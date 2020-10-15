@@ -1,13 +1,13 @@
 import { storiesOf } from '@storybook/react';
 import React from 'react';
-import { ThemedBackground } from '../../../utils/storybook';
-import BaseModal from '../BaseModal/BaseModal';
+import { ThemedBackground } from '../../utils/storybook';
+import Modal from './Modal';
 
-storiesOf('Modal/Base Modal', module)
+storiesOf('Modal', module)
   // Litmus Portal
   .add('Litmus Portal', () => (
     <ThemedBackground platform="litmus-portal">
-      <BaseModal
+      <Modal
         isOpen={true}
         handleClose={() => console.log('clicked')}
         aria-labelledby="simple-modal-title"
@@ -15,14 +15,14 @@ storiesOf('Modal/Base Modal', module)
         hasCloseBtn
       >
         Base Modal
-      </BaseModal>
+      </Modal>
     </ThemedBackground>
   ))
 
   // Kubera Chaos
   .add('Kubera Chaos', () => (
     <ThemedBackground platform="kubera-chaos">
-      <BaseModal
+      <Modal
         isOpen={true}
         handleClose={() => console.log('clicked')}
         aria-labelledby="simple-modal-title"
@@ -30,14 +30,14 @@ storiesOf('Modal/Base Modal', module)
         hasCloseBtn
       >
         Base Modal
-      </BaseModal>
+      </Modal>
     </ThemedBackground>
   ))
 
   // Kubera Portal
   .add('Kubera Propel', () => (
     <ThemedBackground platform="kubera-propel">
-      <BaseModal
+      <Modal
         isOpen={true}
         handleClose={() => console.log('clicked')}
         aria-labelledby="simple-modal-title"
@@ -45,6 +45,6 @@ storiesOf('Modal/Base Modal', module)
         hasCloseBtn
       >
         Base Modal
-      </BaseModal>
+      </Modal>
     </ThemedBackground>
   ));

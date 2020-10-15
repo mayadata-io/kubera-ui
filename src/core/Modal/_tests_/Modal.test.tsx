@@ -1,22 +1,22 @@
 import { render } from '@testing-library/react';
 import React from 'react';
-import { KuberaThemeProvider } from '../../../../theme';
-import BaseModal from '../BaseModal';
+import { KuberaThemeProvider } from '../../../theme';
+import Modal from '../Modal';
 
-describe('Base Modal Component', () => {
+describe('Modal Component', () => {
   it('Renders', () => {
     const { getByText } = render(
       <KuberaThemeProvider platform="kubera-chaos">
-        <BaseModal
+        <Modal
           isOpen={true}
           handleClose={() => console.log('clicked')}
           hasCloseBtn
         >
           Base Modal
-        </BaseModal>
+        </Modal>
       </KuberaThemeProvider>
     );
 
-    expect(getByText('Base Modal')).toBeTruthy();
+    expect(getByText('Modal')).toBeTruthy();
   });
 });
