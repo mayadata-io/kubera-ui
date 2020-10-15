@@ -1,12 +1,13 @@
 import { makeStyles, Theme } from '@material-ui/core';
 
 const useStyles = makeStyles((theme: Theme) => ({
-  lightPills: {
-    height: '1.5rem',
+  root: {
+    padding: theme.spacing(0.625, 1.5),
     borderRadius: '0.1875rem',
     fontSize: '0.625rem',
     lineHeight: '130.2%',
     fontWeight: 400,
+    textTransform: 'none',
   },
   success: {
     background: theme.palette.success.light,

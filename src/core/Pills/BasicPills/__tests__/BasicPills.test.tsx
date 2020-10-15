@@ -7,10 +7,10 @@ describe('Basic Pills Component', () => {
   it('Renders', () => {
     const { getByText } = render(
       <KuberaThemeProvider platform="kubera-chaos">
-        <BasicPills>11 experiments</BasicPills>
+        <BasicPills>Basic Pill</BasicPills>
       </KuberaThemeProvider>
     );
 
-    expect(getByText('11 experiments')).toBeTruthy();
+    expect(getByText('Basic Pill')).toBeTruthy();
   });
 });

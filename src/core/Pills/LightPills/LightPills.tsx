@@ -5,11 +5,10 @@ import { PillsBaseProps } from '../base';
 
 type Variant = 'success' | 'warning' | 'danger' | undefined;
 
-interface BasicPillsProps extends PillsBaseProps {
-  children: string;
+interface LightPillsProps extends PillsBaseProps {
   variant?: Variant;
 }
-const LightPills: React.FC<BasicPillsProps> = ({ children, variant }) => {
+const LightPills: React.FC<LightPillsProps> = ({ children, variant }) => {
   const classes = useStyles();
   const getVariant = (variant: Variant) => {
     switch (variant) {
@@ -24,7 +23,7 @@ const LightPills: React.FC<BasicPillsProps> = ({ children, variant }) => {
     }
   };
   return (
-    <Button className={`${classes.lightPills} ${getVariant(variant)}`}>
+    <Button className={`${classes.root} ${getVariant(variant)}`}>
       {children}
     </Button>
   );
