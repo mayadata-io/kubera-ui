@@ -15,8 +15,9 @@ const useStyles = makeStyles((theme: Theme) => ({
   }),
 
   modalContainerClose: {
-    paddingLeft: theme.spacing(72),
-    paddingRight: theme.spacing(0),
+    display: 'flex',
+    justifyContent: 'flex-end',
+    paddingRight: theme.spacing(4),
     paddingBottom: theme.spacing(0),
   },
 
@@ -31,7 +32,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     color: theme.palette.status.pending.text,
     border: '1px solid',
     borderColor: theme.palette.border.main,
-    marginLeft: '50%',
     marginTop: theme.spacing(2),
   }),
 
