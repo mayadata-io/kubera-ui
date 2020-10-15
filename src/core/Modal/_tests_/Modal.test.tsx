@@ -12,11 +12,11 @@ describe('Modal Component', () => {
           handleClose={() => console.log('clicked')}
           hasCloseBtn
         >
-          Base Modal
+          Open Modal
         </Modal>
       </KuberaThemeProvider>
     );
 
-    expect(getByText('Modal')).toBeTruthy();
+    expect(getByText('Open Modal')).toBeTruthy();
   });
 });

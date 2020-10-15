@@ -14,7 +14,7 @@ storiesOf('Modal', module)
         aria-describedby="simple-modal-description"
         hasCloseBtn
       >
-        Base Modal
+        Modal
       </Modal>
     </ThemedBackground>
   ))
@@ -29,7 +29,7 @@ storiesOf('Modal', module)
         aria-describedby="simple-modal-description"
         hasCloseBtn
       >
-        Base Modal
+        Modal
       </Modal>
     </ThemedBackground>
   ))
@@ -44,7 +44,7 @@ storiesOf('Modal', module)
         aria-describedby="simple-modal-description"
         hasCloseBtn
       >
-        Base Modal
+        Modal
       </Modal>
     </ThemedBackground>
   ));
