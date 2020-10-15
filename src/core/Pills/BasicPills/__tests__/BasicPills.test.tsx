@@ -11,6 +11,6 @@ describe('Basic Pills Component', () => {
       </KuberaThemeProvider>
     );
 
-    expect(getByText('Basic Pills Component')).toBeTruthy();
+    expect(getByText('11 experiments')).toBeTruthy();
   });
 });

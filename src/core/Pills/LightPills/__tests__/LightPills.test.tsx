@@ -8,11 +8,9 @@ describe('Light Pills Component', () => {
     const { getByText } = render(
       <KuberaThemeProvider platform="kubera-chaos">
         <LightPills variant="success">Completed</LightPills>
-        <LightPills variant="warning">Runing</LightPills>
-        <LightPills variant="danger">Failed</LightPills>
       </KuberaThemeProvider>
     );
 
-    expect(getByText('Light Pills Component')).toBeTruthy();
+    expect(getByText('Completed')).toBeTruthy();
   });
 });
