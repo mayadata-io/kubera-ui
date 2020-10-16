@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import useStyles from './styles';
 import PropTypes from 'prop-types';
 import Tab from '@material-ui/core/Tab';
@@ -70,28 +70,32 @@ const SimpleTabs: React.FC<SiampleTabsProps> = ({ label, content }) => {
   })(Tab);
 
   return (
-    <div className={classes.root}>
-      <AppBar position="static" className={classes.panel}>
-        <Tabs
-          value={value}
-          onChange={handleChange}
-          aria-label="simple tabs example"
-          classes={{
-            indicator: classes.indicator,
-          }}
-        >
-          {label.map((item, index) => {
-            return <CustomTab key={index} label={item} {...a11yProps(index)} />;
-          })}
-        </Tabs>
-      </AppBar>
-      {content.map((item, index) => {
-        return (
-          <TabPanel value={value} index={index}>
-            {item}
-          </TabPanel>
-        );
-      })}
+    <div>
+      <Fragment>
+        <AppBar position="static" className={classes.panel}>
+          <Tabs
+            value={value}
+            onChange={handleChange}
+            aria-label="simple tabs example"
+            classes={{
+              indicator: classes.indicator,
+            }}
+          >
+            {label.map((item, index) => {
+              return (
+                <CustomTab key={index} label={item} {...a11yProps(index)} />
+              );
+            })}
+          </Tabs>
+        </AppBar>
+        {content.map((item, index) => {
+          return (
+            <TabPanel key={index} value={value} index={index}>
+              {item}
+            </TabPanel>
+          );
+        })}
+      </Fragment>
     </div>
   );
 };
