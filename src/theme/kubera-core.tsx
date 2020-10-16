@@ -105,7 +105,7 @@ const kuberaCoreTheme = createTheme({
     MuiTab: {
       root: {
         '&$selected': {
-          color: '#28CB69',
+          color: '#D074D1',
         },
       },
     },
@@ -113,7 +113,7 @@ const kuberaCoreTheme = createTheme({
       root: {
         paddingLeft: 20,
         '&[data-shrink="true"]': {
-          color: '#28CB69',
+          color: '#D074D1',
         },
       },
       asterisk: {
