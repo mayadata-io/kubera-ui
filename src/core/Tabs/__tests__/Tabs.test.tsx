@@ -1,6 +1,6 @@
 import React from 'react';
 import Tabs from '../../Tabs';
-import { getAllByRole, render } from '@testing-library/react';
+import { render } from '@testing-library/react';
 import { KuberaThemeProvider } from '../../../theme';
 
 describe('Tabs', () => {
