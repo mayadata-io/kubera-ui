@@ -1,9 +1,9 @@
-import { render } from '@testing-library/react';
 import React from 'react';
-import { KuberaThemeProvider } from '../../../theme';
 import Tabs from '../../Tabs';
+import { render } from '@testing-library/react';
+import { KuberaThemeProvider } from '../../../theme';
 
-describe('Tab Component', () => {
+describe('Tabs', () => {
   it('Renders', () => {
     const { getByText } = render(
       <KuberaThemeProvider platform="kubera-chaos">
@@ -11,6 +11,6 @@ describe('Tab Component', () => {
       </KuberaThemeProvider>
     );
 
-    expect(getByText('Tab Component')).toBeTruthy();
+    expect(getByText('static')).toBeTruthy();
   });
 });
