@@ -1,6 +1,5 @@
 import React from 'react';
 import { useStyles } from './style';
-import { Button } from '@material-ui/core';
 import { PillsBaseProps } from '../base';
 
 type Variant = 'success' | 'warning' | 'danger' | undefined;
@@ -23,9 +22,7 @@ const LightPills: React.FC<LightPillsProps> = ({ children, variant }) => {
     }
   };
   return (
-    <Button className={`${classes.root} ${getVariant(variant)}`}>
-      {children}
-    </Button>
+    <div className={`${classes.root} ${getVariant(variant)}`}>{children}</div>
   );
 };
 export { LightPills };

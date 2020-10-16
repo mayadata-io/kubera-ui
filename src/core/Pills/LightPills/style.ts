@@ -5,7 +5,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     padding: theme.spacing(0.625, 1.5),
     borderRadius: '0.1875rem',
     fontSize: '0.625rem',
-    lineHeight: '130.2%',
     fontWeight: 400,
     textTransform: 'none',
   },
