@@ -1,5 +1,4 @@
-import { CssBaseline } from '@material-ui/core';
-import { Theme, ThemeProvider } from '@material-ui/core/styles';
+import { CssBaseline, Theme, ThemeProvider } from '@material-ui/core';
 import * as React from 'react';
 import { kuberaChaosTheme } from './kubera-chaos';
 import { kuberaCoreTheme } from './kubera-core';
