@@ -7,7 +7,6 @@ const useStyles = makeStyles((theme) => ({
     background: 'transparent',
     borderBottom: `0.0625rem solid ${theme.palette.border.main}`,
   },
-
   indicator: {
     background: theme.palette.highlight,
     boxShadow: '0px 4px 4px',

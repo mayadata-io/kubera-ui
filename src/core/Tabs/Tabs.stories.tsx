@@ -4,7 +4,6 @@ import { storiesOf } from '@storybook/react';
 import { ThemedBackground } from '../../../src/utils/storybook';
 
 // label[0] = content[0]
-
 storiesOf('Tabs', module)
   // Litmus Portal
   .add('Litmus Portal', () => (

@@ -10,7 +10,6 @@ import { withStyles } from '@material-ui/core/styles';
 
 const TabPanel = (props: any) => {
   const { children, value, index, ...other } = props;
-
   return (
     <div
       role="tabpanel"
