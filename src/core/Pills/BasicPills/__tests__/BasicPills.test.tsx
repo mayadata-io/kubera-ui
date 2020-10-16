@@ -1,13 +1,13 @@
 import { render } from '@testing-library/react';
 import React from 'react';
 import { KuberaThemeProvider } from '../../../../theme';
-import { BasicPills } from '../BasicPills';
+import { Pills } from '../BasicPills';
 
 describe('Basic Pills Component', () => {
   it('Renders', () => {
     const { getByText } = render(
       <KuberaThemeProvider platform="kubera-chaos">
-        <BasicPills>Basic Pill</BasicPills>
+        <Pills variant="default">Basic Pill</Pills>
       </KuberaThemeProvider>
     );
 
