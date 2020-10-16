@@ -1,4 +1,4 @@
-import { Modal as KuberaModal, Button } from '@material-ui/core';
+import { Modal as MuiModal, Button } from '@material-ui/core';
 import React from 'react';
 import useStyles from './styles';
 
@@ -8,16 +8,13 @@ interface ModalProps {
   hasCloseBtn: boolean;
 }
 
-const Modal: React.FC<ModalProps> = ({ children, hasCloseBtn }) => {
+const Modal: React.FC<ModalProps> = ({
+  children,
+  hasCloseBtn,
+  isOpen,
+  handleClose,
+}) => {
   const classes = useStyles();
-  const [isOpen, setOpen] = React.useState(false);
-  const handleOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
   const body = (
     <div className={classes.root}>
       {hasCloseBtn && (
@@ -37,10 +34,7 @@ const Modal: React.FC<ModalProps> = ({ children, hasCloseBtn }) => {
 
   return (
     <div>
-      <Button variant="contained" color="primary" onClick={handleOpen}>
-        Open Modal
-      </Button>
-      <KuberaModal
+      <MuiModal
         open={isOpen}
         onClose={handleClose}
         disableBackdropClick
@@ -49,7 +43,7 @@ const Modal: React.FC<ModalProps> = ({ children, hasCloseBtn }) => {
         aria-describedby="simple-modal-description"
       >
         {body}
-      </KuberaModal>
+      </MuiModal>
     </div>
   );
 };

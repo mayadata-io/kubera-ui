@@ -1,7 +1,7 @@
 import { makeStyles, Theme } from '@material-ui/core';
 
 const useStyles = makeStyles((theme: Theme) => ({
-  root: (props) => ({
+  root: () => ({
     height: '80%',
     width: '70%',
     margin: '2rem auto',
@@ -21,11 +21,11 @@ const useStyles = makeStyles((theme: Theme) => ({
     paddingRight: theme.spacing(4),
   },
 
-  closeButton: (props) => ({
+  closeButton: () => ({
     fontSize: '1rem',
     fontWeight: 1000,
     display: 'inline-block',
-    padding: `${theme.spacing(0.375)} ${theme.spacing(1.5)}`,
+    padding: theme.spacing(0.375, 1.5),
     minHeight: 0,
     minWidth: 0,
     borderRadius: 3,
