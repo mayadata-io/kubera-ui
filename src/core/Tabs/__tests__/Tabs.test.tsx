@@ -5,11 +5,11 @@ import { KuberaThemeProvider } from '../../../theme';
 
 describe('Tabs', () => {
   it('Renders', () => {
-    const { getByText } = render(
+    const { getByLabelText } = render(
       <KuberaThemeProvider platform="kubera-chaos">
         <Tabs label={['Tab Item']} content={['Tab Content']}></Tabs>
       </KuberaThemeProvider>
     );
-    expect(getByText(/—/i)).toBeTruthy();
+    expect(getByLabelText(/—/i)).toBeTruthy();
   });
 });
