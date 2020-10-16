@@ -7,7 +7,7 @@ import { kuberaPortalTheme } from './kubera-portal';
 import { kuberaPropelTheme } from './kubera-propel';
 import { litmusPortalTheme } from './litmus-portal';
 
-interface KuberaThemeProviderProps {
+export interface KuberaThemeProviderProps {
   platform:
     | 'litmus-portal'
     | 'kubera-portal'
@@ -48,4 +48,3 @@ const KuberaThemeProvider: React.FC<KuberaThemeProviderProps> = ({
 };
 
 export { KuberaThemeProvider };
-export type { KuberaThemeProviderProps };
