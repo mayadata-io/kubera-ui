@@ -3,7 +3,7 @@ import React from 'react';
 import { KuberaThemeProvider } from '../../../theme';
 import Tabs from '../../Tabs';
 
-describe('Tabs', () => {
+describe('Tab Component', () => {
   it('Renders', () => {
     const { getByText } = render(
       <KuberaThemeProvider platform="kubera-chaos">
@@ -13,6 +13,6 @@ describe('Tabs', () => {
       </KuberaThemeProvider>
     );
 
-    expect(getByText('Tabs Component')).toBeTruthy();
+    expect(getByText('Tab Component')).toBeTruthy();
   });
 });
