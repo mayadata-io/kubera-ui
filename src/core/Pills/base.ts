@@ -1,5 +1,5 @@
-import { ButtonProps } from '@material-ui/core/Button';
+import { ChipProps } from '@material-ui/core/Chip';
 
-type PillsBaseProps = Omit<ButtonProps, 'variant'>;
+type PillsBaseProps = Omit<ChipProps, 'variant'>;
 
 export { PillsBaseProps };

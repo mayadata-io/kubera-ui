@@ -1,8 +1,24 @@
 import React from 'react';
 import { useStyles } from './style';
 
-const BasicPills: React.FC = ({ children }) => {
+type Variant = 'default' | 'selected';
+
+interface PillsProps {
+  variant: Variant;
+}
+
+const Pills: React.FC<PillsProps> = ({ variant, children }) => {
   const classes = useStyles();
-  return <div className={classes.root}>{children}</div>;
+  const getVariant = (variant: Variant) => {
+    switch (variant) {
+      case 'selected':
+        return classes.active;
+      default:
+        return classes.default;
+    }
+  };
+  return (
+    <div className={`${classes.root} ${getVariant(variant)}`}>{children}</div>
+  );
 };
-export { BasicPills };
+export { Pills };

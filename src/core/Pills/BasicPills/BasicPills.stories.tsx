@@ -1,26 +1,26 @@
 import { storiesOf } from '@storybook/react';
 import React from 'react';
 import { ThemedBackground } from '../../../utils/storybook';
-import { BasicPills } from '../BasicPills';
+import { Pills } from '../BasicPills';
 
 storiesOf('Pills/Basic Pills', module)
   // Litmus Portal
   .add('Litmus Portal', () => (
     <ThemedBackground platform="litmus-portal" row>
-      <BasicPills>Basic Pill</BasicPills>
+      <Pills variant="default">Basic Pill</Pills>
     </ThemedBackground>
   ))
 
   // Kubera Chaos
   .add('Kubera Chaos', () => (
     <ThemedBackground platform="kubera-chaos" row>
-      <BasicPills>Basic Pill</BasicPills>
+      <Pills variant="default">Basic Pill</Pills>
     </ThemedBackground>
   ))
 
   // Kubera Propel
   .add('Kubera Propel', () => (
     <ThemedBackground platform="kubera-propel" row>
-      <BasicPills>Basic Pill</BasicPills>
+      <Pills variant="default">Basic Pill</Pills>
     </ThemedBackground>
   ));

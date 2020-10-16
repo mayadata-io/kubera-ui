@@ -5,7 +5,7 @@ import { PillsBaseProps } from '../base';
 type Variant = 'success' | 'warning' | 'danger' | undefined;
 
 interface LightPillsProps extends PillsBaseProps {
-  variant?: Variant;
+  variant: Variant;
 }
 const LightPills: React.FC<LightPillsProps> = ({ children, variant }) => {
   const classes = useStyles();

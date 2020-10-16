@@ -7,11 +7,13 @@ const useStyles = makeStyles((theme: Theme) => ({
     fontSize: '0.625rem',
     fontWeight: 500,
     textTransform: 'none',
-    background: theme.palette.primary.light,
     color: theme.palette.text.secondary,
-    '&:hover': {
-      background: theme.palette.primary.main,
-    },
+  },
+  default: {
+    background: theme.palette.primary.light,
+  },
+  active: {
+    background: theme.palette.primary.main,
   },
 }));
 
