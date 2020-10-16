@@ -14,7 +14,7 @@ const Pills: React.FC<PillsProps> = ({ variant, children }) => {
       case 'selected':
         return classes.active;
       default:
-        return classes.default;
+        return '';
     }
   };
   return (
