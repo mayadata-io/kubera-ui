@@ -10,6 +10,6 @@ describe('Tabs', () => {
         <Tabs label={['Tab Item']} content={['Tab Content']}></Tabs>
       </KuberaThemeProvider>
     );
-    expect(getAllByRole('tabs')).toBeTruthy();
+    expect(getAllByRole('tab')).toBeTruthy();
   });
 });
