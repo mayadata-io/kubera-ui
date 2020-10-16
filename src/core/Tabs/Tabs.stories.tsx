@@ -1,4 +1,3 @@
-import { ButtonOutlined } from '../Button/ButtonOutlined';
 import React from 'react';
 import Tabs from '../Tabs';
 import { storiesOf } from '@storybook/react';
@@ -11,12 +10,8 @@ storiesOf('Tabs', module)
   .add('Litmus Portal', () => (
     <ThemedBackground platform="litmus-portal" row>
       <Tabs
-        label={['Workflow', 'Hubs', 'Propel']}
-        content={[
-          <ButtonOutlined>Button</ButtonOutlined>,
-          'Hubs Content',
-          'Propel Content',
-        ]}
+        label={['Workflow', 'Hubs']}
+        content={['Hubs Content', 'Propel Content']}
       ></Tabs>
     </ThemedBackground>
   ))
@@ -25,12 +20,8 @@ storiesOf('Tabs', module)
   .add('Kubera Chaos', () => (
     <ThemedBackground platform="kubera-chaos" row>
       <Tabs
-        label={['Workflow', 'Hubs', 'Propel']}
-        content={[
-          <ButtonOutlined>Button</ButtonOutlined>,
-          'Hubs Content',
-          'Propel Content',
-        ]}
+        label={['Workflow', 'Hubs']}
+        content={['Hubs Content', 'Propel Content']}
       ></Tabs>
     </ThemedBackground>
   ))
@@ -39,12 +30,8 @@ storiesOf('Tabs', module)
   .add('Kubera Propel', () => (
     <ThemedBackground platform="kubera-propel" row>
       <Tabs
-        label={['Workflow', 'Hubs', 'Propel']}
-        content={[
-          <ButtonOutlined>Button</ButtonOutlined>,
-          'Hubs Content',
-          'Propel Content',
-        ]}
+        label={['Workflow', 'Hubs']}
+        content={['Hubs Content', 'Propel Content']}
       ></Tabs>
     </ThemedBackground>
   ));
