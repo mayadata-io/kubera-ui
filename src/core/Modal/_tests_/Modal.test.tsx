@@ -10,7 +10,6 @@ describe('Modal Component', () => {
         <Modal
           isOpen={true}
           handleClose={() => console.log('clicked')}
-          aria-labelledby="simple-modal-title"
           hasCloseBtn
         >
           Modal
