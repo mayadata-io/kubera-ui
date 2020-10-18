@@ -5,6 +5,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     height: '80%',
     width: '70%',
     margin: '2rem auto',
+    color: theme.palette.text.primary,
     background: theme.palette.background.paper,
     borderRadius: 3,
     textAlign: 'center',
@@ -15,16 +16,10 @@ const useStyles = makeStyles((theme: Theme) => ({
     alignItems: 'center',
   }),
 
-  modalContainerClose: {
-    display: 'flex',
-    justifyContent: 'flex-end',
-    paddingRight: theme.spacing(4),
-  },
-
   closeButton: () => ({
     fontSize: '1rem',
     fontWeight: 1000,
-    display: 'inline-block',
+    display: 'block',
     padding: theme.spacing(0.375, 1.5),
     minHeight: 0,
     minWidth: 0,
@@ -33,7 +28,8 @@ const useStyles = makeStyles((theme: Theme) => ({
     border: '1px solid',
     borderColor: theme.palette.border.main,
     marginTop: theme.spacing(4),
-    marginLeft: theme.spacing(4),
+    marginRight: theme.spacing(4),
+    marginLeft: 'inherit',
   }),
 }));
 

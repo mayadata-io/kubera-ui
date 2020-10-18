@@ -1,5 +1,5 @@
 import { Modal as MuiModal, Button } from '@material-ui/core';
-import React from 'react';
+import React, { useState } from 'react';
 import useStyles from './styles';
 
 interface ModalProps {
@@ -11,26 +11,10 @@ interface ModalProps {
 const Modal: React.FC<ModalProps> = ({
   children,
   hasCloseBtn,
-  isOpen,
   handleClose,
 }) => {
   const classes = useStyles();
-  const body = (
-    <div className={classes.root}>
-      {hasCloseBtn && (
-        <span className={classes.modalContainerClose}>
-          <Button
-            variant="outlined"
-            className={classes.closeButton}
-            onClick={handleClose}
-          >
-            &#x2715;
-          </Button>
-        </span>
-      )}
-      {children}
-    </div>
-  );
+  const [isOpen, setIsOpen] = useState(true);
 
   return (
     <div>
@@ -39,10 +23,21 @@ const Modal: React.FC<ModalProps> = ({
         onClose={handleClose}
         disableBackdropClick
         disableEscapeKeyDown
+        title="Modal"
         aria-labelledby="simple-modal-title"
-        aria-describedby="simple-modal-description"
       >
-        {body}
+        <div className={classes.root}>
+          {hasCloseBtn && (
+            <Button
+              variant="outlined"
+              className={classes.closeButton}
+              onClick={() => setIsOpen(false)}
+            >
+              &#x2715;
+            </Button>
+          )}
+          {children}
+        </div>
       </MuiModal>
     </div>
   );

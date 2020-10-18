@@ -5,11 +5,12 @@ import Modal from '../Modal';
 
 describe('Modal Component', () => {
   it('Renders', () => {
-    const { getByText } = render(
+    const { findByTitle } = render(
       <KuberaThemeProvider platform="kubera-chaos">
         <Modal
           isOpen={true}
           handleClose={() => console.log('clicked')}
+          aria-labelledby="simple-modal-title"
           hasCloseBtn
         >
           Modal
@@ -17,6 +18,6 @@ describe('Modal Component', () => {
       </KuberaThemeProvider>
     );
 
-    expect(getByText('Modal')).toBeTruthy();
+    expect(findByTitle('Modal')).toBeTruthy();
   });
 });
