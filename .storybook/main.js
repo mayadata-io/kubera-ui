@@ -1,4 +1,5 @@
 module.exports = {
+  addons: ['@storybook/addon-essentials','@storybook/addon-a11y'],
   stories: ['../src/**/*.stories.tsx'],
   webpackFinal: async (config, { configType }) => {
     // add typescript support

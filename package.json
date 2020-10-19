@@ -64,8 +64,10 @@
   "devDependencies": {
     "@babel/core": "^7.9.0",
     "@rollup/plugin-commonjs": "^11.1.0",
+    "@storybook/addon-a11y": "^6.0.26",
+    "@storybook/addon-essentials": "^6.0.26",
     "@storybook/preset-typescript": "^3.0.0",
-    "@storybook/react": "^5.3.18",
+    "@storybook/react": "^6.0.26",
     "@testing-library/react": "^10.0.2",
     "@types/autoprefixer": "^9.7.2",
     "@types/classnames": "^2.2.10",
