@@ -5,20 +5,20 @@
     "esModuleInterop": true,
     "experimentalDecorators": true,
     "jsx": "react",
-    "lib": ["dom", "es5"],
+    "lib": ["dom", "es6"],
     "module": "esNext",
     "moduleResolution": "node",
     "noImplicitAny": true,
     "noImplicitThis": true,
     "strictNullChecks": true,
-    "noImplicitReturns": true,
+    "noImplicitReturns": false,
     "noUnusedLocals": true,
     "noUnusedParameters": false,
     "outDir": "./dist",
     "pretty": true,
     "sourceMap": true,
     "strict": true,
-    "target": "es5"
+    "target": "es6"
   },
   "exclude": ["node_modules", "**/*.stories.*", "**/*.test.*", "**/*.spec.*"],
   "include": ["./src"]
