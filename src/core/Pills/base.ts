@@ -1,5 +1,5 @@
 import { ChipProps } from '@material-ui/core/Chip';
 
-type PillsBaseProps = Omit<ChipProps, 'variant'>;
+type ChipBaseProps = Omit<ChipProps, 'variant' | 'label'>;
 
-export { PillsBaseProps };
+export { ChipBaseProps };

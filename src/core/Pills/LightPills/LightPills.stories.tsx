@@ -7,26 +7,26 @@ storiesOf('Pills/Light Pills', module)
   // Litmus Portal
   .add('Litmus Portal', () => (
     <ThemedBackground platform="litmus-portal" row>
-      <LightPills variant="success">Success</LightPills>
-      <LightPills variant="warning">Warning</LightPills>
-      <LightPills variant="danger">Danger</LightPills>
+      <LightPills variant="success" label="Success" />
+      <LightPills variant="warning" label="Warning" />
+      <LightPills variant="danger" label="Danger" />
     </ThemedBackground>
   ))
 
   // Kubera Chaos
   .add('Kubera Chaos', () => (
     <ThemedBackground platform="kubera-chaos" row>
-      <LightPills variant="success">Success</LightPills>
-      <LightPills variant="warning">Warning</LightPills>
-      <LightPills variant="danger">Danger</LightPills>
+      <LightPills variant="success" label="Success" />
+      <LightPills variant="warning" label="Warning" />
+      <LightPills variant="danger" label="Danger" />
     </ThemedBackground>
   ))
 
   // Kubera Propel
   .add('Kubera Propel', () => (
     <ThemedBackground platform="kubera-propel" row>
-      <LightPills variant="success">Success</LightPills>
-      <LightPills variant="warning">Warning</LightPills>
-      <LightPills variant="danger">Danger</LightPills>
+      <LightPills variant="success" label="Success" />
+      <LightPills variant="warning" label="Warning" />
+      <LightPills variant="danger" label="Danger" />
     </ThemedBackground>
   ));

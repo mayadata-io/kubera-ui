@@ -7,6 +7,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     fontSize: '0.625rem',
     fontWeight: 400,
     textTransform: 'none',
+    height: 'auto',
   },
   success: {
     background: theme.palette.success.light,

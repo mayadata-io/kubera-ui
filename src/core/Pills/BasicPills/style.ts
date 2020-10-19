@@ -8,6 +8,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     fontWeight: 500,
     textTransform: 'none',
     color: theme.palette.text.secondary,
+    height: 'auto',
     background: theme.palette.primary.light,
   },
   active: {

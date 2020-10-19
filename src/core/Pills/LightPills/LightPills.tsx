@@ -1,13 +1,15 @@
 import React from 'react';
 import { useStyles } from './style';
-import { PillsBaseProps } from '../base';
+import { ChipBaseProps } from '../base';
+import { Chip } from '@material-ui/core';
 
 type Variant = 'success' | 'warning' | 'danger' | undefined;
 
-interface LightPillsProps extends PillsBaseProps {
+interface LightPillsProps extends ChipBaseProps {
   variant: Variant;
+  label: string;
 }
-const LightPills: React.FC<LightPillsProps> = ({ children, variant }) => {
+const LightPills: React.FC<LightPillsProps> = ({ label, variant }) => {
   const classes = useStyles();
   const getVariant = (variant: Variant) => {
     switch (variant) {
@@ -22,7 +24,7 @@ const LightPills: React.FC<LightPillsProps> = ({ children, variant }) => {
     }
   };
   return (
-    <div className={`${classes.root} ${getVariant(variant)}`}>{children}</div>
+    <Chip label={label} className={`${classes.root} ${getVariant(variant)}`} />
   );
 };
 export { LightPills };

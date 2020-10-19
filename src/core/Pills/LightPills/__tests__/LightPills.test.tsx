@@ -7,7 +7,7 @@ describe('Light Pills Component', () => {
   it('Renders', () => {
     const { getByText } = render(
       <KuberaThemeProvider platform="kubera-chaos">
-        <LightPills variant="success">Success</LightPills>
+        <LightPills variant="success" label="Success" />
       </KuberaThemeProvider>
     );
 

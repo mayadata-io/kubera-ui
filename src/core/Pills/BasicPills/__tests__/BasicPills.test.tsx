@@ -7,7 +7,7 @@ describe('Basic Pills Component', () => {
   it('Renders', () => {
     const { getByText } = render(
       <KuberaThemeProvider platform="kubera-chaos">
-        <Pills variant="default">Basic Pill</Pills>
+        <Pills variant="default" label="Basic Pill" />
       </KuberaThemeProvider>
     );
 
