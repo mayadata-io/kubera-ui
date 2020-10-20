@@ -7,7 +7,7 @@ describe('Timepicker component', () => {
   it('Renders', () => {
     const { getByTestId } = render(
       <KuberaThemeProvider platform="kubera-chaos">
-        <BaseTimePicker />
+        <BaseTimePicker onChange={() => console.log('timepicker')} />
       </KuberaThemeProvider>
     );
 

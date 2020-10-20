@@ -2,14 +2,16 @@ import 'date-fns';
 import React, { useState } from 'react';
 import MomentUtils from '@date-io/moment';
 import { MuiPickersUtilsProvider, TimePicker } from '@material-ui/pickers';
-import { BaseTimePickerProps } from '../base';
 import { useStyles } from './style';
+import { BaseTimePickerProps } from '../base';
 
 interface TimePickerProps extends BaseTimePickerProps {
-  value: Date;
+  value?: Date;
 }
+
 const BaseTimePicker: React.FC<TimePickerProps> = ({ value }) => {
-  const [selectedDate, handleDateChange] = useState<Date | null>(value);
+  const date = value != undefined ? value : new Date();
+  const [selectedDate, handleDateChange] = useState<Date | null>(date);
   const classes = useStyles();
   return (
     <MuiPickersUtilsProvider utils={MomentUtils}>
