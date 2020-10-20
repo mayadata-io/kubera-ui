@@ -5,8 +5,8 @@ import BaseArea from './BaseArea';
 
 storiesOf('Graph/Area', module)
   // Litmus Portal
-  .add('Litmus Portal', () => (
-    <ThemedBackground platform="litmus-portal">
+  .add('Kubera Chaos', () => (
+    <ThemedBackground platform="kubera-chaos">
       <BaseArea />
     </ThemedBackground>
   ));

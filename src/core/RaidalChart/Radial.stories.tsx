@@ -5,8 +5,8 @@ import BaseRadial from './BaseRadial';
 
 storiesOf('Graph/Radial', module)
   // Litmus Portal
-  .add('Litmus Portal', () => (
-    <ThemedBackground platform="litmus-portal">
+  .add('Kubera Chaos', () => (
+    <ThemedBackground platform="kubera-chaos">
       <BaseRadial />
     </ThemedBackground>
   ));

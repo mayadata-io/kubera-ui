@@ -1,30 +1,50 @@
 import React from 'react';
-
-import generateDateValue, {
-  DateValue,
-} from '@visx/mock-data/lib/generators/genDateValue';
+// import generateDateValue, {
+//   DateValue,
+// } from '@visx/mock-data/lib/generators/genDateValue';
 // import Example2 from "./components/RadialPie-testing-01";
 import AreaGraph from './Graph-01';
-let lineCount: number = 1;
-const series = new Array(lineCount)
-  .fill(null)
-  .map((_) =>
-    generateDateValue(7).sort(
-      (a: DateValue, b: DateValue) => a.date.getTime() - b.date.getTime()
-    )
-  );
 
-const series2 = new Array(lineCount)
-  .fill(null)
-  .map((_) =>
-    generateDateValue(7).sort(
-      (a: DateValue, b: DateValue) => a.date.getTime() - b.date.getTime()
-    )
-  );
+export interface DataValue {
+  date: number;
+  value: number;
+}
+export interface AreaGrapher {
+  metricName: string;
+  data: DataValue[];
+}
+
+let data1: DataValue[] = [
+  { date: 1000, value: 20 },
+  { date: 2000, value: 30 },
+  { date: 3000, value: 35 },
+  { date: 4000, value: 40 },
+];
+let data2: DataValue[] = [
+  { date: 1000, value: 40 },
+  { date: 2000, value: 10 },
+  { date: 3000, value: 55 },
+  { date: 4000, value: 60 },
+];
+let data3: DataValue[] = [
+  { date: 1000, value: 50 },
+  { date: 2000, value: 60 },
+  { date: 3000, value: 85 },
+  { date: 4000, value: 90 },
+];
+
+// const w:AreaGrapher={date:,value:20}
+let seriestest: AreaGrapher[] = [
+  { metricName: 'chaos-exporter', data: data1 },
+  { metricName: 'heptio-http', data: data2 },
+];
+let seriestest2: AreaGrapher[] = [{ metricName: 'payment-db', data: data3 }];
+
+console.log(seriestest);
 
 const width = 600;
 const height = 400;
-
+console.log(seriestest);
 function BaseArea() {
   return (
     <div className="App">
@@ -32,10 +52,10 @@ function BaseArea() {
         width={width}
         height={height}
         showLineClosed={true}
-        closedSeries={series}
-        openSeries={series2}
+        closedSeries={seriestest}
+        openSeries={seriestest2}
         showLineOpen={true}
-        showPoints={false}
+        showPoints={true}
       />
     </div>
   );

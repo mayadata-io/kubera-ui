@@ -1,5 +1,4 @@
-// gave working demo
-// tried adding multiple colors
+// added multiple colors version 19- tooltip with color legend
 // x-y axis added
 // sorting data
 // multiple line series
@@ -8,25 +7,18 @@ import { MarkerCircle } from '@visx/marker';
 import React, { useMemo, useCallback } from 'react';
 import { AreaClosed, Line, LinePath, Bar } from '@visx/shape';
 // import appleStock, { AppleStock } from '@visx/mock-data/lib/mocks/appleStock';
-import { AxisLeft, AxisBottom } from '@visx/axis';
+import { AxisLeft, AxisBottom, AxisRight } from '@visx/axis';
 import { Tooltip, useTooltip, defaultStyles } from '@visx/tooltip';
-
 import { curveMonotoneX } from '@visx/curve';
 import { GridRows, GridColumns } from '@visx/grid';
 import { scaleTime, scaleLinear } from '@visx/scale';
-
-// import { WithTooltipProvidedProps } from "@visx/tooltip/lib/enhancers/withTooltip";
 import { localPoint } from '@visx/event';
 import { LinearGradient } from '@visx/gradient';
 import { max, extent, bisector } from 'd3-array';
-
-import generateDateValue, {
-  DateValue,
-} from '@visx/mock-data/lib/generators/genDateValue';
 import { Group } from '@visx/group';
+import { AreaGrapher, DataValue } from './BaseArea';
 
 export const background = '#0A1818';
-
 export const background2 = '#0A1818';
 export const accentColor = '#08BBD7';
 export const accentColorDark = '#08BBD7';
@@ -59,29 +51,47 @@ const axisLeftTickLabelProps = {
   fill: axisColor,
 };
 
-const series = generateDateValue(1).sort(
-  (a: DateValue, b: DateValue) => a.date.getTime() - b.date.getTime()
-);
+const axisRightTickLabelProps = {
+  dx: '2em' ?? '0.5em',
+  dy: '0.25em',
+  fontFamily: 'Arial',
+  fontSize: 10,
+  textAnchor: 'end' as const,
+  fill: axisColor,
+};
+// const series = generateDateValue(1).sort(
+//   (a: AreaGrapher, b: AreaGrapher) => a.date.getTime() - b.date.getTime()
+// );
 
 let plotgraph: number = ClosedlineCount;
 
 let indexer: number;
 
-let dd1: DateValue;
-let dd0: DateValue;
+let dd1: DataValue;
+let dd0: DataValue;
 
 let i: number;
 
-let j: number;
+let j, k: number;
 
 // console.log(series);
 
-const getDate = (d: DateValue) => d.date;
-const getValue = (d: DateValue) => d.value;
-let dd3: DateValue[] = [series[0]];
+const getDate = (d: DataValue) => new Date(d.date * 1000);
+const getValue = (d: DataValue) => d.value;
+let a: AreaGrapher = {
+  metricName: 'metric11',
+  data: [{ date: 10, value: 10 }],
+};
+let dd3: AreaGrapher[] = [a];
 
 // scales
 
+let colorArr: string[] = [
+  accentColor1,
+  accentColor2,
+  accentColor3,
+  accentColor4,
+];
 export type CurveProps = {
   width: number;
   height: number;
@@ -96,24 +106,28 @@ const tooltipStyles = {
   color: 'white',
 };
 
-const bisectDate = bisector<DateValue, Date>((d) => new Date(d.date)).left;
-type TooltipData = DateValue[];
+const bisectDate = bisector<DataValue, Date>((d) => new Date(d.date * 1000))
+  .left;
+type TooltipData = AreaGrapher[];
 
 export type AreaProps = {
   width: number;
   height: number;
   margin?: { top: number; right: number; bottom: number; left: number };
   children?: React.ReactNode;
-  showPoints?: boolean;
   showLineOpen?: boolean;
   showLineClosed?: boolean;
+
+  shiftL?: number;
+  shiftT?: number;
+  openSeries?: AreaGrapher[];
+  closedSeries?: AreaGrapher[];
+
+  showPoints?: boolean;
   showGrid?: boolean;
   hideLeftAxis?: boolean;
   hideBottomAxis?: boolean;
-  shiftL?: number;
-  shiftT?: number;
-  openSeries?: DateValue[][];
-  closedSeries?: DateValue[][];
+  hideRightAxis?: boolean;
 };
 
 const AreaGraph = ({
@@ -128,6 +142,7 @@ const AreaGraph = ({
   showGrid = true,
   hideLeftAxis = false,
   hideBottomAxis = false,
+  hideRightAxis = false,
   openSeries,
   closedSeries,
 }: AreaProps) => {
@@ -137,10 +152,13 @@ const AreaGraph = ({
 
   // scales
 
-  let allData: DateValue[];
+  let allData: DataValue[];
 
   if (closedSeries) {
-    allData = closedSeries.reduce((rec, d) => rec.concat(d), []);
+    allData = closedSeries
+      .map((linedata) => linedata.data)
+      .reduce((rec, d) => rec.concat(d), []);
+    k = closedSeries.length;
   }
 
   const dateScale = useMemo(
@@ -181,36 +199,39 @@ const AreaGraph = ({
       x = x - shiftL;
       y = y - shiftT;
       const x0 = dateScale.invert(x);
+
       containerX = ('clientX' in event ? event.clientX : 0) - shiftL;
       containerY = ('clientY' in event ? event.clientY : 0) - shiftT;
 
       if (showLineClosed && closedSeries) {
         for (i = 0; i < closedSeries.length; i++) {
-          indexer = bisectDate(closedSeries[i], x0, 1);
-          dd0 = closedSeries[i][indexer - 1];
-          dd1 = closedSeries[i][indexer];
-
+          indexer = bisectDate(closedSeries[i].data, x0, 1);
+          console.log('indeex', indexer);
+          dd0 = closedSeries[i].data[indexer - 1];
+          dd1 = closedSeries[i].data[indexer];
+          // console.log(dd0)
           if (dd1 && getDate(dd1)) {
             dd3[i] =
               x0.valueOf() - getDate(dd0).valueOf() >
               getDate(dd1).valueOf() - x0.valueOf()
-                ? dd1
-                : dd0;
+                ? { metricName: closedSeries[i].metricName, data: [dd1] }
+                : { metricName: closedSeries[i].metricName, data: [dd0] };
           }
         }
+        // console.log("dd3",dd3)
       }
       if (showLineOpen && openSeries) {
         for (j = 0; j < openSeries.length; j++) {
-          indexer = bisectDate(openSeries[j], x0, 1);
-          dd0 = openSeries[j][indexer - 1];
-          dd1 = openSeries[j][indexer];
+          indexer = bisectDate(openSeries[j].data, x0, 1);
+          dd0 = openSeries[j].data[indexer - 1];
+          dd1 = openSeries[j].data[indexer];
 
           if (dd1 && getDate(dd1)) {
             dd3[i] =
               x0.valueOf() - getDate(dd0).valueOf() >
               getDate(dd1).valueOf() - x0.valueOf()
-                ? dd1
-                : dd0;
+                ? { metricName: openSeries[j].metricName, data: [dd1] }
+                : { metricName: openSeries[j].metricName, data: [dd0] };
             i++;
           }
         }
@@ -218,16 +239,6 @@ const AreaGraph = ({
 
       if (width < 10) return null;
 
-      // console.log(dd3);
-
-      // const index = bisectDate(allData, x0, 1);
-      // const d0 = allData[index - 1];
-      // const d1 = allData[index];
-      // let d = d0;
-      // if (d1 && getDate(d1)) {
-      //   d = x0.valueOf() - getDate(d0).valueOf() > getDate(d1).valueOf() - x0.valueOf() ? d1 : d0;
-
-      // }
       showTooltip({
         tooltipData: dd3,
       });
@@ -251,70 +262,11 @@ const AreaGraph = ({
           from={background}
           to={background2}
         />
-
-        <LinearGradient
-          id="area-gradient-s-0"
-          from={accentColor1}
-          to={accentColor1}
-          toOpacity={0.8}
-        />
-        <LinearGradient
-          id="area-gradient-s-1"
-          from={accentColor2}
-          to={accentColor2}
-          toOpacity={0.8}
-        />
-
-        <LinearGradient
-          id="area-gradient-l-0"
-          from={accentColor3}
-          to={accentColor3}
-          toOpacity={1}
-        />
-        <LinearGradient
-          id="area-gradient-l-1"
-          from={accentColor4}
-          to={accentColor4}
-          toOpacity={1}
-        />
-
-        <LinearGradient
-          id="area-gradient-f-0"
-          from={accentColor1}
-          to={accentColor1}
-          fromOpacity={0.5}
-          toOpacity={0.1}
-        />
-        <LinearGradient
-          id="area-gradient-f-1"
-          from={accentColor2}
-          to={accentColor2}
-          fromOpacity={0.5}
-          toOpacity={0.1}
-        />
-
-        <MarkerCircle
-          id="marker-circle-0"
-          stroke={'white'}
-          strokeWidth={0.5}
-          fill={accentColor3}
-          size={2}
-          refX={2}
-        />
-        <MarkerCircle
-          id="marker-circle-1"
-          stroke={'white'}
-          strokeWidth={0.5}
-          fill={accentColor4}
-          size={2}
-          refX={2}
-        />
-
         {showGrid && (
-          <g>
+          <Group left={shiftL}>
             <GridRows
               scale={valueScale}
-              width={width}
+              width={xMax}
               strokeDasharray="1,1"
               stroke={accentColor}
               strokeOpacity={0.3}
@@ -328,7 +280,7 @@ const AreaGraph = ({
               strokeOpacity={0.3}
               pointerEvents="none"
             />
-          </g>
+          </Group>
         )}
         <Group left={shiftL}>
           {plotgraph > 0 &&
@@ -336,33 +288,37 @@ const AreaGraph = ({
             closedSeries &&
             closedSeries.map((linedata, i) => (
               <g key={`${i}abcd`}>
-                <AreaClosed<DateValue>
-                  data={linedata}
+                <LinearGradient
+                  id={`${i}-linearGragient`}
+                  from={colorArr[i]}
+                  to={colorArr[i]}
+                  fromOpacity={0.5}
+                  toOpacity={0.1}
+                />
+                <AreaClosed<DataValue>
+                  data={linedata.data}
                   x={(d) => dateScale(getDate(d)) ?? 0}
                   y={(d) => valueScale(getValue(d)) ?? 0}
                   yScale={valueScale}
                   strokeWidth={3}
-                  stroke={`url(#area-gradient-s-${i % 2})`}
-                  fill={`url(#area-gradient-f-${i % 2})`}
+                  stroke={colorArr[i]}
+                  strokeOpacity={0.8}
+                  fill={`url(#${i}-linearGragient)`}
                   curve={curveMonotoneX}
                 />
 
                 {showPoints &&
-                  linedata.map((d, j) => (
+                  linedata.data.map((d, j) => (
                     <g key={`test-oot-${i}-${j}`}>
                       <circle
                         cx={dateScale(getDate(d))}
                         cy={valueScale(getValue(d))}
                         r={5}
-                        fill={`url(#area-gradient-s-${i % 2})`}
-                        stroke="white"
-                        strokeOpacity={0.8}
-                        strokeWidth={2}
+                        fill={colorArr[i]}
+                        fillOpacity={0.6}
                         pointerEvents="none"
-                        // style={{touchAction:"pan-y", zIndex:10}}
                       />
                     </g>
-                    // console.log("hey")
                   ))}
               </g>
             ))}
@@ -370,12 +326,12 @@ const AreaGraph = ({
             !showPoints &&
             openSeries &&
             openSeries.map((openLineData, j) => (
-              <LinePath<DateValue>
-                data={openLineData}
+              <LinePath<DataValue>
+                data={openLineData.data}
                 x={(d) => dateScale(getDate(d)) ?? 0}
                 y={(d) => valueScale(getValue(d)) ?? 0}
                 strokeWidth={2}
-                stroke={`url(#area-gradient-l-${j % 2})`}
+                stroke={colorArr[k + j]}
                 strokeOpacity={0.7}
                 curve={curveMonotoneX}
               />
@@ -386,18 +342,29 @@ const AreaGraph = ({
             showPoints &&
             openSeries &&
             openSeries.map((openLineData, j) => (
-              <LinePath<DateValue>
-                data={openLineData}
-                x={(d) => dateScale(getDate(d)) ?? 0}
-                y={(d) => valueScale(getValue(d)) ?? 0}
-                strokeWidth={2}
-                stroke={`url(#area-gradient-l-${j % 2})`}
-                strokeOpacity={0.7}
-                curve={curveMonotoneX}
-                markerMid={`url(#marker-circle-${j % 2})`}
-                markerStart={`url(#marker-circle-${j % 2})`}
-                markerEnd={`url(#marker-circle-${j % 2})`}
-              />
+              <g>
+                <MarkerCircle
+                  id={`${j}-circle`}
+                  // stroke={'white'}
+                  // strokeWidth={0.5}
+                  fill={colorArr[j + k]}
+                  size={2.5}
+                  refX={2.5}
+                  fillOpacity={0.6}
+                />
+                <LinePath<DataValue>
+                  data={openLineData.data}
+                  x={(d) => dateScale(getDate(d)) ?? 0}
+                  y={(d) => valueScale(getValue(d)) ?? 0}
+                  strokeWidth={2}
+                  stroke={colorArr[j + k]}
+                  strokeOpacity={0.7}
+                  curve={curveMonotoneX}
+                  markerMid={`url(#${j}-circle)`}
+                  markerStart={`url(#${j}-circle)`}
+                  markerEnd={`url(#${j}-circle)`}
+                />
+              </g>
               // (console.log(lineIndex))
             ))}
 
@@ -421,30 +388,18 @@ const AreaGraph = ({
               <g key={`${i}-tooltip`}>
                 {/* vertical line for toolitip */}
                 <Line
-                  from={{ x: dateScale(getDate(d)), y: 0 }}
-                  to={{ x: dateScale(getDate(d)), y: yMax }}
+                  from={{ x: dateScale(getDate(d.data[0])), y: 0 }}
+                  to={{ x: dateScale(getDate(d.data[0])), y: yMax }}
                   stroke={accentColorDark}
                   strokeWidth={2}
                   pointerEvents="none"
                   strokeDasharray="5,2"
                 />
-
-                {/* horizontal line for tooltip */}
-
-                {/* <Line
-                            from={{ x: 0, y: valueScale(getValue(d)) }}
-                            to={{ x: xMax, y: valueScale(getValue(d)) }}
-                            stroke={accentColorDark}
-                            strokeWidth={2}
-                            pointerEvents="none"
-                            strokeDasharray="5,2"
-                            /> */}
-
                 <circle
-                  cx={dateScale(getDate(d))}
-                  cy={valueScale(getValue(d))}
-                  r={6}
-                  fill={'black'}
+                  cx={dateScale(getDate(d.data[0]))}
+                  cy={valueScale(getValue(d.data[0]))}
+                  r={7}
+                  fill={colorArr[i]}
                   fillOpacity={0.5}
                   stroke="white"
                   strokeOpacity={0.5}
@@ -475,6 +430,16 @@ const AreaGraph = ({
             left={shiftL}
           />
         )}
+        {!hideRightAxis && (
+          <AxisRight
+            scale={valueScale}
+            numTicks={5}
+            stroke={axisColor}
+            tickStroke={axisColor}
+            tickLabelProps={() => axisRightTickLabelProps}
+            left={shiftL + xMax}
+          />
+        )}
       </svg>
       {tooltipData && (
         <Tooltip
@@ -484,8 +449,21 @@ const AreaGraph = ({
         >
           {dd3.map((d, i) => (
             <div style={{ padding: '5px', display: 'flex' }} key={`bb- ${i}`}>
-              {' '}
-              {`${i}.  ${getValue(d).toString()} \n `}{' '}
+              <div
+                style={{
+                  float: 'left',
+                  display: 'flex',
+                  alignItems: 'flex-start',
+                }}
+              >
+                <hr
+                  color={colorArr[i]}
+                  style={{ width: '10px', height: '1px' }}
+                />
+                <span style={{ color: 'white', paddingLeft: '0.5em' }}>{`${
+                  d.metricName
+                }:  ${getValue(d.data[0]).toString()}`}</span>
+              </div>
             </div>
           ))}
         </Tooltip>
