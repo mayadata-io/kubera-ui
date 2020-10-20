@@ -14,7 +14,7 @@ React component library for faster and easier web development. Build your own de
 6. [Branch](#6-branch)
 7. [Publishing your Library on NPM](#7-publishing-your-library-on-npm)
 <br><br><br>
-<br><br><br>
+<br><br>
 
 
 ### `1. Project Structure`
