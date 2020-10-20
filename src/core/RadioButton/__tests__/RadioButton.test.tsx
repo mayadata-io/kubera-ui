@@ -10,6 +10,6 @@ describe('Radio Button Component', () => {
         <RadioButton>Target cluster</RadioButton>
       </KuberaThemeProvider>
     );
-    expect(getAllByRole('RadioButton')).toBeTruthy();
+    expect(getAllByRole('Radio')).toBeTruthy();
   });
 });
