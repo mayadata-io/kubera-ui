@@ -1,15 +1,24 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import useStyles from './styles';
-import PropTypes from 'prop-types';
+import { TabBaseProps } from './base';
 import Tab from '@material-ui/core/Tab';
-import Box from '@material-ui/core/Box';
 import Tabs from '@material-ui/core/Tabs';
 import AppBar from '@material-ui/core/AppBar';
 import Typography from '@material-ui/core/Typography';
-import { withStyles } from '@material-ui/core/styles';
 
-const TabPanel = (props: any) => {
-  const { children, value, index, ...other } = props;
+interface TabPanelProps {
+  children?: string;
+  index: any;
+  value: any;
+}
+
+const TabPanel: React.FC<TabPanelProps> = ({
+  children,
+  index,
+  value,
+  ...other
+}) => {
+  const classes = useStyles();
   return (
     <div
       role="tabpanel"
@@ -19,18 +28,12 @@ const TabPanel = (props: any) => {
       {...other}
     >
       {value === index && (
-        <Box p={3}>
+        <div className={classes.tabPanel}>
           <Typography>{children}</Typography>
-        </Box>
+        </div>
       )}
     </div>
   );
-};
-
-TabPanel.propTypes = {
-  children: PropTypes.node,
-  index: PropTypes.any.isRequired,
-  value: PropTypes.any.isRequired,
 };
 
 const a11yProps = (index: number) => {
@@ -40,7 +43,7 @@ const a11yProps = (index: number) => {
   };
 };
 
-interface SiampleTabsProps {
+interface SiampleTabsProps extends TabBaseProps {
   label: string[];
   content: any[];
 }
@@ -53,48 +56,36 @@ const SimpleTabs: React.FC<SiampleTabsProps> = ({ label, content }) => {
     setValue(newValue);
   };
 
-  const CustomTab = withStyles({
-    root: {
-      fontWeight: 500,
-      color: ' #B9B9B9',
-      fontSize: '1rem',
-      lineHeight: '140%',
-      textAlign: 'center',
-      textTransform: 'none',
-    },
-
-    selected: {
-      color: '#EAD7A2',
-    },
-  })(Tab);
-
   return (
     <div>
-      <Fragment>
-        <AppBar position="static" className={classes.panel}>
-          <Tabs
-            value={value}
-            onChange={handleChange}
-            aria-label="simple tabs example"
-            classes={{
-              indicator: classes.indicator,
-            }}
-          >
-            {label.map((item, index) => {
-              return (
-                <CustomTab key={index} label={item} {...a11yProps(index)} />
-              );
-            })}
-          </Tabs>
-        </AppBar>
-        {content.map((item, index) => {
-          return (
-            <TabPanel key={index} value={value} index={index}>
-              {item}
-            </TabPanel>
-          );
-        })}
-      </Fragment>
+      <AppBar position="static" className={classes.panel}>
+        <Tabs
+          value={value}
+          onChange={handleChange}
+          aria-label="simple tabs example"
+          classes={{
+            indicator: classes.indicator,
+          }}
+        >
+          {label.map((item, index) => {
+            return (
+              <Tab
+                className={classes.TabItem}
+                key={index}
+                label={item}
+                {...a11yProps(index)}
+              />
+            );
+          })}
+        </Tabs>
+      </AppBar>
+      {content.map((item, index) => {
+        return (
+          <TabPanel key={index} value={value} index={index}>
+            {item}
+          </TabPanel>
+        );
+      })}
     </div>
   );
 };
