@@ -29,4 +29,22 @@ storiesOf('Pills/Light Pills', module)
       <LightPills variant="warning" label="Warning" />
       <LightPills variant="danger" label="Danger" />
     </ThemedBackground>
+  ))
+
+  // Kubera Portal
+  .add('Kubera Portal', () => (
+    <ThemedBackground platform="kubera-portal" row>
+      <LightPills variant="success" label="Success" />
+      <LightPills variant="warning" label="Warning" />
+      <LightPills variant="danger" label="Danger" />
+    </ThemedBackground>
+  ))
+
+  // Kubera Core
+  .add('Kubera Core', () => (
+    <ThemedBackground platform="kubera-core" row>
+      <LightPills variant="success" label="Success" />
+      <LightPills variant="warning" label="Warning" />
+      <LightPills variant="danger" label="Danger" />
+    </ThemedBackground>
   ));

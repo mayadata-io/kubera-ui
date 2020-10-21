@@ -6,6 +6,8 @@ import pkg from './package.json';
 
 const globals = {
   react: 'React',
+  'react-dom': 'ReactDOM',
+  '@material-ui/core': 'MaterialUI',
 };
 
 export default {
@@ -26,14 +28,7 @@ export default {
       format: 'es',
       globals,
       sourcemap: true,
-    },
-    {
-      file: `./dist/${pkg.browser}`,
-      format: 'iife',
-      name: 'lib',
-      globals,
-      sourcemap: true,
-    },
+    }
   ],
   plugins: [
     commonjs(),
@@ -42,9 +37,6 @@ export default {
         require('postcss-easy-import')({ prefix: '_' }), // keep this first
         require('cssnano')({
           preset: 'default',
-        }),
-        require('autoprefixer')({
-          browsers: ['>1%', 'last 4 versions', 'Firefox ESR', 'not ie < 9'],
         }),
       ],
     }),

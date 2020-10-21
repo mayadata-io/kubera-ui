@@ -1,24 +1,53 @@
-import { createMuiTheme } from '@material-ui/core/styles';
-import { ThemeOptions } from '@material-ui/core/styles/createMuiTheme';
+import { createMuiTheme, ThemeOptions } from '@material-ui/core';
 
 // Agument the Theme interface
-// declare module '@material-ui/core/styles/createMuiTheme' {
-//   interface Theme {
-//     // newProperty: {
-//     // 	key: value;
-//     // }
-//   }
-//   // allow configuration using `createMuiTheme`
-//   interface ThemeOptions {
-//     // newProperty?: {
-//     // 	key?: value;
-//     // }
-//   }
-// }
+declare module '@material-ui/core/styles/createMuiTheme' {
+  export interface Theme {
+    kuberaCoreCards: {
+      kuberaChaos: {
+        card: string;
+        license: {
+          selection: string;
+          header: string;
+          body: string;
+        };
+      };
+      kuberaPropel: {
+        card: string;
+        license: {
+          selection: string;
+          header: string;
+          body: string;
+        };
+      };
+    };
+  }
+  // allow configuration using `createMuiTheme`
+  export interface ThemeOptions {
+    kuberaCoreCards?: {
+      kuberaChaos?: {
+        card: string;
+        license: {
+          selection: string;
+          header: string;
+          body: string;
+        };
+      };
+      kuberaPropel?: {
+        card: string;
+        license: {
+          selection: string;
+          header: string;
+          body: string;
+        };
+      };
+    };
+  }
+}
 
 // Augument the Palette interface
 declare module '@material-ui/core/styles/createPalette' {
-  interface Palette {
+  export interface Palette {
     // Base Theme Palette
     sidebarMenu: string;
     loginBackground: string;
@@ -59,7 +88,7 @@ declare module '@material-ui/core/styles/createPalette' {
     };
   }
   // allow configuration using `createMuiTheme`
-  interface PaletteOptions {
+  export interface PaletteOptions {
     // Base Theme Palette options
     sidebarMenu?: string;
     loginBackground?: string;
