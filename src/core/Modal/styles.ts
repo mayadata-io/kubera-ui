@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     minHeight: 0,
     minWidth: 0,
     borderRadius: 3,
-    color: theme.palette.status.pending.text,
+    color: theme.palette.disabledBackground,
     border: '1px solid',
     borderColor: theme.palette.border.main,
     marginTop: theme.spacing(4),

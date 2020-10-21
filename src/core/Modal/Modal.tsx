@@ -17,29 +17,27 @@ const Modal: React.FC<ModalProps> = ({
   const [isOpen, setIsOpen] = useState(true);
 
   return (
-    <div>
-      <MuiModal
-        open={isOpen}
-        onClose={handleClose}
-        disableBackdropClick
-        disableEscapeKeyDown
-        title="Modal"
-        aria-labelledby="simple-modal-title"
-      >
-        <div className={classes.root}>
-          {hasCloseBtn && (
-            <Button
-              variant="outlined"
-              className={classes.closeButton}
-              onClick={() => setIsOpen(false)}
-            >
-              &#x2715;
-            </Button>
-          )}
-          {children}
-        </div>
-      </MuiModal>
-    </div>
+    <MuiModal
+      open={isOpen}
+      onClose={handleClose}
+      disableBackdropClick
+      disableEscapeKeyDown
+      title="Modal"
+      aria-labelledby="simple-modal-title"
+    >
+      <div className={classes.root}>
+        {hasCloseBtn && (
+          <Button
+            variant="outlined"
+            className={classes.closeButton}
+            onClick={() => setIsOpen(false)}
+          >
+            &#x2715;
+          </Button>
+        )}
+        {children}
+      </div>
+    </MuiModal>
   );
 };
 
