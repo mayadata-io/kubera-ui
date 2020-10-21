@@ -8,13 +8,13 @@ storiesOf('Modal', module)
   .add('Kubera Chaos', () => (
     <ThemedBackground platform="kubera-chaos">
       <Modal
-        isOpen={true}
-        handleClose={() => console.log('clicked')}
+        open={true}
+        onClose={() => console.log('clicked')}
         aria-labelledby="simple-modal-title"
         aria-describedby="simple-modal-description"
         hasCloseBtn
       >
-        Modal
+        <>Modal</>
       </Modal>
     </ThemedBackground>
   ))
@@ -23,13 +23,13 @@ storiesOf('Modal', module)
   .add('Kubera Core', () => (
     <ThemedBackground platform="kubera-core">
       <Modal
-        isOpen={true}
-        handleClose={() => console.log('clicked')}
+        open={true}
+        onClose={() => console.log('clicked')}
         aria-labelledby="simple-modal-title"
         aria-describedby="simple-modal-description"
         hasCloseBtn
       >
-        Modal
+        <>Modal</>
       </Modal>
     </ThemedBackground>
   ))
@@ -38,13 +38,13 @@ storiesOf('Modal', module)
   .add('Litmus Portal', () => (
     <ThemedBackground platform="litmus-portal">
       <Modal
-        isOpen={true}
-        handleClose={() => console.log('clicked')}
+        open={true}
+        onClose={() => console.log('clicked')}
         aria-labelledby="simple-modal-title"
         aria-describedby="simple-modal-description"
         hasCloseBtn
       >
-        Modal
+        <>Modal</>
       </Modal>
     </ThemedBackground>
   ))
@@ -53,13 +53,13 @@ storiesOf('Modal', module)
   .add('Kubera Portal', () => (
     <ThemedBackground platform="kubera-portal">
       <Modal
-        isOpen={true}
-        handleClose={() => console.log('clicked')}
+        open={true}
+        onClose={() => console.log('clicked')}
         aria-labelledby="simple-modal-title"
         aria-describedby="simple-modal-description"
         hasCloseBtn
       >
-        Modal
+        <>Modal</>
       </Modal>
     </ThemedBackground>
   ))
@@ -68,13 +68,13 @@ storiesOf('Modal', module)
   .add('Kubera Propel', () => (
     <ThemedBackground platform="kubera-propel">
       <Modal
-        isOpen={true}
-        handleClose={() => console.log('clicked')}
+        open={true}
+        onClose={() => console.log('clicked')}
         aria-labelledby="simple-modal-title"
         aria-describedby="simple-modal-description"
         hasCloseBtn
       >
-        Modal
+        <>Modal</>
       </Modal>
     </ThemedBackground>
   ));

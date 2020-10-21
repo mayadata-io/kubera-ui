@@ -7,12 +7,8 @@ describe('Modal Component', () => {
   it('Renders', () => {
     const { findByTitle } = render(
       <KuberaThemeProvider platform="kubera-chaos">
-        <Modal
-          isOpen={true}
-          handleClose={() => console.log('clicked')}
-          hasCloseBtn
-        >
-          Modal
+        <Modal open={true} onClose={() => console.log('clicked')} hasCloseBtn>
+          <>Modal</>
         </Modal>
       </KuberaThemeProvider>
     );

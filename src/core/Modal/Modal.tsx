@@ -1,25 +1,23 @@
-import { Modal as MuiModal, Button } from '@material-ui/core';
+import {
+  Modal as MuiModal,
+  Button,
+  ModalProps as ModalBaseProps,
+} from '@material-ui/core';
 import React, { useState } from 'react';
 import useStyles from './styles';
 
-interface ModalProps {
-  isOpen: boolean;
-  handleClose: () => void;
+interface ModalProps extends ModalBaseProps {
   hasCloseBtn: boolean;
 }
 
-const Modal: React.FC<ModalProps> = ({
-  children,
-  hasCloseBtn,
-  handleClose,
-}) => {
+const Modal: React.FC<ModalProps> = ({ children, hasCloseBtn }) => {
   const classes = useStyles();
-  const [isOpen, setIsOpen] = useState(true);
+  const [open, setIsOpen] = useState(true);
 
   return (
     <MuiModal
-      open={isOpen}
-      onClose={handleClose}
+      open={open}
+      onClose={() => setIsOpen(false)}
       disableBackdropClick
       disableEscapeKeyDown
       title="Modal"
