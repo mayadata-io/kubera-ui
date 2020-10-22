@@ -9,8 +9,8 @@ describe('InputField', () => {
       <KuberaThemeProvider platform="kubera-chaos">
         <InputField
           label="primary"
-          data-id="inputField"
           variant="primary"
+          type="text"
           disabled={false}
           handleChange={() => console.log('change')}
         />

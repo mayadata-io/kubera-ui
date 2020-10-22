@@ -5,6 +5,9 @@ const useStyles = makeStyles((theme: Theme) => ({
     border: '0.0.625rem solid',
     width: '25rem',
     borderRadius: '0.25rem',
+    '& label': {
+      color: theme.palette.text.hint,
+    },
     background: theme.palette.background.paper,
     '& fieldset': {
       borderColor: theme.palette.border.main,

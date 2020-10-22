@@ -61,7 +61,7 @@ const InputField: React.FC<InputProps> = ({
         <InputLabel htmlFor="outlined-adornment-password">{label}</InputLabel>
         <OutlinedInput
           id="outlined-adornment-password"
-          type={type === 'password' && showPassword ? 'text' : 'password'}
+          type={showPassword ? 'text' : 'password'}
           error={variant === 'error' ? true : false}
           disabled={disabled}
           onChange={handleChange}
