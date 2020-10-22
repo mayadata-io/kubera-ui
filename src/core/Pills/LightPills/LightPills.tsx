@@ -7,7 +7,6 @@ type Variant = 'success' | 'warning' | 'danger' | undefined;
 
 interface LightPillsProps extends ChipBaseProps {
   variant: Variant;
-  label: string;
 }
 const LightPills: React.FC<LightPillsProps> = ({ label, variant }) => {
   const classes = useStyles();
