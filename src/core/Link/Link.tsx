@@ -1,9 +1,8 @@
 import React from 'react';
 import { BrowserRouter as Router, Link } from 'react-router-dom';
 import { useStyles } from './styles';
-import { BaseLinkProps } from './base';
 
-interface LinksProps extends BaseLinkProps {
+interface LinksProps {
   pathname: string;
   disabled?: boolean;
   active?: boolean;
