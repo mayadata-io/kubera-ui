@@ -1,6 +1,5 @@
 import React, { Fragment } from 'react';
 import { useStyles } from './styles';
-// import { TypographyBaseProps } from '../base';
 import Typography from '@material-ui/core/Typography';
 
 type Type = 'bold' | undefined;
