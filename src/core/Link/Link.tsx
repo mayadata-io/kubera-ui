@@ -21,10 +21,10 @@ const Links: React.FC<LinksProps> = ({
   return (
     <Router>
       <Link
-        data-testid="link"
         className={`${classes.root} ${disableLink} ${pressed}`}
         to={pathname}
         target="_blank"
+        rel="noreferrer noopener"
       >
         {children}
       </Link>

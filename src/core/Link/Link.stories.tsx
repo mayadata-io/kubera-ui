@@ -6,7 +6,7 @@ import { Links } from '../Link';
 storiesOf('Link', module)
   // Litmus Portal
   .add('Litmus Portal', () => (
-    <ThemedBackground platform="litmus-portal" row>
+    <ThemedBackground platform="litmus-portal">
       <Links active={true} disabled={false} pathname="/home">
         Link
       </Links>
@@ -15,7 +15,7 @@ storiesOf('Link', module)
 
   // Kubera Chaos
   .add('Kubera Chaos', () => (
-    <ThemedBackground platform="kubera-chaos" row>
+    <ThemedBackground platform="kubera-chaos">
       <Links active={true} disabled={true} pathname="/home">
         Link
       </Links>
@@ -24,7 +24,7 @@ storiesOf('Link', module)
 
   // Kubera Propel
   .add('Kubera Propel', () => (
-    <ThemedBackground platform="kubera-propel" row>
+    <ThemedBackground platform="kubera-propel">
       <Links active={true} disabled={true} pathname="/home">
         Link
       </Links>
@@ -33,7 +33,7 @@ storiesOf('Link', module)
 
   // Kubera Portal
   .add('Kubera Portal', () => (
-    <ThemedBackground platform="kubera-portal" row>
+    <ThemedBackground platform="kubera-portal">
       <Links active={true} disabled={true} pathname="/home">
         Link
       </Links>
@@ -42,7 +42,7 @@ storiesOf('Link', module)
 
   // Kubera Core
   .add('Kubera Core', () => (
-    <ThemedBackground platform="kubera-core" row>
+    <ThemedBackground platform="kubera-core">
       <Links active={true} disabled={true} pathname="/home">
         Link
       </Links>
