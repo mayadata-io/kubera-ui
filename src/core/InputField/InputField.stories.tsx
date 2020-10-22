@@ -1,16 +1,16 @@
 import { storiesOf } from '@storybook/react';
 import React from 'react';
-import { ThemedBackground } from '../../../utils/storybook';
+import { ThemedBackground } from '../../utils/storybook';
 import { InputField } from '../InputField';
 
 storiesOf('Input/InputField', module)
   // Litmus Portal
   .add('Litmus Portal', () => (
-    <ThemedBackground platform="litmus-portal" row>
+    <ThemedBackground platform="litmus-portal">
       <InputField
         label="primary"
         variant="primary"
-        error={false}
+        type="password"
         disabled={false}
         handleChange={() => console.log('change')}
       />
@@ -24,14 +24,12 @@ storiesOf('Input/InputField', module)
       <InputField
         label="success"
         variant="success"
-        error={false}
         disabled={false}
         handleChange={() => console.log('change')}
       />
       <InputField
-        label="disabled"
+        label="primary"
         variant="primary"
-        error={false}
         disabled={true}
         handleChange={() => console.log('change')}
       />
@@ -40,11 +38,10 @@ storiesOf('Input/InputField', module)
 
   // Kubera Chaos
   .add('Kubera Chaos', () => (
-    <ThemedBackground platform="kubera-chaos" row>
+    <ThemedBackground platform="kubera-chaos">
       <InputField
         label="primary"
         variant="primary"
-        error={false}
         disabled={false}
         handleChange={() => console.log('change')}
       />
@@ -52,19 +49,18 @@ storiesOf('Input/InputField', module)
         label="error"
         variant="error"
         error={true}
+        disabled={false}
         handleChange={() => console.log('change')}
       />
       <InputField
         label="success"
         variant="success"
-        error={false}
         disabled={false}
         handleChange={() => console.log('change')}
       />
       <InputField
-        label="disabled"
+        label="primary"
         variant="primary"
-        error={false}
         disabled={true}
         handleChange={() => console.log('change')}
       />
@@ -73,11 +69,10 @@ storiesOf('Input/InputField', module)
 
   // Kubera Propel
   .add('Kubera Propel', () => (
-    <ThemedBackground platform="kubera-propel" row>
+    <ThemedBackground platform="kubera-propel">
       <InputField
         label="primary"
         variant="primary"
-        error={false}
         disabled={false}
         handleChange={() => console.log('change')}
       />
@@ -85,19 +80,18 @@ storiesOf('Input/InputField', module)
         label="error"
         variant="error"
         error={true}
+        disabled={false}
         handleChange={() => console.log('change')}
       />
       <InputField
         label="success"
         variant="success"
-        error={false}
         disabled={false}
         handleChange={() => console.log('change')}
       />
       <InputField
-        label="disabled"
+        label="primary"
         variant="primary"
-        error={false}
         disabled={true}
         handleChange={() => console.log('change')}
       />
@@ -106,11 +100,10 @@ storiesOf('Input/InputField', module)
 
   // Kubera Core
   .add('Kubera Core', () => (
-    <ThemedBackground platform="kubera-core" row>
+    <ThemedBackground platform="kubera-core">
       <InputField
         label="primary"
         variant="primary"
-        error={false}
         disabled={false}
         handleChange={() => console.log('change')}
       />
@@ -118,19 +111,18 @@ storiesOf('Input/InputField', module)
         label="error"
         variant="error"
         error={true}
+        disabled={false}
         handleChange={() => console.log('change')}
       />
       <InputField
         label="success"
         variant="success"
-        error={false}
         disabled={false}
         handleChange={() => console.log('change')}
       />
       <InputField
-        label="disabled"
+        label="primary"
         variant="primary"
-        error={false}
         disabled={true}
         handleChange={() => console.log('change')}
       />
@@ -139,11 +131,10 @@ storiesOf('Input/InputField', module)
 
   // Kubera Portal
   .add('Kubera Portal', () => (
-    <ThemedBackground platform="kubera-portal" row>
+    <ThemedBackground platform="kubera-portal">
       <InputField
         label="primary"
         variant="primary"
-        error={false}
         disabled={false}
         handleChange={() => console.log('change')}
       />
@@ -151,19 +142,18 @@ storiesOf('Input/InputField', module)
         label="error"
         variant="error"
         error={true}
+        disabled={false}
         handleChange={() => console.log('change')}
       />
       <InputField
         label="success"
         variant="success"
-        error={false}
         disabled={false}
         handleChange={() => console.log('change')}
       />
       <InputField
-        label="disabled"
+        label="primary"
         variant="primary"
-        error={false}
         disabled={true}
         handleChange={() => console.log('change')}
       />

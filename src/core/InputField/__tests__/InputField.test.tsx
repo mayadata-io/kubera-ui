@@ -1,6 +1,6 @@
 import { render } from '@testing-library/react';
 import React from 'react';
-import { KuberaThemeProvider } from '../../../../theme';
+import { KuberaThemeProvider } from '../../../theme';
 import { InputField } from '../InputField';
 
 describe('InputField', () => {
@@ -8,12 +8,11 @@ describe('InputField', () => {
     const { getByTestId } = render(
       <KuberaThemeProvider platform="kubera-chaos">
         <InputField
-          data-id="inputField"
           label="primary"
+          data-id="inputField"
           variant="primary"
-          error={false}
           disabled={false}
-          handleChange={() => {}}
+          handleChange={() => console.log('change')}
         />
       </KuberaThemeProvider>
     );
