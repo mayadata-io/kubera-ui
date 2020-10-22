@@ -1,13 +1,13 @@
 import { storiesOf } from '@storybook/react';
 import React from 'react';
-import { ThemedBackground } from '../../../utils/storybook';
+import { ThemedBackground } from '../../utils/storybook';
 import { CheckBox } from '../CheckBox';
 
-storiesOf('CheckBox/CheckBox default', module)
+storiesOf('CheckBox', module)
   // Litmus Portal
   .add('Litmus Portal', () => (
     <ThemedBackground platform="litmus-portal" row>
-      <CheckBox checked={true} disabled={false} />
+      <CheckBox checked={true} disabled={true} />
     </ThemedBackground>
   ))
 

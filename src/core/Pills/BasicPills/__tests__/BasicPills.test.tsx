@@ -1,15 +1,16 @@
 import { render } from '@testing-library/react';
 import React from 'react';
 import { KuberaThemeProvider } from '../../../../theme';
-import { CheckBox } from '../CheckBox';
+import { Pills } from '../BasicPills';
 
-describe('CheckBox', () => {
+describe('Basic Pills Component', () => {
   it('Renders', () => {
-    const { container } = render(
+    const { getByText } = render(
       <KuberaThemeProvider platform="kubera-chaos">
-        <CheckBox checked={false} disabled={false} />
+        <Pills variant="default" label="Basic Pill" />
       </KuberaThemeProvider>
     );
-    container.querySelector('input');
+
+    expect(getByText('Basic Pill')).toBeTruthy();
   });
 });
