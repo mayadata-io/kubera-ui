@@ -47,7 +47,7 @@ const InputField: React.FC<InputProps> = ({
     }
   }
 
-  if (type == 'password') {
+  if (type === 'password') {
     return (
       <FormControl
         data-testid="inputField"
@@ -61,8 +61,8 @@ const InputField: React.FC<InputProps> = ({
         <InputLabel htmlFor="outlined-adornment-password">{label}</InputLabel>
         <OutlinedInput
           id="outlined-adornment-password"
-          type={showPassword ? 'text' : 'password'}
-          error={variant == 'error' ? true : false}
+          type={type === 'password' && showPassword ? 'text' : 'password'}
+          error={variant === 'error' ? true : false}
           disabled={disabled}
           onChange={handleChange}
           required={required}
@@ -91,11 +91,11 @@ const InputField: React.FC<InputProps> = ({
         disabled ? classes.disabled : `${classes.root}  ${getVariant(variant)}`
       }
     >
-      <InputLabel htmlFor="outlined-adornment-password">{label}</InputLabel>
+      <InputLabel htmlFor="outlined-adornment">{label}</InputLabel>
       <OutlinedInput
-        id="outlined-adornment-password"
-        type={showPassword ? 'text' : 'password'}
-        error={variant == 'error' ? true : false}
+        id="outlined-adornment"
+        type={type}
+        error={variant === 'error' ? true : false}
         disabled={disabled}
         onChange={handleChange}
         required={required}

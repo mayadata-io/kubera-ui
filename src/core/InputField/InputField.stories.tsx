@@ -10,7 +10,7 @@ storiesOf('Input/InputField', module)
       <InputField
         label="primary"
         variant="primary"
-        type="password"
+        type="text"
         disabled={false}
         handleChange={() => console.log('change')}
       />
@@ -18,18 +18,21 @@ storiesOf('Input/InputField', module)
         label="error"
         variant="error"
         error={true}
+        type="text"
         disabled={false}
         handleChange={() => console.log('change')}
       />
       <InputField
         label="success"
         variant="success"
+        type="text"
         disabled={false}
         handleChange={() => console.log('change')}
       />
       <InputField
         label="primary"
         variant="primary"
+        type="text"
         disabled={true}
         handleChange={() => console.log('change')}
       />
@@ -42,6 +45,7 @@ storiesOf('Input/InputField', module)
       <InputField
         label="primary"
         variant="primary"
+        type="password"
         disabled={false}
         handleChange={() => console.log('change')}
       />
@@ -49,18 +53,21 @@ storiesOf('Input/InputField', module)
         label="error"
         variant="error"
         error={true}
+        type="text"
         disabled={false}
         handleChange={() => console.log('change')}
       />
       <InputField
         label="success"
         variant="success"
+        type="text"
         disabled={false}
         handleChange={() => console.log('change')}
       />
       <InputField
         label="primary"
         variant="primary"
+        type="text"
         disabled={true}
         handleChange={() => console.log('change')}
       />
@@ -73,6 +80,7 @@ storiesOf('Input/InputField', module)
       <InputField
         label="primary"
         variant="primary"
+        type="text"
         disabled={false}
         handleChange={() => console.log('change')}
       />
@@ -80,18 +88,21 @@ storiesOf('Input/InputField', module)
         label="error"
         variant="error"
         error={true}
+        type="text"
         disabled={false}
         handleChange={() => console.log('change')}
       />
       <InputField
         label="success"
         variant="success"
+        type="text"
         disabled={false}
         handleChange={() => console.log('change')}
       />
       <InputField
         label="primary"
         variant="primary"
+        type="text"
         disabled={true}
         handleChange={() => console.log('change')}
       />
@@ -104,6 +115,7 @@ storiesOf('Input/InputField', module)
       <InputField
         label="primary"
         variant="primary"
+        type="text"
         disabled={false}
         handleChange={() => console.log('change')}
       />
@@ -111,18 +123,21 @@ storiesOf('Input/InputField', module)
         label="error"
         variant="error"
         error={true}
+        type="text"
         disabled={false}
         handleChange={() => console.log('change')}
       />
       <InputField
         label="success"
         variant="success"
+        type="text"
         disabled={false}
         handleChange={() => console.log('change')}
       />
       <InputField
         label="primary"
         variant="primary"
+        type="text"
         disabled={true}
         handleChange={() => console.log('change')}
       />
@@ -135,6 +150,7 @@ storiesOf('Input/InputField', module)
       <InputField
         label="primary"
         variant="primary"
+        type="text"
         disabled={false}
         handleChange={() => console.log('change')}
       />
@@ -142,18 +158,21 @@ storiesOf('Input/InputField', module)
         label="error"
         variant="error"
         error={true}
+        type="text"
         disabled={false}
         handleChange={() => console.log('change')}
       />
       <InputField
         label="success"
         variant="success"
+        type="text"
         disabled={false}
         handleChange={() => console.log('change')}
       />
       <InputField
         label="primary"
         variant="primary"
+        type="text"
         disabled={true}
         handleChange={() => console.log('change')}
       />
