@@ -17,6 +17,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     fontSize: '0.75rem',
     marginBottom: theme.spacing(1.625),
     color: theme.palette.text.primary,
+    whiteSpace: 'nowrap',
   },
 }));
 export { useStyles };

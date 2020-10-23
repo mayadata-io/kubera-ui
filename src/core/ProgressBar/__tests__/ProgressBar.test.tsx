@@ -1,35 +1,34 @@
-import { render } from '@testing-library/react';
+import '@testing-library/jest-dom/extend-expect';
 import React from 'react';
-import { KuberaThemeProvider } from '../../../theme';
+import { render, cleanup } from '@testing-library/react';
+import '@testing-library/jest-dom';
 import { ProgressBar } from '../ProgressBar';
 
-describe('ProgressBar', () => {
-  it('Renders', () => {
-    function checkProgressValue(value: number) {
-      if (value >= 0 && value <= 100) {
-        return value;
-      }
-      return 0;
-    }
-    function isColor(strColor: string) {
-      var s = new Option().style;
-      s.color = strColor;
+afterEach(cleanup);
+jest.useFakeTimers();
 
-      if (s.color === strColor.toLowerCase()) {
-        return strColor;
-      }
-      return strColor;
-    }
-
-    const { getAllByRole } = render(
-      <KuberaThemeProvider platform="kubera-chaos">
-        <ProgressBar
-          value={checkProgressValue(80)}
-          label="Success"
-          color={isColor('red')}
-        />
-      </KuberaThemeProvider>
+describe('ProgressBar renders', () => {
+  it('Render', () => {
+    const items = [{ value: 80, color: 'rgb(63, 81, 181)', label: 'Success' }];
+    const { getAllByRole, getByText } = render(
+      <ProgressBar value={80} color={'red'} label="Success" />
     );
-    expect(getAllByRole('progressbar')).toBeTruthy();
+    const elem = getAllByRole('progressbar');
+    /**
+     * test component
+     */
+    elem.forEach((item, index) => {
+      expect(item).toHaveAttribute(
+        'aria-valuenow',
+        items[index].value.toString()
+      );
+      const el = document.getElementsByClassName('MuiLinearProgress-bar');
+      const style = window.getComputedStyle(el[index]);
+      expect(style.backgroundColor).toBe(items[index].color);
+      const labelElment = getByText(
+        items[index].label + ' : ' + items[index].value
+      );
+      expect(labelElment).toBeInTheDocument();
+    });
   });
 });
