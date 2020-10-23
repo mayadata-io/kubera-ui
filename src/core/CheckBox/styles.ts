@@ -5,10 +5,8 @@ const useStyles = makeStyles((theme: Theme) => ({
     '&:hover': {
       backgroundColor: 'transparent',
     },
-    '& svg': {
-      width: '1.5rem',
-      height: '1.5rem',
-    },
+    width: '1.5rem',
+    height: '1.5rem',
   },
   '@global': {
     '.MuiCheckbox-root': {
