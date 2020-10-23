@@ -10,20 +10,12 @@ interface CustomDropdownProps extends BasePropsMenu {
 }
 const Dropdown: React.FC<CustomDropdownProps> = ({ children, anchorEl }) => {
   const classes = useStyles();
-  let t = 0;
-  let l = 0;
-  let h = 0;
 
   const [anchorElement, setAnchorElement] = React.useState<null | HTMLElement>(
     anchorEl
   );
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorElement(event.currentTarget);
-    l = event.currentTarget.offsetLeft;
-    t = event.currentTarget.offsetTop;
-    h = event.currentTarget.offsetHeight;
-
-    console.log('top', t, 'left', l, 'height', h);
   };
   const handleClose = () => {
     setAnchorElement(null);
