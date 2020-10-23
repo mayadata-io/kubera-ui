@@ -1,34 +1,25 @@
 import React from 'react';
 import useStyles from './styles';
-import { RadioBaseProps } from './base';
 import Radio from '@material-ui/core/Radio';
+import { RadioProps } from '@material-ui/core/Radio';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 
-interface RadioButtonProps extends RadioBaseProps {
-  children: string;
-  disabled?: boolean;
-  checked?: boolean;
-}
-
-const RadioButton: React.FC<RadioButtonProps> = ({
-  children,
-  disabled,
-  checked,
-}) => {
+const RadioButton: React.FC<RadioProps> = (props) => {
   const classes = useStyles();
 
   return (
     <FormControlLabel
       value="end"
-      label={children}
-      className={classes.RadioLabel}
+      label={props.children}
+      className={classes.root}
       control={
         <Radio
-          color="primary"
-          disabled={disabled}
-          checked={checked}
+          disabled={props.disabled}
+          checked={props.disabled}
           className={
-            checked && disabled ? classes.diffStyle : classes.styledRadio
+            props.disabled && props.disabled
+              ? classes.diffStyle
+              : classes.styledRadio
           }
         />
       }

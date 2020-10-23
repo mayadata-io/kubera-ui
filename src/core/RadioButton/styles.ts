@@ -2,6 +2,9 @@ import { makeStyles } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
   styledRadio: {
+    '&.MuiRadio-colorSecondary&.Mui-disabled': {
+      color: theme.palette.disabledBackground,
+    },
     '&.MuiRadio-colorPrimary&.Mui-disabled': {
       color: theme.palette.disabledBackground,
     },
@@ -22,9 +25,12 @@ const useStyles = makeStyles((theme) => ({
     '&.MuiFormControlLabel-label&.Mui-disabled': {
       color: theme.palette.text.disabled,
     },
+    '&.MuiRadio-colorSecondary&.Mui-disabled': {
+      color: theme.palette.disabledBackground,
+    },
   },
 
-  RadioLabel: {
+  root: {
     color: theme.palette.text.primary,
   },
 }));
