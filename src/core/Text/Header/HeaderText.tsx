@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { useStyles } from './styles';
 import Typography from '@material-ui/core/Typography';
 
@@ -21,11 +21,7 @@ const HeaderText: React.FC<HeaderTextProps> = ({ type, children }) => {
     }
   }
 
-  return (
-    <Fragment>
-      <Typography className={`${getType(type)}`}>{children}</Typography>
-    </Fragment>
-  );
+  return <Typography className={`${getType(type)}`}>{children}</Typography>;
 };
 
 export { HeaderText };
