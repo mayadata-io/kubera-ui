@@ -5,7 +5,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     width: '10.18rem',
     color: theme.palette.text.primary,
     '&:before': {
-      borderBottom: `1px solid ${theme.palette.border.main}`,
+      borderBottom: `0.0625rem solid ${theme.palette.border.main}`,
     },
   },
 }));
