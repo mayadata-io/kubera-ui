@@ -12,7 +12,7 @@ describe('InputField', () => {
           variant="primary"
           type="text"
           disabled={false}
-          handleChange={() => console.log('change')}
+          onChange={() => console.log('change')}
         />
       </KuberaThemeProvider>
     );

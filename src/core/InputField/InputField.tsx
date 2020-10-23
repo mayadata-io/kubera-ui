@@ -14,7 +14,6 @@ type Variant = 'primary' | 'error' | 'success' | undefined;
 
 interface InputProps extends BaseInputProps {
   variant?: Variant;
-  handleChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 const InputField: React.FC<InputProps> = ({
   variant,
@@ -22,7 +21,7 @@ const InputField: React.FC<InputProps> = ({
   disabled,
   type,
   required,
-  handleChange,
+  onChange,
 }) => {
   const classes = useStyles();
   const [showPassword, setShowPassword] = useState<boolean>(true);
@@ -64,7 +63,7 @@ const InputField: React.FC<InputProps> = ({
           type={showPassword ? 'text' : 'password'}
           error={variant === 'error' ? true : false}
           disabled={disabled}
-          onChange={handleChange}
+          onChange={onChange}
           required={required}
           endAdornment={
             <InputAdornment position="end">
@@ -97,7 +96,7 @@ const InputField: React.FC<InputProps> = ({
         type={type}
         error={variant === 'error' ? true : false}
         disabled={disabled}
-        onChange={handleChange}
+        onChange={onChange}
         required={required}
         labelWidth={70}
       />

@@ -12,7 +12,7 @@ storiesOf('Input/InputField', module)
         variant="primary"
         type="text"
         disabled={false}
-        handleChange={() => console.log('change')}
+        onChange={() => console.log('change')}
       />
       <InputField
         label="error"
@@ -20,21 +20,21 @@ storiesOf('Input/InputField', module)
         error={true}
         type="text"
         disabled={false}
-        handleChange={() => console.log('change')}
+        onChange={() => console.log('change')}
       />
       <InputField
         label="success"
         variant="success"
         type="text"
         disabled={false}
-        handleChange={() => console.log('change')}
+        onChange={() => console.log('change')}
       />
       <InputField
         label="primary"
         variant="primary"
         type="text"
         disabled={true}
-        handleChange={() => console.log('change')}
+        onChange={() => console.log('change')}
       />
     </ThemedBackground>
   ))
@@ -47,7 +47,7 @@ storiesOf('Input/InputField', module)
         variant="primary"
         type="password"
         disabled={false}
-        handleChange={() => console.log('change')}
+        onChange={() => console.log('change')}
       />
       <InputField
         label="error"
@@ -55,21 +55,21 @@ storiesOf('Input/InputField', module)
         error={true}
         type="text"
         disabled={false}
-        handleChange={() => console.log('change')}
+        onChange={() => console.log('change')}
       />
       <InputField
         label="success"
         variant="success"
         type="text"
         disabled={false}
-        handleChange={() => console.log('change')}
+        onChange={() => console.log('change')}
       />
       <InputField
         label="primary"
         variant="primary"
         type="text"
         disabled={true}
-        handleChange={() => console.log('change')}
+        onChange={() => console.log('change')}
       />
     </ThemedBackground>
   ))
@@ -82,7 +82,7 @@ storiesOf('Input/InputField', module)
         variant="primary"
         type="text"
         disabled={false}
-        handleChange={() => console.log('change')}
+        onChange={() => console.log('change')}
       />
       <InputField
         label="error"
@@ -90,21 +90,21 @@ storiesOf('Input/InputField', module)
         error={true}
         type="text"
         disabled={false}
-        handleChange={() => console.log('change')}
+        onChange={() => console.log('change')}
       />
       <InputField
         label="success"
         variant="success"
         type="text"
         disabled={false}
-        handleChange={() => console.log('change')}
+        onChange={() => console.log('change')}
       />
       <InputField
         label="primary"
         variant="primary"
         type="text"
         disabled={true}
-        handleChange={() => console.log('change')}
+        onChange={() => console.log('change')}
       />
     </ThemedBackground>
   ))
@@ -117,7 +117,7 @@ storiesOf('Input/InputField', module)
         variant="primary"
         type="text"
         disabled={false}
-        handleChange={() => console.log('change')}
+        onChange={() => console.log('change')}
       />
       <InputField
         label="error"
@@ -125,21 +125,21 @@ storiesOf('Input/InputField', module)
         error={true}
         type="text"
         disabled={false}
-        handleChange={() => console.log('change')}
+        onChange={() => console.log('change')}
       />
       <InputField
         label="success"
         variant="success"
         type="text"
         disabled={false}
-        handleChange={() => console.log('change')}
+        onChange={() => console.log('change')}
       />
       <InputField
         label="primary"
         variant="primary"
         type="text"
         disabled={true}
-        handleChange={() => console.log('change')}
+        onChange={() => console.log('change')}
       />
     </ThemedBackground>
   ))
@@ -152,7 +152,7 @@ storiesOf('Input/InputField', module)
         variant="primary"
         type="text"
         disabled={false}
-        handleChange={() => console.log('change')}
+        onChange={() => console.log('change')}
       />
       <InputField
         label="error"
@@ -160,21 +160,21 @@ storiesOf('Input/InputField', module)
         error={true}
         type="text"
         disabled={false}
-        handleChange={() => console.log('change')}
+        onChange={() => console.log('change')}
       />
       <InputField
         label="success"
         variant="success"
         type="text"
         disabled={false}
-        handleChange={() => console.log('change')}
+        onChange={() => console.log('change')}
       />
       <InputField
         label="primary"
         variant="primary"
         type="text"
         disabled={true}
-        handleChange={() => console.log('change')}
+        onChange={() => console.log('change')}
       />
     </ThemedBackground>
   ));
