@@ -4,37 +4,7 @@ import { TabBaseProps } from './base';
 import Tab from '@material-ui/core/Tab';
 import Tabs from '@material-ui/core/Tabs';
 import AppBar from '@material-ui/core/AppBar';
-import Typography from '@material-ui/core/Typography';
-
-interface TabPanelProps {
-  children?: string;
-  index: any;
-  value: any;
-}
-
-const TabPanel: React.FC<TabPanelProps> = ({
-  children,
-  index,
-  value,
-  ...other
-}) => {
-  const classes = useStyles();
-  return (
-    <div
-      role="tabpanel"
-      hidden={value !== index}
-      id={`simple-tabpanel-${index}`}
-      aria-labelledby={`simple-tab-${index}`}
-      {...other}
-    >
-      {value === index && (
-        <div className={classes.tabPanel}>
-          <Typography>{children}</Typography>
-        </div>
-      )}
-    </div>
-  );
-};
+import { TabPanel } from '../TabPanel';
 
 const a11yProps = (index: number) => {
   return {
@@ -52,7 +22,7 @@ const SimpleTabs: React.FC<SiampleTabsProps> = ({ label, content }) => {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
 
-  const handleChange = (event: any, newValue: number) => {
+  const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
     setValue(newValue);
   };
 

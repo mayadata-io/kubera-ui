@@ -13,10 +13,6 @@ const useStyles = makeStyles((theme) => ({
     boxShadow: theme.shadows[4],
   },
 
-  tabPanel: {
-    padding: theme.spacing(1.5),
-  },
-
   TabItem: {
     fontWeight: 500,
     color: theme.palette.text.hint,
