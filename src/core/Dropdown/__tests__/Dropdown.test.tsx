@@ -1,6 +1,6 @@
 import { render } from '@testing-library/react';
 import React from 'react';
-import { KuberaThemeProvider } from '../../../../theme';
+import { KuberaThemeProvider } from '../../../theme';
 import { Dropdown } from '../../Dropdown';
 import MenuItem from '@material-ui/core/MenuItem';
 

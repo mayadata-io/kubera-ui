@@ -1,6 +1,6 @@
 import { storiesOf } from '@storybook/react';
 import React from 'react';
-import { ThemedBackground } from '../../../utils/storybook';
+import { ThemedBackground } from '../../utils/storybook';
 import { Dropdown } from './Dropdown';
 import MenuItem from '@material-ui/core/MenuItem';
 import { useTheme } from '@material-ui/core/styles';

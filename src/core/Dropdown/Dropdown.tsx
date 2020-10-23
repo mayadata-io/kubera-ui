@@ -1,9 +1,9 @@
 import React from 'react';
 import { Menu } from '@material-ui/core';
 import { useStyles } from './styles';
-import { ButtonFilled } from '../../Button/ButtonFilled';
+import { ButtonFilled } from '../Button/ButtonFilled';
 
-import { BasePropsMenu } from '../base';
+import { BasePropsMenu } from './base';
 
 interface CustomDropdownProps extends BasePropsMenu {
   anchorEl: HTMLElement | null;

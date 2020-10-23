@@ -1,2 +1,3 @@
 export * from './Button';
-export * from './DropdownCard';
+export * from './Dropdown';
+export * from './Pills';
