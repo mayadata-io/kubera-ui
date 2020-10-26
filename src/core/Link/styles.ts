@@ -20,9 +20,11 @@ const useStyles = makeStyles((theme: Theme) => ({
     pointerEvents: 'none',
     color: theme.palette.disabledBackground,
   },
-  pressed: {
-    color: theme.palette.secondary.dark,
-    fontWeight: 'bold',
+  '@global': {
+    '.active': {
+      color: theme.palette.secondary.dark,
+      fontWeight: 'bold',
+    },
   },
 }));
 

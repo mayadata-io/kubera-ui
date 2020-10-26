@@ -7,7 +7,7 @@ describe('Link component', () => {
   it('Renders', () => {
     const { getByText } = render(
       <KuberaThemeProvider platform="kubera-chaos">
-        <Links active={true} disabled={false} pathname="/home">
+        <Links disabled={false} pathname="/home">
           Link
         </Links>
       </KuberaThemeProvider>
