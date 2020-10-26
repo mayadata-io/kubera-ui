@@ -10,31 +10,30 @@ storiesOf('Input/InputField', module)
       <InputField
         label="primary"
         variant="primary"
-        type="text"
+        type="password"
         disabled={false}
-        onChange={() => console.log('change')}
+        onChange={(e) => e.target.value}
       />
       <InputField
         label="error"
         variant="error"
-        error={true}
         type="text"
         disabled={false}
-        onChange={() => console.log('change')}
+        onChange={(e) => e.target.value}
       />
       <InputField
         label="success"
         variant="success"
         type="text"
         disabled={false}
-        onChange={() => console.log('change')}
+        onChange={(e) => e.target.value}
       />
       <InputField
         label="primary"
         variant="primary"
         type="text"
         disabled={true}
-        onChange={() => console.log('change')}
+        onChange={() => {}}
       />
     </ThemedBackground>
   ))
@@ -45,31 +44,30 @@ storiesOf('Input/InputField', module)
       <InputField
         label="primary"
         variant="primary"
-        type="password"
+        type="text"
         disabled={false}
-        onChange={() => console.log('change')}
+        onChange={(e) => e.target.value}
       />
       <InputField
         label="error"
         variant="error"
-        error={true}
         type="text"
         disabled={false}
-        onChange={() => console.log('change')}
+        onChange={(e) => e.target.value}
       />
       <InputField
         label="success"
         variant="success"
         type="text"
         disabled={false}
-        onChange={() => console.log('change')}
+        onChange={(e) => e.target.value}
       />
       <InputField
         label="primary"
         variant="primary"
         type="text"
         disabled={true}
-        onChange={() => console.log('change')}
+        onChange={() => {}}
       />
     </ThemedBackground>
   ))
@@ -82,29 +80,28 @@ storiesOf('Input/InputField', module)
         variant="primary"
         type="text"
         disabled={false}
-        onChange={() => console.log('change')}
+        onChange={(e) => e.target.value}
       />
       <InputField
         label="error"
         variant="error"
-        error={true}
         type="text"
         disabled={false}
-        onChange={() => console.log('change')}
+        onChange={(e) => e.target.value}
       />
       <InputField
         label="success"
         variant="success"
         type="text"
         disabled={false}
-        onChange={() => console.log('change')}
+        onChange={(e) => e.target.value}
       />
       <InputField
         label="primary"
         variant="primary"
         type="text"
         disabled={true}
-        onChange={() => console.log('change')}
+        onChange={() => {}}
       />
     </ThemedBackground>
   ))
@@ -117,29 +114,28 @@ storiesOf('Input/InputField', module)
         variant="primary"
         type="text"
         disabled={false}
-        onChange={() => console.log('change')}
+        onChange={(e) => e.target.value}
       />
       <InputField
         label="error"
         variant="error"
-        error={true}
         type="text"
         disabled={false}
-        onChange={() => console.log('change')}
+        onChange={(e) => e.target.value}
       />
       <InputField
         label="success"
         variant="success"
         type="text"
         disabled={false}
-        onChange={() => console.log('change')}
+        onChange={(e) => e.target.value}
       />
       <InputField
         label="primary"
         variant="primary"
         type="text"
         disabled={true}
-        onChange={() => console.log('change')}
+        onChange={() => {}}
       />
     </ThemedBackground>
   ))
@@ -152,29 +148,28 @@ storiesOf('Input/InputField', module)
         variant="primary"
         type="text"
         disabled={false}
-        onChange={() => console.log('change')}
+        onChange={(e) => e.target.value}
       />
       <InputField
         label="error"
         variant="error"
-        error={true}
         type="text"
         disabled={false}
-        onChange={() => console.log('change')}
+        onChange={(e) => e.target.value}
       />
       <InputField
         label="success"
         variant="success"
         type="text"
         disabled={false}
-        onChange={() => console.log('change')}
+        onChange={(e) => e.target.value}
       />
       <InputField
         label="primary"
         variant="primary"
         type="text"
         disabled={true}
-        onChange={() => console.log('change')}
+        onChange={() => {}}
       />
     </ThemedBackground>
   ));

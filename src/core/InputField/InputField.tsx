@@ -35,6 +35,9 @@ const InputField: React.FC<InputProps> = ({
     setShowPassword(false);
   };
 
+  //  const onChange = (e)=>{
+  //   console.log(e.target.value)
+  //  }
   function getVariant(variant: Variant): string {
     switch (variant) {
       case 'error':
@@ -59,7 +62,7 @@ const InputField: React.FC<InputProps> = ({
       >
         <InputLabel htmlFor="outlined-adornment-password">{label}</InputLabel>
         <OutlinedInput
-          id="outlined-adornment-password"
+          role="OutlinedInput"
           type={showPassword ? 'text' : 'password'}
           error={variant === 'error' ? true : false}
           disabled={disabled}
@@ -92,7 +95,7 @@ const InputField: React.FC<InputProps> = ({
     >
       <InputLabel htmlFor="outlined-adornment">{label}</InputLabel>
       <OutlinedInput
-        id="outlined-adornment"
+        role="OutlinedInput"
         type={type}
         error={variant === 'error' ? true : false}
         disabled={disabled}
