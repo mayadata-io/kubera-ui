@@ -1,34 +1,26 @@
 import React from 'react';
 import RadioButton from '../RadioButton';
+import RadioGroup from '@material-ui/core/RadioGroup';
 import { storiesOf } from '@storybook/react';
 import { ThemedBackground } from '../../../src/utils/storybook';
 
-// label[0] = content[0]
 storiesOf('RadioButton', module)
   // Litmus Portal
   .add('Litmus Portal', () => (
     <ThemedBackground platform="litmus-portal" row>
-      <RadioButton disabled={false} checked={true}>
-        Target cluster
-      </RadioButton>
-      <RadioButton disabled={false} checked={true}>
-        Target cluster
-      </RadioButton>
-      <RadioButton disabled={true} checked={true}>
-        Target cluster
-      </RadioButton>
+      <RadioGroup row>
+        <RadioButton value="1">Target cluster</RadioButton>
+        <RadioButton disabled={true} checked={true}>
+          Target cluster
+        </RadioButton>
+      </RadioGroup>
     </ThemedBackground>
   ))
 
   // Kubera Chaos
   .add('Kubera Chaos', () => (
     <ThemedBackground platform="kubera-chaos" row>
-      <RadioButton disabled={false} checked={true}>
-        Target cluster
-      </RadioButton>
-      <RadioButton disabled={false} checked={true}>
-        Target cluster
-      </RadioButton>
+      <RadioButton value="1">Target cluster</RadioButton>
       <RadioButton disabled={true} checked={true}>
         Target cluster
       </RadioButton>
@@ -38,12 +30,7 @@ storiesOf('RadioButton', module)
   // Kubera Propel
   .add('Kubera Propel', () => (
     <ThemedBackground platform="kubera-propel" row>
-      <RadioButton disabled={false} checked={true}>
-        Target cluster
-      </RadioButton>
-      <RadioButton disabled={false} checked={true}>
-        Target cluster
-      </RadioButton>
+      <RadioButton value="1">Target cluster</RadioButton>
       <RadioButton disabled={true} checked={true}>
         Target cluster
       </RadioButton>
@@ -53,12 +40,7 @@ storiesOf('RadioButton', module)
   // Kubera Portal
   .add('Kubera Portal', () => (
     <ThemedBackground platform="kubera-portal" row>
-      <RadioButton disabled={false} checked={true}>
-        Target cluster
-      </RadioButton>
-      <RadioButton disabled={false} checked={true}>
-        Target cluster
-      </RadioButton>
+      <RadioButton value="1">Target cluster</RadioButton>
       <RadioButton disabled={true} checked={true}>
         Target cluster
       </RadioButton>
@@ -68,12 +50,7 @@ storiesOf('RadioButton', module)
   // Kubera Core
   .add('Kubera Core', () => (
     <ThemedBackground platform="kubera-core" row>
-      <RadioButton disabled={false} checked={true}>
-        Target cluster
-      </RadioButton>
-      <RadioButton disabled={false} checked={true}>
-        Target cluster
-      </RadioButton>
+      <RadioButton value="1">Target cluster</RadioButton>
       <RadioButton disabled={true} checked={true}>
         Target cluster
       </RadioButton>

@@ -5,6 +5,9 @@ const useStyles = makeStyles((theme) => ({
     '&.MuiRadio-colorSecondary&.Mui-disabled': {
       color: theme.palette.disabledBackground,
     },
+    '&.Mui-checked': {
+      color: theme.palette.highlight,
+    },
     '&.MuiRadio-colorPrimary&.Mui-disabled': {
       color: theme.palette.disabledBackground,
     },
@@ -12,21 +15,8 @@ const useStyles = makeStyles((theme) => ({
     '&.PrivateRadioButtonIcon-checked-13': {
       color: theme.palette.highlight,
     },
-  },
-
-  diffStyle: {
-    '&.MuiRadio-colorPrimary&.Mui-disabled': {
-      color: theme.palette.disabledBackground,
-    },
-    color: theme.palette.border.main,
-    '&.PrivateRadioButtonIcon-checked-13': {
-      color: theme.palette.disabledBackground,
-    },
     '&.MuiFormControlLabel-label&.Mui-disabled': {
       color: theme.palette.text.disabled,
-    },
-    '&.MuiRadio-colorSecondary&.Mui-disabled': {
-      color: theme.palette.disabledBackground,
     },
   },
 
