@@ -39,7 +39,7 @@ const Switch: React.FC<SwitchProps> = ({ variant }) => {
         variant={variant}
         disabled={variant === 'default' || variant === 'error'}
       >
-        {currentState ? <CheckCircle /> : <CheckCircle />}
+        <CheckCircle />
         <Typography className={classes.typography}>Pass</Typography>
       </ButtonFilled>
 
@@ -50,7 +50,7 @@ const Switch: React.FC<SwitchProps> = ({ variant }) => {
         variant={variant}
         disabled={variant === 'default' || variant === 'success'}
       >
-        {currentState !== true ? <Cancel /> : <Cancel />}
+        <Cancel />
         <Typography className={classes.typography}>Fail</Typography>
       </ButtonFilled>
     </div>
