@@ -48,9 +48,9 @@ jobs:
 workflows:
   lint_build_and_test:
     jobs:
-      # - lint
-      # - build
+      - lint
+      - build
       - chromatic
-      # - test:
-      #     requires:
-      #       - build
+      - test:
+          requires:
+            - build
