@@ -30,7 +30,7 @@ jobs:
       - run: yarn install --production=false
       - run:
           name: UI Review of the components
-          command: yarn chromatic
+          command: npx chromatic --project-token $CHROMATIC_PROJECT_TOKEN --exit-zero-on-changes
   test:
     docker:
       - image: circleci/node:10.13.0
