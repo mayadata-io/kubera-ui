@@ -33,7 +33,6 @@ storiesOf('Input/InputField', module)
         variant="primary"
         type="text"
         disabled={true}
-        onChange={() => {}}
       />
     </ThemedBackground>
   ))
@@ -67,7 +66,6 @@ storiesOf('Input/InputField', module)
         variant="primary"
         type="text"
         disabled={true}
-        onChange={() => {}}
       />
     </ThemedBackground>
   ))
@@ -101,7 +99,6 @@ storiesOf('Input/InputField', module)
         variant="primary"
         type="text"
         disabled={true}
-        onChange={() => {}}
       />
     </ThemedBackground>
   ))
@@ -135,7 +132,6 @@ storiesOf('Input/InputField', module)
         variant="primary"
         type="text"
         disabled={true}
-        onChange={() => {}}
       />
     </ThemedBackground>
   ))
@@ -169,7 +165,6 @@ storiesOf('Input/InputField', module)
         variant="primary"
         type="text"
         disabled={true}
-        onChange={() => {}}
       />
     </ThemedBackground>
   ));
