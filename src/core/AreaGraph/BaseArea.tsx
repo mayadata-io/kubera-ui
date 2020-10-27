@@ -2,7 +2,7 @@
 //   DateValue,
 // } from "@visx/mock-data/lib/generators/genDateValue";
 import React from 'react';
-import BrushChart from './AreaGraph-Scroller-01';
+import BrushChart from './AreaGraph-Scroller';
 // import ParentSize from "@visx/responsive/lib/components/ParentSize";
 
 export interface DataValue {

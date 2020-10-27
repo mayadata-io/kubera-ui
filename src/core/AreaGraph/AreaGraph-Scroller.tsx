@@ -11,9 +11,8 @@ import { localPoint } from '@visx/event';
 import { Line } from '@visx/shape';
 type TooltipData = Array<AreaGrapher>;
 // Initialize some variables
-let containerX: number = 10;
-let containerY: number = 10;
-let showLineClosed: boolean = true;
+let containerX: number;
+let containerY: number;
 let dd1: DataValue;
 let dd0: DataValue;
 
@@ -147,7 +146,7 @@ function BrushChart({
   const yMax = Math.max(topChartHeight, 0);
 
   //  let filteredSeries: DateValue[]=series.reduce((rec, d) => rec.concat(d), []);
-  // const [filteredSeries, setFilteredSeries] = useState(series.reduce((rec, d) => rec.concat(d), []););
+  //const [filteredSeries, setFilteredSeries] = useState(series.reduce((rec, d) => rec.concat(d), []););
 
   // scales
 
@@ -208,7 +207,7 @@ function BrushChart({
       containerX = 'clientX' in event ? event.clientX : 0;
       containerY = 'clientY' in event ? event.clientY : 0;
 
-      if (showLineClosed && closedSeries) {
+      if (closedSeries) {
         for (i = 0; i < closedSeries.length; i++) {
           indexer = bisectDate(closedSeries[i].data, x0, 1);
           // console.log("indeex", indexer);

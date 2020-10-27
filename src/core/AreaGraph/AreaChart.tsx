@@ -116,7 +116,7 @@ export default function AreaChart({
                 />
                 <GridColumns
                   scale={xScale}
-                  height={yMax}
+                  height={height}
                   // strokeDasharray="1"
                   stroke={accentColor}
                   strokeOpacity={0.3}
