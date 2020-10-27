@@ -7,10 +7,11 @@ type Variant = 'small' | undefined;
 
 interface ParagraphProps extends TypographyBaseProps {
   variant?: Variant;
+  color?: string;
 }
 
-const Paragraph: React.FC<ParagraphProps> = ({ variant, children }) => {
-  const classes = useStyles();
+const Paragraph: React.FC<ParagraphProps> = ({ color, variant, children }) => {
+  const classes = useStyles({ color });
 
   function getVarinat(variant: Variant): string {
     switch (variant) {
@@ -22,7 +23,9 @@ const Paragraph: React.FC<ParagraphProps> = ({ variant, children }) => {
   }
 
   return (
-    <Typography className={`${getVarinat(variant)}`}>{children}</Typography>
+    <Typography className={`${classes.root} ${getVarinat(variant)}`}>
+      {children}
+    </Typography>
   );
 };
 

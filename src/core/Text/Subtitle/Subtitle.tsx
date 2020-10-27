@@ -7,10 +7,11 @@ type Variant = 'small' | undefined;
 
 interface SubtitleProps extends TypographyBaseProps {
   variant?: Variant;
+  color?: string;
 }
 
-const Subtitle: React.FC<SubtitleProps> = ({ variant, children }) => {
-  const classes = useStyles();
+const Subtitle: React.FC<SubtitleProps> = ({ color, variant, children }) => {
+  const classes = useStyles({ color });
 
   function getVariant(variant: Variant): string {
     switch (variant) {
@@ -22,7 +23,9 @@ const Subtitle: React.FC<SubtitleProps> = ({ variant, children }) => {
   }
 
   return (
-    <Typography className={`${getVariant(variant)}`}>{children}</Typography>
+    <Typography className={`${classes.root} ${getVariant(variant)}`}>
+      {children}
+    </Typography>
   );
 };
 

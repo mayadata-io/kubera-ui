@@ -7,10 +7,11 @@ type Variant = 'bold' | undefined;
 
 interface HeaderProps extends TypographyBaseProps {
   variant?: Variant;
+  color?: string;
 }
 
-const Header: React.FC<HeaderProps> = ({ variant, children }) => {
-  const classes = useStyles();
+const Header: React.FC<HeaderProps> = ({ color, variant, children }) => {
+  const classes = useStyles({ color });
 
   function getVariant(variant: Variant): string {
     switch (variant) {
@@ -22,7 +23,9 @@ const Header: React.FC<HeaderProps> = ({ variant, children }) => {
   }
 
   return (
-    <Typography className={`${getVariant(variant)}`}>{children}</Typography>
+    <Typography className={`${classes.root} ${getVariant(variant)}`}>
+      {children}
+    </Typography>
   );
 };
 

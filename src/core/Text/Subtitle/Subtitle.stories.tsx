@@ -8,6 +8,7 @@ storiesOf('Text/SubtitleText', module)
   .add('Litmus Portal', () => (
     <ThemedBackground platform="litmus-portal" row>
       <Subtitle>Subtitle Text</Subtitle>
+      <Subtitle color={'green'}>Subtitle Text</Subtitle>
       <Subtitle variant="small">Subtitle Text</Subtitle>
     </ThemedBackground>
   ))
@@ -16,6 +17,7 @@ storiesOf('Text/SubtitleText', module)
   .add('Kubera Chaos', () => (
     <ThemedBackground platform="kubera-chaos" row>
       <Subtitle>Subtitle Text</Subtitle>
+      <Subtitle color={'green'}>Subtitle Text</Subtitle>
       <Subtitle variant="small">Subtitle Text</Subtitle>
     </ThemedBackground>
   ))
@@ -24,6 +26,7 @@ storiesOf('Text/SubtitleText', module)
   .add('Kubera Propel', () => (
     <ThemedBackground platform="kubera-propel" row>
       <Subtitle>Subtitle Text</Subtitle>
+      <Subtitle color={'green'}>Subtitle Text</Subtitle>
       <Subtitle variant="small">Subtitle Text</Subtitle>
     </ThemedBackground>
   ))
@@ -32,6 +35,7 @@ storiesOf('Text/SubtitleText', module)
   .add('Kubera Portal', () => (
     <ThemedBackground platform="kubera-portal" row>
       <Subtitle>Subtitle Text</Subtitle>
+      <Subtitle color={'green'}>Subtitle Text</Subtitle>
       <Subtitle variant="small">Subtitle Text</Subtitle>
     </ThemedBackground>
   ))
@@ -40,6 +44,7 @@ storiesOf('Text/SubtitleText', module)
   .add('Kubera Core', () => (
     <ThemedBackground platform="kubera-core" row>
       <Subtitle>Subtitle Text</Subtitle>
+      <Subtitle color={'green'}>Subtitle Text</Subtitle>
       <Subtitle variant="small">Subtitle Text</Subtitle>
     </ThemedBackground>
   ));

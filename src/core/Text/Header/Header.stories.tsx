@@ -9,6 +9,7 @@ storiesOf('Text/HeaderText', module)
     <ThemedBackground platform="litmus-portal" row>
       <Header>Header Text</Header>
       <Header variant="bold">Header Text</Header>
+      <Header color={'green'}>Header Text</Header>
     </ThemedBackground>
   ))
 
@@ -17,6 +18,7 @@ storiesOf('Text/HeaderText', module)
     <ThemedBackground platform="kubera-chaos" row>
       <Header>Header Text</Header>
       <Header variant="bold">Header Text</Header>
+      <Header color={'green'}>Header Text</Header>
     </ThemedBackground>
   ))
 
@@ -25,6 +27,7 @@ storiesOf('Text/HeaderText', module)
     <ThemedBackground platform="kubera-propel" row>
       <Header>Header Text</Header>
       <Header variant="bold">Header Text</Header>
+      <Header color={'green'}>Header Text</Header>
     </ThemedBackground>
   ))
 
@@ -33,6 +36,7 @@ storiesOf('Text/HeaderText', module)
     <ThemedBackground platform="kubera-portal" row>
       <Header>Header Text</Header>
       <Header variant="bold">Header Text</Header>
+      <Header color={'green'}>Header Text</Header>
     </ThemedBackground>
   ))
 
@@ -41,5 +45,6 @@ storiesOf('Text/HeaderText', module)
     <ThemedBackground platform="kubera-core" row>
       <Header>Header Text</Header>
       <Header variant="bold">Header Text</Header>
+      <Header color={'green'}>Header Text</Header>
     </ThemedBackground>
   ));
