@@ -26,13 +26,13 @@ jobs:
     docker:
       - image: circleci/node:10.13.0
         environment:
-          xyz: $CHROMATIC
-          abc: ${CHROMATIC}
+          CHROMATIC_PROJECT_TOKEN: m51ljovzzh
     steps:
       - checkout
-      # - run: yarn install --production=false
-      - run: echo ${xyz}
-      - run: echo $abc
+      - run: yarn install --production=false
+      - run:
+          name: UI Review for Storybook PR
+          command: yarn chromatic
   test:
     docker:
       - image: circleci/node:10.13.0
