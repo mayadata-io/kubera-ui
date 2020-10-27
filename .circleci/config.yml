@@ -22,6 +22,15 @@ jobs:
       - run:
           name: Building the project
           command: yarn build
+  chromatic:
+    docker:
+      - image: circleci/node:10.13.0
+    steps:
+      - checkout
+      - run: yarn install --production=false
+      - run:
+          name: UI Review of the components
+          command: yarn chromatic
   test:
     docker:
       - image: circleci/node:10.13.0
@@ -39,6 +48,7 @@ workflows:
     jobs:
       - lint
       - build
+      - chromatic
       - test:
           requires:
             - build
