@@ -5,14 +5,15 @@ import { Links } from '../Link';
 
 describe('Link component', () => {
   it('Renders', () => {
-    const { getByText } = render(
+    const { getByRole } = render(
       <KuberaThemeProvider platform="kubera-chaos">
         <Links disabled={false} pathname="/home">
           Link
         </Links>
       </KuberaThemeProvider>
     );
-
-    expect(getByText('Link')).toBeTruthy();
+    const element = getByRole('navlink');
+    // check href
+    expect(element).toHaveProperty('href', window.location.origin + '/home');
   });
 });

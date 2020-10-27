@@ -7,10 +7,13 @@ const useStyles = makeStyles((theme: Theme) => ({
     textDecorationLine: 'none',
     '&:hover': {
       color: theme.palette.secondary.main,
-      boxShadow: `0px 0.25em 0.313em -0.125em ${fade(
+      boxShadow: `0px 4px 5px -2px ${fade(
         theme.palette.highlight,
-        0.7
-      )}`,
+        0.2
+      )},0px 7px 10px 1px ${fade(
+        theme.palette.highlight,
+        0.14
+      )},0px 2px 16px 1px ${fade(theme.palette.highlight, 0.12)}`,
     },
     '&:focus': {
       fontWeight: 'bold',

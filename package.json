@@ -52,8 +52,10 @@
   "types": "index.d.ts",
   "dependencies": {
     "@material-ui/core": "^4.10.2",
+    "@types/react-router-dom": "^5.1.6",
     "react": "^16.9.0",
-    "react-dom": "^16.9.0"
+    "react-dom": "^16.9.0",
+    "react-router-dom": "^5.2.0"
   },
   "peerDependencies": {
     "@material-ui/core": "^4.10.2",
