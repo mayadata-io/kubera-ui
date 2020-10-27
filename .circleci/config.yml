@@ -27,10 +27,10 @@ jobs:
       - image: circleci/node:10.13.0
     steps:
       - checkout
-      - run: yarn install --production=false
+      # - run: yarn install --production=false
       - run:
           name: UI Review of the components
-          command: npx chromatic --project-token ${CHROMATIC_PROJECT_TOKEN} --exit-zero-on-changes
+          command: echo ${CHROMATIC_PROJECT_TOKEN}
   test:
     docker:
       - image: circleci/node:10.13.0
@@ -46,9 +46,9 @@ jobs:
 workflows:
   lint_build_and_test:
     jobs:
-      - lint
-      - build
+      # - lint
+      # - build
       - chromatic
-      - test:
-          requires:
-            - build
+      # - test:
+      #     requires:
+      #       - build
