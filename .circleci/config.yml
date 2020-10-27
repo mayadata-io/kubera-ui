@@ -25,12 +25,14 @@ jobs:
   chromatic:
     docker:
       - image: circleci/node:10.13.0
+        environment:
+          xyz: $CHROMATIC_PROJECT_TOKEN
+          abc: ${CHROMATIC_PROJECT_TOKEN}
     steps:
       - checkout
       # - run: yarn install --production=false
-      - run:
-          name: UI Review of the components
-          command: echo $CHROMATIC_PROJECT_TOKEN
+      - run: echo ${xyz}
+      - run: echo $abc
   test:
     docker:
       - image: circleci/node:10.13.0
