@@ -1,9 +1,8 @@
 import React from 'react';
 import { useStyles } from './styles';
 import LinearProgress from '@material-ui/core/LinearProgress';
-import { BaseProgressProps } from './base';
 
-interface ProgressBarProps extends BaseProgressProps {
+interface ProgressBarProps {
   value: number;
   color: string;
   label: string;
