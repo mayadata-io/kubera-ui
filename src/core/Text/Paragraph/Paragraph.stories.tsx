@@ -1,45 +1,45 @@
 import { storiesOf } from '@storybook/react';
 import React from 'react';
 import { ThemedBackground } from '../../../utils/storybook';
-import { ParagraphText } from '../Paragraph';
+import { Paragraph } from './Paragraph';
 
 storiesOf('Text/ParagraphText', module)
   // Litmus Portal
   .add('Litmus Portal', () => (
     <ThemedBackground platform="litmus-portal" row>
-      <ParagraphText>Paragraph Text</ParagraphText>
-      <ParagraphText type="small">Paragraph Text</ParagraphText>
+      <Paragraph>Paragraph Text</Paragraph>
+      <Paragraph variant="small">Paragraph Text</Paragraph>
     </ThemedBackground>
   ))
 
   // Kubera Chaos
   .add('Kubera Chaos', () => (
     <ThemedBackground platform="kubera-chaos" row>
-      <ParagraphText>Paragraph Text</ParagraphText>
-      <ParagraphText type="small">Paragraph Text</ParagraphText>
+      <Paragraph>Paragraph Text</Paragraph>
+      <Paragraph variant="small">Paragraph Text</Paragraph>
     </ThemedBackground>
   ))
 
   // Kubera Propel
   .add('Kubera Propel', () => (
     <ThemedBackground platform="kubera-propel" row>
-      <ParagraphText>Paragraph Text</ParagraphText>
-      <ParagraphText type="small">Paragraph Text</ParagraphText>
+      <Paragraph>Paragraph Text</Paragraph>
+      <Paragraph variant="small">Paragraph Text</Paragraph>
     </ThemedBackground>
   ))
 
   // Kubera Portal
   .add('Kubera Portal', () => (
     <ThemedBackground platform="kubera-portal" row>
-      <ParagraphText>Paragraph Text</ParagraphText>
-      <ParagraphText type="small">Paragraph Text</ParagraphText>
+      <Paragraph>Paragraph Text</Paragraph>
+      <Paragraph variant="small">Paragraph Text</Paragraph>
     </ThemedBackground>
   ))
 
   // Kubera Core
   .add('Kubera Core', () => (
     <ThemedBackground platform="kubera-core" row>
-      <ParagraphText>Paragraph Text</ParagraphText>
-      <ParagraphText type="small">Paragraph Text</ParagraphText>
+      <Paragraph>Paragraph Text</Paragraph>
+      <Paragraph variant="small">Paragraph Text</Paragraph>
     </ThemedBackground>
   ));

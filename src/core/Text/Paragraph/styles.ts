@@ -12,12 +12,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     fontWeight: 'normal',
     color: theme.palette.text.primary,
   },
-
-  adaptive: {
-    fontSize: '1rem',
-    fontWeight: 'normal',
-    color: theme.palette.primary.main,
-  },
 }));
 
 export { useStyles };

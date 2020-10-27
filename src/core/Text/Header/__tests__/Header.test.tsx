@@ -1,13 +1,13 @@
 import { render } from '@testing-library/react';
 import React from 'react';
 import { KuberaThemeProvider } from '../../../../theme';
-import { SubtitleText } from '../../Subtitle';
+import { Header } from '../Header';
 
 describe('Text Component', () => {
   it('Renders', () => {
     const { getByText } = render(
       <KuberaThemeProvider platform="kubera-chaos">
-        <SubtitleText>Header Text</SubtitleText>
+        <Header>Header Text</Header>
       </KuberaThemeProvider>
     );
 
