@@ -14,27 +14,10 @@ interface SwitchProps extends SwitchBaseProps {
 const Switch: React.FC<SwitchProps> = ({ variant }) => {
   const classes = useStyles();
 
-  // Default Props are true
-  const [currentState, setCurrentState] = React.useState<boolean>(true);
-
-  // Toggle Handlers
-  const passToggler = () => {
-    if (currentState === false) {
-      setCurrentState(true);
-    }
-  };
-
-  const failToggler = () => {
-    if (currentState === true) {
-      setCurrentState(false);
-    }
-  };
-
   return (
     <div className={classes.root} data-testid="switch">
       {/* Pass Button */}
       <ButtonFilled
-        onClick={passToggler}
         aria-label="left aligned"
         variant={variant}
         disabled={variant === 'default' || variant === 'error'}
@@ -45,7 +28,6 @@ const Switch: React.FC<SwitchProps> = ({ variant }) => {
 
       {/* Failed Button */}
       <ButtonFilled
-        onClick={failToggler}
         aria-label="left aligned"
         variant={variant}
         disabled={variant === 'default' || variant === 'success'}
