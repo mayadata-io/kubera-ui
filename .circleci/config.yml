@@ -30,7 +30,7 @@ jobs:
       # - run: yarn install --production=false
       - run:
           name: UI Review of the components
-          command: echo ${CHROMATIC_PROJECT_TOKEN}
+          command: echo $CHROMATIC_PROJECT_TOKEN
   test:
     docker:
       - image: circleci/node:10.13.0
