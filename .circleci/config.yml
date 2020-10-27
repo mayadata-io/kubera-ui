@@ -26,8 +26,8 @@ jobs:
     docker:
       - image: circleci/node:10.13.0
         environment:
-          xyz: $CHROMATIC_PROJECT_TOKEN
-          abc: ${CHROMATIC_PROJECT_TOKEN}
+          xyz: $CHROMATIC
+          abc: ${CHROMATIC}
     steps:
       - checkout
       # - run: yarn install --production=false
