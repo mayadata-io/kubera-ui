@@ -10,6 +10,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     '& input': {
       '&:focus': {
         color: theme.palette.text.primary,
+        borderColor: theme.palette.highlight,
       },
     },
   },
