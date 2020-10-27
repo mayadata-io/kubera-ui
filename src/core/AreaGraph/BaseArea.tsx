@@ -1,9 +1,9 @@
-import React from 'react';
 // import generateDateValue, {
 //   DateValue,
-// } from '@visx/mock-data/lib/generators/genDateValue';
-// import Example2 from "./components/RadialPie-testing-01";
-import AreaGraph from './Graph-01';
+// } from "@visx/mock-data/lib/generators/genDateValue";
+import React from 'react';
+import BrushChart from './AreaGraph-Scroller-01';
+// import ParentSize from "@visx/responsive/lib/components/ParentSize";
 
 export interface DataValue {
   date: number;
@@ -11,52 +11,54 @@ export interface DataValue {
 }
 export interface AreaGrapher {
   metricName: string;
-  data: DataValue[];
+  data: Array<DataValue>;
 }
 
-let data1: DataValue[] = [
+const data1: DataValue[] = [
   { date: 1000, value: 20 },
   { date: 2000, value: 30 },
   { date: 3000, value: 35 },
   { date: 4000, value: 40 },
+  { date: 5000, value: 50 },
+  { date: 6000, value: 74 },
+  { date: 7000, value: 30 },
+  { date: 8000, value: 10 },
 ];
-let data2: DataValue[] = [
+const data2: DataValue[] = [
   { date: 1000, value: 40 },
   { date: 2000, value: 10 },
   { date: 3000, value: 55 },
   { date: 4000, value: 60 },
-];
-let data3: DataValue[] = [
-  { date: 1000, value: 50 },
-  { date: 2000, value: 60 },
-  { date: 3000, value: 85 },
-  { date: 4000, value: 90 },
+  { date: 5000, value: 20 },
+  { date: 6000, value: 14 },
+  { date: 7000, value: 60 },
+  { date: 8000, value: 10 },
 ];
 
 // const w:AreaGrapher={date:,value:20}
-let seriestest: AreaGrapher[] = [
+const seriestest: Array<AreaGrapher> = [
   { metricName: 'chaos-exporter', data: data1 },
-  { metricName: 'heptio-http', data: data2 },
 ];
-let seriestest2: AreaGrapher[] = [{ metricName: 'payment-db', data: data3 }];
+const seriestest2: Array<AreaGrapher> = [{ metricName: 'heptio', data: data2 }];
 
-console.log(seriestest);
+// let lineCount: number = 2;
 
-const width = 600;
-const height = 400;
-console.log(seriestest);
+// console.log(seriestest);
+
+// const width = 600;
+// const height = 400;
+// console.log(seriestest);
 function BaseArea() {
   return (
     <div className="App">
-      <AreaGraph
-        width={width}
-        height={height}
-        showLineClosed={true}
+      <BrushChart
+        width={600}
+        height={400}
         closedSeries={seriestest}
         openSeries={seriestest2}
-        showLineOpen={true}
         showPoints={true}
       />
+      ,
     </div>
   );
 }
