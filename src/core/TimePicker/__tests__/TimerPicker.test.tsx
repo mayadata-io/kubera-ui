@@ -11,6 +11,6 @@ describe('Timepicker component', () => {
       </KuberaThemeProvider>
     );
 
-    expect(getByTestId('Time Changed')).toBeTruthy();
+    expect(getByTestId('timepicker')).toBeTruthy();
   });
 });
