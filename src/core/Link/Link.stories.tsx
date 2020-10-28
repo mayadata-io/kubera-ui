@@ -9,7 +9,7 @@ storiesOf('Link', module)
   .add('Litmus Portal', () => (
     <ThemedBackground platform="litmus-portal">
       <Router>
-        <Link disabled={false} target="_blank" pathname="/home">
+        <Link disabled={false} target="_blank" to="/home">
           Link
         </Link>
       </Router>
@@ -20,7 +20,7 @@ storiesOf('Link', module)
   .add('Kubera Chaos', () => (
     <ThemedBackground platform="kubera-chaos">
       <Router>
-        <Link disabled={false} pathname="/home">
+        <Link disabled={false} to="/home">
           Link
         </Link>
       </Router>
@@ -31,7 +31,7 @@ storiesOf('Link', module)
   .add('Kubera Propel', () => (
     <ThemedBackground platform="kubera-propel">
       <Router>
-        <Link disabled={false} pathname="/home">
+        <Link disabled={false} to="/home">
           Link
         </Link>
       </Router>
@@ -42,7 +42,7 @@ storiesOf('Link', module)
   .add('Kubera Portal', () => (
     <ThemedBackground platform="kubera-portal">
       <Router>
-        <Link disabled={false} pathname="/home">
+        <Link disabled={false} to="/home">
           Link
         </Link>
       </Router>
@@ -53,7 +53,7 @@ storiesOf('Link', module)
   .add('Kubera Core', () => (
     <ThemedBackground platform="kubera-core">
       <Router>
-        <Link disabled={false} pathname="/home">
+        <Link disabled={false} to="/home">
           Link
         </Link>
       </Router>

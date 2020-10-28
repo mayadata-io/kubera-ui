@@ -9,7 +9,7 @@ describe('Link component', () => {
     const { getByRole } = render(
       <KuberaThemeProvider platform="kubera-chaos">
         <Router>
-          <Link disabled={false} pathname="/home">
+          <Link disabled={false} to="/home">
             Link
           </Link>
         </Router>
