@@ -46,20 +46,22 @@ const colorArr: string[] = [
   accentColor4,
   accentColor,
 ];
+const colorCount = 5;
 const selectedBrushStyle = {
   fill: `url(#${13}-linearGragient)`,
   stroke: 'white',
 };
-
-// accessors
-const getDate = (d: DataValue) => new Date(d.date * 1000);
-const getValue = (d: DataValue) => d.value;
 const tooltipStyles = {
   ...defaultStyles,
   background,
   border: '1px solid white',
   color: 'white',
 };
+
+// accessors
+const getDate = (d: DataValue) => new Date(d.date * 1000);
+const getValue = (d: DataValue) => d.value;
+
 export type BrushProps = {
   closedSeries: Array<AreaGrapher>;
   openSeries: Array<AreaGrapher>;
@@ -331,7 +333,7 @@ function BrushChart({
                   cx={dateScale(getDate(d.data[0]))}
                   cy={valueScale(getValue(d.data[0]))}
                   r={7}
-                  fill={colorArr[i % 4]}
+                  fill={colorArr[i % colorCount]}
                   fillOpacity={0.5}
                   stroke="white"
                   strokeOpacity={0.5}
@@ -354,7 +356,7 @@ function BrushChart({
                 }}
               >
                 <hr
-                  color={colorArr[i]}
+                  color={colorArr[i % colorCount]}
                   style={{ width: '10px', height: '1px' }}
                 />
                 <span style={{ color: 'white', paddingLeft: '0.5em' }}>{`${

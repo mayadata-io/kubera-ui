@@ -24,6 +24,7 @@ const colorArr: string[] = [
   accentColor3,
   accentColor4,
 ];
+const colorCount = 4;
 const axisBottomTickLabelProps = {
   textAnchor: 'middle' as const,
   fontFamily: 'Arial',
@@ -99,8 +100,8 @@ export default function AreaChart({
           <Group key={`${i}-group`}>
             <LinearGradient
               id={`${i}-linearGragient`}
-              from={colorArr[i]}
-              to={colorArr[i]}
+              from={colorArr[i % colorCount]}
+              to={colorArr[i % colorCount]}
               fromOpacity={0.5}
               toOpacity={0.1}
             />
@@ -131,7 +132,7 @@ export default function AreaChart({
               y={(d) => yScale(getStockValue(d)) || 0}
               yScale={yScale}
               strokeWidth={2}
-              stroke={colorArr[i]}
+              stroke={colorArr[i % colorCount]}
               fill={`url(#${i}-linearGragient)`}
               curve={curveMonotoneX}
             />
@@ -143,7 +144,7 @@ export default function AreaChart({
                     cx={xScale(getDate(d))}
                     cy={yScale(getStockValue(d))}
                     r={5}
-                    fill={colorArr[i]}
+                    fill={colorArr[i % colorCount]}
                     fillOpacity={0.7}
                     pointerEvents="none"
                   />
@@ -156,7 +157,11 @@ export default function AreaChart({
           <g key={`${j}-group-open`}>
             <MarkerCircle
               id={`${j}-circle`}
-              fill={colorArr[j + (closedSeries ? closedSeries.length : 0)]}
+              fill={
+                colorArr[
+                  (j + (closedSeries ? closedSeries.length : 0)) % colorCount
+                ]
+              }
               size={2.5}
               refX={2.5}
               fillOpacity={0.6}
@@ -167,7 +172,10 @@ export default function AreaChart({
               y={(d) => yScale(getStockValue(d)) ?? 0}
               strokeWidth={2}
               stroke={
-                colorArr[j + (closedSeries.length ? closedSeries.length : 0)]
+                colorArr[
+                  (j + (closedSeries.length ? closedSeries.length : 0)) %
+                    colorCount
+                ]
               }
               strokeOpacity={0.7}
               curve={curveMonotoneX}
