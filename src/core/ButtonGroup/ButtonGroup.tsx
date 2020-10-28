@@ -2,16 +2,16 @@ import React from 'react';
 import { Typography } from '@material-ui/core';
 import { CheckCircle, Cancel } from '@material-ui/icons';
 import { ButtonFilled } from '../Button/ButtonFilled';
-import { SwitchBaseProps } from './base';
+import { ButtonGroupBaseProps } from './base';
 import { useStyles } from './styles';
 
 type Variant = 'default' | 'error' | 'success' | undefined;
 
-interface SwitchProps extends SwitchBaseProps {
+interface ButtonGroupProps extends ButtonGroupBaseProps {
   variant?: Variant;
 }
 
-const Switch: React.FC<SwitchProps> = ({ variant }) => {
+const ButtonGroup: React.FC<ButtonGroupProps> = ({ variant }) => {
   const classes = useStyles();
 
   return (
@@ -39,4 +39,4 @@ const Switch: React.FC<SwitchProps> = ({ variant }) => {
   );
 };
 
-export { Switch };
+export { ButtonGroup };

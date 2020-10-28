@@ -1,13 +1,13 @@
 import { render } from '@testing-library/react';
 import React from 'react';
 import { KuberaThemeProvider } from '../../../theme';
-import { Switch } from '../Switch';
+import { ButtonGroup } from '../ButtonGroup';
 
 describe('Switch Component', () => {
   it('Renders', () => {
     const { getByTestId } = render(
       <KuberaThemeProvider platform="litmus-portal" data-testid="switch">
-        <Switch variant="default" />
+        <ButtonGroup variant="default" />
       </KuberaThemeProvider>
     );
 
