@@ -1,5 +1,5 @@
 import React from 'react';
-import Tabs from '../../Tabs';
+import Tabs from '../Tabs';
 import { render, fireEvent, screen } from '@testing-library/react';
 import { KuberaThemeProvider } from '../../../theme';
 
