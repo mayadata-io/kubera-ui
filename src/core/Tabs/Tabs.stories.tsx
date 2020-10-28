@@ -1,12 +1,12 @@
 import React from 'react';
-import Tabs from '../Tabs';
+import Tabs from './Tabs';
 import { storiesOf } from '@storybook/react';
 import { ThemedBackground } from '../../../src/utils/storybook';
 
 storiesOf('Tabs', module)
   // Litmus Portal
   .add('Litmus Portal', () => (
-    <ThemedBackground platform="litmus-portal" row>
+    <ThemedBackground platform="litmus-portal">
       <Tabs
         label={['Workflow', 'Hubs']}
         content={['Workflow Content', 'Hubs Content']}
@@ -16,7 +16,7 @@ storiesOf('Tabs', module)
 
   // Kubera Chaos
   .add('Kubera Chaos', () => (
-    <ThemedBackground platform="kubera-chaos" row>
+    <ThemedBackground platform="kubera-chaos">
       <Tabs
         label={['Workflow', 'Hubs']}
         content={['Workflow Content', 'Hubs Content']}
@@ -26,7 +26,7 @@ storiesOf('Tabs', module)
 
   // Kubera Propel
   .add('Kubera Propel', () => (
-    <ThemedBackground platform="kubera-propel" row>
+    <ThemedBackground platform="kubera-propel">
       <Tabs
         label={['Workflow', 'Hubs']}
         content={['Workflow Content', 'Hubs Content']}
@@ -36,7 +36,7 @@ storiesOf('Tabs', module)
 
   // Kubera Portal
   .add('Kubera Portal', () => (
-    <ThemedBackground platform="kubera-portal" row>
+    <ThemedBackground platform="kubera-portal">
       <Tabs
         label={['Workflow', 'Hubs']}
         content={['Workflow Content', 'Hubs Content']}
@@ -46,7 +46,7 @@ storiesOf('Tabs', module)
 
   // Kubera Core
   .add('Kubera Core', () => (
-    <ThemedBackground platform="kubera-core" row>
+    <ThemedBackground platform="kubera-core">
       <Tabs
         label={['Workflow', 'Hubs']}
         content={['Workflow Content', 'Hubs Content']}

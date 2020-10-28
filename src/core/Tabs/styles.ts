@@ -2,7 +2,7 @@ import { makeStyles } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
   panel: {
-    width: '67.125rem',
+    width: '100%',
     boxShadow: 'none',
     background: 'transparent',
     borderBottom: `0.0625rem solid ${theme.palette.border.main}`,
