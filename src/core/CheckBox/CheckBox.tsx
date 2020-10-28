@@ -1,17 +1,12 @@
 import { Checkbox } from '@material-ui/core';
 import React, { useState } from 'react';
-// import clsx from 'clsx';
 import CheckOutlinedIcon from '@material-ui/icons/CheckOutlined';
 import { useStyles } from './styles';
-import { BaseCheckboxProps } from './base';
+import { CheckboxProps } from '@material-ui/core/Checkbox';
 
-interface CheckBoxProps extends BaseCheckboxProps {
-  checked: boolean;
-}
-
-const CheckBox: React.FC<CheckBoxProps> = ({ disabled, checked }) => {
+const CheckBox: React.FC<CheckboxProps> = ({ disabled, checked }) => {
   const classes = useStyles();
-  const [check, setChecked] = useState<boolean>(checked);
+  const [check, setChecked] = useState<boolean | undefined>(checked);
   return (
     <Checkbox
       data-testid="checkbox"
