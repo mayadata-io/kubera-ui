@@ -22,6 +22,8 @@ const useStyles = makeStyles((theme: Theme) => ({
     '& hr': {
       width: '0.75rem',
       height: '0.0625rem',
+      border: `0.0625rem solid ${theme.palette.disabledBackground}`,
+      borderRadius: '0.3125rem',
       margin: `${theme.spacing(1.25, 1)} auto`,
     },
   },
