@@ -1,7 +1,7 @@
 import { render } from '@testing-library/react';
 import React from 'react';
 import { KuberaThemeProvider } from '../../../theme';
-import { Links } from '../Link';
+import { Link } from '../Link';
 import { BrowserRouter as Router } from 'react-router-dom';
 
 describe('Link component', () => {
@@ -9,9 +9,9 @@ describe('Link component', () => {
     const { getByRole } = render(
       <KuberaThemeProvider platform="kubera-chaos">
         <Router>
-          <Links disabled={false} pathname="/home">
+          <Link disabled={false} pathname="/home">
             Link
-          </Links>
+          </Link>
         </Router>
       </KuberaThemeProvider>
     );

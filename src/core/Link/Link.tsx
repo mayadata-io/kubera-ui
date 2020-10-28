@@ -8,7 +8,7 @@ interface LinksProps {
   target?: string;
 }
 
-const Links: React.FC<LinksProps> = ({
+const Link: React.FC<LinksProps> = ({
   pathname,
   target,
   children,
@@ -28,4 +28,4 @@ const Links: React.FC<LinksProps> = ({
     </NavLink>
   );
 };
-export { Links };
+export { Link };
