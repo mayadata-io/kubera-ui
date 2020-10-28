@@ -14,6 +14,9 @@ const useStyles = makeStyles((theme: Theme) => ({
       borderColor: theme.palette.border.main,
       paddingLeft: '1.5rem !important',
     },
+    '& .MuiSvgIcon-root': {
+      color: theme.palette.text.hint,
+    },
   },
   disabled: {
     color: theme.palette.text.disabled,
