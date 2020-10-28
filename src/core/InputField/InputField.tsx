@@ -21,6 +21,7 @@ const InputField: React.FC<InputProps> = ({
   label,
   disabled,
   type,
+  value,
   adornment,
   required,
   onChange,
@@ -61,6 +62,7 @@ const InputField: React.FC<InputProps> = ({
         <OutlinedInput
           role="OutlinedInput"
           type={showPassword ? 'text' : 'password'}
+          value={value}
           error={variant === 'error' ? true : false}
           disabled={disabled}
           onChange={onChange}
@@ -97,6 +99,7 @@ const InputField: React.FC<InputProps> = ({
         <OutlinedInput
           role="OutlinedInput"
           type={type}
+          value={value}
           error={variant === 'error' ? true : false}
           disabled={disabled}
           onChange={onChange}
@@ -127,6 +130,7 @@ const InputField: React.FC<InputProps> = ({
         <OutlinedInput
           role="OutlinedInput"
           type={type}
+          value={value}
           error={variant === 'error' ? true : false}
           disabled={disabled}
           onChange={onChange}
@@ -157,6 +161,7 @@ const InputField: React.FC<InputProps> = ({
         <OutlinedInput
           role="OutlinedInput"
           type={type}
+          value={value}
           error={variant === 'error' ? true : false}
           disabled={disabled}
           onChange={onChange}
@@ -190,7 +195,12 @@ const InputField: React.FC<InputProps> = ({
             : `${classes.root}  ${getVariant(variant)}`
         }
       >
-        <InputLabel htmlFor="outlined-adornment">{label}</InputLabel>
+        <InputLabel
+          htmlFor="outlined-adornment"
+          className={disabled ? `MuiInputLabel-shrink MuiFormLabel-filled` : ``}
+        >
+          {label}
+        </InputLabel>
         <OutlinedInput
           role="OutlinedInput"
           type={type}
@@ -198,6 +208,7 @@ const InputField: React.FC<InputProps> = ({
           disabled={disabled}
           onChange={onChange}
           required={required}
+          value={value}
           labelWidth={70}
         />
       </FormControl>

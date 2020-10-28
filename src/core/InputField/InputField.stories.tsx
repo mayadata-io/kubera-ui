@@ -10,22 +10,6 @@ storiesOf('Input/InputField', module)
       <InputField
         label="primary"
         variant="primary"
-        type="password"
-        disabled={false}
-        onChange={(e) => e.target.value}
-      />
-      <InputField
-        label="error"
-        variant="error"
-        adornment="Start"
-        type="text"
-        disabled={false}
-        onChange={(e) => e.target.value}
-      />
-      <InputField
-        label="success"
-        variant="success"
-        adornment="StartEnd"
         type="text"
         disabled={false}
         onChange={(e) => e.target.value}
@@ -33,8 +17,80 @@ storiesOf('Input/InputField', module)
       <InputField
         label="primary"
         variant="primary"
+        type="password"
+        disabled={false}
+        value="Input with password type"
+        onChange={(e) => e.target.value}
+      />
+      <InputField
+        label="primary"
+        variant="primary"
+        adornment="Start"
+        type="text"
+        value="Input with Start adornment"
+        disabled={false}
+        onChange={(e) => e.target.value}
+      />
+      <InputField
+        label="primary"
+        variant="primary"
+        adornment="End"
+        type="text"
+        value="Input with End adornment"
+        disabled={false}
+        onChange={(e) => e.target.value}
+      />
+      <InputField
+        label="primary"
+        variant="primary"
+        adornment="StartEnd"
+        type="text"
+        value="Input with both adornment"
+        disabled={false}
+        onChange={(e) => e.target.value}
+      />
+      <InputField
+        label="error"
+        variant="error"
+        type="text"
+        disabled={false}
+        onChange={(e) => e.target.value}
+      />
+      <InputField
+        label="error"
+        variant="error"
+        type="text"
+        value="Input with error type"
+        disabled={false}
+        onChange={(e) => e.target.value}
+      />
+      <InputField
+        label="success"
+        variant="success"
+        type="text"
+        disabled={false}
+        onChange={(e) => e.target.value}
+      />
+      <InputField
+        label="success"
+        variant="success"
+        type="text"
+        value="Input with success type"
+        disabled={false}
+        onChange={(e) => e.target.value}
+      />
+      <InputField
+        label="disabled"
+        variant="primary"
         type="text"
         disabled={true}
+      />
+      <InputField
+        label="disabled"
+        variant="primary"
+        type="text"
+        disabled={true}
+        value="disabled text"
       />
     </ThemedBackground>
   ))
@@ -50,9 +106,52 @@ storiesOf('Input/InputField', module)
         onChange={(e) => e.target.value}
       />
       <InputField
+        label="primary"
+        variant="primary"
+        type="password"
+        disabled={false}
+        value="Input with password type"
+        onChange={(e) => e.target.value}
+      />
+      <InputField
+        label="primary"
+        variant="primary"
+        adornment="Start"
+        type="text"
+        value="Input with Start adornment"
+        disabled={false}
+        onChange={(e) => e.target.value}
+      />
+      <InputField
+        label="primary"
+        variant="primary"
+        adornment="End"
+        type="text"
+        value="Input with End adornment"
+        disabled={false}
+        onChange={(e) => e.target.value}
+      />
+      <InputField
+        label="primary"
+        variant="primary"
+        adornment="StartEnd"
+        type="text"
+        value="Input with both adornment"
+        disabled={false}
+        onChange={(e) => e.target.value}
+      />
+      <InputField
         label="error"
         variant="error"
         type="text"
+        disabled={false}
+        onChange={(e) => e.target.value}
+      />
+      <InputField
+        label="error"
+        variant="error"
+        type="text"
+        value="Input with error type"
         disabled={false}
         onChange={(e) => e.target.value}
       />
@@ -64,10 +163,25 @@ storiesOf('Input/InputField', module)
         onChange={(e) => e.target.value}
       />
       <InputField
-        label="primary"
+        label="success"
+        variant="success"
+        type="text"
+        value="Input with success type"
+        disabled={false}
+        onChange={(e) => e.target.value}
+      />
+      <InputField
+        label="disabled"
         variant="primary"
         type="text"
         disabled={true}
+      />
+      <InputField
+        label="disabled"
+        variant="primary"
+        type="text"
+        disabled={true}
+        value="disabled text"
       />
     </ThemedBackground>
   ))
@@ -83,9 +197,52 @@ storiesOf('Input/InputField', module)
         onChange={(e) => e.target.value}
       />
       <InputField
+        label="primary"
+        variant="primary"
+        type="password"
+        disabled={false}
+        value="Input with password type"
+        onChange={(e) => e.target.value}
+      />
+      <InputField
+        label="primary"
+        variant="primary"
+        adornment="Start"
+        type="text"
+        value="Input with Start adornment"
+        disabled={false}
+        onChange={(e) => e.target.value}
+      />
+      <InputField
+        label="primary"
+        variant="primary"
+        adornment="End"
+        type="text"
+        value="Input with End adornment"
+        disabled={false}
+        onChange={(e) => e.target.value}
+      />
+      <InputField
+        label="primary"
+        variant="primary"
+        adornment="StartEnd"
+        type="text"
+        value="Input with both adornment"
+        disabled={false}
+        onChange={(e) => e.target.value}
+      />
+      <InputField
         label="error"
         variant="error"
         type="text"
+        disabled={false}
+        onChange={(e) => e.target.value}
+      />
+      <InputField
+        label="error"
+        variant="error"
+        type="text"
+        value="Input with error type"
         disabled={false}
         onChange={(e) => e.target.value}
       />
@@ -97,10 +254,25 @@ storiesOf('Input/InputField', module)
         onChange={(e) => e.target.value}
       />
       <InputField
-        label="primary"
+        label="success"
+        variant="success"
+        type="text"
+        value="Input with success type"
+        disabled={false}
+        onChange={(e) => e.target.value}
+      />
+      <InputField
+        label="disabled"
         variant="primary"
         type="text"
         disabled={true}
+      />
+      <InputField
+        label="disabled"
+        variant="primary"
+        type="text"
+        disabled={true}
+        value="disabled text"
       />
     </ThemedBackground>
   ))
@@ -116,9 +288,52 @@ storiesOf('Input/InputField', module)
         onChange={(e) => e.target.value}
       />
       <InputField
+        label="primary"
+        variant="primary"
+        type="password"
+        disabled={false}
+        value="Input with password type"
+        onChange={(e) => e.target.value}
+      />
+      <InputField
+        label="primary"
+        variant="primary"
+        adornment="Start"
+        type="text"
+        value="Input with Start adornment"
+        disabled={false}
+        onChange={(e) => e.target.value}
+      />
+      <InputField
+        label="primary"
+        variant="primary"
+        adornment="End"
+        type="text"
+        value="Input with End adornment"
+        disabled={false}
+        onChange={(e) => e.target.value}
+      />
+      <InputField
+        label="primary"
+        variant="primary"
+        adornment="StartEnd"
+        type="text"
+        value="Input with both adornment"
+        disabled={false}
+        onChange={(e) => e.target.value}
+      />
+      <InputField
         label="error"
         variant="error"
         type="text"
+        disabled={false}
+        onChange={(e) => e.target.value}
+      />
+      <InputField
+        label="error"
+        variant="error"
+        type="text"
+        value="Input with error type"
         disabled={false}
         onChange={(e) => e.target.value}
       />
@@ -130,10 +345,25 @@ storiesOf('Input/InputField', module)
         onChange={(e) => e.target.value}
       />
       <InputField
-        label="primary"
+        label="success"
+        variant="success"
+        type="text"
+        value="Input with success type"
+        disabled={false}
+        onChange={(e) => e.target.value}
+      />
+      <InputField
+        label="disabled"
         variant="primary"
         type="text"
         disabled={true}
+      />
+      <InputField
+        label="disabled"
+        variant="primary"
+        type="text"
+        disabled={true}
+        value="disabled text"
       />
     </ThemedBackground>
   ))
@@ -149,9 +379,52 @@ storiesOf('Input/InputField', module)
         onChange={(e) => e.target.value}
       />
       <InputField
+        label="primary"
+        variant="primary"
+        type="password"
+        disabled={false}
+        value="Input with password type"
+        onChange={(e) => e.target.value}
+      />
+      <InputField
+        label="primary"
+        variant="primary"
+        adornment="Start"
+        type="text"
+        value="Input with Start adornment"
+        disabled={false}
+        onChange={(e) => e.target.value}
+      />
+      <InputField
+        label="primary"
+        variant="primary"
+        adornment="End"
+        type="text"
+        value="Input with End adornment"
+        disabled={false}
+        onChange={(e) => e.target.value}
+      />
+      <InputField
+        label="primary"
+        variant="primary"
+        adornment="StartEnd"
+        type="text"
+        value="Input with both adornment"
+        disabled={false}
+        onChange={(e) => e.target.value}
+      />
+      <InputField
         label="error"
         variant="error"
         type="text"
+        disabled={false}
+        onChange={(e) => e.target.value}
+      />
+      <InputField
+        label="error"
+        variant="error"
+        type="text"
+        value="Input with error type"
         disabled={false}
         onChange={(e) => e.target.value}
       />
@@ -163,10 +436,25 @@ storiesOf('Input/InputField', module)
         onChange={(e) => e.target.value}
       />
       <InputField
-        label="primary"
+        label="success"
+        variant="success"
+        type="text"
+        value="Input with success type"
+        disabled={false}
+        onChange={(e) => e.target.value}
+      />
+      <InputField
+        label="disabled"
         variant="primary"
         type="text"
         disabled={true}
+      />
+      <InputField
+        label="disabled"
+        variant="primary"
+        type="text"
+        disabled={true}
+        value="disabled text"
       />
     </ThemedBackground>
   ));

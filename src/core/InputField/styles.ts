@@ -7,16 +7,29 @@ const useStyles = makeStyles((theme: Theme) => ({
     borderRadius: '0.25rem',
     '& label': {
       color: theme.palette.text.hint,
-      paddingLeft: '0.75rem',
+      paddingLeft: '1.75rem',
     },
     background: theme.palette.background.paper,
     '& fieldset': {
       borderColor: theme.palette.border.main,
+      paddingLeft: '1.5rem !important',
     },
   },
   disabled: {
     color: theme.palette.text.disabled,
     width: '25rem',
+    background: theme.palette.background.paper,
+    '& fieldset': {
+      borderColor: `${theme.palette.border.main} !important`,
+      paddingLeft: '1.5rem !important',
+      '& legend': {
+        width: '3.78125rem !important',
+      },
+    },
+    '& label': {
+      color: `${theme.palette.border.main} !important`,
+      paddingLeft: '1.75rem',
+    },
   },
   primary: {
     '&:hover': {
