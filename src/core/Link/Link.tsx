@@ -2,13 +2,13 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { useStyles } from './styles';
 
-interface LinksProps {
+interface LinkProps {
   pathname: string;
   disabled?: boolean;
   target?: string;
 }
 
-const Link: React.FC<LinksProps> = ({
+const Link: React.FC<LinkProps> = ({
   pathname,
   target,
   children,
