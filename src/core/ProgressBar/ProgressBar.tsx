@@ -13,7 +13,11 @@ const ProgressBar: React.FC<ProgressBarProps> = ({ value, label, color }) => {
   return (
     <div>
       <label className={classes.label}>
-        {label} : {value}
+        <span data-testid="label">{label}</span>
+        <hr />
+        <span data-testid="value" className={classes.value}>
+          {value}
+        </span>
       </label>
       <LinearProgress
         className={classes.root}
