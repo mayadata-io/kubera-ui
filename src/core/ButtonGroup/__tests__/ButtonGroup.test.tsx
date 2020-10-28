@@ -3,7 +3,7 @@ import React from 'react';
 import { KuberaThemeProvider } from '../../../theme';
 import { ButtonGroup } from '../ButtonGroup';
 
-describe('Switch Component', () => {
+describe('ButtonGroup Component', () => {
   it('Renders', () => {
     const { getByTestId } = render(
       <KuberaThemeProvider platform="litmus-portal" data-testid="switch">
