@@ -17,6 +17,7 @@ storiesOf('Input/InputField', module)
       <InputField
         label="error"
         variant="error"
+        adornment="Start"
         type="text"
         disabled={false}
         onChange={(e) => e.target.value}
@@ -24,6 +25,7 @@ storiesOf('Input/InputField', module)
       <InputField
         label="success"
         variant="success"
+        adornment="StartEnd"
         type="text"
         disabled={false}
         onChange={(e) => e.target.value}

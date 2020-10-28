@@ -7,6 +7,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     borderRadius: '0.25rem',
     '& label': {
       color: theme.palette.text.hint,
+      paddingLeft: '0.75rem',
     },
     background: theme.palette.background.paper,
     '& fieldset': {

@@ -6,7 +6,7 @@ import {
   InputLabel,
   FormControl,
 } from '@material-ui/core';
-import { Visibility, VisibilityOff } from '@material-ui/icons';
+import { Visibility, VisibilityOff, AccountCircle } from '@material-ui/icons';
 import { BaseInputProps } from './base';
 import { useStyles } from './styles';
 
@@ -14,12 +14,14 @@ type Variant = 'primary' | 'error' | 'success' | undefined;
 
 interface InputProps extends BaseInputProps {
   variant?: Variant;
+  adornment?: string;
 }
 const InputField: React.FC<InputProps> = ({
   variant,
   label,
   disabled,
   type,
+  adornment,
   required,
   onChange,
 }) => {
@@ -34,10 +36,6 @@ const InputField: React.FC<InputProps> = ({
     event.preventDefault();
     setShowPassword(false);
   };
-
-  //  const onChange = (e)=>{
-  //   console.log(e.target.value)
-  //  }
   function getVariant(variant: Variant): string {
     switch (variant) {
       case 'error':
@@ -48,7 +46,6 @@ const InputField: React.FC<InputProps> = ({
         return classes.primary;
     }
   }
-
   if (type === 'password') {
     return (
       <FormControl
@@ -85,26 +82,127 @@ const InputField: React.FC<InputProps> = ({
       </FormControl>
     );
   }
-  return (
-    <FormControl
-      data-testid="inputField"
-      variant="outlined"
-      className={
-        disabled ? classes.disabled : `${classes.root}  ${getVariant(variant)}`
-      }
-    >
-      <InputLabel htmlFor="outlined-adornment">{label}</InputLabel>
-      <OutlinedInput
-        role="OutlinedInput"
-        type={type}
-        error={variant === 'error' ? true : false}
-        disabled={disabled}
-        onChange={onChange}
-        required={required}
-        labelWidth={70}
-      />
-    </FormControl>
-  );
+  if (adornment === 'Start') {
+    return (
+      <FormControl
+        data-testid="inputField"
+        variant="outlined"
+        className={
+          disabled
+            ? classes.disabled
+            : `${classes.root}  ${getVariant(variant)}`
+        }
+      >
+        <InputLabel htmlFor="outlined-adornment">{label}</InputLabel>
+        <OutlinedInput
+          role="OutlinedInput"
+          type={type}
+          error={variant === 'error' ? true : false}
+          disabled={disabled}
+          onChange={onChange}
+          required={required}
+          startAdornment={
+            <InputAdornment position="start">
+              <IconButton edge="start">
+                <AccountCircle />
+              </IconButton>
+            </InputAdornment>
+          }
+          labelWidth={70}
+        />
+      </FormControl>
+    );
+  } else if (adornment === 'End') {
+    return (
+      <FormControl
+        data-testid="inputField"
+        variant="outlined"
+        className={
+          disabled
+            ? classes.disabled
+            : `${classes.root}  ${getVariant(variant)}`
+        }
+      >
+        <InputLabel htmlFor="outlined-adornment">{label}</InputLabel>
+        <OutlinedInput
+          role="OutlinedInput"
+          type={type}
+          error={variant === 'error' ? true : false}
+          disabled={disabled}
+          onChange={onChange}
+          required={required}
+          endAdornment={
+            <InputAdornment position="end">
+              <IconButton edge="end">
+                <AccountCircle />
+              </IconButton>
+            </InputAdornment>
+          }
+          labelWidth={70}
+        />
+      </FormControl>
+    );
+  } else if (adornment === 'StartEnd') {
+    return (
+      <FormControl
+        data-testid="inputField"
+        variant="outlined"
+        className={
+          disabled
+            ? classes.disabled
+            : `${classes.root}  ${getVariant(variant)}`
+        }
+      >
+        <InputLabel htmlFor="outlined-adornment">{label}</InputLabel>
+        <OutlinedInput
+          role="OutlinedInput"
+          type={type}
+          error={variant === 'error' ? true : false}
+          disabled={disabled}
+          onChange={onChange}
+          required={required}
+          endAdornment={
+            <InputAdornment position="end">
+              <IconButton edge="end">
+                <AccountCircle />
+              </IconButton>
+            </InputAdornment>
+          }
+          startAdornment={
+            <InputAdornment position="start">
+              <IconButton edge="start">
+                <AccountCircle />
+              </IconButton>
+            </InputAdornment>
+          }
+          labelWidth={70}
+        />
+      </FormControl>
+    );
+  } else {
+    return (
+      <FormControl
+        data-testid="inputField"
+        variant="outlined"
+        className={
+          disabled
+            ? classes.disabled
+            : `${classes.root}  ${getVariant(variant)}`
+        }
+      >
+        <InputLabel htmlFor="outlined-adornment">{label}</InputLabel>
+        <OutlinedInput
+          role="OutlinedInput"
+          type={type}
+          error={variant === 'error' ? true : false}
+          disabled={disabled}
+          onChange={onChange}
+          required={required}
+          labelWidth={70}
+        />
+      </FormControl>
+    );
+  }
 };
 
 export { InputField };
