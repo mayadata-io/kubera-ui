@@ -1,15 +1,14 @@
 import { AxisBottom, AxisLeft, AxisRight, AxisScale } from '@visx/axis';
 import { curveMonotoneX } from '@visx/curve';
 import { LinearGradient } from '@visx/gradient';
+import { GridColumns, GridRows } from '@visx/grid';
 import { Group } from '@visx/group';
 import { MarkerCircle } from '@visx/marker';
-import { GridRows, GridColumns } from '@visx/grid';
 import { AreaClosed, LinePath } from '@visx/shape';
 import React from 'react';
-import { AreaGrapher, DataValue } from './BaseArea';
+import { AreaGrapher, DataValue } from './base';
 
 // Initialize some variables
-
 const axisColor = '#fff';
 export const accentColor = '#f6acc8';
 export const background = '#584153';
@@ -52,7 +51,28 @@ const axisRightTickLabelProps = {
 const getDate = (d: DataValue) => new Date(d.date * 1000);
 const getStockValue = (d: DataValue) => d.value;
 
-export default function AreaChart({
+interface AreaChartProps {
+  data?: Array<AreaGrapher>;
+  gradientColor: string;
+  xScale: AxisScale<number>;
+  yScale: AxisScale<number>;
+  closedSeries: Array<AreaGrapher>;
+  openSeries: Array<AreaGrapher>;
+  showGrid?: boolean;
+  width: number;
+  height: number;
+  yMax: number;
+  xMax: number;
+  margin?: { top: number; right: number; bottom: number; left: number };
+  hideBottomAxis?: boolean;
+  hideLeftAxis?: boolean;
+  hideRightAxis?: boolean;
+  top?: number;
+  left?: number;
+  showPoints: boolean;
+}
+
+const AreaChart: React.FC<AreaChartProps> = ({
   height,
   width,
   closedSeries,
@@ -70,28 +90,7 @@ export default function AreaChart({
   children,
   showPoints = true,
   showGrid = true,
-}: {
-  data?: Array<AreaGrapher>;
-  gradientColor: string;
-  xScale: AxisScale<number>;
-  yScale: AxisScale<number>;
-  closedSeries: Array<AreaGrapher>;
-  openSeries: Array<AreaGrapher>;
-  showGrid?: boolean;
-  width: number;
-  height: number;
-  yMax: number;
-  xMax: number;
-  margin?: { top: number; right: number; bottom: number; left: number };
-  hideBottomAxis?: boolean;
-  hideLeftAxis?: boolean;
-  hideRightAxis?: boolean;
-
-  top?: number;
-  left?: number;
-  children?: React.ReactNode;
-  showPoints: boolean;
-}) {
+}) => {
   if (width < 10) return null;
   return (
     <Group left={left || margin?.left} top={top || margin?.top}>
@@ -218,4 +217,6 @@ export default function AreaChart({
       {children}
     </Group>
   );
-}
+};
+
+export { AreaChart };

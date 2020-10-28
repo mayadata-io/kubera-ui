@@ -1,14 +1,15 @@
 import { Brush } from '@visx/brush';
 import { Bounds } from '@visx/brush/lib/types';
+import { localPoint } from '@visx/event';
 import { LinearGradient } from '@visx/gradient';
 import { scaleLinear, scaleTime } from '@visx/scale';
-import { extent, max, bisector } from 'd3-array';
-import React, { useMemo, useState, useCallback } from 'react';
-import AreaChart from './AreaChart';
-import { AreaGrapher, DataValue } from './BaseArea';
-import { Tooltip, useTooltip, defaultStyles } from '@visx/tooltip';
-import { localPoint } from '@visx/event';
 import { Line } from '@visx/shape';
+import { defaultStyles, Tooltip, useTooltip } from '@visx/tooltip';
+import { bisector, extent, max } from 'd3-array';
+import React, { useCallback, useMemo, useState } from 'react';
+import { AreaChart } from './AreaChart';
+import { AreaGrapher, DataValue } from './base';
+
 type TooltipData = Array<AreaGrapher>;
 // Initialize some variables
 let containerX: number;
@@ -62,7 +63,7 @@ const tooltipStyles = {
 const getDate = (d: DataValue) => new Date(d.date * 1000);
 const getValue = (d: DataValue) => d.value;
 
-export type BrushProps = {
+export type AreaGraphProps = {
   closedSeries: Array<AreaGrapher>;
   openSeries: Array<AreaGrapher>;
   showPoints?: boolean;
@@ -73,7 +74,7 @@ export type BrushProps = {
   compact?: boolean;
 };
 
-function BrushChart({
+const AreaGraph: React.FC<AreaGraphProps> = ({
   compact = false,
   closedSeries,
   openSeries,
@@ -87,7 +88,7 @@ function BrushChart({
     bottom: 20,
     right: 30,
   },
-}: BrushProps) {
+}) => {
   // const [filteredSeries, setFilteredStock] = useState(series);
   const [filteredClosedSeries, setFilteredSeries] = useState(closedSeries);
   const [filteredOpenSeries, setfilteredOpenSeries] = useState(openSeries);
@@ -146,9 +147,6 @@ function BrushChart({
   // bounds
   const xMax = Math.max(width - margin.left - margin.right, 0);
   const yMax = Math.max(topChartHeight, 0);
-
-  //  let filteredSeries: DateValue[]=series.reduce((rec, d) => rec.concat(d), []);
-  //const [filteredSeries, setFilteredSeries] = useState(series.reduce((rec, d) => rec.concat(d), []););
 
   // scales
 
@@ -369,6 +367,6 @@ function BrushChart({
       )}
     </div>
   );
-}
+};
 
-export default BrushChart;
+export { AreaGraph };
