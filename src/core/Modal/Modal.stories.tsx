@@ -3,7 +3,7 @@ import React from 'react';
 import { ThemedBackground } from '../../utils/storybook';
 import Modal from './Modal';
 
-storiesOf('Modal', module)
+storiesOf('Modal/Base Modal', module)
   // Kubera Chaos
   .add('Kubera Chaos', () => (
     <ThemedBackground platform="kubera-chaos">
