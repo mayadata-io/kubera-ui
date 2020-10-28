@@ -225,7 +225,7 @@ const AreaGraph: React.FC<AreaGraphProps> = ({
           dd1 = closedSeries[i].data[indexer];
 
           // console.log(dd0);
-          if (dd1 && getDate(dd1)) {
+          if (dd1) {
             dd3[i] =
               x0.valueOf() - getDate(dd0).valueOf() >
               getDate(dd1).valueOf() - x0.valueOf()
@@ -242,7 +242,7 @@ const AreaGraph: React.FC<AreaGraphProps> = ({
           dd0 = openSeries[j].data[indexer - 1];
           dd1 = openSeries[j].data[indexer];
 
-          if (dd1 && getDate(dd1)) {
+          if (dd1) {
             dd3[i] =
               x0.valueOf() - getDate(dd0).valueOf() >
               getDate(dd1).valueOf() - x0.valueOf()
