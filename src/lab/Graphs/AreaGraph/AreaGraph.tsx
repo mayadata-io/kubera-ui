@@ -157,7 +157,12 @@ const AreaGraph: React.FC<AreaGraphProps> = ({
         domain: extent(
           filteredClosedSeries
             .map((linedata) => linedata.data)
-            .reduce((rec, d) => rec.concat(d), []),
+            .reduce((rec, d) => rec.concat(d), [])
+            .concat(
+              filteredOpenSeries
+                .map((linedata) => linedata.data)
+                .reduce((rec, d) => rec.concat(d), [])
+            ),
           getDate
         ) as [Date, Date],
       }),
@@ -173,7 +178,12 @@ const AreaGraph: React.FC<AreaGraphProps> = ({
           max(
             filteredClosedSeries
               .map((linedata) => linedata.data)
-              .reduce((rec, d) => rec.concat(d), []),
+              .reduce((rec, d) => rec.concat(d), [])
+              .concat(
+                filteredOpenSeries
+                  .map((linedata) => linedata.data)
+                  .reduce((rec, d) => rec.concat(d), [])
+              ),
             getValue
           ) || 0,
         ],
