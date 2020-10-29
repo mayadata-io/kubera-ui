@@ -5,12 +5,6 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 
 const RadioButton: React.FC<RadioProps> = (props) => {
   const classes = useStyles();
-  const [value, setValue] = React.useState<string>('');
-
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setValue(event.target.value);
-    console.log(value);
-  };
 
   return (
     <FormControlLabel
@@ -21,7 +15,6 @@ const RadioButton: React.FC<RadioProps> = (props) => {
       control={
         <Radio
           value={props.value}
-          onChange={handleChange}
           disabled={props.disabled}
           checked={props.checked}
           className={classes.styledRadio}
