@@ -60,7 +60,12 @@ const InputField: React.FC<InputProps> = ({
             : `${classes.root}  ${getVariant(variant)}`
         }
       >
-        <InputLabel htmlFor="outlined-adornment-password">{label}</InputLabel>
+        <InputLabel
+          htmlFor="outlined-adornment-password"
+          className={disabled ? `MuiInputLabel-shrink MuiFormLabel-filled` : ``}
+        >
+          {label}
+        </InputLabel>
         <OutlinedInput
           role="OutlinedInput"
           type={showPassword ? 'text' : 'password'}
@@ -96,8 +101,7 @@ const InputField: React.FC<InputProps> = ({
         />
       </FormControl>
     );
-  }
-  if (type === 'text') {
+  } else {
     return (
       <FormControl
         data-testid="inputField"
@@ -108,7 +112,12 @@ const InputField: React.FC<InputProps> = ({
             : `${classes.root}  ${getVariant(variant)}`
         }
       >
-        <InputLabel htmlFor="outlined-adornment">{label}</InputLabel>
+        <InputLabel
+          htmlFor="outlined-adornment-password"
+          className={disabled ? `MuiInputLabel-shrink MuiFormLabel-filled` : ``}
+        >
+          {label}
+        </InputLabel>
         <OutlinedInput
           role="OutlinedInput"
           type={type}
@@ -123,7 +132,7 @@ const InputField: React.FC<InputProps> = ({
                 <IconButton edge="start">{startIcon}</IconButton>
               </InputAdornment>
             ) : (
-              <></>
+              ''
             )
           }
           endAdornment={
@@ -132,38 +141,9 @@ const InputField: React.FC<InputProps> = ({
                 <IconButton edge="end">{endIcon}</IconButton>
               </InputAdornment>
             ) : (
-              <></>
+              ''
             )
           }
-          labelWidth={70}
-        />
-      </FormControl>
-    );
-  } else {
-    return (
-      <FormControl
-        data-testid="inputField"
-        variant="outlined"
-        className={
-          disabled
-            ? classes.disabled
-            : `${classes.root}  ${getVariant(variant)}`
-        }
-      >
-        <InputLabel
-          htmlFor="outlined-adornment"
-          className={disabled ? `MuiInputLabel-shrink MuiFormLabel-filled` : ``}
-        >
-          {label}
-        </InputLabel>
-        <OutlinedInput
-          role="OutlinedInput"
-          type={type}
-          error={variant === 'error' ? true : false}
-          disabled={disabled}
-          onChange={onChange}
-          required={required}
-          value={value}
           labelWidth={70}
         />
       </FormControl>
