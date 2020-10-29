@@ -1,5 +1,6 @@
 import React from 'react';
 import RadioButton from '../../RadioButton';
+import RadioGroup from '@material-ui/core/RadioGroup';
 import { render, cleanup, fireEvent } from '@testing-library/react';
 import { KuberaThemeProvider } from '../../../theme';
 import { screen } from '@testing-library/dom';
@@ -30,5 +31,33 @@ describe('Radio Button Component', () => {
     fireEvent.change(radio, { target: { value: 'radio button text' } });
     //check given value
     expect(radio).toHaveProperty('value', 'radio button text');
+  });
+});
+
+// Testing with RadioGroup ------------------------>
+
+describe('when clicked', () => {
+  it('should call a callback function', () => {
+    const testFunction = jest.fn((value) => value);
+    testFunction(1);
+    const { getByTestId } = render(
+      <KuberaThemeProvider platform="kubera-chaos">
+        <RadioGroup
+          data-testid="radiogroup"
+          onChange={testFunction}
+          name="contact"
+          value={1}
+        >
+          <RadioButton id="1" value="email">
+            E-mail
+          </RadioButton>
+          <RadioButton id="2" value="phone">
+            Phone
+          </RadioButton>
+        </RadioGroup>
+      </KuberaThemeProvider>
+    );
+    fireEvent.click(getByTestId('radiogroup'));
+    expect(testFunction).toHaveBeenCalledTimes(1);
   });
 });
