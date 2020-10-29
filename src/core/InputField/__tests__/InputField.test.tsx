@@ -7,7 +7,7 @@ import { screen } from '@testing-library/dom';
 afterEach(cleanup);
 jest.useFakeTimers();
 
-describe('InputField', () => {
+describe('InputField component', () => {
   it('Renders', () => {
     render(
       <KuberaThemeProvider platform="kubera-chaos">

@@ -14,8 +14,8 @@ type Variant = 'primary' | 'error' | 'success' | undefined;
 
 interface InputProps extends BaseInputProps {
   variant?: Variant;
-  startIcon?: JSX.Element | null;
-  endIcon?: JSX.Element | null;
+  startIcon?: React.ReactNode;
+  endIcon?: React.ReactNode;
 }
 const InputField: React.FC<InputProps> = ({
   variant,
