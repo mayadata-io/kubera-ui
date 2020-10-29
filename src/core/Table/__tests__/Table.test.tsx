@@ -1,7 +1,7 @@
 import { render } from '@testing-library/react';
 import React from 'react';
-import { KuberaThemeProvider } from '../../../../theme';
-import { BasicTable } from '../BasicTable';
+import { KuberaThemeProvider } from '../../../theme';
+import { Table } from '../Table';
 import {
   tableHead,
   tableData,
@@ -14,7 +14,7 @@ describe('Basic Table Component', () => {
   it('Renders', () => {
     const { getByTestId } = render(
       <KuberaThemeProvider platform="kubera-chaos">
-        <BasicTable
+        <Table
           tableData={tableData}
           tableHead={tableHead}
           pageCount={pageCount}

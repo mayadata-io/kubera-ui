@@ -1,5 +1,6 @@
-import { TableCell, TableRow, Typography } from '@material-ui/core';
+import { TableCell, TableRow } from '@material-ui/core';
 import React from 'react';
+import { Subtitle } from '../Text/Subtitle';
 
 const tableHead = (
   <TableRow>
@@ -15,8 +16,8 @@ const tableHead = (
 
 const tableData = (
   <TableRow>
-    <TableCell colSpan={7}>
-      <Typography align="center">No records available</Typography>
+    <TableCell colSpan={7} align="center">
+      <Subtitle>No records available</Subtitle>
     </TableCell>
   </TableRow>
 );

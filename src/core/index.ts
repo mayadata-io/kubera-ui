@@ -6,3 +6,4 @@ export * from './Link';
 export * from './ButtonGroup';
 export * from './Search';
 export * from './Modal';
+export * from './Table';

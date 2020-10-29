@@ -1,7 +1,7 @@
 import { storiesOf } from '@storybook/react';
 import React from 'react';
-import { ThemedBackground } from '../../../utils/storybook';
-import { BasicTable } from '../BasicTable';
+import { ThemedBackground } from '../../utils/storybook';
+import { Table } from '../Table';
 import {
   tableHead,
   tableData,
@@ -10,11 +10,11 @@ import {
   onChangePage,
 } from './data';
 
-storiesOf('Table/Basic Table', module)
+storiesOf('Table', module)
   // Litmus Portal
   .add('Litmus Portal', () => (
     <ThemedBackground platform="litmus-portal">
-      <BasicTable
+      <Table
         tableData={tableData}
         tableHead={tableHead}
         pageCount={pageCount}
@@ -27,7 +27,7 @@ storiesOf('Table/Basic Table', module)
   // Kubera Chaos
   .add('Kubera Chaos', () => (
     <ThemedBackground platform="kubera-chaos">
-      <BasicTable
+      <Table
         tableData={tableData}
         tableHead={tableHead}
         pageCount={pageCount}
@@ -40,20 +40,20 @@ storiesOf('Table/Basic Table', module)
   // Kubera Propel
   .add('Kubera Propel', () => (
     <ThemedBackground platform="kubera-propel">
-      <BasicTable
+      <Table
         tableData={tableData}
         tableHead={tableHead}
         pageCount={pageCount}
         paginationData={paginationData}
         onChangePage={onChangePage}
-      />{' '}
+      />
     </ThemedBackground>
   ))
 
   // Kubera Portal
   .add('Kubera Portal', () => (
     <ThemedBackground platform="kubera-portal">
-      <BasicTable
+      <Table
         tableData={tableData}
         tableHead={tableHead}
         pageCount={pageCount}
@@ -66,7 +66,7 @@ storiesOf('Table/Basic Table', module)
   // Kubera Core
   .add('Kubera Core', () => (
     <ThemedBackground platform="kubera-core">
-      <BasicTable
+      <Table
         tableData={tableData}
         tableHead={tableHead}
         pageCount={pageCount}

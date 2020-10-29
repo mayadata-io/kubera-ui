@@ -1,13 +1,13 @@
 import {
-  Table,
+  Table as MuiTable,
   TableBody,
   TableContainer,
   TableHead,
-  TableProps,
   TablePagination,
   Paper,
 } from '@material-ui/core';
 import React from 'react';
+import { TableBaseProps } from './base';
 import { useStyles } from './style';
 
 interface PaginationData {
@@ -15,18 +15,18 @@ interface PaginationData {
   rowsPerPage: number;
 }
 
-interface BasicTableProps extends TableProps {
+interface TableProps extends TableBaseProps {
   tableHead: React.ReactNode;
   tableData: React.ReactNode;
   paginationData: PaginationData;
   pageCount: number;
-  onChangePage: (_: any, page: number) => any;
+  onChangePage: (_: any, page: number) => void;
   onChangeRowsPerPage?: (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => void;
 }
 
-const BasicTable: React.FC<BasicTableProps> = ({
+const Table: React.FC<TableProps> = ({
   tableHead,
   tableData,
   paginationData,
@@ -39,10 +39,10 @@ const BasicTable: React.FC<BasicTableProps> = ({
   return (
     <Paper className={classes.root} data-testid="table">
       <TableContainer className={classes.tableMain}>
-        <Table stickyHeader>
+        <MuiTable stickyHeader>
           <TableHead className={classes.tableHead}>{tableHead}</TableHead>
           <TableBody>{tableData}</TableBody>
-        </Table>
+        </MuiTable>
       </TableContainer>
       <TablePagination
         rowsPerPageOptions={[5, 10, 25]}
@@ -57,4 +57,4 @@ const BasicTable: React.FC<BasicTableProps> = ({
   );
 };
 
-export { BasicTable };
+export { Table };
