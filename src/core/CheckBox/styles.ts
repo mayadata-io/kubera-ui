@@ -7,6 +7,9 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
     width: '1.5rem',
     height: '1.5rem',
+    '& svg': {
+      display: 'none',
+    },
   },
   '@global': {
     '.MuiCheckbox-root': {
@@ -25,6 +28,9 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
     '.Mui-checked': {
       borderColor: theme.palette.secondary.main,
+      '& svg': {
+        display: 'block',
+      },
     },
     '.Mui-disabled': {
       borderColor: theme.palette.text.disabled,

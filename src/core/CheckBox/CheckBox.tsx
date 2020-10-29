@@ -14,7 +14,6 @@ const CheckBox: React.FC<CheckboxProps> = ({ disabled, checked }) => {
       checkedIcon={<CheckOutlinedIcon />}
       disabled={disabled}
       checked={check}
-      icon={<span></span>}
       onChange={() => setChecked(!check)}
       inputProps={{ 'aria-label': 'decorative checkbox' }}
     />
