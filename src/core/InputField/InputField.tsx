@@ -6,7 +6,6 @@ import {
   InputLabel,
   FormControl,
 } from '@material-ui/core';
-import { Visibility, VisibilityOff, AccountCircle } from '@material-ui/icons';
 import { BaseInputProps } from './base';
 import { useStyles } from './styles';
 
@@ -15,6 +14,8 @@ type Variant = 'primary' | 'error' | 'success' | undefined;
 interface InputProps extends BaseInputProps {
   variant?: Variant;
   adornment?: string;
+  startIcons: JSX.Element[];
+  endIcons: JSX.Element[];
 }
 const InputField: React.FC<InputProps> = ({
   variant,
@@ -24,6 +25,8 @@ const InputField: React.FC<InputProps> = ({
   value,
   adornment,
   required,
+  startIcons,
+  endIcons,
   onChange,
 }) => {
   const classes = useStyles();
@@ -75,7 +78,7 @@ const InputField: React.FC<InputProps> = ({
                 onMouseDown={handleMouseDownPassword}
                 edge="end"
               >
-                {showPassword ? <Visibility /> : <VisibilityOff />}
+                {showPassword ? endIcons[0] : endIcons[1]}
               </IconButton>
             </InputAdornment>
           }
@@ -106,9 +109,11 @@ const InputField: React.FC<InputProps> = ({
           required={required}
           startAdornment={
             <InputAdornment position="start">
-              <IconButton edge="start">
-                <AccountCircle />
-              </IconButton>
+              {startIcons?.map((Icon) => (
+                <IconButton edge="start" key={startIcons.indexOf(Icon)}>
+                  {Icon}
+                </IconButton>
+              ))}
             </InputAdornment>
           }
           labelWidth={70}
@@ -137,9 +142,11 @@ const InputField: React.FC<InputProps> = ({
           required={required}
           endAdornment={
             <InputAdornment position="end">
-              <IconButton edge="end">
-                <AccountCircle />
-              </IconButton>
+              {endIcons?.map((Icon) => (
+                <IconButton edge="end" key={endIcons.indexOf(Icon)}>
+                  {Icon}
+                </IconButton>
+              ))}
             </InputAdornment>
           }
           labelWidth={70}
@@ -168,16 +175,20 @@ const InputField: React.FC<InputProps> = ({
           required={required}
           endAdornment={
             <InputAdornment position="end">
-              <IconButton edge="end">
-                <AccountCircle />
-              </IconButton>
+              {endIcons?.map((Icon) => (
+                <IconButton edge="end" key={endIcons.indexOf(Icon)}>
+                  {Icon}
+                </IconButton>
+              ))}
             </InputAdornment>
           }
           startAdornment={
             <InputAdornment position="start">
-              <IconButton edge="start">
-                <AccountCircle />
-              </IconButton>
+              {startIcons?.map((Icon) => (
+                <IconButton edge="end" key={startIcons.indexOf(Icon)}>
+                  {Icon}
+                </IconButton>
+              ))}
             </InputAdornment>
           }
           labelWidth={70}

@@ -2,8 +2,8 @@ import { storiesOf } from '@storybook/react';
 import React from 'react';
 import { ThemedBackground } from '../../utils/storybook';
 import { InputField } from '../InputField';
-
-storiesOf('Input/InputField', module)
+import { Visibility, VisibilityOff, AccountCircle } from '@material-ui/icons';
+storiesOf('InputField', module)
   // Litmus Portal
   .add('Litmus Portal', () => (
     <ThemedBackground platform="litmus-portal" row>
@@ -13,6 +13,8 @@ storiesOf('Input/InputField', module)
           variant="primary"
           type="text"
           disabled={false}
+          endIcons={[]}
+          startIcons={[]}
           onChange={(e) => e.target.value}
         />
         <InputField
@@ -20,6 +22,8 @@ storiesOf('Input/InputField', module)
           variant="error"
           type="text"
           disabled={false}
+          endIcons={[]}
+          startIcons={[]}
           onChange={(e) => e.target.value}
         />
         <InputField
@@ -27,6 +31,8 @@ storiesOf('Input/InputField', module)
           variant="success"
           type="text"
           disabled={false}
+          endIcons={[]}
+          startIcons={[]}
           onChange={(e) => e.target.value}
         />
         <InputField
@@ -34,6 +40,8 @@ storiesOf('Input/InputField', module)
           variant="primary"
           type="text"
           disabled={true}
+          endIcons={[]}
+          startIcons={[]}
         />
       </div>
       <div style={{ display: 'grid', gridGap: '20px' }}>
@@ -42,6 +50,8 @@ storiesOf('Input/InputField', module)
           variant="primary"
           type="password"
           disabled={false}
+          startIcons={[]}
+          endIcons={[<Visibility />, <VisibilityOff />]}
           value="Input with password type"
           onChange={(e) => e.target.value}
         />
@@ -52,6 +62,8 @@ storiesOf('Input/InputField', module)
           type="text"
           value="Input with Start adornment"
           disabled={false}
+          startIcons={[<AccountCircle />]}
+          endIcons={[]}
           onChange={(e) => e.target.value}
         />
         <InputField
@@ -61,6 +73,8 @@ storiesOf('Input/InputField', module)
           type="text"
           value="Input with End adornment"
           disabled={false}
+          startIcons={[]}
+          endIcons={[<AccountCircle />]}
           onChange={(e) => e.target.value}
         />
         <InputField
@@ -70,6 +84,8 @@ storiesOf('Input/InputField', module)
           type="text"
           value="Input with both adornment"
           disabled={false}
+          startIcons={[<AccountCircle />]}
+          endIcons={[<AccountCircle />]}
           onChange={(e) => e.target.value}
         />
         <InputField
@@ -78,6 +94,8 @@ storiesOf('Input/InputField', module)
           type="text"
           value="Input with error type"
           disabled={false}
+          endIcons={[]}
+          startIcons={[]}
           onChange={(e) => e.target.value}
         />
         <InputField
@@ -86,6 +104,8 @@ storiesOf('Input/InputField', module)
           type="text"
           value="Input with success type"
           disabled={false}
+          endIcons={[]}
+          startIcons={[]}
           onChange={(e) => e.target.value}
         />
         <InputField
@@ -93,6 +113,8 @@ storiesOf('Input/InputField', module)
           variant="primary"
           type="text"
           disabled={true}
+          endIcons={[]}
+          startIcons={[]}
           value="disabled text"
         />
       </div>
@@ -108,6 +130,8 @@ storiesOf('Input/InputField', module)
           variant="primary"
           type="text"
           disabled={false}
+          endIcons={[]}
+          startIcons={[]}
           onChange={(e) => e.target.value}
         />
         <InputField
@@ -115,6 +139,8 @@ storiesOf('Input/InputField', module)
           variant="error"
           type="text"
           disabled={false}
+          endIcons={[]}
+          startIcons={[]}
           onChange={(e) => e.target.value}
         />
         <InputField
@@ -122,6 +148,8 @@ storiesOf('Input/InputField', module)
           variant="success"
           type="text"
           disabled={false}
+          endIcons={[]}
+          startIcons={[]}
           onChange={(e) => e.target.value}
         />
         <InputField
@@ -129,6 +157,8 @@ storiesOf('Input/InputField', module)
           variant="primary"
           type="text"
           disabled={true}
+          endIcons={[]}
+          startIcons={[]}
         />
       </div>
       <div style={{ display: 'grid', gridGap: '20px' }}>
@@ -137,6 +167,8 @@ storiesOf('Input/InputField', module)
           variant="primary"
           type="password"
           disabled={false}
+          startIcons={[]}
+          endIcons={[<Visibility />, <VisibilityOff />]}
           value="Input with password type"
           onChange={(e) => e.target.value}
         />
@@ -147,6 +179,8 @@ storiesOf('Input/InputField', module)
           type="text"
           value="Input with Start adornment"
           disabled={false}
+          startIcons={[<AccountCircle />]}
+          endIcons={[]}
           onChange={(e) => e.target.value}
         />
         <InputField
@@ -156,6 +190,8 @@ storiesOf('Input/InputField', module)
           type="text"
           value="Input with End adornment"
           disabled={false}
+          startIcons={[]}
+          endIcons={[<AccountCircle />]}
           onChange={(e) => e.target.value}
         />
         <InputField
@@ -165,6 +201,8 @@ storiesOf('Input/InputField', module)
           type="text"
           value="Input with both adornment"
           disabled={false}
+          startIcons={[<AccountCircle />]}
+          endIcons={[<AccountCircle />]}
           onChange={(e) => e.target.value}
         />
         <InputField
@@ -173,6 +211,8 @@ storiesOf('Input/InputField', module)
           type="text"
           value="Input with error type"
           disabled={false}
+          endIcons={[]}
+          startIcons={[]}
           onChange={(e) => e.target.value}
         />
         <InputField
@@ -181,6 +221,8 @@ storiesOf('Input/InputField', module)
           type="text"
           value="Input with success type"
           disabled={false}
+          endIcons={[]}
+          startIcons={[]}
           onChange={(e) => e.target.value}
         />
         <InputField
@@ -188,6 +230,8 @@ storiesOf('Input/InputField', module)
           variant="primary"
           type="text"
           disabled={true}
+          endIcons={[]}
+          startIcons={[]}
           value="disabled text"
         />
       </div>
@@ -203,6 +247,8 @@ storiesOf('Input/InputField', module)
           variant="primary"
           type="text"
           disabled={false}
+          endIcons={[]}
+          startIcons={[]}
           onChange={(e) => e.target.value}
         />
         <InputField
@@ -210,6 +256,8 @@ storiesOf('Input/InputField', module)
           variant="error"
           type="text"
           disabled={false}
+          endIcons={[]}
+          startIcons={[]}
           onChange={(e) => e.target.value}
         />
         <InputField
@@ -217,6 +265,8 @@ storiesOf('Input/InputField', module)
           variant="success"
           type="text"
           disabled={false}
+          endIcons={[]}
+          startIcons={[]}
           onChange={(e) => e.target.value}
         />
         <InputField
@@ -224,6 +274,8 @@ storiesOf('Input/InputField', module)
           variant="primary"
           type="text"
           disabled={true}
+          endIcons={[]}
+          startIcons={[]}
         />
       </div>
       <div style={{ display: 'grid', gridGap: '20px' }}>
@@ -232,6 +284,8 @@ storiesOf('Input/InputField', module)
           variant="primary"
           type="password"
           disabled={false}
+          startIcons={[]}
+          endIcons={[<Visibility />, <VisibilityOff />]}
           value="Input with password type"
           onChange={(e) => e.target.value}
         />
@@ -242,6 +296,8 @@ storiesOf('Input/InputField', module)
           type="text"
           value="Input with Start adornment"
           disabled={false}
+          startIcons={[<AccountCircle />]}
+          endIcons={[]}
           onChange={(e) => e.target.value}
         />
         <InputField
@@ -251,6 +307,8 @@ storiesOf('Input/InputField', module)
           type="text"
           value="Input with End adornment"
           disabled={false}
+          startIcons={[]}
+          endIcons={[<AccountCircle />]}
           onChange={(e) => e.target.value}
         />
         <InputField
@@ -260,6 +318,8 @@ storiesOf('Input/InputField', module)
           type="text"
           value="Input with both adornment"
           disabled={false}
+          startIcons={[<AccountCircle />]}
+          endIcons={[<AccountCircle />]}
           onChange={(e) => e.target.value}
         />
         <InputField
@@ -268,6 +328,8 @@ storiesOf('Input/InputField', module)
           type="text"
           value="Input with error type"
           disabled={false}
+          endIcons={[]}
+          startIcons={[]}
           onChange={(e) => e.target.value}
         />
         <InputField
@@ -276,6 +338,8 @@ storiesOf('Input/InputField', module)
           type="text"
           value="Input with success type"
           disabled={false}
+          endIcons={[]}
+          startIcons={[]}
           onChange={(e) => e.target.value}
         />
         <InputField
@@ -283,6 +347,8 @@ storiesOf('Input/InputField', module)
           variant="primary"
           type="text"
           disabled={true}
+          endIcons={[]}
+          startIcons={[]}
           value="disabled text"
         />
       </div>
@@ -298,6 +364,8 @@ storiesOf('Input/InputField', module)
           variant="primary"
           type="text"
           disabled={false}
+          endIcons={[]}
+          startIcons={[]}
           onChange={(e) => e.target.value}
         />
         <InputField
@@ -305,6 +373,8 @@ storiesOf('Input/InputField', module)
           variant="error"
           type="text"
           disabled={false}
+          endIcons={[]}
+          startIcons={[]}
           onChange={(e) => e.target.value}
         />
         <InputField
@@ -312,6 +382,8 @@ storiesOf('Input/InputField', module)
           variant="success"
           type="text"
           disabled={false}
+          endIcons={[]}
+          startIcons={[]}
           onChange={(e) => e.target.value}
         />
         <InputField
@@ -319,6 +391,8 @@ storiesOf('Input/InputField', module)
           variant="primary"
           type="text"
           disabled={true}
+          endIcons={[]}
+          startIcons={[]}
         />
       </div>
       <div style={{ display: 'grid', gridGap: '20px' }}>
@@ -327,6 +401,8 @@ storiesOf('Input/InputField', module)
           variant="primary"
           type="password"
           disabled={false}
+          startIcons={[]}
+          endIcons={[<Visibility />, <VisibilityOff />]}
           value="Input with password type"
           onChange={(e) => e.target.value}
         />
@@ -337,6 +413,8 @@ storiesOf('Input/InputField', module)
           type="text"
           value="Input with Start adornment"
           disabled={false}
+          startIcons={[<AccountCircle />]}
+          endIcons={[]}
           onChange={(e) => e.target.value}
         />
         <InputField
@@ -346,6 +424,8 @@ storiesOf('Input/InputField', module)
           type="text"
           value="Input with End adornment"
           disabled={false}
+          startIcons={[]}
+          endIcons={[<AccountCircle />]}
           onChange={(e) => e.target.value}
         />
         <InputField
@@ -355,6 +435,8 @@ storiesOf('Input/InputField', module)
           type="text"
           value="Input with both adornment"
           disabled={false}
+          startIcons={[<AccountCircle />]}
+          endIcons={[<AccountCircle />]}
           onChange={(e) => e.target.value}
         />
         <InputField
@@ -363,6 +445,8 @@ storiesOf('Input/InputField', module)
           type="text"
           value="Input with error type"
           disabled={false}
+          endIcons={[]}
+          startIcons={[]}
           onChange={(e) => e.target.value}
         />
         <InputField
@@ -371,6 +455,8 @@ storiesOf('Input/InputField', module)
           type="text"
           value="Input with success type"
           disabled={false}
+          endIcons={[]}
+          startIcons={[]}
           onChange={(e) => e.target.value}
         />
         <InputField
@@ -378,6 +464,8 @@ storiesOf('Input/InputField', module)
           variant="primary"
           type="text"
           disabled={true}
+          endIcons={[]}
+          startIcons={[]}
           value="disabled text"
         />
       </div>
@@ -393,6 +481,8 @@ storiesOf('Input/InputField', module)
           variant="primary"
           type="text"
           disabled={false}
+          endIcons={[]}
+          startIcons={[]}
           onChange={(e) => e.target.value}
         />
         <InputField
@@ -400,6 +490,8 @@ storiesOf('Input/InputField', module)
           variant="error"
           type="text"
           disabled={false}
+          endIcons={[]}
+          startIcons={[]}
           onChange={(e) => e.target.value}
         />
         <InputField
@@ -407,6 +499,8 @@ storiesOf('Input/InputField', module)
           variant="success"
           type="text"
           disabled={false}
+          endIcons={[]}
+          startIcons={[]}
           onChange={(e) => e.target.value}
         />
         <InputField
@@ -414,6 +508,8 @@ storiesOf('Input/InputField', module)
           variant="primary"
           type="text"
           disabled={true}
+          endIcons={[]}
+          startIcons={[]}
         />
       </div>
       <div style={{ display: 'grid', gridGap: '20px' }}>
@@ -422,6 +518,8 @@ storiesOf('Input/InputField', module)
           variant="primary"
           type="password"
           disabled={false}
+          startIcons={[]}
+          endIcons={[<Visibility />, <VisibilityOff />]}
           value="Input with password type"
           onChange={(e) => e.target.value}
         />
@@ -432,6 +530,8 @@ storiesOf('Input/InputField', module)
           type="text"
           value="Input with Start adornment"
           disabled={false}
+          startIcons={[<AccountCircle />]}
+          endIcons={[]}
           onChange={(e) => e.target.value}
         />
         <InputField
@@ -441,6 +541,8 @@ storiesOf('Input/InputField', module)
           type="text"
           value="Input with End adornment"
           disabled={false}
+          startIcons={[]}
+          endIcons={[<AccountCircle />]}
           onChange={(e) => e.target.value}
         />
         <InputField
@@ -450,6 +552,8 @@ storiesOf('Input/InputField', module)
           type="text"
           value="Input with both adornment"
           disabled={false}
+          startIcons={[<AccountCircle />]}
+          endIcons={[<AccountCircle />]}
           onChange={(e) => e.target.value}
         />
         <InputField
@@ -458,6 +562,8 @@ storiesOf('Input/InputField', module)
           type="text"
           value="Input with error type"
           disabled={false}
+          endIcons={[]}
+          startIcons={[]}
           onChange={(e) => e.target.value}
         />
         <InputField
@@ -466,6 +572,8 @@ storiesOf('Input/InputField', module)
           type="text"
           value="Input with success type"
           disabled={false}
+          endIcons={[]}
+          startIcons={[]}
           onChange={(e) => e.target.value}
         />
         <InputField
@@ -473,6 +581,8 @@ storiesOf('Input/InputField', module)
           variant="primary"
           type="text"
           disabled={true}
+          endIcons={[]}
+          startIcons={[]}
           value="disabled text"
         />
       </div>
