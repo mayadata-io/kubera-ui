@@ -7,12 +7,12 @@ import AppBar from '@material-ui/core/AppBar';
 import TabPanel from '@material-ui/lab/TabPanel';
 import TabContext from '@material-ui/lab/TabContext';
 
-interface SiampleTabsProps extends TabBaseProps {
+interface TabsProps extends TabBaseProps {
   label: string[];
   content: any[];
 }
 
-const SimpleTabs: React.FC<SiampleTabsProps> = ({ label, content }) => {
+const Tabs: React.FC<TabsProps> = ({ label, content }) => {
   const classes = useStyles();
   const [value, setValue] = React.useState('0');
 
@@ -55,4 +55,4 @@ const SimpleTabs: React.FC<SiampleTabsProps> = ({ label, content }) => {
   );
 };
 
-export default SimpleTabs;
+export default Tabs;
