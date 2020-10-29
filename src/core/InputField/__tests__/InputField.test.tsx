@@ -16,8 +16,8 @@ describe('InputField', () => {
           variant="primary"
           type="text"
           disabled={false}
-          startIcons={[]}
-          endIcons={[]}
+          startIcon={null}
+          endIcon={null}
           onChange={() => console.log('change')}
         />
       </KuberaThemeProvider>

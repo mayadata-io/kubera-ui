@@ -8,14 +8,14 @@ import {
 } from '@material-ui/core';
 import { BaseInputProps } from './base';
 import { useStyles } from './styles';
+import { Visibility, VisibilityOff } from '@material-ui/icons';
 
 type Variant = 'primary' | 'error' | 'success' | undefined;
 
 interface InputProps extends BaseInputProps {
   variant?: Variant;
-  adornment?: string;
-  startIcons: JSX.Element[];
-  endIcons: JSX.Element[];
+  startIcon?: JSX.Element | null;
+  endIcon?: JSX.Element | null;
 }
 const InputField: React.FC<InputProps> = ({
   variant,
@@ -23,10 +23,9 @@ const InputField: React.FC<InputProps> = ({
   disabled,
   type,
   value,
-  adornment,
   required,
-  startIcons,
-  endIcons,
+  startIcon,
+  endIcon,
   onChange,
 }) => {
   const classes = useStyles();
@@ -50,7 +49,7 @@ const InputField: React.FC<InputProps> = ({
         return classes.primary;
     }
   }
-  if (type === 'password') {
+  if (type === 'password' && startIcon === null) {
     return (
       <FormControl
         data-testid="inputField"
@@ -78,7 +77,50 @@ const InputField: React.FC<InputProps> = ({
                 onMouseDown={handleMouseDownPassword}
                 edge="end"
               >
-                {showPassword ? endIcons[0] : endIcons[1]}
+                {showPassword ? <Visibility /> : <VisibilityOff />}
+              </IconButton>
+            </InputAdornment>
+          }
+          labelWidth={70}
+        />
+      </FormControl>
+    );
+  } else if (type === 'password' && startIcon !== null) {
+    return (
+      <FormControl
+        data-testid="inputField"
+        variant="outlined"
+        className={
+          disabled
+            ? classes.disabled
+            : `${classes.root}  ${getVariant(variant)}`
+        }
+      >
+        <InputLabel htmlFor="outlined-adornment-password">{label}</InputLabel>
+        <OutlinedInput
+          role="OutlinedInput"
+          type={showPassword ? 'text' : 'password'}
+          value={value}
+          error={variant === 'error' ? true : false}
+          disabled={disabled}
+          onChange={onChange}
+          required={required}
+          endAdornment={
+            <InputAdornment position="end">
+              <IconButton
+                aria-label="toggle password visibility"
+                onClick={handleClickShowPassword}
+                onMouseDown={handleMouseDownPassword}
+                edge="end"
+              >
+                {showPassword ? <Visibility /> : <VisibilityOff />}
+              </IconButton>
+            </InputAdornment>
+          }
+          startAdornment={
+            <InputAdornment position="start">
+              <IconButton aria-label="password field icon" edge="start">
+                {startIcon}
               </IconButton>
             </InputAdornment>
           }
@@ -87,7 +129,7 @@ const InputField: React.FC<InputProps> = ({
       </FormControl>
     );
   }
-  if (adornment === 'Start') {
+  if (type === 'text' && startIcon !== null && endIcon === null) {
     return (
       <FormControl
         data-testid="inputField"
@@ -109,18 +151,14 @@ const InputField: React.FC<InputProps> = ({
           required={required}
           startAdornment={
             <InputAdornment position="start">
-              {startIcons?.map((Icon) => (
-                <IconButton edge="start" key={startIcons.indexOf(Icon)}>
-                  {Icon}
-                </IconButton>
-              ))}
+              <IconButton edge="start">{startIcon}</IconButton>
             </InputAdornment>
           }
           labelWidth={70}
         />
       </FormControl>
     );
-  } else if (adornment === 'End') {
+  } else if (type === 'text' && startIcon === null && endIcon !== null) {
     return (
       <FormControl
         data-testid="inputField"
@@ -142,18 +180,14 @@ const InputField: React.FC<InputProps> = ({
           required={required}
           endAdornment={
             <InputAdornment position="end">
-              {endIcons?.map((Icon) => (
-                <IconButton edge="end" key={endIcons.indexOf(Icon)}>
-                  {Icon}
-                </IconButton>
-              ))}
+              <IconButton edge="end">{endIcon}</IconButton>
             </InputAdornment>
           }
           labelWidth={70}
         />
       </FormControl>
     );
-  } else if (adornment === 'StartEnd') {
+  } else if (type === 'text' && startIcon !== null && endIcon !== null) {
     return (
       <FormControl
         data-testid="inputField"
@@ -175,20 +209,12 @@ const InputField: React.FC<InputProps> = ({
           required={required}
           endAdornment={
             <InputAdornment position="end">
-              {endIcons?.map((Icon) => (
-                <IconButton edge="end" key={endIcons.indexOf(Icon)}>
-                  {Icon}
-                </IconButton>
-              ))}
+              <IconButton edge="end">{endIcon}</IconButton>
             </InputAdornment>
           }
           startAdornment={
             <InputAdornment position="start">
-              {startIcons?.map((Icon) => (
-                <IconButton edge="end" key={startIcons.indexOf(Icon)}>
-                  {Icon}
-                </IconButton>
-              ))}
+              <IconButton edge="end">{startIcon}</IconButton>
             </InputAdornment>
           }
           labelWidth={70}
