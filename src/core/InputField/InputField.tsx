@@ -94,7 +94,7 @@ const InputField: React.FC<InputProps> = ({
                 </IconButton>
               </InputAdornment>
             ) : (
-              <></>
+              ''
             )
           }
           labelWidth={70}
