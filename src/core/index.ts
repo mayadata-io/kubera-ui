@@ -1,5 +1,6 @@
 export * from './Button';
 export * from './RadioButton';
+export * from './InputField';
 export * from './ProgressBar';
 export * from './Text';
 export * from './Pills';
