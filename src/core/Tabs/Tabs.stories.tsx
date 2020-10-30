@@ -8,6 +8,10 @@ storiesOf('Tabs', module)
   .add('Litmus Portal', () => (
     <ThemedBackground platform="litmus-portal">
       <Tabs
+        value="0"
+        onChange={() => {
+          console.log(true);
+        }}
         label={['Workflow', 'Hubs']}
         content={['Workflow Content', 'Hubs Content']}
       ></Tabs>
@@ -18,6 +22,10 @@ storiesOf('Tabs', module)
   .add('Kubera Chaos', () => (
     <ThemedBackground platform="kubera-chaos">
       <Tabs
+        value="0"
+        onChange={() => {
+          console.log(true);
+        }}
         label={['Workflow', 'Hubs']}
         content={['Workflow Content', 'Hubs Content']}
       ></Tabs>
@@ -28,6 +36,10 @@ storiesOf('Tabs', module)
   .add('Kubera Propel', () => (
     <ThemedBackground platform="kubera-propel">
       <Tabs
+        value="0"
+        onChange={() => {
+          console.log(true);
+        }}
         label={['Workflow', 'Hubs']}
         content={['Workflow Content', 'Hubs Content']}
       ></Tabs>
@@ -38,6 +50,10 @@ storiesOf('Tabs', module)
   .add('Kubera Portal', () => (
     <ThemedBackground platform="kubera-portal">
       <Tabs
+        value="0"
+        onChange={() => {
+          console.log(true);
+        }}
         label={['Workflow', 'Hubs']}
         content={['Workflow Content', 'Hubs Content']}
       ></Tabs>
@@ -48,6 +64,10 @@ storiesOf('Tabs', module)
   .add('Kubera Core', () => (
     <ThemedBackground platform="kubera-core">
       <Tabs
+        value="0"
+        onChange={() => {
+          console.log(true);
+        }}
         label={['Workflow', 'Hubs']}
         content={['Workflow Content', 'Hubs Content']}
       ></Tabs>

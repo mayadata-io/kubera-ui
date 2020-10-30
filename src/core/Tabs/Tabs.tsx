@@ -10,22 +10,19 @@ import TabContext from '@material-ui/lab/TabContext';
 interface TabsProps extends TabBaseProps {
   label: string[];
   content: any[];
+  value: string;
+  onChange: (event: React.ChangeEvent<{}>, value: any) => void;
 }
 
-const Tabs: React.FC<TabsProps> = ({ label, content }) => {
+const Tabs: React.FC<TabsProps> = ({ label, content, onChange, value }) => {
   const classes = useStyles();
-  const [value, setValue] = React.useState('0');
-
-  const handleChange = (event: React.ChangeEvent<{}>, newValue: string) => {
-    setValue(newValue);
-  };
 
   return (
     <div>
-      <TabContext value={value}>
+      <TabContext value={value ? value : '0'}>
         <AppBar position="static" className={classes.panel}>
           <TabList
-            onChange={handleChange}
+            onChange={onChange}
             aria-label="simple tabs example"
             classes={{
               indicator: classes.indicator,
