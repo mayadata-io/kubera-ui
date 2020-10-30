@@ -3,7 +3,7 @@ import React from 'react';
 import { ThemedBackground } from '../../utils/storybook';
 import { Card } from '../Card';
 
-const cardWithGlow = (
+const cardContainer = (content: string) => (
   <div
     style={{
       textAlign: 'center',
@@ -11,19 +11,7 @@ const cardWithGlow = (
       fontSize: '1.2rem',
     }}
   >
-    Card with Glow
-  </div>
-);
-
-const cardWithoutGlow = (
-  <div
-    style={{
-      textAlign: 'center',
-      marginTop: '50%',
-      fontSize: '1.2rem',
-    }}
-  >
-    Card without Glow
+    {content}
   </div>
 );
 
@@ -32,10 +20,10 @@ storiesOf('Card', module)
   .add('Litmus Portal', () => (
     <ThemedBackground platform="litmus-portal" row>
       <Card width="15rem" height="20rem" glow>
-        {cardWithGlow}
+        {cardContainer('Card With Glow')}
       </Card>
       <Card width="15rem" height="20rem" glow={false}>
-        {cardWithoutGlow}
+        {cardContainer('Card Without Glow')}
       </Card>
     </ThemedBackground>
   ))
@@ -44,10 +32,10 @@ storiesOf('Card', module)
   .add('Kubera Chaos', () => (
     <ThemedBackground platform="kubera-chaos" row>
       <Card width="15rem" height="20rem" glow>
-        {cardWithGlow}
+        {cardContainer('Card With Glow')}
       </Card>
       <Card width="15rem" height="20rem" glow={false}>
-        {cardWithoutGlow}
+        {cardContainer('Card Without Glow')}
       </Card>
     </ThemedBackground>
   ))
@@ -56,10 +44,10 @@ storiesOf('Card', module)
   .add('Kubera Propel', () => (
     <ThemedBackground platform="kubera-propel" row>
       <Card width="15rem" height="20rem" glow>
-        {cardWithGlow}
+        {cardContainer('Card With Glow')}
       </Card>
       <Card width="15rem" height="20rem" glow={false}>
-        {cardWithoutGlow}
+        {cardContainer('Card Without Glow')}
       </Card>
     </ThemedBackground>
   ))
@@ -68,10 +56,10 @@ storiesOf('Card', module)
   .add('Kubera Portal', () => (
     <ThemedBackground platform="kubera-portal" row>
       <Card width="15rem" height="20rem" glow>
-        {cardWithGlow}
+        {cardContainer('Card With Glow')}
       </Card>
       <Card width="15rem" height="20rem" glow={false}>
-        {cardWithoutGlow}
+        {cardContainer('Card Without Glow')}
       </Card>
     </ThemedBackground>
   ))
@@ -80,10 +68,10 @@ storiesOf('Card', module)
   .add('Kubera Core', () => (
     <ThemedBackground platform="kubera-core" row>
       <Card width="15rem" height="20rem" glow>
-        {cardWithGlow}
+        {cardContainer('Card With Glow')}
       </Card>
       <Card width="15rem" height="20rem" glow={false}>
-        {cardWithoutGlow}
+        {cardContainer('Card Without Glow')}
       </Card>
     </ThemedBackground>
   ));
