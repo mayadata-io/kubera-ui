@@ -1,15 +1,15 @@
 import { render } from '@testing-library/react';
 import React from 'react';
 import { KuberaThemeProvider } from '../../../theme';
-import { Card } from '../Card';
+import { KuberaCard } from '../KuberaCard';
 
 describe('Button Filled Component', () => {
   it('Renders', () => {
     const { getByText } = render(
       <KuberaThemeProvider platform="kubera-propel">
-        <Card width="15rem" height="20rem" glow>
+        <KuberaCard width="15rem" height="20rem" glow>
           Card With Glow
-        </Card>
+        </KuberaCard>
       </KuberaThemeProvider>
     );
 
