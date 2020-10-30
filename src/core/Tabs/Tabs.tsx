@@ -22,6 +22,7 @@ const Tabs: React.FC<TabsProps> = ({ label, content, onChange, value }) => {
       <TabContext value={value ? value : '0'}>
         <AppBar position="static" className={classes.panel}>
           <TabList
+            role="tablist"
             onChange={onChange}
             aria-label="simple tabs example"
             classes={{
