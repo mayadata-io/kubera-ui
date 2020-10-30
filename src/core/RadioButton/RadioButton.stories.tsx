@@ -1,13 +1,13 @@
-import React from 'react';
-import RadioButton from '../RadioButton';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import { storiesOf } from '@storybook/react';
+import React from 'react';
 import { ThemedBackground } from '../../../src/utils/storybook';
+import { RadioButton } from '../RadioButton';
 
 storiesOf('RadioButton', module)
   // Litmus Portal
   .add('Litmus Portal', () => (
-    <ThemedBackground platform="litmus-portal" row>
+    <ThemedBackground platform="litmus-portal">
       <RadioGroup row>
         <RadioButton value="1">Target cluster</RadioButton>
         <RadioButton value="2">Target cluster</RadioButton>
@@ -24,7 +24,7 @@ storiesOf('RadioButton', module)
 
   // Kubera Chaos
   .add('Kubera Chaos', () => (
-    <ThemedBackground platform="kubera-chaos" row>
+    <ThemedBackground platform="kubera-chaos">
       <RadioGroup row>
         <RadioButton value="1">Target cluster</RadioButton>
         <RadioButton value="2">Target cluster</RadioButton>
@@ -41,7 +41,7 @@ storiesOf('RadioButton', module)
 
   // Kubera Propel
   .add('Kubera Propel', () => (
-    <ThemedBackground platform="kubera-propel" row>
+    <ThemedBackground platform="kubera-propel">
       <RadioGroup row>
         <RadioButton value="1">Target cluster</RadioButton>
         <RadioButton value="2">Target cluster</RadioButton>
@@ -58,7 +58,7 @@ storiesOf('RadioButton', module)
 
   // Kubera Portal
   .add('Kubera Portal', () => (
-    <ThemedBackground platform="kubera-portal" row>
+    <ThemedBackground platform="kubera-portal">
       <RadioGroup row>
         <RadioButton value="1">Target cluster</RadioButton>
         <RadioButton value="2">Target cluster</RadioButton>
@@ -75,7 +75,7 @@ storiesOf('RadioButton', module)
 
   // Kubera Core
   .add('Kubera Core', () => (
-    <ThemedBackground platform="kubera-core" row>
+    <ThemedBackground platform="kubera-core">
       <RadioGroup row>
         <RadioButton value="1">Target cluster</RadioButton>
         <RadioButton value="2">Target cluster</RadioButton>
