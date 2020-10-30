@@ -14,6 +14,12 @@ storiesOf('InputField', module)
           onChange={(e) => e.target.value}
         />
         <InputField
+          label="primary"
+          variant="primary"
+          type="password"
+          onChange={(e) => e.target.value}
+        />
+        <InputField
           label="error"
           variant="error"
           onChange={(e) => e.target.value}
@@ -63,24 +69,6 @@ storiesOf('InputField', module)
           endIcon={<AccountCircle />}
           onChange={(e) => e.target.value}
         />
-        <InputField
-          label="error"
-          variant="error"
-          value="Input with error type"
-          onChange={(e) => e.target.value}
-        />
-        <InputField
-          label="success"
-          variant="success"
-          value="Input with success type"
-          onChange={(e) => e.target.value}
-        />
-        <InputField
-          label="disabled"
-          variant="primary"
-          disabled={true}
-          value="disabled text"
-        />
       </div>
     </ThemedBackground>
   ))
@@ -92,6 +80,12 @@ storiesOf('InputField', module)
         <InputField
           label="primary"
           variant="primary"
+          onChange={(e) => e.target.value}
+        />
+        <InputField
+          label="primary"
+          variant="primary"
+          type="password"
           onChange={(e) => e.target.value}
         />
         <InputField
@@ -143,24 +137,6 @@ storiesOf('InputField', module)
           startIcon={<AccountCircle />}
           endIcon={<AccountCircle />}
           onChange={(e) => e.target.value}
-        />
-        <InputField
-          label="error"
-          variant="error"
-          value="Input with error type"
-          onChange={(e) => e.target.value}
-        />
-        <InputField
-          label="success"
-          variant="success"
-          value="Input with success type"
-          onChange={(e) => e.target.value}
-        />
-        <InputField
-          label="disabled"
-          variant="primary"
-          disabled={true}
-          value="disabled text"
         />
       </div>
     </ThemedBackground>
@@ -176,6 +152,12 @@ storiesOf('InputField', module)
           onChange={(e) => e.target.value}
         />
         <InputField
+          label="primary"
+          variant="primary"
+          type="password"
+          onChange={(e) => e.target.value}
+        />
+        <InputField
           label="error"
           variant="error"
           onChange={(e) => e.target.value}
@@ -224,24 +206,6 @@ storiesOf('InputField', module)
           startIcon={<AccountCircle />}
           endIcon={<AccountCircle />}
           onChange={(e) => e.target.value}
-        />
-        <InputField
-          label="error"
-          variant="error"
-          value="Input with error type"
-          onChange={(e) => e.target.value}
-        />
-        <InputField
-          label="success"
-          variant="success"
-          value="Input with success type"
-          onChange={(e) => e.target.value}
-        />
-        <InputField
-          label="disabled"
-          variant="primary"
-          disabled={true}
-          value="disabled text"
         />
       </div>
     </ThemedBackground>
@@ -257,6 +221,12 @@ storiesOf('InputField', module)
           onChange={(e) => e.target.value}
         />
         <InputField
+          label="primary"
+          variant="primary"
+          type="password"
+          onChange={(e) => e.target.value}
+        />
+        <InputField
           label="error"
           variant="error"
           onChange={(e) => e.target.value}
@@ -305,24 +275,6 @@ storiesOf('InputField', module)
           startIcon={<AccountCircle />}
           endIcon={<AccountCircle />}
           onChange={(e) => e.target.value}
-        />
-        <InputField
-          label="error"
-          variant="error"
-          value="Input with error type"
-          onChange={(e) => e.target.value}
-        />
-        <InputField
-          label="success"
-          variant="success"
-          value="Input with success type"
-          onChange={(e) => e.target.value}
-        />
-        <InputField
-          label="disabled"
-          variant="primary"
-          disabled={true}
-          value="disabled text"
         />
       </div>
     </ThemedBackground>
@@ -338,6 +290,12 @@ storiesOf('InputField', module)
           onChange={(e) => e.target.value}
         />
         <InputField
+          label="primary"
+          variant="primary"
+          type="password"
+          onChange={(e) => e.target.value}
+        />
+        <InputField
           label="error"
           variant="error"
           onChange={(e) => e.target.value}
@@ -386,24 +344,6 @@ storiesOf('InputField', module)
           startIcon={<AccountCircle />}
           endIcon={<AccountCircle />}
           onChange={(e) => e.target.value}
-        />
-        <InputField
-          label="error"
-          variant="error"
-          value="Input with error type"
-          onChange={(e) => e.target.value}
-        />
-        <InputField
-          label="success"
-          variant="success"
-          value="Input with success type"
-          onChange={(e) => e.target.value}
-        />
-        <InputField
-          label="disabled"
-          variant="primary"
-          disabled={true}
-          value="disabled text"
         />
       </div>
     </ThemedBackground>
