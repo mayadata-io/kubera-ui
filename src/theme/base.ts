@@ -86,6 +86,10 @@ declare module '@material-ui/core/styles/createPalette' {
       background: string;
       highlight: string;
     };
+    modal: {
+      background: string;
+      backdrop: string;
+    };
   }
   // allow configuration using `createMuiTheme`
   export interface PaletteOptions {
@@ -127,6 +131,10 @@ declare module '@material-ui/core/styles/createPalette' {
       background: string;
       highlight: string;
     };
+    modal?: {
+      background: string;
+      backdrop: string;
+    };
   }
 }
 
@@ -134,6 +142,15 @@ declare module '@material-ui/core/styles/createPalette' {
 
 function createTheme(themeOptions?: ThemeOptions) {
   return createMuiTheme({
+    breakpoints: {
+      values: {
+        xs: 0,
+        sm: 600,
+        md: 960,
+        lg: 1520,
+        xl: 1920,
+      },
+    },
     typography: {
       fontSize: 12,
       fontFamily: 'Ubuntu',
