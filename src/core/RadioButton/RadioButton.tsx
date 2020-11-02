@@ -1,5 +1,4 @@
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Radio from '@material-ui/core/Radio';
+import { FormControlLabel, Radio } from '@material-ui/core';
 import React from 'react';
 import { RadioBaseProps } from './base';
 import useStyles from './styles';
