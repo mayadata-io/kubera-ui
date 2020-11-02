@@ -3,7 +3,7 @@ import React from 'react';
 import { ThemedBackground } from '../../../utils/storybook';
 import { ButtonGroup } from './ButtonGroup';
 
-storiesOf('ButtonGroup', module)
+storiesOf('Button/ButtonGroup', module)
   // Litmus Portal
   .add('Litmus Portal', () => (
     <ThemedBackground platform="litmus-portal" row>

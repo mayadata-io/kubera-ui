@@ -1,13 +1,13 @@
 import { Typography } from '@material-ui/core';
 import { Cancel, CheckCircle } from '@material-ui/icons';
 import React from 'react';
+import { ButtonBaseProps } from '../base';
 import { ButtonFilled } from '../ButtonFilled';
-import { ButtonGroupBaseProps } from './base';
 import { useStyles } from './styles';
 
 type Variant = 'default' | 'error' | 'success' | undefined;
 
-interface ButtonGroupProps extends ButtonGroupBaseProps {
+interface ButtonGroupProps extends ButtonBaseProps {
   variant?: Variant;
 }
 
