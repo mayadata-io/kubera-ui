@@ -1,7 +1,7 @@
-import React from 'react';
 import { Typography } from '@material-ui/core';
-import { CheckCircle, Cancel } from '@material-ui/icons';
-import { ButtonFilled } from '../Button/ButtonFilled';
+import { Cancel, CheckCircle } from '@material-ui/icons';
+import React from 'react';
+import { ButtonFilled } from '../ButtonFilled';
 import { ButtonGroupBaseProps } from './base';
 import { useStyles } from './styles';
 
