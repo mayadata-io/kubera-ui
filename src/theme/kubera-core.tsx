@@ -92,7 +92,7 @@ const kuberaCoreTheme = createTheme({
           'linear-gradient(255.08deg, #10805E 7.37%, rgba(16, 128, 94, 0) 100%)',
       },
       button: {
-        unconfigured: 'rgba(82, 249, 149, 0.25)',
+        unconfigured: '#52F99540',
         configured: '#28CB69',
       },
       card: 'linear-gradient(255.08deg, #0F7B5B 7.37%, #0E5B44 100%)',
@@ -111,7 +111,7 @@ const kuberaCoreTheme = createTheme({
           'linear-gradient(249.11deg, #E9D08C 25.9%, rgba(126, 110, 66, 0) 94.35%)',
       },
       button: {
-        unconfigured: 'rgba(234, 215, 162, 0.25)',
+        unconfigured: '#EAD7A240',
         configured: '#EAD7A2',
       },
       card: 'linear-gradient(264.22deg, #323E5B 2.84%, #2C354D 100%)',
