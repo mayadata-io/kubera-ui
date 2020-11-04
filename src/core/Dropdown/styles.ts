@@ -17,16 +17,25 @@ const useStyles = makeStyles((theme: Theme) => ({
       fontSize: '0.75rem',
       width: '100%',
       height: '100%',
-      boxShadow: '0px 5px 9px rgba(0, 0, 0, 0.1)',
+      boxShadow: '0 0.3125rem 0.5625rem rgba(0, 0, 0, 0.1)',
     },
     '& ul>li': {
       fontWeight: 500,
       padding: theme.spacing(1.25, 9.25, 1.25, 2.5),
       color: theme.palette.text.primary,
+      // display:'flex',
+      // justifyContent:'space-between',
       '&:focus': {
         backgroundColor: theme.palette.cards.highlight,
-        color: theme.palette.text.secondary,
+        color: theme.palette.text.primary,
       },
+      '&:hover': {
+        backgroundColor: theme.palette.cards.highlight,
+        color: theme.palette.text.primary,
+      },
+    },
+    '& ul>li>svg': {
+      marginRight: '1.3rem',
     },
   },
   triangleUp: {
@@ -40,7 +49,9 @@ const useStyles = makeStyles((theme: Theme) => ({
     borderTopRightRadius: '21.75rem',
     transform: 'translateY(-0.62rem) rotate(135deg)',
     position: 'absolute',
-    right: '1rem',
+    right: 0,
+    left: 0,
+    margin: 'auto',
   },
   show: {
     display: 'block',

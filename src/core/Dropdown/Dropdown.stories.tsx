@@ -4,17 +4,18 @@ import { ThemedBackground } from '../../utils/storybook';
 import { Dropdown } from './Dropdown';
 import MenuItem from '@material-ui/core/MenuItem';
 import { useTheme } from '@material-ui/core/styles';
+import QueryBuilderIcon from '@material-ui/icons/QueryBuilder';
+import TrendingUpIcon from '@material-ui/icons/TrendingUp';
+import WidgetsIcon from '@material-ui/icons/Widgets';
 
-storiesOf('DropdownCard/Dropdown', module)
+storiesOf('Dropdown', module)
   // Litmus Portal
   .add('Litmus Portal', () => (
     <ThemedBackground platform="litmus-portal" row>
       <Dropdown anchorEl={null}>
-        <MenuItem>View PVC</MenuItem>
-        <MenuItem>Edit PVC</MenuItem>
-        <MenuItem style={{ color: useTheme().palette.error.main }}>
-          Delete PVC
-        </MenuItem>
+        <MenuItem>Show the workflow</MenuItem>
+        <MenuItem>Show the analytics</MenuItem>
+        <MenuItem>Show the scheduler</MenuItem>
       </Dropdown>
     </ThemedBackground>
   ))
@@ -23,11 +24,9 @@ storiesOf('DropdownCard/Dropdown', module)
   .add('Kubera Chaos', () => (
     <ThemedBackground platform="kubera-chaos" row>
       <Dropdown anchorEl={null}>
-        <MenuItem>View PVC</MenuItem>
-        <MenuItem>Edit PVC</MenuItem>
-        <MenuItem style={{ color: useTheme().palette.error.main }}>
-          Delete PVC
-        </MenuItem>
+        <MenuItem>Show the workflow</MenuItem>
+        <MenuItem>Show the analytics</MenuItem>
+        <MenuItem>Show the scheduler</MenuItem>
       </Dropdown>
     </ThemedBackground>
   ))
@@ -36,10 +35,16 @@ storiesOf('DropdownCard/Dropdown', module)
   .add('Kubera Propel', () => (
     <ThemedBackground platform="kubera-propel" row>
       <Dropdown anchorEl={null}>
-        <MenuItem>View PVC</MenuItem>
-        <MenuItem>Edit PVC</MenuItem>
+        <MenuItem>
+          <WidgetsIcon />
+          View PVC
+        </MenuItem>
+        <MenuItem>
+          <TrendingUpIcon />
+          Edit PVC
+        </MenuItem>
         <MenuItem style={{ color: useTheme().palette.error.main }}>
-          Delete PVC
+          <QueryBuilderIcon /> Delete PVC
         </MenuItem>
       </Dropdown>
     </ThemedBackground>
@@ -49,10 +54,17 @@ storiesOf('DropdownCard/Dropdown', module)
   .add('Kubera Core', () => (
     <ThemedBackground platform="kubera-core" row>
       <Dropdown anchorEl={null}>
-        <MenuItem>View PVC</MenuItem>
-        <MenuItem>Edit PVC</MenuItem>
-        <MenuItem style={{ color: useTheme().palette.error.main }}>
-          Delete PVC
+        <MenuItem>
+          <WidgetsIcon />
+          Show the workflow
+        </MenuItem>
+        <MenuItem>
+          <TrendingUpIcon />
+          Show the analytics
+        </MenuItem>
+        <MenuItem>
+          <QueryBuilderIcon />
+          Show the scheduler
         </MenuItem>
       </Dropdown>
     </ThemedBackground>
@@ -62,10 +74,17 @@ storiesOf('DropdownCard/Dropdown', module)
   .add('Kubera Portal', () => (
     <ThemedBackground platform="kubera-portal" row>
       <Dropdown anchorEl={null}>
-        <MenuItem>View PVC</MenuItem>
-        <MenuItem>Edit PVC</MenuItem>
-        <MenuItem style={{ color: useTheme().palette.error.main }}>
-          Delete PVC
+        <MenuItem>
+          <WidgetsIcon />
+          Show the workflow
+        </MenuItem>
+        <MenuItem>
+          <TrendingUpIcon />
+          Show the analytics
+        </MenuItem>
+        <MenuItem>
+          <QueryBuilderIcon />
+          Show the scheduler
         </MenuItem>
       </Dropdown>
     </ThemedBackground>
