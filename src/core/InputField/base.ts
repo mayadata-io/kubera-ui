@@ -1,6 +1,3 @@
-import { TextFieldProps } from '@material-ui/core/TextField';
+import { TextFieldProps } from '@material-ui/core';
 
-export type BaseInputProps = Omit<
-  TextFieldProps,
-  'variant' | 'startAdornment' | 'endAdornment'
->;
+export type BaseInputProps = Omit<TextFieldProps, 'variant'>;

@@ -1,7 +1,7 @@
-import { Modal as MuiModal, Button } from '@material-ui/core';
-import { ModalBaseProps } from './base';
+import { Button, Modal as MuiModal } from '@material-ui/core';
 import React from 'react';
-import useStyles from './styles';
+import { ModalBaseProps } from './base';
+import { useStyles } from './styles';
 
 interface ModalProps extends ModalBaseProps {
   hasCloseBtn: boolean;
@@ -40,4 +40,4 @@ const Modal: React.FC<ModalProps> = ({
   );
 };
 
-export default Modal;
+export { Modal };

@@ -1,7 +1,7 @@
 {
   "name": "kubera-ui",
   "license": "Apache-2.0",
-  "version": "0.1.4",
+  "version": "0.2.3",
   "private": false,
   "description": "Component Library for Kubera products",
   "author": "MayaData, Inc.",
@@ -26,6 +26,7 @@
     "build-storybook": "build-storybook -s public",
     "storybook": "start-storybook -p 9001 -s ./src/assets -c .storybook",
     "test": "jest --maxWorkers=2",
+    "test:clean": "jest --clearCache",
     "test:watch": "yarn test --watch",
     "test:coverage": "jest --coverage --colors --maxWorkers=2"
   },
@@ -53,6 +54,7 @@
   "types": "index.d.ts",
   "dependencies": {
     "@material-ui/core": "^4.10.2",
+    "@material-ui/lab": "^4.0.0-alpha.56",
     "@material-ui/icons": "^4.9.1",
     "d3-array": "^2.8.0",
     "react": "^16.9.0",
