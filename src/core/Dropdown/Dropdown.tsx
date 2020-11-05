@@ -5,25 +5,23 @@ import { BasePropsMenu } from './base';
 
 interface CustomDropdownProps extends BasePropsMenu {
   anchorEl: HTMLElement | null;
+  handleClose: () => void;
 }
-const Dropdown: React.FC<CustomDropdownProps> = ({ children, anchorEl }) => {
+const Dropdown: React.FC<CustomDropdownProps> = ({
+  children,
+  anchorEl,
+  handleClose,
+}) => {
   const classes = useStyles();
-  const [anchorElement, setAnchorElement] = React.useState<null | HTMLElement>(
-    anchorEl
-  );
-
-  const handleClose = () => {
-    setAnchorElement(null);
-  };
-  const showDropdown = Boolean(anchorElement) ? classes.show : classes.hide;
+  const showDropdown = Boolean(anchorEl) ? classes.show : classes.hide;
   return (
     <div className={classes.root} data-testid="dropdownElement">
       <div className={`${classes.triangleUp} ${showDropdown}`}></div>
       <Menu
-        open={Boolean(anchorElement)}
+        open={Boolean(anchorEl)}
         className={classes.customDropdown}
         variant="menu"
-        anchorEl={anchorElement}
+        anchorEl={anchorEl}
         onClose={handleClose}
       >
         {children}

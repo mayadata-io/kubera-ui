@@ -9,7 +9,7 @@ describe('Dropdown Component', () => {
   it('Renders', () => {
     render(
       <KuberaThemeProvider platform="kubera-chaos">
-        <Dropdown anchorEl={null}>
+        <Dropdown anchorEl={null} handleClose={() => {}}>
           <MenuItem>Show the workflow</MenuItem>
           <MenuItem>Show the analytics</MenuItem>
           <MenuItem>Show the scheduler</MenuItem>

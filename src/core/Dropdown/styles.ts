@@ -3,7 +3,7 @@ import { makeStyles, Theme } from '@material-ui/core';
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
     minWidth: '10.4375rem',
-    width: 'auto',
+    // width: 'auto',
     height: 'auto',
     display: 'inline-block',
     position: 'relative',
@@ -11,6 +11,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   customDropdown: {
     '& div': {
       top: '6rem !important',
+      left: '0 !important',
     },
     '& ul': {
       backgroundColor: theme.palette.cards.background,
@@ -23,8 +24,6 @@ const useStyles = makeStyles((theme: Theme) => ({
       fontWeight: 500,
       padding: theme.spacing(1.25, 9.25, 1.25, 2.5),
       color: theme.palette.text.primary,
-      // display:'flex',
-      // justifyContent:'space-between',
       '&:focus': {
         backgroundColor: theme.palette.cards.highlight,
         color: theme.palette.text.primary,
@@ -47,11 +46,11 @@ const useStyles = makeStyles((theme: Theme) => ({
     borderBottomRightRadius: '3.125rem',
     borderTopLeftRadius: '3.125rem',
     borderTopRightRadius: '21.75rem',
-    transform: 'translateY(-0.62rem) rotate(135deg)',
+    transform: 'translateY(-3.5rem) rotate(135deg)',
     position: 'absolute',
     right: 0,
     left: 0,
-    margin: 'auto',
+    margin: '0 auto',
   },
   show: {
     display: 'block',
