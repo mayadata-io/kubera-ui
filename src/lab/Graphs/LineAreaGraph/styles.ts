@@ -1,4 +1,4 @@
-import { makeStyles, Theme } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core';
 
 interface StyleProps {
   color?: string;
@@ -7,7 +7,7 @@ interface StyleProps {
   align?: string;
 }
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles(() => ({
   rectBase: {
     fill: 'rgba(10, 24, 24, 0.9)',
   },
