@@ -22,11 +22,7 @@ const data2: DataValue[] = [
 ];
 
 const seriestest1: Array<AreaGrapher> = [
-  {
-    metricName:
-      'chaos-exporterxporterchaos-exporter-haos-xporterchaos-exporter-haos-xporterchaos-exporter-haos-xporter',
-    data: data1,
-  },
+  { metricName: 'chaos-exporter', data: data1 },
 ];
 const seriestest2: Array<AreaGrapher> = [{ metricName: 'heptio', data: data2 }];
 

@@ -10,7 +10,6 @@ import { PlotLineAreaGraph } from './PlotLineAreaGraph';
 import { LegendTable } from './LegendTable';
 import { AreaGrapher, DataValue, LegendData } from './base';
 import { useStyles } from './styles';
-import Typography from '@material-ui/core/Typography';
 type TooltipData = Array<AreaGrapher>;
 // Initialize some variables
 let containerX: number;
@@ -251,18 +250,14 @@ const LineAreaGraph: React.FC<AreaGraphProps> = ({
   );
   {
     filteredClosedSeries &&
-      showLegend &&
       filteredClosedSeries.map((linedata, index) => {
         legenddata[index] = {
           value: [
-            linedata.metricName, // name/title
-            //average
+            linedata.metricName,
             (
               linedata.data.map((d) => d.value).reduce(getSum, 0) /
               linedata.data.length
-            )
-              .toFixed(2)
-              .toString(), //current
+            ).toString(),
             closedSeries[index].data[
               closedSeries[index].data.length - 1
             ].value.toString(),
@@ -272,7 +267,6 @@ const LineAreaGraph: React.FC<AreaGraphProps> = ({
   }
   {
     filteredOpenSeries &&
-      showLegend &&
       filteredOpenSeries.map((linedata, index) => {
         legenddata[index + closedSeriesCount] = {
           value: [
@@ -280,9 +274,7 @@ const LineAreaGraph: React.FC<AreaGraphProps> = ({
             (
               linedata.data.map((d) => d.value).reduce(getSum, 0) /
               linedata.data.length
-            )
-              .toFixed(2)
-              .toString(),
+            ).toString(),
             openSeries[index].data[
               openSeries[index].data.length - 1
             ].value.toString(),
@@ -346,10 +338,6 @@ const LineAreaGraph: React.FC<AreaGraphProps> = ({
                   from={{ x: dateScale(getDate(d.data[0])), y: 0 }}
                   to={{ x: dateScale(getDate(d.data[0])), y: yMax }}
                   className={classes.tooltipLine}
-                  // stroke={accentColorDark}
-                  // strokeWidth={2}
-                  // pointerEvents="none"
-                  // strokeDasharray="5,2"
                 />
                 <circle
                   cx={dateScale(getDate(d.data[0]))}
@@ -373,9 +361,9 @@ const LineAreaGraph: React.FC<AreaGraphProps> = ({
             <div style={{ padding: '5px', display: 'flex' }} key={`bb- ${i}`}>
               <div className={classes.tooltipData}>
                 <hr color={colorArr[i % colorCount]} className={classes.hr} />
-                <Typography className={classes.tableData}>
-                  {`${d.metricName}:  ${getValue(d.data[0]).toString()}`}
-                </Typography>
+                <span style={{ color: 'white', paddingLeft: '0.5em' }}>{`${
+                  d.metricName
+                }:  ${getValue(d.data[0]).toString()}`}</span>
               </div>
             </div>
           ))}
@@ -388,8 +376,6 @@ const LineAreaGraph: React.FC<AreaGraphProps> = ({
           heading={['', 'Avg', 'Curr']}
           width={width}
           height={legendTableHeight}
-          // width={100}
-          // height={150}
         />
       )}
     </div>

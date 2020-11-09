@@ -1,4 +1,4 @@
-import { makeStyles, Theme } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core';
 
 interface StyleProps {
   color?: string;
@@ -7,7 +7,7 @@ interface StyleProps {
   align?: string;
 }
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles(() => ({
   rectBase: {
     fill: 'rgba(10, 24, 24, 0.9)',
   },
@@ -18,19 +18,14 @@ const useStyles = makeStyles((theme: Theme) => ({
     backgroundColor: 'rgba(10, 24, 24, 0.9)',
     overflowY: 'auto',
     '&::-webkit-scrollbar': {
-      width: '6px',
-      height: '6px',
+      width: '9px',
+      height: '9px',
     },
 
     '&::-webkit-scrollbar-track': {
-      backgroundColor: 'rgba(10, 24, 24, 0.9)',
+      backgroundColor: 'rgba(119, 119, 119,0.6)',
       borderRadius: '5px',
     },
-
-    '&::-webkit-scrollbar-corner': {
-      backgroundColor: 'rgba(10, 24, 24, 0.9)',
-    },
-
     '&::-webkit-scrollbar-thumb': {
       backgroundColor: 'rgba(82,249,149,0.6)',
       borderRadius: '5px',
@@ -41,36 +36,28 @@ const useStyles = makeStyles((theme: Theme) => ({
   }),
   tableCell: {
     borderBottom: 'none',
-    maxWidth: '30%',
-    minWidth: '10%',
   },
   tableDataRow: {
     float: 'left',
     display: 'flex',
     alignItems: 'flex-start',
   },
-  tableHeading: {
+  tableFont: {
     borderBottom: 'none',
-    fontSize: '0.9rem',
-    color: '#0098DD',
     whiteSpace: 'nowrap',
     fontFamily: 'Ubuntu',
     fontStyle: 'normal',
-    fontWeight: 500,
     letterSpacing: '0em',
     textAlign: 'left',
-    paddingLeft: '1.5em',
-  },
-  tableData: {
-    fontFamily: 'Ubuntu',
+    paddingLeft: '2.5em',
     fontSize: '0.8rem',
-    fontStyle: 'normal',
+    color: '#fff',
     fontWeight: 400,
-    lineHeight: '16px',
-
-    letterSpacing: '0em',
-    textAlign: 'left',
-    paddingLeft: '0.5em',
+  },
+  tableHeading: {
+    fontSize: '0.9rem',
+    color: '#0098DD',
+    fontWeight: 500,
   },
 
   hr: {
