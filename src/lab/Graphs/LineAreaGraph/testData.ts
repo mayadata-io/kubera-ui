@@ -23,7 +23,8 @@ const data2: DataValue[] = [
 
 const seriestest1: Array<AreaGrapher> = [
   {
-    metricName: 'chaos-export',
+    metricName:
+      'chaos-export-chaos-exportchaos-exportchaos-exportchaos-exportchaos-exportchaos-export',
     data: data1,
   },
 ];
