@@ -54,12 +54,14 @@ const RadialChart = ({
       )
     : NaN;
   // console.log(total);
-  const radialArc = radialData.map((elem) => {
-    return {
-      value: (total ? elem.value / total : 0) * scalerArc,
-      lable: elem.lable,
-    };
-  });
+  const radialArc = radialData
+    ? radialData.map((elem) => {
+        return {
+          value: (total ? elem.value / total : 0) * scalerArc,
+          lable: elem.lable,
+        };
+      })
+    : [{ value: NaN, lable: '' }];
   if (centerDataValue === 'NoData' && total > 0) {
     setCenterDataValue(total.toString());
   }
@@ -94,6 +96,7 @@ const RadialChart = ({
         <Group top={circleOrient == 1 ? height : height / 2} left={width / 2}>
           {showArc &&
             total > 0 &&
+            radialArc &&
             radialArc.map((elem, i) => (
               <Arc
                 className={classes.radicalArc}
@@ -113,7 +116,7 @@ const RadialChart = ({
               />
             ))}
           {(currentAngle = Math.PI)}
-          {showArc && (total == 0 || total == NaN) && (
+          {showArc && (total == 0 || isNaN(total)) && (
             <Arc
               cornerRadius={2}
               padAngle={0.02}
@@ -135,7 +138,7 @@ const RadialChart = ({
               innerRadius={outerRadius + 10}
               outerRadius={outerRadius + 15}
               fill={
-                total == 0 || total == NaN ? '#2B333B' : 'url(#gpinkorange)'
+                total == 0 || isNaN(total) ? '#2B333B' : 'url(#gpinkorange)'
               }
               startAngle={startAngle}
               endAngle={circleOrient == 1 ? Math.PI / 2 : 2 * Math.PI}
