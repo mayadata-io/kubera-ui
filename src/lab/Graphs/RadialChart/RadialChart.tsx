@@ -145,7 +145,7 @@ const RadialChart = ({
           )}
           <Group
             id={'test-text'}
-            left={-16 * centerDataValue.toString().length}
+            left={-14 * centerDataValue.toString().length}
             top={circleOrient == 1 ? -8 : 16}
           >
             <Text className={classes.centerDataValue}>{centerDataValue}</Text>

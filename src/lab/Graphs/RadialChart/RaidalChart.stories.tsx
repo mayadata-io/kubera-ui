@@ -6,6 +6,11 @@ import { testRadialChartData } from './testRadialChartData';
 
 storiesOf('Graphs/RadialChart', module).add('Kubera Chaos', () => (
   <ThemedBackground platform="kubera-chaos">
-    <RadialChart width={500} height={250} radialData={testRadialChartData} />
+    <RadialChart
+      width={500}
+      height={250}
+      radialData={testRadialChartData}
+      circleOrient={1}
+    />
   </ThemedBackground>
 ));
