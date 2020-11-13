@@ -1,4 +1,4 @@
-// this is a redundant file will be removed later on
+// this is a file will be removed later
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';

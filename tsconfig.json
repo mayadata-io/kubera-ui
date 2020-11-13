@@ -13,7 +13,7 @@
     "noImplicitReturns": false,
     "strictNullChecks": true,
     "noUnusedLocals": true,
-    "noUnusedParameters": true,
+    "noUnusedParameters": false,
     "outDir": "./dist",
     "pretty": true,
     "sourceMap": true,

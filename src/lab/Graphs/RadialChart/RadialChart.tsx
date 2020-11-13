@@ -1,5 +1,3 @@
-/* tslint:disable:no-unused-variable */
-
 import { Arc, Group, LinearGradient, Text } from '@visx/visx';
 import React, { useState } from 'react';
 import { LegendData } from '../LineAreaGraph/base';
