@@ -16,7 +16,7 @@ export type ChordProps = {
   centerSize?: number;
   events?: boolean;
   showOuterArc?: boolean;
-  circleOrient?: number;
+  semiCircle?: boolean;
   showArc?: boolean;
   showLegend?: boolean;
   radialData: RadialChartProps[];
@@ -28,7 +28,7 @@ const RadialChart = ({
   radialData,
   centerSize = 30,
   showOuterArc = true,
-  circleOrient = 1,
+  semiCircle = true,
   showArc = true,
   legendTableHeight = 150,
   showLegend = true,
@@ -36,6 +36,7 @@ const RadialChart = ({
   let legenddata: Array<LegendData> = [{ value: [] }];
   const classes = useStyles();
   const [centerDataValue, setCenterDataValue] = useState<string>('NoData');
+  const circleOrient = semiCircle ? 1 : 2;
   const scalerArc: number = circleOrient * Math.PI;
 
   console.log(centerDataValue);
@@ -141,7 +142,7 @@ const RadialChart = ({
                 total == 0 || isNaN(total) ? '#2B333B' : 'url(#gpinkorange)'
               }
               startAngle={startAngle}
-              endAngle={circleOrient == 1 ? Math.PI / 2 : 2 * Math.PI}
+              endAngle={circleOrient * Math.PI}
             />
           )}
           <Group

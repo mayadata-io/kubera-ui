@@ -1,8 +1,8 @@
 import { RadialChartProps } from './base';
 
 const testRadialChartData: RadialChartProps[] = [
-  { value: 0, lable: 'pass' },
-  { value: 0, lable: 'pending' },
-  { value: 0, lable: 'failed' },
+  { value: 60, lable: 'pass' },
+  { value: 30, lable: 'pending' },
+  { value: 50, lable: 'failed' },
 ];
 export { testRadialChartData };
