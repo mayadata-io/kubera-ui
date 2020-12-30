@@ -86,6 +86,11 @@ const kuberaChaosTheme = createTheme({
   // Kubera Chaos Additional Theme Options
 
   graph: {
+    interleaveRed: '#6A2625',
+    dashboard: {
+      lightBlue: '#08BBD7',
+      lightOrange: '#F6B92B',
+    },
     line: {
       violet: '#A93DDB',
       violetLight: '#A05195',
