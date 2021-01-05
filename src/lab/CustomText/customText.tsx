@@ -10,11 +10,12 @@ interface CustomTextProps {
   onChangeText: (value: string) => void;
   isEditable?: boolean;
   showLabelDisabled?: boolean;
-  showHelperTextDisables?: boolean;
+  showHelperTextDisabled?: boolean;
   validateText?: boolean;
   placeholder?: string;
   label?: string;
   helperText?: string;
+  width: string;
 }
 
 // If validateText => True => There is a validation error
@@ -23,7 +24,6 @@ interface CustomTextProps {
 // Editable text field used to edit and save the input in the text box
 const CustomText: React.FC<CustomTextProps> = ({
   value,
-  id,
   onChangeText,
   isEditable,
   validateText,
@@ -31,7 +31,8 @@ const CustomText: React.FC<CustomTextProps> = ({
   placeholder,
   label,
   showLabelDisabled = true,
-  showHelperTextDisables = true,
+  showHelperTextDisabled = true,
+  width,
 }) => {
   const [isDisabled, setIsDisabled] = React.useState(true);
   const [newValue, setNewValue] = React.useState<string>(value);
@@ -47,7 +48,7 @@ const CustomText: React.FC<CustomTextProps> = ({
     setNewValue(event.target.value);
   };
 
-  const classes = useStyles();
+  const classes = useStyles({ width });
   const { palette } = useTheme();
   return (
     <div className={classes.root}>
@@ -55,7 +56,6 @@ const CustomText: React.FC<CustomTextProps> = ({
         <TextField
           className={classes.inputText}
           value={newValue}
-          id={id}
           placeholder={placeholder}
           label={label ? (showLabelDisabled ? label : '') : label}
           variant={isDisabled ? 'standard' : 'outlined'}
@@ -69,7 +69,7 @@ const CustomText: React.FC<CustomTextProps> = ({
             },
           }}
           helperText={
-            isDisabled ? (showHelperTextDisables ? helperText : '') : helperText
+            isDisabled ? (showHelperTextDisabled ? helperText : '') : helperText
           }
         />
 

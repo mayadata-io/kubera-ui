@@ -1,5 +1,8 @@
 import { makeStyles, Theme } from '@material-ui/core';
 
+interface StyleProps {
+  width: string;
+}
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
     background: theme.palette.background.paper,
@@ -21,14 +24,14 @@ const useStyles = makeStyles((theme: Theme) => ({
     '& .MuiInputBase-root ': {
       padding: `0.5rem`,
       margin: '0.5rem',
-      marginBottom: 0,
-      paddingBottopm: 0,
+      marginBottom: '0.2rem',
+      paddingBottom: '0.2rem',
     },
     '& .MuiOutlinedInput-root ': {
       padding: `0.5rem`,
       margin: '0.5rem',
-      marginBottom: 0,
-      paddingBottom: 0,
+      marginBottom: '0.2rem',
+      paddingBottom: '0.2rem',
     },
 
     '& .MuiInput-underline:before': {
@@ -49,6 +52,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
     //helper message end
     // outline box start
+
     '& input:valid + fieldset': {
       borderColor: theme.palette.primary.dark,
       borderWidth: 2,
@@ -72,7 +76,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     color: theme.palette.text.primary,
   },
   inputText: {
-    width: '15rem',
+    width: (props: StyleProps) => props.width,
   },
 }));
 
