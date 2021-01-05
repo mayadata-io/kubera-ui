@@ -3,15 +3,17 @@ import { makeStyles, Theme } from '@material-ui/core';
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
     background: theme.palette.background.paper,
+    //label start
     '& label': {
-      color: theme.palette.text.disabled,
-      paddingLeft: '1rem',
-      paddingTop: '0.5rem',
+      color: theme.palette.text.hint,
+      paddingLeft: '0.5rem',
+      paddingTop: '0.4rem',
     },
     '& .MuiFormLabel-root.Mui-disabled ': {
-      color: theme.palette.text.disabled,
-      paddingTop: '0rem',
+      color: theme.palette.text.hint,
     },
+    // label end
+
     '& .MuiInputBase-input ': {
       padding: `0rem`,
       margin: '0rem',
@@ -19,17 +21,34 @@ const useStyles = makeStyles((theme: Theme) => ({
     '& .MuiInputBase-root ': {
       padding: `0.5rem`,
       margin: '0.5rem',
+      marginBottom: 0,
+      paddingBottopm: 0,
     },
     '& .MuiOutlinedInput-root ': {
       padding: `0.5rem`,
       margin: '0.5rem',
-    },
-    '& .MuiInput-underline:before': {
-      padding: 0,
-      borderColor: 'red',
-      borderWidth: '0rem',
+      marginBottom: 0,
+      paddingBottom: 0,
     },
 
+    '& .MuiInput-underline:before': {
+      // inputBase bottomLine
+      borderWidth: '0rem',
+    },
+    //helper message start
+    '& .MuiFormHelperText-root': {
+      color: theme.palette.text.hint,
+      padding: 0,
+      margin: 0,
+      marginLeft: '0.5rem',
+      paddingLeft: '0.5rem',
+      transition: 'all 200ms cubic-bezier(0, 0, 0.2, 1) 0s',
+    },
+    '& .MuiFormHelperText-root.Mui-disabled': {
+      marginTop: '-0.7rem',
+    },
+    //helper message end
+    // outline box start
     '& input:valid + fieldset': {
       borderColor: theme.palette.primary.dark,
       borderWidth: 2,
@@ -44,6 +63,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     '& input:valid:hover + fieldset': {
       borderColor: theme.palette.primary.dark,
     },
+    // outline box end
   },
   editBtn: {
     color: theme.palette.text.primary,
@@ -52,14 +72,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     color: theme.palette.text.primary,
   },
   inputText: {
-    width: '40.75rem',
-    color: theme.palette.text.primary,
-    paddingTop: theme.spacing(0.375),
-  },
-  helperMessage: {
-    width: '40.75rem',
-    color: theme.palette.error.main,
-    paddingTop: theme.spacing(0.375),
+    width: '15rem',
   },
 }));
 

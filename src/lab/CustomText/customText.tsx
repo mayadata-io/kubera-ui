@@ -6,10 +6,14 @@ import { useStyles } from './styles';
 
 interface CustomTextProps {
   value: string;
-  id: string;
-  onchange: (val: string) => void;
+  id?: string;
+  onChangeText: (value: string) => void;
   isEditable?: boolean;
+  showLabelDisabled?: boolean;
+  showHelperTextDisables?: boolean;
   validateText?: boolean;
+  placeholder?: string;
+  label?: string;
   helperText?: string;
 }
 
@@ -20,10 +24,14 @@ interface CustomTextProps {
 const CustomText: React.FC<CustomTextProps> = ({
   value,
   id,
-  onchange,
+  onChangeText,
   isEditable,
   validateText,
   helperText,
+  placeholder,
+  label,
+  showLabelDisabled = true,
+  showHelperTextDisables = true,
 }) => {
   const [isDisabled, setIsDisabled] = React.useState(true);
   const [newValue, setNewValue] = React.useState<string>(value);
@@ -32,7 +40,7 @@ const CustomText: React.FC<CustomTextProps> = ({
     setIsDisabled(false);
   };
   const handleSave = () => {
-    onchange(newValue);
+    onChangeText(newValue);
     setIsDisabled(true);
   };
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -45,22 +53,24 @@ const CustomText: React.FC<CustomTextProps> = ({
     <div className={classes.root}>
       <div style={{ color: palette.text.primary }}>
         <TextField
-          required
-          id="outlined-required"
-          placeholder={'test'}
-          label={'test'}
-          defaultValue="Hello World"
+          className={classes.inputText}
+          value={newValue}
+          id={id}
+          placeholder={placeholder}
+          label={label ? (showLabelDisabled ? label : '') : label}
           variant={isDisabled ? 'standard' : 'outlined'}
           onChange={handleChange}
           disabled={isDisabled}
           inputProps={{
-            readOnly: isDisabled,
             style: {
               color: validateText ? palette.error.main : palette.text.primary,
               lineHeight: '1rem',
               fontSize: '1rem',
             },
           }}
+          helperText={
+            isDisabled ? (showHelperTextDisables ? helperText : '') : helperText
+          }
         />
 
         {isEditable ? (
@@ -77,7 +87,7 @@ const CustomText: React.FC<CustomTextProps> = ({
           </>
         ) : null}
       </div>
-      <div className={classes.helperMessage}>{helperText}</div>
+      {/* <div className={classes.helperMessage}>{'waah beta waah'}</div> */}
     </div>
   );
 };
