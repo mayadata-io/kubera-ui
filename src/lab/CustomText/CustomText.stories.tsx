@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { ThemedBackground } from '../../utils/storybook';
 import CustomText from './customText';
 
-storiesOf('CustomText', module)
+storiesOf('text/CustomText', module)
   .add('Litmus Portal', () => {
     const [valueText, setValueText] = useState('Hello World');
     const handleChnage = (value: string) => {
