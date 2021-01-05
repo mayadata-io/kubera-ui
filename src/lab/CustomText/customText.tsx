@@ -47,6 +47,8 @@ const CustomText: React.FC<CustomTextProps> = ({
         <TextField
           required
           id="outlined-required"
+          placeholder={'test'}
+          label={'test'}
           defaultValue="Hello World"
           variant={isDisabled ? 'standard' : 'outlined'}
           onChange={handleChange}
@@ -60,23 +62,6 @@ const CustomText: React.FC<CustomTextProps> = ({
             },
           }}
         />
-        {/* <TextField
-          data-cy="text"
-          className={classes.inputText}
-          disabled={isDisabled}
-          id={id}
-          defaultValue={newValue}
-          multiline
-          InputProps={{
-            disableUnderline: true,
-            style: {
-              color: validateText ? palette.error.main : palette.text.primary,
-              lineHeight: '1rem',
-              fontSize: '1rem',
-            },
-          }}
-          onChange={handleChange}
-        /> */}
 
         {isEditable ? (
           <>

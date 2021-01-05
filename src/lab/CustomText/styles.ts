@@ -2,30 +2,47 @@ import { makeStyles, Theme } from '@material-ui/core';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
-    // color: theme.palette.text.primary,
     background: theme.palette.background.paper,
-
+    '& label': {
+      color: theme.palette.text.disabled,
+      paddingLeft: '1rem',
+      paddingTop: '0.5rem',
+    },
+    '& .MuiFormLabel-root.Mui-disabled ': {
+      color: theme.palette.text.disabled,
+      paddingTop: '0rem',
+    },
+    '& .MuiInputBase-input ': {
+      padding: `0rem`,
+      margin: '0rem',
+    },
+    '& .MuiInputBase-root ': {
+      padding: `0.5rem`,
+      margin: '0.5rem',
+    },
+    '& .MuiOutlinedInput-root ': {
+      padding: `0.5rem`,
+      margin: '0.5rem',
+    },
     '& .MuiInput-underline:before': {
+      padding: 0,
       borderColor: 'red',
       borderWidth: '0rem',
     },
+
     '& input:valid + fieldset': {
       borderColor: theme.palette.primary.dark,
       borderWidth: 2,
     },
     '& input:invalid + fieldset': {
-      borderColor: theme.palette.primary.dark,
+      borderColor: theme.palette.border.error,
       borderWidth: 2,
     },
     '& input:valid:focus + fieldset': {
       borderColor: theme.palette.primary.dark,
-      borderLeftWidth: 6,
-      padding: '4px !important', // override inline-style
     },
     '& input:valid:hover + fieldset': {
       borderColor: theme.palette.primary.dark,
-      borderLeftWidth: 6,
-      padding: '4px !important', // override inline-style
     },
   },
   editBtn: {
