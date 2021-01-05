@@ -18,10 +18,6 @@ interface CustomTextProps {
   width: string;
 }
 
-// If validateText => True => There is a validation error
-// If validateText => False => There is no validation error
-
-// Editable text field used to edit and save the input in the text box
 const CustomText: React.FC<CustomTextProps> = ({
   value,
   onChangeText,
