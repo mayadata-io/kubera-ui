@@ -87,7 +87,6 @@ const CustomText: React.FC<CustomTextProps> = ({
           </>
         ) : null}
       </div>
-      {/* <div className={classes.helperMessage}>{'waah beta waah'}</div> */}
     </div>
   );
 };
