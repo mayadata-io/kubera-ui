@@ -16,6 +16,7 @@ interface CustomTextProps {
   label?: string;
   helperText?: string;
   width: string;
+  multiline?: boolean;
 }
 
 const CustomText: React.FC<CustomTextProps> = ({
@@ -29,6 +30,7 @@ const CustomText: React.FC<CustomTextProps> = ({
   showLabelDisabled = true,
   showHelperTextDisabled = true,
   width,
+  multiline = false,
 }) => {
   const [isDisabled, setIsDisabled] = React.useState(true);
   const [newValue, setNewValue] = React.useState<string>(value);
@@ -57,6 +59,7 @@ const CustomText: React.FC<CustomTextProps> = ({
           variant={isDisabled ? 'standard' : 'outlined'}
           onChange={handleChange}
           disabled={isDisabled}
+          multiline={multiline}
           inputProps={{
             style: {
               color: validateText ? palette.error.main : palette.text.primary,

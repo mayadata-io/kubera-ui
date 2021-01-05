@@ -9,33 +9,49 @@ const useStyles = makeStyles((theme: Theme) => ({
     //label start
     '& label': {
       color: theme.palette.text.hint,
-      paddingLeft: '0.5rem',
-      paddingTop: '0.4rem',
+      paddingLeft: '0.7rem',
     },
     '& .MuiFormLabel-root.Mui-disabled ': {
       color: theme.palette.text.hint,
+      paddingBottom: '0.2rem',
     },
     // label end
+    //test
+
+    '& .MuiOutlinedInput-root': {
+      '& fieldset': {
+        borderColor: theme.palette.primary.dark,
+        borderWidth: 2,
+        padding: `0.5rem`,
+        margin: '0.5rem',
+        marginTop: '0.2rem',
+      },
+      '&:hover fieldset': {
+        borderColor: theme.palette.primary.dark,
+      },
+      '&.Mui-focused fieldset': {
+        borderColor: theme.palette.primary.dark,
+      },
+      '&.Mui-active fieldset': {
+        borderColor: theme.palette.primary.dark,
+      },
+    },
+    //end test
 
     '& .MuiInputBase-input ': {
-      padding: `0rem`,
-      margin: '0rem',
+      padding: `0.5rem`,
+      margin: `0`,
     },
     '& .MuiInputBase-root ': {
       padding: `0.5rem`,
-      margin: '0.5rem',
-      marginBottom: '0.2rem',
-      paddingBottom: '0.2rem',
+      marginTop: '0.1rem',
     },
     '& .MuiOutlinedInput-root ': {
       padding: `0.5rem`,
-      margin: '0.5rem',
-      marginBottom: '0.2rem',
-      paddingBottom: '0.2rem',
+      marginTop: '0.1rem',
     },
-
+    // inputBase bottomLine
     '& .MuiInput-underline:before': {
-      // inputBase bottomLine
       borderWidth: '0rem',
     },
     //helper message start
@@ -44,13 +60,15 @@ const useStyles = makeStyles((theme: Theme) => ({
       padding: 0,
       margin: 0,
       marginLeft: '0.5rem',
+      marginTop: '-0.2rem',
       paddingLeft: '0.5rem',
       transition: 'all 200ms cubic-bezier(0, 0, 0.2, 1) 0s',
     },
     '& .MuiFormHelperText-root.Mui-disabled': {
-      marginTop: '-0.7rem',
+      marginTop: '-1rem',
     },
     //helper message end
+
     // outline box start
 
     '& input:valid + fieldset': {
@@ -67,6 +85,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     '& input:valid:hover + fieldset': {
       borderColor: theme.palette.primary.dark,
     },
+
     // outline box end
   },
   editBtn: {

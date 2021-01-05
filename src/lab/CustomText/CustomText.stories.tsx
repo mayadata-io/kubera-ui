@@ -30,6 +30,7 @@ storiesOf('CustomText', module)
           helperText={'test'}
           showHelperTextDisabled={false}
           width={'10rem'}
+          multiline
         />
         <CustomText
           value={valueText}
@@ -67,6 +68,7 @@ storiesOf('CustomText', module)
           helperText={'test'}
           showHelperTextDisabled={false}
           width={'10rem'}
+          multiline
         />
         <CustomText
           value={valueText}
@@ -104,6 +106,7 @@ storiesOf('CustomText', module)
           helperText={'test'}
           showHelperTextDisabled={false}
           width={'10rem'}
+          multiline
         />
         <CustomText
           value={valueText}
@@ -141,6 +144,7 @@ storiesOf('CustomText', module)
           helperText={'test'}
           showHelperTextDisabled={false}
           width={'10rem'}
+          multiline
         />
         <CustomText
           value={valueText}
@@ -178,6 +182,7 @@ storiesOf('CustomText', module)
           helperText={'test'}
           showHelperTextDisabled={false}
           width={'10rem'}
+          multiline
         />
         <CustomText
           value={valueText}
