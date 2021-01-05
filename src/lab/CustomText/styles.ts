@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       paddingBottom: '0.2rem',
     },
     // label end
-    //test
+    // textarea start
 
     '& .MuiOutlinedInput-root': {
       '& fieldset': {
@@ -36,7 +36,7 @@ const useStyles = makeStyles((theme: Theme) => ({
         borderColor: theme.palette.primary.dark,
       },
     },
-    //end test
+    //textarea end
 
     '& .MuiInputBase-input ': {
       padding: `0.5rem`,
@@ -68,25 +68,6 @@ const useStyles = makeStyles((theme: Theme) => ({
       marginTop: '-1rem',
     },
     //helper message end
-
-    // outline box start
-
-    '& input:valid + fieldset': {
-      borderColor: theme.palette.primary.dark,
-      borderWidth: 2,
-    },
-    '& input:invalid + fieldset': {
-      borderColor: theme.palette.border.error,
-      borderWidth: 2,
-    },
-    '& input:valid:focus + fieldset': {
-      borderColor: theme.palette.primary.dark,
-    },
-    '& input:valid:hover + fieldset': {
-      borderColor: theme.palette.primary.dark,
-    },
-
-    // outline box end
   },
   editBtn: {
     color: theme.palette.text.primary,
