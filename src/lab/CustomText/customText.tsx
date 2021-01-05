@@ -50,6 +50,7 @@ const CustomText: React.FC<CustomTextProps> = ({
           defaultValue="Hello World"
           variant={isDisabled ? 'standard' : 'outlined'}
           onChange={handleChange}
+          disabled={isDisabled}
           inputProps={{
             readOnly: isDisabled,
             style: {

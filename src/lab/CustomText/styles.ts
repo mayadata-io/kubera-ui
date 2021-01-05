@@ -5,6 +5,10 @@ const useStyles = makeStyles((theme: Theme) => ({
     // color: theme.palette.text.primary,
     background: theme.palette.background.paper,
 
+    '& .MuiInput-underline:before': {
+      borderColor: 'red',
+      borderWidth: '0rem',
+    },
     '& input:valid + fieldset': {
       borderColor: theme.palette.primary.dark,
       borderWidth: 2,
