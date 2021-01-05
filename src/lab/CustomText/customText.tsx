@@ -43,8 +43,23 @@ const CustomText: React.FC<CustomTextProps> = ({
   const { palette } = useTheme();
   return (
     <div className={classes.root}>
-      <div>
+      <div style={{ color: palette.text.primary }}>
         <TextField
+          required
+          id="outlined-required"
+          defaultValue="Hello World"
+          variant={isDisabled ? 'standard' : 'outlined'}
+          onChange={handleChange}
+          inputProps={{
+            readOnly: isDisabled,
+            style: {
+              color: validateText ? palette.error.main : palette.text.primary,
+              lineHeight: '1rem',
+              fontSize: '1rem',
+            },
+          }}
+        />
+        {/* <TextField
           data-cy="text"
           className={classes.inputText}
           disabled={isDisabled}
@@ -54,13 +69,13 @@ const CustomText: React.FC<CustomTextProps> = ({
           InputProps={{
             disableUnderline: true,
             style: {
-              color: validateText ? palette.error.main : palette.text.secondary,
+              color: validateText ? palette.error.main : palette.text.primary,
               lineHeight: '1rem',
               fontSize: '1rem',
             },
           }}
           onChange={handleChange}
-        />
+        /> */}
 
         {isEditable ? (
           <>

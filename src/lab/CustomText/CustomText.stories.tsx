@@ -12,7 +12,7 @@ storiesOf('CustomText', module)
           id="name"
           onchange={(val: string) => console.log('l')}
           isEditable={true}
-          validateText={true}
+          validateText={false}
         />
       </ThemedBackground>
     );
@@ -25,7 +25,7 @@ storiesOf('CustomText', module)
           id="name"
           onchange={(val: string) => console.log('hi')}
           isEditable={true}
-          validateText={true}
+          validateText={false}
         />
       </ThemedBackground>
     );
@@ -38,7 +38,7 @@ storiesOf('CustomText', module)
           id="name"
           onchange={(val: string) => console.log('hi')}
           isEditable={true}
-          validateText={true}
+          validateText={false}
         />
       </ThemedBackground>
     );
@@ -51,7 +51,7 @@ storiesOf('CustomText', module)
           id="name"
           onchange={(val: string) => console.log('hi')}
           isEditable={true}
-          validateText={true}
+          validateText={false}
         />
       </ThemedBackground>
     );
@@ -64,7 +64,7 @@ storiesOf('CustomText', module)
           id="name"
           onchange={(val: string) => console.log('hi')}
           isEditable={true}
-          validateText={true}
+          validateText={false}
         />
       </ThemedBackground>
     );
