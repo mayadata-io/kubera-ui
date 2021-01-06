@@ -2,22 +2,8 @@ import { IconButton, TextField, useTheme } from '@material-ui/core';
 import EditIcon from '@material-ui/icons/Edit';
 import SaveIcon from '@material-ui/icons/Save';
 import React from 'react';
+import { CustomTextProps } from './base';
 import { useStyles } from './styles';
-
-interface CustomTextProps {
-  value: string;
-  id?: string;
-  onChangeText: (value: string) => void;
-  isEditable?: boolean;
-  showLabelDisabled?: boolean;
-  showHelperTextDisabled?: boolean;
-  validateText?: boolean;
-  placeholder?: string;
-  label?: string;
-  helperText?: string;
-  width: string;
-  multiline?: boolean;
-}
 
 const CustomText: React.FC<CustomTextProps> = ({
   value,
@@ -89,4 +75,4 @@ const CustomText: React.FC<CustomTextProps> = ({
     </div>
   );
 };
-export default CustomText;
+export { CustomText };

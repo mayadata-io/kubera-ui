@@ -1,7 +1,7 @@
 import { storiesOf } from '@storybook/react';
 import React, { useState } from 'react';
 import { ThemedBackground } from '../../utils/storybook';
-import CustomText from './customText';
+import { CustomText } from './CustomText';
 
 storiesOf('text/CustomText', module)
   .add('Litmus Portal', () => {
