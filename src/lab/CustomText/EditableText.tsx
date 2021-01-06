@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { IconButton, Typography, useTheme } from '@material-ui/core';
 import EditIcon from '@material-ui/icons/Edit';
 import SaveIcon from '@material-ui/icons/Save';
@@ -14,10 +13,15 @@ interface InputProps extends BaseInputProps {
   startIcon?: React.ReactNode;
   endIcon?: React.ReactNode;
 }
-const EditableText: React.FC<InputProps> = ({ value, fullWidth, ...rest }) => {
+const EditableText: React.FC<InputProps> = ({
+  value,
+  fullWidth,
+  multiline,
+  ...rest
+}) => {
   const [toggleEditSave, settoggleEditSave] = React.useState(true);
 
-  const classes = useStyles({ fullWidth: fullWidth });
+  const classes = useStyles({ fullWidth: fullWidth, multiline: multiline });
   const { palette } = useTheme();
   return (
     <div>
@@ -27,7 +31,12 @@ const EditableText: React.FC<InputProps> = ({ value, fullWidth, ...rest }) => {
             {typeof value === 'string' ? value : ''}
           </Typography>
         ) : (
-          <InputField value={value} fullWidth={fullWidth} {...rest} />
+          <InputField
+            value={value}
+            fullWidth={fullWidth}
+            multiline={multiline}
+            {...rest}
+          />
         )}
         <div className={classes.btn}>
           {toggleEditSave ? (
