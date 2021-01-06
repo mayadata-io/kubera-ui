@@ -8,17 +8,18 @@ import { useStyles } from './styles';
 const CustomText: React.FC<CustomTextProps> = ({
   value,
   onChangeText,
-  isEditable,
   validateText,
   helperText,
   placeholder,
   label,
-  showLabelDisabled = true,
-  showHelperTextDisabled = true,
+  showLabelOnDisabled = true,
+  showHelperTextOnDisabled = true,
   width,
   multiline = false,
+  initialStateOutline = false,
+  isEditable = true,
 }) => {
-  const [isDisabled, setIsDisabled] = React.useState(true);
+  const [isDisabled, setIsDisabled] = React.useState(!initialStateOutline);
   const [newValue, setNewValue] = React.useState<string>(value);
 
   const handleEdit = () => {
@@ -41,7 +42,7 @@ const CustomText: React.FC<CustomTextProps> = ({
           className={classes.inputText}
           value={newValue}
           placeholder={placeholder}
-          label={label ? (showLabelDisabled ? label : '') : label}
+          label={label ? (showLabelOnDisabled ? label : '') : label}
           variant={isDisabled ? 'standard' : 'outlined'}
           onChange={handleChange}
           disabled={isDisabled}
@@ -53,8 +54,15 @@ const CustomText: React.FC<CustomTextProps> = ({
               fontSize: '1rem',
             },
           }}
+          InputProps={{
+            readOnly: !isEditable,
+          }}
           helperText={
-            isDisabled ? (showHelperTextDisabled ? helperText : '') : helperText
+            isDisabled
+              ? showHelperTextOnDisabled
+                ? helperText
+                : ''
+              : helperText
           }
         />
 

@@ -14,30 +14,36 @@ storiesOf('text/CustomText', module)
         <CustomText
           value={valueText}
           onChangeText={handleChnage}
-          isEditable={true}
           validateText={false}
           label={'test'}
           helperText={'test'}
-          showHelperTextDisabled={true}
+          showHelperTextOnDisabled={true}
           width={'10rem'}
         />
         <CustomText
           value={valueText}
           onChangeText={handleChnage}
-          isEditable={true}
           validateText={false}
           label={'test'}
           helperText={'test'}
-          showHelperTextDisabled={false}
+          showHelperTextOnDisabled={false}
           width={'10rem'}
           multiline
         />
         <CustomText
           value={valueText}
           onChangeText={handleChnage}
-          isEditable={true}
           validateText={false}
           width={'10rem'}
+        />
+        <CustomText
+          value={valueText}
+          onChangeText={handleChnage}
+          label={'test'}
+          initialStateOutline={true}
+          validateText={false}
+          width={'10rem'}
+          isEditable={false}
         />
       </ThemedBackground>
     );
@@ -52,30 +58,36 @@ storiesOf('text/CustomText', module)
         <CustomText
           value={valueText}
           onChangeText={handleChnage}
-          isEditable={true}
           validateText={false}
           label={'test'}
           helperText={'test'}
-          showHelperTextDisabled={true}
+          showHelperTextOnDisabled={true}
           width={'10rem'}
         />
         <CustomText
           value={valueText}
           onChangeText={handleChnage}
-          isEditable={true}
           validateText={false}
           label={'test'}
           helperText={'test'}
-          showHelperTextDisabled={false}
+          showHelperTextOnDisabled={false}
           width={'10rem'}
           multiline
         />
         <CustomText
           value={valueText}
           onChangeText={handleChnage}
-          isEditable={true}
           validateText={false}
           width={'10rem'}
+        />
+        <CustomText
+          value={valueText}
+          onChangeText={handleChnage}
+          label={'test'}
+          initialStateOutline={true}
+          validateText={false}
+          width={'10rem'}
+          isEditable={false}
         />
       </ThemedBackground>
     );
@@ -90,30 +102,36 @@ storiesOf('text/CustomText', module)
         <CustomText
           value={valueText}
           onChangeText={handleChnage}
-          isEditable={true}
           validateText={false}
           label={'test'}
           helperText={'test'}
-          showHelperTextDisabled={true}
+          showHelperTextOnDisabled={true}
           width={'10rem'}
         />
         <CustomText
           value={valueText}
           onChangeText={handleChnage}
-          isEditable={true}
           validateText={false}
           label={'test'}
           helperText={'test'}
-          showHelperTextDisabled={false}
+          showHelperTextOnDisabled={false}
           width={'10rem'}
           multiline
         />
         <CustomText
           value={valueText}
           onChangeText={handleChnage}
-          isEditable={true}
           validateText={false}
           width={'10rem'}
+        />
+        <CustomText
+          value={valueText}
+          onChangeText={handleChnage}
+          label={'test'}
+          initialStateOutline={true}
+          validateText={false}
+          width={'10rem'}
+          isEditable={false}
         />
       </ThemedBackground>
     );
@@ -128,30 +146,36 @@ storiesOf('text/CustomText', module)
         <CustomText
           value={valueText}
           onChangeText={handleChnage}
-          isEditable={true}
           validateText={false}
           label={'test'}
           helperText={'test'}
-          showHelperTextDisabled={true}
+          showHelperTextOnDisabled={true}
           width={'10rem'}
         />
         <CustomText
           value={valueText}
           onChangeText={handleChnage}
-          isEditable={true}
           validateText={false}
           label={'test'}
           helperText={'test'}
-          showHelperTextDisabled={false}
+          showHelperTextOnDisabled={false}
           width={'10rem'}
           multiline
         />
         <CustomText
           value={valueText}
           onChangeText={handleChnage}
-          isEditable={true}
           validateText={false}
           width={'10rem'}
+        />
+        <CustomText
+          value={valueText}
+          onChangeText={handleChnage}
+          label={'test'}
+          initialStateOutline={true}
+          validateText={false}
+          width={'10rem'}
+          isEditable={false}
         />
       </ThemedBackground>
     );
@@ -166,30 +190,36 @@ storiesOf('text/CustomText', module)
         <CustomText
           value={valueText}
           onChangeText={handleChnage}
-          isEditable={true}
           validateText={false}
           label={'test'}
           helperText={'test'}
-          showHelperTextDisabled={true}
+          showHelperTextOnDisabled={true}
           width={'10rem'}
         />
         <CustomText
           value={valueText}
           onChangeText={handleChnage}
-          isEditable={true}
           validateText={false}
           label={'test'}
           helperText={'test'}
-          showHelperTextDisabled={false}
+          showHelperTextOnDisabled={false}
           width={'10rem'}
           multiline
         />
         <CustomText
           value={valueText}
           onChangeText={handleChnage}
-          isEditable={true}
           validateText={false}
           width={'10rem'}
+        />
+        <CustomText
+          value={valueText}
+          onChangeText={handleChnage}
+          label={'test'}
+          initialStateOutline={true}
+          validateText={false}
+          width={'10rem'}
+          isEditable={false}
         />
       </ThemedBackground>
     );

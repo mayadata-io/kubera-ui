@@ -12,7 +12,6 @@ const useStyles = makeStyles((theme: Theme) => ({
       paddingLeft: '0.7rem',
     },
     '& .MuiFormLabel-root.Mui-disabled ': {
-      color: theme.palette.text.hint,
       paddingBottom: '0.2rem',
     },
     // label end
