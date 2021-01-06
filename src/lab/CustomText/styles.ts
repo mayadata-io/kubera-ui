@@ -11,6 +11,10 @@ const useStyles = makeStyles((theme: Theme) => ({
       color: theme.palette.text.hint,
       paddingLeft: '0.7rem',
     },
+    ' & .MuiInputLabel-shrink  ': {
+      paddingTop: '0.5rem',
+    },
+
     '& .MuiFormLabel-root.Mui-disabled ': {
       paddingBottom: '0.2rem',
     },
