@@ -2,28 +2,28 @@ import { makeStyles, Theme } from '@material-ui/core';
 interface StyleProps {
   fullWidth?: boolean;
   multiline?: boolean;
+  width?: string;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
+  root: {
+    display: 'flex',
+    width: (props: StyleProps) => (props.fullWidth ? '100%' : props.width),
+  },
   text: {
-    width: (props: StyleProps) => (props.fullWidth ? '100%' : '25rem'),
-    maxHeight: (props: StyleProps) => (props.multiline ? 'none' : '2.2rem'),
-    paddingLeft: '0.89rem',
-    paddingTop: '1.15rem',
+    padding: '1.15rem 0 0 0.89rem',
     color: theme.palette.text.primary,
-    font: 'inherit 0.8rem 400',
     lineHeight: '1.1876em',
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
     whiteSpace: (props: StyleProps) =>
       props.multiline ? 'break-spaces' : 'nowrap',
     overflowWrap: (props: StyleProps) =>
       props.multiline ? 'break-word' : 'normal',
-    overflow: 'hidden',
   },
   btn: {
-    '& .MuiButtonBase-root': {
-      alignItems: 'top',
-    },
     '& .MuiIconButton-root': {
+      alignItems: 'top',
       padding: '1rem 1rem ',
       color: theme.palette.text.primary,
     },

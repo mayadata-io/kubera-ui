@@ -8,19 +8,24 @@ storiesOf('text/EditableText', module)
     const [valueText, setValueText] = useState('Hello World');
     return (
       <ThemedBackground platform="litmus-portal">
-        <EditableText
-          label="Normal text field"
-          variant={'primary'}
-          value={valueText}
-          onChange={(e) => setValueText(e.target.value)}
-        />
-        <EditableText
-          label="Normal text field"
-          variant={'primary'}
-          value={valueText}
-          multiline
-          onChange={(e) => setValueText(e.target.value)}
-        />
+        <div style={{ width: '80vw' }}>
+          <EditableText
+            label="Normal text field"
+            variant={'primary'}
+            value={valueText}
+            onChange={(e) => setValueText(e.target.value)}
+            fullWidth
+          />
+          <br />
+          <EditableText
+            label="Normal text field"
+            variant={'primary'}
+            value={valueText}
+            multiline
+            onChange={(e) => setValueText(e.target.value)}
+            fullWidth
+          />
+        </div>
       </ThemedBackground>
     );
   })

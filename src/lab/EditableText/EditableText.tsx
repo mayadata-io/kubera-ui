@@ -1,4 +1,4 @@
-import { IconButton, Typography, useTheme } from '@material-ui/core';
+import { IconButton, Typography } from '@material-ui/core';
 import EditIcon from '@material-ui/icons/Edit';
 import SaveIcon from '@material-ui/icons/Save';
 import React from 'react';
@@ -10,6 +10,7 @@ type Variant = 'primary' | 'error' | 'success' | undefined;
 
 interface InputProps extends BaseInputProps {
   variant?: Variant;
+  width?: string;
   startIcon?: React.ReactNode;
   endIcon?: React.ReactNode;
 }
@@ -17,37 +18,40 @@ const EditableText: React.FC<InputProps> = ({
   value,
   fullWidth,
   multiline,
+  width,
+  className,
   ...rest
 }) => {
   const [toggleEditSave, settoggleEditSave] = React.useState(true);
 
-  const classes = useStyles({ fullWidth: fullWidth, multiline: multiline });
-  const { palette } = useTheme();
+  const classes = useStyles({ fullWidth, multiline, width: width ?? '25rem' });
   return (
     <div>
-      <div style={{ color: palette.text.primary, display: 'inline-flex' }}>
+      <div className={`${classes.root} ${className}`}>
         {toggleEditSave ? (
-          <Typography variant="body1" component="pre" className={classes.text}>
-            {typeof value === 'string' ? value : ''}
+          <Typography variant="body1" className={classes.text}>
+            {value as any}
           </Typography>
         ) : (
           <InputField
             value={value}
-            fullWidth={fullWidth}
+            width={width}
             multiline={multiline}
+            fullWidth={fullWidth}
             {...rest}
           />
         )}
         <div className={classes.btn}>
-          {toggleEditSave ? (
-            <IconButton size="medium" onClick={() => settoggleEditSave(false)}>
+          <IconButton
+            size="medium"
+            onClick={() => settoggleEditSave(!toggleEditSave)}
+          >
+            {toggleEditSave ? (
               <EditIcon data-cy="edit" />
-            </IconButton>
-          ) : (
-            <IconButton size="medium" onClick={() => settoggleEditSave(true)}>
+            ) : (
               <SaveIcon data-cy="save" />
-            </IconButton>
-          )}
+            )}
+          </IconButton>
         </div>
       </div>
     </div>
