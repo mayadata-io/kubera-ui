@@ -1,6 +1,6 @@
 import { storiesOf } from '@storybook/react';
 import React, { useState } from 'react';
-import { ThemedBackground } from '../../utils/storybook';
+import { ThemedBackground } from '../../../utils/storybook';
 import { EditableText } from './EditableText';
 
 storiesOf('text/EditableText', module)

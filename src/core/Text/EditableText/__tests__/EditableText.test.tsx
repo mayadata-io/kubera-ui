@@ -20,28 +20,34 @@ describe('EditablText component', () => {
         />
       </KuberaThemeProvider>
     );
-    //get OutlinedInput byRole
+    // Get editText component
     const editTextComponent = screen.getByTestId('editableText');
     const textValue = editTextComponent.querySelector('p') as HTMLElement;
     const editBtn = screen.getByTestId('edit-btn');
 
-    //checking initial value of Typography
+    // Checking initial value of Typography <p> tag
     expect(textValue.textContent).toBe('test value');
 
-    //cilcking to change it to edit mode
-    // typography replaced with input field
-    fireEvent.click(editBtn); //first click
+    // Cilcking to change it to edit mode
+    fireEvent.click(editBtn);
     const saveBtn = screen.getByTestId('save-btn');
+
+    // Typography replaced with input field
     const input = editTextComponent.querySelector('input') as HTMLElement;
-    // test the value in input field
+
+    // Test <input>
     expect(input).toHaveProperty('type', 'text');
     expect(input).toHaveProperty('value', 'test value');
     fireEvent.click(saveBtn);
+
+    // Click to edit <input>
     fireEvent.click(editBtn);
 
+    // change <input> value
     fireEvent.change(input, { target: { value: 'Good Day' } });
-    fireEvent.click(saveBtn);
     expect(input).toHaveProperty('value', 'Good Day');
-    // expect(textValue.textContent).toBe('test value');
+
+    // Back to typography
+    fireEvent.click(saveBtn);
   });
 });
