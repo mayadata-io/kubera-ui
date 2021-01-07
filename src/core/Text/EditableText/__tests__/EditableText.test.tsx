@@ -1,7 +1,7 @@
 import { screen } from '@testing-library/dom';
 import { cleanup, fireEvent, render } from '@testing-library/react';
 import React from 'react';
-import { KuberaThemeProvider } from '../../../theme';
+import { KuberaThemeProvider } from '../../../../theme';
 import { EditableText } from '../EditableText';
 
 afterEach(cleanup);

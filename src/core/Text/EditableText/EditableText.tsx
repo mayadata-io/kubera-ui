@@ -2,7 +2,7 @@ import { IconButton, Typography } from '@material-ui/core';
 import EditIcon from '@material-ui/icons/Edit';
 import SaveIcon from '@material-ui/icons/Save';
 import React from 'react';
-import { InputField } from '../../core/InputField/InputField';
+import { InputField } from './../../InputField/InputField';
 import { EditableTextBaseProps } from './base';
 import { useStyles } from './styles';
 
