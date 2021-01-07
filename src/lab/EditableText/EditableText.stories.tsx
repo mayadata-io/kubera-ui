@@ -11,7 +11,6 @@ storiesOf('text/EditableText', module)
         <div style={{ width: '80vw' }}>
           <EditableText
             label="Normal text field"
-            variant={'primary'}
             value={valueText}
             onChange={(e) => setValueText(e.target.value)}
             fullWidth
@@ -19,7 +18,6 @@ storiesOf('text/EditableText', module)
           <br />
           <EditableText
             label="Normal text field"
-            variant={'primary'}
             value={valueText}
             multiline
             onChange={(e) => setValueText(e.target.value)}
@@ -35,13 +33,11 @@ storiesOf('text/EditableText', module)
       <ThemedBackground platform="kubera-chaos">
         <EditableText
           label="Normal text field"
-          variant={'primary'}
           value={valueText}
           onChange={(e) => setValueText(e.target.value)}
         />
         <EditableText
           label="Normal text field"
-          variant={'primary'}
           value={valueText}
           multiline
           onChange={(e) => setValueText(e.target.value)}
@@ -55,13 +51,11 @@ storiesOf('text/EditableText', module)
       <ThemedBackground platform="kubera-propel">
         <EditableText
           label="Normal text field"
-          variant={'primary'}
           value={valueText}
           onChange={(e) => setValueText(e.target.value)}
         />
         <EditableText
           label="Normal text field"
-          variant={'primary'}
           value={valueText}
           multiline
           onChange={(e) => setValueText(e.target.value)}
@@ -75,13 +69,11 @@ storiesOf('text/EditableText', module)
       <ThemedBackground platform="kubera-core">
         <EditableText
           label="Normal text field"
-          variant={'primary'}
           value={valueText}
           onChange={(e) => setValueText(e.target.value)}
         />
         <EditableText
           label="Normal text field"
-          variant={'primary'}
           value={valueText}
           multiline
           onChange={(e) => setValueText(e.target.value)}
@@ -95,13 +87,11 @@ storiesOf('text/EditableText', module)
       <ThemedBackground platform="kubera-portal">
         <EditableText
           label="Normal text field"
-          variant={'primary'}
           value={valueText}
           onChange={(e) => setValueText(e.target.value)}
         />
         <EditableText
           label="Normal text field"
-          variant={'primary'}
           value={valueText}
           multiline
           onChange={(e) => setValueText(e.target.value)}

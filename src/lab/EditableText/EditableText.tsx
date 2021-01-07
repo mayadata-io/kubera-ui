@@ -3,18 +3,14 @@ import EditIcon from '@material-ui/icons/Edit';
 import SaveIcon from '@material-ui/icons/Save';
 import React from 'react';
 import { InputField } from '../../core/InputField/InputField';
-import { BaseInputProps } from './base';
+import { EditableTextBaseProps } from './base';
 import { useStyles } from './styles';
 
-type Variant = 'primary' | 'error' | 'success' | undefined;
-
-interface InputProps extends BaseInputProps {
-  variant?: Variant;
+interface EditableTextProps extends EditableTextBaseProps {
   width?: string;
-  startIcon?: React.ReactNode;
-  endIcon?: React.ReactNode;
+  className?: string;
 }
-const EditableText: React.FC<InputProps> = ({
+const EditableText: React.FC<EditableTextProps> = ({
   value,
   fullWidth,
   multiline,
@@ -26,7 +22,7 @@ const EditableText: React.FC<InputProps> = ({
 
   const classes = useStyles({ fullWidth, multiline, width: width ?? '25rem' });
   return (
-    <div>
+    <div data-testid="editableText">
       <div className={`${classes.root} ${className}`}>
         {toggleEditSave ? (
           <Typography variant="body1" className={classes.text}>
@@ -43,13 +39,14 @@ const EditableText: React.FC<InputProps> = ({
         )}
         <div className={classes.btn}>
           <IconButton
+            data-testid="editSave-btn"
             size="medium"
             onClick={() => settoggleEditSave(!toggleEditSave)}
           >
             {toggleEditSave ? (
-              <EditIcon data-cy="edit" />
+              <EditIcon data-cy="edit" data-testid="edit-btn" />
             ) : (
-              <SaveIcon data-cy="save" />
+              <SaveIcon data-cy="save" data-testid="save-btn" />
             )}
           </IconButton>
         </div>
