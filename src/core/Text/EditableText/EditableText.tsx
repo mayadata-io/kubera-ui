@@ -54,6 +54,7 @@ const EditableText: React.FC<EditableTextProps> = ({
             data-testid="editSave-btn"
             size="medium"
             onClick={() => settoggleEditSave(!toggleEditSave)}
+            disabled={disabled}
           >
             {toggleEditSave || disabled ? (
               <EditIcon data-cy="edit" data-testid="edit-btn" />
