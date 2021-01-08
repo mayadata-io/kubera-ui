@@ -2,12 +2,13 @@ import { makeStyles, Theme } from '@material-ui/core';
 
 interface StyleProps {
   fullWidth?: boolean;
+  width?: string;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
     color: theme.palette.text.primary,
-    width: (props: StyleProps) => (props.fullWidth ? '100%' : '25rem'),
+    width: (props: StyleProps) => (props.fullWidth ? '100%' : props.width),
     '& label': {
       color: theme.palette.text.hint,
     },
@@ -17,6 +18,18 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
     '& .MuiSvgIcon-root': {
       color: theme.palette.text.hint,
+    },
+    '& .MuiInputBase-input': {
+      '&:focus, &:hover, &:active': {
+        '&:-webkit-autofill': {
+          WebkitBoxShadow: `0 0 0 1000px ${theme.palette.background.paper} inset`,
+          WebkitTextFillColor: theme.palette.text.primary,
+        },
+      },
+      '&:-webkit-autofill': {
+        WebkitBoxShadow: `0 0 0 1000px ${theme.palette.background.paper} inset`,
+        WebkitTextFillColor: theme.palette.text.primary,
+      },
     },
   },
   disabled: {
