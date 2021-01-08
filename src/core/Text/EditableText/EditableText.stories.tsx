@@ -23,6 +23,14 @@ storiesOf('text/EditableText', module)
             onChange={(e) => setValueText(e.target.value)}
             fullWidth
           />
+          <EditableText
+            label="Normal text field"
+            value={valueText}
+            variant={'error'}
+            multiline
+            onChange={(e) => setValueText(e.target.value)}
+            fullWidth
+          />
         </div>
       </ThemedBackground>
     );
@@ -42,6 +50,14 @@ storiesOf('text/EditableText', module)
           multiline
           onChange={(e) => setValueText(e.target.value)}
         />
+        <EditableText
+          label="Normal text field"
+          value={valueText}
+          variant={'error'}
+          multiline
+          onChange={(e) => setValueText(e.target.value)}
+          fullWidth
+        />
       </ThemedBackground>
     );
   })
@@ -59,6 +75,14 @@ storiesOf('text/EditableText', module)
           value={valueText}
           multiline
           onChange={(e) => setValueText(e.target.value)}
+        />
+        <EditableText
+          label="Normal text field"
+          value={valueText}
+          variant={'error'}
+          multiline
+          onChange={(e) => setValueText(e.target.value)}
+          fullWidth
         />
       </ThemedBackground>
     );
@@ -78,6 +102,14 @@ storiesOf('text/EditableText', module)
           multiline
           onChange={(e) => setValueText(e.target.value)}
         />
+        <EditableText
+          label="Normal text field"
+          value={valueText}
+          variant={'error'}
+          multiline
+          onChange={(e) => setValueText(e.target.value)}
+          fullWidth
+        />
       </ThemedBackground>
     );
   })
@@ -95,6 +127,14 @@ storiesOf('text/EditableText', module)
           value={valueText}
           multiline
           onChange={(e) => setValueText(e.target.value)}
+        />
+        <EditableText
+          label="Normal text field"
+          value={valueText}
+          variant={'error'}
+          multiline
+          onChange={(e) => setValueText(e.target.value)}
+          fullWidth
         />
       </ThemedBackground>
     );

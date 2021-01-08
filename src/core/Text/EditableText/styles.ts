@@ -1,6 +1,8 @@
 import { makeStyles, Theme } from '@material-ui/core';
+type Variant = 'primary' | 'error' | 'success' | undefined;
 
 interface StyleProps {
+  variant?: Variant;
   fullWidth?: boolean;
   multiline?: boolean;
   width?: string;
@@ -13,7 +15,10 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   text: {
     padding: '1.15rem 0 0 0.89rem',
-    color: theme.palette.text.primary,
+    color: (props: StyleProps) =>
+      props.variant === 'error'
+        ? theme.palette.error.main
+        : theme.palette.text.primary,
     lineHeight: '1.1876em',
     overflow: 'hidden',
     textOverflow: 'ellipsis',

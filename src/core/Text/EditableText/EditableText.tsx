@@ -6,7 +6,9 @@ import { InputField } from './../../InputField/InputField';
 import { EditableTextBaseProps } from './base';
 import { useStyles } from './styles';
 
+type Variant = 'primary' | 'error' | 'success' | undefined;
 interface EditableTextProps extends EditableTextBaseProps {
+  variant?: Variant;
   width?: string;
   className?: string;
 }
@@ -14,13 +16,19 @@ const EditableText: React.FC<EditableTextProps> = ({
   value,
   fullWidth,
   multiline,
+  variant,
   width,
   className,
   ...rest
 }) => {
   const [toggleEditSave, settoggleEditSave] = React.useState(true);
 
-  const classes = useStyles({ fullWidth, multiline, width: width ?? '25rem' });
+  const classes = useStyles({
+    fullWidth,
+    multiline,
+    variant,
+    width: width ?? '25rem',
+  });
   return (
     <div data-testid="editableText">
       <div className={`${classes.root} ${className}`}>
@@ -31,6 +39,7 @@ const EditableText: React.FC<EditableTextProps> = ({
         ) : (
           <InputField
             value={value}
+            variant={variant}
             width={width}
             multiline={multiline}
             fullWidth={fullWidth}
