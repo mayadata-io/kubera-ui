@@ -6,6 +6,7 @@ interface StyleProps {
   fullWidth?: boolean;
   multiline?: boolean;
   width?: string;
+  disabled?: boolean;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -31,7 +32,10 @@ const useStyles = makeStyles((theme: Theme) => ({
     '& .MuiIconButton-root': {
       alignItems: 'top',
       padding: '1rem 1rem ',
-      color: theme.palette.text.primary,
+      color: (props: StyleProps) =>
+        props.disabled
+          ? theme.palette.text.disabled
+          : theme.palette.text.primary,
     },
   },
 }));

@@ -19,6 +19,7 @@ const EditableText: React.FC<EditableTextProps> = ({
   variant,
   width,
   className,
+  disabled,
   ...rest
 }) => {
   const [toggleEditSave, settoggleEditSave] = React.useState(true);
@@ -27,12 +28,13 @@ const EditableText: React.FC<EditableTextProps> = ({
     fullWidth,
     multiline,
     variant,
+    disabled,
     width: width ?? '25rem',
   });
   return (
     <div data-testid="editableText">
       <div className={`${classes.root} ${className}`}>
-        {toggleEditSave ? (
+        {toggleEditSave || disabled ? (
           <Typography variant="body1" className={classes.text}>
             {value as any}
           </Typography>
@@ -41,6 +43,7 @@ const EditableText: React.FC<EditableTextProps> = ({
             value={value}
             variant={variant}
             width={width}
+            disabled={disabled}
             multiline={multiline}
             fullWidth={fullWidth}
             {...rest}
@@ -52,7 +55,7 @@ const EditableText: React.FC<EditableTextProps> = ({
             size="medium"
             onClick={() => settoggleEditSave(!toggleEditSave)}
           >
-            {toggleEditSave ? (
+            {toggleEditSave || disabled ? (
               <EditIcon data-cy="edit" data-testid="edit-btn" />
             ) : (
               <SaveIcon data-cy="save" data-testid="save-btn" />
