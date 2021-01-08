@@ -26,7 +26,7 @@ storiesOf('text/EditableText', module)
           <EditableText
             label="Normal text field"
             value={valueText}
-            variant={'error'}
+            variant="error"
             multiline
             onChange={(e) => setValueText(e.target.value)}
             fullWidth
@@ -61,7 +61,7 @@ storiesOf('text/EditableText', module)
         <EditableText
           label="Normal text field"
           value={valueText}
-          variant={'error'}
+          variant="error"
           multiline
           onChange={(e) => setValueText(e.target.value)}
           fullWidth
@@ -95,7 +95,7 @@ storiesOf('text/EditableText', module)
         <EditableText
           label="Normal text field"
           value={valueText}
-          variant={'error'}
+          variant="error"
           multiline
           onChange={(e) => setValueText(e.target.value)}
           fullWidth
@@ -129,7 +129,7 @@ storiesOf('text/EditableText', module)
         <EditableText
           label="Normal text field"
           value={valueText}
-          variant={'error'}
+          variant="error"
           multiline
           onChange={(e) => setValueText(e.target.value)}
           fullWidth
@@ -163,7 +163,7 @@ storiesOf('text/EditableText', module)
         <EditableText
           label="Normal text field"
           value={valueText}
-          variant={'error'}
+          variant="error"
           multiline
           onChange={(e) => setValueText(e.target.value)}
           fullWidth
