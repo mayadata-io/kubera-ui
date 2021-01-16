@@ -20,25 +20,11 @@ type TooltipData = Array<AreaGrapher>;
 // Initialize some variables
 // let containerX: number;
 // let containerY: number;
-const filterUndefinedData = (data: AreaGrapher[]): AreaGrapher[] =>
-  data
-    ? data
-        .filter((elem) => elem && elem.data && elem.data.length)
-        .filter((elem) =>
-          elem.data.filter(
-            (d) =>
-              d &&
-              d.date &&
-              typeof d.date === 'number' &&
-              typeof d.value === 'number'
-          )
-        )
-    : data;
 
 let dd1: DataValue;
 let dd0: DataValue;
 let i: number;
-let j: number;
+// let j: number;
 let indexer: number;
 
 const bisectDate = bisector<DataValue, Date>((d) => new Date(d.date)).left;
@@ -107,7 +93,7 @@ const ComputationGraph: React.FC<AreaGraphProps> = ({
     ? filteredClosedSeries.length
     : 0;
 
-  const openSeriesCount = filteredOpenSeries ? filteredOpenSeries.length : 0;
+  // const openSeriesCount = filteredOpenSeries ? filteredOpenSeries.length : 0;
   const eventSeriesCount = filteredEventSeries ? filteredEventSeries.length : 0;
 
   const onBrushChange = useCallback(
@@ -177,6 +163,7 @@ const ComputationGraph: React.FC<AreaGraphProps> = ({
     [filteredClosedSeries, filteredOpenSeries, filteredEventSeries]
   );
 
+  console.log('container', containerX, containerY);
   const innerHeight = height - margin.top - margin.bottom;
   const topChartBottomMargin = compact
     ? chartSeparation / 2
@@ -270,85 +257,76 @@ const ComputationGraph: React.FC<AreaGraphProps> = ({
   };
 
   // tooltip handler
-  let dd3: AreaGrapher[] = [{ metricName: '', data: [] }];
+  let dd3: AreaGrapher[] = [];
 
   const handleTooltip = useCallback(
     (
-      event: React.MouseEvent<SVGRectElement> | React.TouchEvent<SVGRectElement>
+      event: React.TouchEvent<SVGRectElement> | React.MouseEvent<SVGRectElement>
     ) => {
-      if (showTips) {
-        let { x } = localPoint(event) || { x: 0 };
-        x = 30;
-        const x0 = dateScale.invert(x);
+      let { x } = localPoint(event) || { x: 0 };
+      x = x - margin.left;
+      const x0 = dateScale.invert(x);
 
-        containerX = 'clientX' in event ? event.clientX - 300 : 10;
-        containerY = 'clientY' in event ? event.clientY - 60 : 10;
+      containerX = 'clientX' in event ? event.clientX : 0;
+      containerY = 'clientY' in event ? event.clientY : 0;
+      dd3 = dd3.splice(0);
+      if (closedSeries) {
+        for (i = 0; i < closedSeries.length; i++) {
+          indexer = bisectDate(closedSeries[i].data, x0, 1);
+          dd0 = closedSeries[i].data[indexer - 1];
+          dd1 = closedSeries[i].data[indexer];
+          console.log('🚀  dd0/1', dd0, dd1);
 
-        // containerX = x;
-        // containerY = y;
-        dd3 = dd3.splice(0);
-        if (closedSeries) {
-          for (i = 0; i < closedSeries.length; i++) {
-            indexer = bisectDate(closedSeries[i].data, x0, 1);
-            dd0 = closedSeries[i].data[indexer - 1];
-            dd1 = closedSeries[i].data[indexer];
-
-            if (dd1) {
-              dd3[i] =
-                x0.valueOf() - getDate(dd0).valueOf() >
-                getDate(dd1).valueOf() - x0.valueOf()
-                  ? {
-                      metricName: closedSeries[i].metricName,
-                      data: [dd1],
-                      baseColor: closedSeries[i].baseColor,
-                    }
-                  : {
-                      metricName: closedSeries[i].metricName,
-                      data: [dd0],
-                      baseColor: closedSeries[i].baseColor,
-                    };
-            }
+          if (dd1) {
+            dd3[i] =
+              x0.valueOf() - dd0.date > dd1.date - x0.valueOf()
+                ? {
+                    metricName: closedSeries[i].metricName,
+                    data: [dd1],
+                    baseColor: closedSeries[i].baseColor,
+                  }
+                : {
+                    metricName: closedSeries[i].metricName,
+                    data: [dd0],
+                    baseColor: closedSeries[i].baseColor,
+                  };
           }
         }
-
-        if (openSeries) {
-          for (j = 0; j < openSeries.length; j++) {
-            indexer = bisectDate(openSeries[j].data, x0, 1);
-            dd0 = openSeries[j].data[indexer - 1];
-            dd1 = openSeries[j].data[indexer];
-
-            if (dd1) {
-              dd3[i] =
-                x0.valueOf() - getDate(dd0).valueOf() >
-                getDate(dd1).valueOf() - x0.valueOf()
-                  ? {
-                      metricName: openSeries[j].metricName,
-                      data: [dd1],
-                      baseColor: openSeries[j].baseColor,
-                    }
-                  : {
-                      metricName: openSeries[j].metricName,
-                      data: [dd0],
-                      baseColor: openSeries[j].baseColor,
-                    };
-              i++;
-            }
-          }
-        }
-        dd3 = filterUndefinedData(dd3);
-        // console.log('dd3', dd3);
-        if (width < 10) return null;
-        dd3 = dd3.slice(0, closedSeriesCount + openSeriesCount);
-
-        showTooltip({
-          tooltipData: dd3,
-          tooltipLeft: containerX,
-          tooltipTop: containerY,
-        });
       }
+
+      if (openSeries) {
+        for (let j = 0; j < openSeries.length; j++) {
+          indexer = bisectDate(openSeries[j].data, x0, 1);
+          dd0 = openSeries[j].data[indexer - 1];
+          dd1 = openSeries[j].data[indexer];
+
+          if (dd1) {
+            dd3[i] =
+              x0.valueOf() - dd0.date > dd1.date - x0.valueOf()
+                ? {
+                    metricName: openSeries[j].metricName,
+                    data: [dd1],
+                    baseColor: openSeries[j].baseColor,
+                  }
+                : {
+                    metricName: openSeries[j].metricName,
+                    data: [dd0],
+                    baseColor: openSeries[j].baseColor,
+                  };
+            i++;
+          }
+        }
+      }
+
+      if (width < 10) return null;
+
+      showTooltip({
+        tooltipData: dd3,
+      });
     },
     [showTooltip, dateScale, closedSeries, openSeries, width]
   );
+  // legendData
   legenddata = legenddata.splice(0);
   if (filteredEventSeries) {
     filteredEventSeries.map((linedata, index) => {
@@ -476,7 +454,16 @@ const ComputationGraph: React.FC<AreaGraphProps> = ({
   }
   return (
     <div>
-      <svg width={width} height={height}>
+      <svg
+        width={width}
+        height={height}
+        onDoubleClick={() => {
+          setFilteredSeries(closedSeries);
+          setfilteredOpenSeries(openSeries);
+          setfilteredEventSeries(eventSeries);
+          setAutoRender(true);
+        }}
+      >
         <rect
           x={0}
           y={0}
@@ -516,12 +503,12 @@ const ComputationGraph: React.FC<AreaGraphProps> = ({
             resetOnEnd
             onBrushEnd={onBrushChange}
             onChange={() => hideTooltip()}
-            onClick={() => {
-              setFilteredSeries(closedSeries);
-              setfilteredOpenSeries(openSeries);
-              setfilteredEventSeries(eventSeries);
-              setAutoRender(true);
-            }}
+            // onClick={() => {
+            //   setFilteredSeries(closedSeries);
+            //   setfilteredOpenSeries(openSeries);
+            //   setfilteredEventSeries(eventSeries);
+            //   setAutoRender(true);
+            // }}
             selectedBoxStyle={{
               fill: 'white',
               stroke: 'white',
@@ -539,7 +526,6 @@ const ComputationGraph: React.FC<AreaGraphProps> = ({
                   to={{ x: dateScale(getDate(d.data[0])), y: yMax }}
                   className={classes.tooltipLine}
                 />
-                {/* {console.log(d.data[0])} */}
                 <circle
                   cx={dateScale(getDate(d.data[0]))}
                   cy={valueScale(getValue(d.data[0]))}
@@ -559,7 +545,7 @@ const ComputationGraph: React.FC<AreaGraphProps> = ({
             {dd3.map((d, i) => (
               <g style={{ padding: '5px', display: 'flex' }} key={`bb- ${i}`}>
                 <g className={classes.tooltipData}>
-                  {/* <hr color={colorArr[i % colorCount]} className={classes.hr} />
+                  <hr color={'red'} className={classes.hr} />
                   <Text fill={'white'}>
                     {`${d.metricName}:  ${getValue(d.data[0]).toString()}`}
                   </Text>
@@ -577,7 +563,7 @@ const ComputationGraph: React.FC<AreaGraphProps> = ({
               key={`tooltip- ${d.metricName}`}
             >
               <div className={classes.tooltipData}>
-                <hr color={colorArr[i % colorCount]} className={classes.hr} />
+                <hr color={'red'} className={classes.hr} />
                 <span style={{ color: 'white', paddingLeft: '0.5em' }}>{`${
                   d.metricName
                 }:  ${getValue(d.data[0]).toFixed(2)}`}</span>

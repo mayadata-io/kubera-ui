@@ -108,8 +108,6 @@ const PlotLineAreaGraph: React.FC<AreaChartProps> = ({
     return `${numValue}${suffixes[suffixNum]}`;
   };
   numValue = '';
-  console.log('eventSeries', eventSeries);
-  console.log('domain', yScale.domain());
 
   return (
     <Group left={left || margin?.left} top={top || margin?.top}>
