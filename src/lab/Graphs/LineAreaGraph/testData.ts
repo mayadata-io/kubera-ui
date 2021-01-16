@@ -31,7 +31,17 @@ const data3: DataValue[] = [
   { date: 9000, value: 1 },
   { date: 10000, value: 1 },
 ];
-
+const data4: DataValue[] = [
+  { date: 2000, value: 0 },
+  { date: 3000, value: 0 },
+  { date: 4000, value: 0 },
+  { date: 5000, value: 0 },
+  { date: 6000, value: 1 },
+  { date: 7000, value: 1 },
+  { date: 8000, value: 0 },
+  { date: 9000, value: 0 },
+  { date: 10000, value: 0 },
+];
 const seriestest1: Array<AreaGrapher> = [
   {
     metricName: 'ip:123.34.45.66',
@@ -44,6 +54,7 @@ const seriestest2: Array<AreaGrapher> = [
 ];
 const seriestest3: Array<AreaGrapher> = [
   { metricName: 'chaos-network', data: data3, baseColor: 'red' },
+  { metricName: 'chaos-pod-delete', data: data4, baseColor: 'green' },
 ];
 
 export { seriestest1, seriestest2, seriestest3 };
