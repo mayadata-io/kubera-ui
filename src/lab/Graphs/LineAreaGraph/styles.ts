@@ -1,21 +1,27 @@
-import { makeStyles } from '@material-ui/core';
+import { makeStyles, Theme } from '@material-ui/core';
 
 interface StyleProps {
   color?: string;
   width?: number;
   height?: number;
   align?: string;
+  backgroundTransparent?: boolean;
 }
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme: Theme) => ({
   rectBase: {
-    fill: 'rgba(10, 24, 24, 0.9)',
+    fill: theme.palette.background.paper,
+  },
+  rectBaseTransparent: {
+    fill: 'transparent',
   },
   table: (props: StyleProps) => ({
     display: 'flex',
     width: props.width,
     height: props.height,
-    backgroundColor: 'rgba(10, 24, 24, 0.9)',
+    backgroundColor: props.backgroundTransparent
+      ? 'transparent'
+      : theme.palette.background.paper,
     overflowY: 'auto',
     '&::-webkit-scrollbar': {
       width: '6px',
@@ -23,27 +29,23 @@ const useStyles = makeStyles(() => ({
     },
 
     '&::-webkit-scrollbar-track': {
-      backgroundColor: 'rgba(10, 24, 24, 0.9)',
+      backgroundColor: theme.palette.background.paper,
       borderRadius: '5px',
     },
 
     '&::-webkit-scrollbar-corner': {
-      backgroundColor: 'rgba(10, 24, 24, 0.9)',
+      backgroundColor: theme.palette.background.paper,
     },
 
     '&::-webkit-scrollbar-thumb': {
-      backgroundColor: 'rgba(82,249,149,0.6)',
+      backgroundColor: theme.palette.background.paper,
       borderRadius: '5px',
     },
     '&::-webkit-scrollbar-thumb:hover': {
-      background: 'rgba(82,249,149,0.9)',
+      backgroundColor: theme.palette.background.paper,
     },
   }),
-  tableCell: {
-    borderBottom: 'none',
-    maxWidth: '30%',
-    minWidth: '10%',
-  },
+
   tableDataRow: {
     float: 'left',
     display: 'flex',
@@ -64,7 +66,7 @@ const useStyles = makeStyles(() => ({
   tableHeading: {
     paddingLeft: '1.5em',
     fontSize: '0.9rem',
-    color: '#0098DD',
+    color: theme.graph.dashboard.lightBlue,
     whiteSpace: 'nowrap',
     fontWeight: 500,
   },
@@ -74,11 +76,11 @@ const useStyles = makeStyles(() => ({
     height: '2px',
   },
   grid: {
-    stroke: '#777777',
-    strokeOpacity: 0.5,
+    stroke: theme.palette.disabledBackground,
+    strokeOpacity: 0.2,
   },
   tooltipLine: {
-    stroke: '#08BBD7',
+    stroke: theme.graph.dashboard.lightBlue,
     strokeWidth: 2,
     pointerEvents: 'none',
     strokeDasharray: '5,2',
@@ -87,6 +89,15 @@ const useStyles = makeStyles(() => ({
     float: 'left',
     display: 'flex',
     alignItems: 'flex-start',
+  },
+  tableRow: {
+    '& td': {
+      borderBottom: 'none !important',
+    },
+  },
+  tableCell: {
+    maxWidth: '30%',
+    minWidth: '10%',
   },
 }));
 export { useStyles };
