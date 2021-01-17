@@ -8,7 +8,7 @@ const data1: DataValue[] = [
   { date: 5000, value: 50 },
   { date: 6000, value: 74 },
   { date: 7000, value: 30 },
-  { date: 8000, value: 10 },
+  // { date: 8000, value: 10 },
 ];
 const data2: DataValue[] = [
   { date: 1000, value: 40 },
@@ -19,6 +19,16 @@ const data2: DataValue[] = [
   { date: 6000, value: 14 },
   { date: 7000, value: 60 },
   { date: 8000, value: 10 },
+];
+const data22: DataValue[] = [
+  { date: 1000, value: 0 },
+  { date: 2000, value: 14 },
+  { date: 3000, value: 5 },
+  { date: 4000, value: 30 },
+  { date: 5000, value: 50 },
+  { date: 6000, value: 54 },
+  { date: 7000, value: 20 },
+  { date: 8000, value: 30 },
 ];
 const data3: DataValue[] = [
   { date: 2000, value: 1 },
@@ -44,17 +54,18 @@ const data4: DataValue[] = [
 ];
 const seriestest1: Array<AreaGrapher> = [
   {
-    metricName: 'ip:123.34.45.66',
+    metricName: 'close1',
     data: data1,
     baseColor: 'teal',
   },
 ];
 const seriestest2: Array<AreaGrapher> = [
-  { metricName: 'heptio', data: data2, baseColor: 'orange' },
+  { metricName: 'lineOpen1', data: data2, baseColor: 'orange' },
+  { metricName: 'lineOpen2', data: data22, baseColor: 'pink' },
 ];
 const seriestest3: Array<AreaGrapher> = [
-  { metricName: 'chaos-network', data: data3, baseColor: 'red' },
-  { metricName: 'chaos-pod-delete', data: data4, baseColor: 'green' },
+  { metricName: 'chaos-1', data: data3, baseColor: 'red' },
+  { metricName: 'chaos-2', data: data4, baseColor: 'green' },
 ];
 
 export { seriestest1, seriestest2, seriestest3 };

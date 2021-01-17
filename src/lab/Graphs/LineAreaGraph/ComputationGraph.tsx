@@ -3,7 +3,6 @@
 import { Bounds } from '@visx/brush/lib/types';
 import {
   Brush,
-  Line,
   localPoint,
   scaleLinear,
   scaleTime,
@@ -11,12 +10,12 @@ import {
 } from '@visx/visx';
 import { bisector, extent, max } from 'd3-array';
 import React, { useCallback, useMemo, useState } from 'react';
-import { AreaGrapher, DataValue, LegendData } from './base';
+import { AreaGrapher, DataValue, LegendData, ToolTipInterface } from './base';
 import { LegendTable } from './LegendTable';
 import { PlotLineAreaGraph } from './PlotLineAreaGraph';
 import { useStyles } from './styles';
 
-type TooltipData = Array<AreaGrapher>;
+type TooltipData = Array<ToolTipInterface>;
 // Initialize some variables
 // let containerX: number;
 // let containerY: number;
@@ -24,7 +23,7 @@ type TooltipData = Array<AreaGrapher>;
 let dd1: DataValue;
 let dd0: DataValue;
 let i: number;
-// let j: number;
+let j: number;
 let indexer: number;
 
 const bisectDate = bisector<DataValue, Date>((d) => new Date(d.date)).left;
@@ -257,7 +256,7 @@ const ComputationGraph: React.FC<AreaGraphProps> = ({
   };
 
   // tooltip handler
-  let dd3: AreaGrapher[] = [];
+  let dd3: ToolTipInterface[] = [];
 
   const handleTooltip = useCallback(
     (
@@ -270,53 +269,86 @@ const ComputationGraph: React.FC<AreaGraphProps> = ({
       containerX = 'clientX' in event ? event.clientX : 0;
       containerY = 'clientY' in event ? event.clientY : 0;
       dd3 = dd3.splice(0);
+      i = 0;
       if (closedSeries) {
-        for (i = 0; i < closedSeries.length; i++) {
+        for (j = 0; j < closedSeries.length; j++) {
           indexer = bisectDate(closedSeries[i].data, x0, 1);
-          dd0 = closedSeries[i].data[indexer - 1];
-          dd1 = closedSeries[i].data[indexer];
-          console.log('🚀  dd0/1', dd0, dd1);
+          dd0 = closedSeries[j].data[indexer - 1];
+          dd1 = closedSeries[j].data[indexer];
+          // console.log('🚀  dd0/1', dd0, dd1);
 
           if (dd1) {
             dd3[i] =
               x0.valueOf() - dd0.date > dd1.date - x0.valueOf()
                 ? {
                     metricName: closedSeries[i].metricName,
-                    data: [dd1],
+                    data: dd1,
                     baseColor: closedSeries[i].baseColor,
                   }
                 : {
                     metricName: closedSeries[i].metricName,
-                    data: [dd0],
+                    data: dd0,
                     baseColor: closedSeries[i].baseColor,
                   };
+            i++;
           }
         }
       }
-
       if (openSeries) {
-        for (let j = 0; j < openSeries.length; j++) {
+        for (j = 0; j < openSeries.length; j++) {
           indexer = bisectDate(openSeries[j].data, x0, 1);
           dd0 = openSeries[j].data[indexer - 1];
           dd1 = openSeries[j].data[indexer];
+          // console.log('🚀  dd0/1', dd0, dd1);
 
           if (dd1) {
             dd3[i] =
               x0.valueOf() - dd0.date > dd1.date - x0.valueOf()
                 ? {
                     metricName: openSeries[j].metricName,
-                    data: [dd1],
+                    data: dd1,
                     baseColor: openSeries[j].baseColor,
                   }
                 : {
                     metricName: openSeries[j].metricName,
-                    data: [dd0],
+                    data: dd0,
                     baseColor: openSeries[j].baseColor,
                   };
             i++;
           }
         }
       }
+      // i = 0;
+
+      // if (eventSeries) {
+      //   for (let k = 0; k < eventSeries.length; k++) {
+      //     indexer = bisectDate(eventSeries[k].data, x0, 1);
+      //     dd0 = eventSeries[k].data[indexer - 1];
+      //     dd1 = eventSeries[k].data[indexer];
+
+      //     if (dd1) {
+      //       dd3[i] =
+      //         x0.valueOf() - dd0.date > dd1.date - x0.valueOf()
+      //           ? {
+      //               metricName: eventSeries[k].metricName,
+      //               data: dd1,
+      //               baseColor: eventSeries[k].baseColor,
+      //             }
+      //           : {
+      //               metricName: eventSeries[k].metricName,
+      //               data: dd0,
+      //               baseColor: eventSeries[k].baseColor,
+      //             };
+      //       i++;
+      //     }
+      //   }
+      // }
+
+      dd3 = dd3.sort((a, b) => (a.data.date > b.data.date ? 1 : -1));
+      const firstToolTipData = dd3[0];
+      dd3 = dd3.filter((elem) => elem.data.date <= firstToolTipData.data.date);
+
+      console.log('🚀 dd3', dd3);
 
       if (width < 10) return null;
 
@@ -503,12 +535,6 @@ const ComputationGraph: React.FC<AreaGraphProps> = ({
             resetOnEnd
             onBrushEnd={onBrushChange}
             onChange={() => hideTooltip()}
-            // onClick={() => {
-            //   setFilteredSeries(closedSeries);
-            //   setfilteredOpenSeries(openSeries);
-            //   setfilteredEventSeries(eventSeries);
-            //   setAutoRender(true);
-            // }}
             selectedBoxStyle={{
               fill: 'white',
               stroke: 'white',
@@ -517,28 +543,24 @@ const ComputationGraph: React.FC<AreaGraphProps> = ({
             onMouseMove={handleTooltip}
             onMouseLeave={() => hideTooltip()}
           />
-          {showTips &&
-            tooltipData &&
-            tooltipData.map((d) => (
-              <g key={`${d.metricName}-tooltip`}>
-                <Line
-                  from={{ x: dateScale(getDate(d.data[0])), y: 0 }}
-                  to={{ x: dateScale(getDate(d.data[0])), y: yMax }}
-                  className={classes.tooltipLine}
-                />
+          {showTips && tooltipData && (
+            <g key={`tooltip-points`}>
+              {tooltipData.map((lineData) => (
                 <circle
-                  cx={dateScale(getDate(d.data[0]))}
-                  cy={valueScale(getValue(d.data[0]))}
+                  key={`${lineData.metricName}-toolTipPoint`}
+                  cx={dateScale(getDate(lineData.data))}
+                  cy={valueScale(getValue(lineData.data))}
                   r={7}
-                  fill={d.baseColor}
-                  fillOpacity={0.5}
+                  fill={lineData.baseColor}
+                  fillOpacity={1}
                   stroke="white"
                   strokeOpacity={0.5}
                   strokeWidth={2}
                   pointerEvents="none"
                 />
-              </g>
-            ))}
+              ))}
+            </g>
+          )}
         </PlotLineAreaGraph>
         {/* {tooltipData && (
           <Tooltip top={containerY} left={containerX} style={tooltipStyles}>

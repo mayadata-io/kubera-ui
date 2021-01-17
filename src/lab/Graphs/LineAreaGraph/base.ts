@@ -8,6 +8,11 @@ export interface AreaGrapher {
   data: Array<DataValue>;
   baseColor?: string;
 }
+export interface ToolTipInterface {
+  metricName: string;
+  data: DataValue;
+  baseColor?: string;
+}
 
 export interface LegendData {
   value: Array<string>;
