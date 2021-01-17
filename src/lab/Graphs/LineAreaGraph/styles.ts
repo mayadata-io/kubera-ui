@@ -24,13 +24,13 @@ const useStyles = makeStyles((theme: Theme) => ({
       : theme.palette.background.paper,
     overflowY: 'auto',
     '&::-webkit-scrollbar': {
-      width: '6px',
-      height: '6px',
+      width: '3px',
+      height: '3px',
     },
 
     '&::-webkit-scrollbar-track': {
       backgroundColor: theme.palette.background.paper,
-      borderRadius: '5px',
+      borderRadius: '3px',
     },
 
     '&::-webkit-scrollbar-corner': {
@@ -38,11 +38,11 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
 
     '&::-webkit-scrollbar-thumb': {
-      backgroundColor: theme.palette.background.paper,
-      borderRadius: '5px',
+      backgroundColor: theme.palette.highlight,
+      borderRadius: '3px',
     },
     '&::-webkit-scrollbar-thumb:hover': {
-      backgroundColor: theme.palette.background.paper,
+      backgroundColor: theme.palette.highlight,
     },
   }),
 
@@ -80,10 +80,10 @@ const useStyles = makeStyles((theme: Theme) => ({
     strokeOpacity: 0.2,
   },
   tooltipLine: {
-    stroke: theme.graph.dashboard.lightBlue,
-    strokeWidth: 2,
+    stroke: '#5252F6',
+    strokeWidth: 4,
     pointerEvents: 'none',
-    strokeDasharray: '5,2',
+    // strokeDasharray: '5,2',
   },
   tooltipData: {
     float: 'left',

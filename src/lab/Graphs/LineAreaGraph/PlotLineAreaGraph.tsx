@@ -9,6 +9,7 @@ import {
   GridColumns,
   GridRows,
   Group,
+  Line,
   LinearGradient,
   LinePath,
   MarkerCircle,
@@ -18,29 +19,43 @@ import React from 'react';
 import { AreaGrapher, DataValue } from './base';
 import { useStyles } from './styles';
 // Initialize some variables
-const axisColor = '#fff';
+const axisColor = '#777777';
+const axisTextColor = '#B9B9B9';
 
 const axisBottomTickLabelProps = {
+  dy: '0.3rem',
   textAnchor: 'middle' as const,
-  fontFamily: 'Arial',
-  fontSize: 10,
-  fill: axisColor,
+  fontFamily: 'Ubuntu',
+  fontSize: '12px',
+  fontWeight: 400,
+  // stroke: axisColor,
+  fill: axisTextColor,
+  lineHeight: '12px',
+  // opacity: 0.7,
 };
 const axisLeftTickLabelProps = {
   dx: '-0.25em',
   dy: '0.25em',
   fontFamily: 'Ubuntu',
-  fontSize: 10,
+  fontWeight: 400,
+  fontSize: '10px',
   textAnchor: 'end' as const,
-  fill: axisColor,
+  lineHeight: '12px',
+  fill: axisTextColor,
+
+  // opacity: 0.7,
 };
 const axisRightTickLabelProps = {
   dx: '1.5em',
   dy: '0.25em',
   fontFamily: 'Ubuntu',
-  fontSize: 10,
+  fontWeight: 400,
+  fontSize: '10px',
   textAnchor: 'end' as const,
-  fill: axisColor,
+  lineHeight: '12px',
+  fill: axisTextColor,
+
+  // opacity: 0.7,
 };
 
 // accessors
@@ -174,7 +189,6 @@ const PlotLineAreaGraph: React.FC<AreaChartProps> = ({
           scale={xScale}
           numTicks={width > 520 ? 6 : 5}
           stroke={axisColor}
-          tickStroke={axisColor}
           tickLabelProps={() => axisBottomTickLabelProps}
         />
       )}
@@ -183,7 +197,6 @@ const PlotLineAreaGraph: React.FC<AreaChartProps> = ({
           scale={yScale}
           numTicks={4}
           stroke={axisColor}
-          tickStroke={axisColor}
           tickFormat={(num) => intToString(num)}
           tickLabelProps={() => axisLeftTickLabelProps}
         />
@@ -194,7 +207,6 @@ const PlotLineAreaGraph: React.FC<AreaChartProps> = ({
           scale={yScale}
           numTicks={4}
           stroke={axisColor}
-          tickStroke={axisColor}
           tickLabelProps={() => axisRightTickLabelProps}
           tickFormat={(num) => intToString(num)}
           orientation="right"
@@ -208,7 +220,7 @@ const PlotLineAreaGraph: React.FC<AreaChartProps> = ({
               id={`${i}-linearGragient-eventSeries`}
               from={linedata.baseColor}
               to={linedata.baseColor}
-              fromOpacity={0.3}
+              fromOpacity={0.1}
               toOpacity={0.1}
             />
 
@@ -238,21 +250,32 @@ const PlotLineAreaGraph: React.FC<AreaChartProps> = ({
                     (linedata.data[pointIndex].value === 0 &&
                       linedata.data[pointIndex - 1] &&
                       linedata.data[pointIndex - 1].value === 1)) && (
-                    <Polygon
-                      sides={3}
-                      size={6}
-                      stroke={linedata.baseColor}
-                      opacity={0.6}
-                      strokeWidth={5}
-                      center={{
-                        x: xScale(getDate(d)) ?? 0,
-                        y: yScale(0) ?? 0,
-                      }}
-                      fill={linedata.baseColor}
-                      pointerEvents="none"
-                      rotate={90}
-                      style={{ strokeLinejoin: 'round' }}
-                    />
+                    <g>
+                      <Polygon
+                        sides={3}
+                        size={6}
+                        stroke={linedata.baseColor}
+                        opacity={0.6}
+                        strokeWidth={5}
+                        center={{
+                          x: xScale(getDate(d)) ?? 0,
+                          y: yScale(0) ?? 0,
+                        }}
+                        fill={linedata.baseColor}
+                        pointerEvents="none"
+                        rotate={90}
+                        style={{ strokeLinejoin: 'round' }}
+                      />
+                      <Line
+                        from={{ x: xScale(getDate(d)), y: 0 }}
+                        to={{
+                          x: xScale(getDate(d)),
+                          y: yMax,
+                        }}
+                        stroke={linedata.baseColor}
+                        strokeWidth={1}
+                      />
+                    </g>
                   )}
                   )
                 </g>

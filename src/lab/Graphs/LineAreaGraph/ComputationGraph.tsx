@@ -4,6 +4,7 @@
 import { Bounds } from '@visx/brush/lib/types';
 import {
   Brush,
+  Line,
   localPoint,
   scaleLinear,
   scaleTime,
@@ -593,20 +594,23 @@ const ComputationGraph: React.FC<AreaGraphProps> = ({
           />
           {showTips && tooltipData && (
             <g key={`tooltip-points`}>
-              {
-                <circle
-                  key={`${tooltipData.metricName}-toolTipPoint`}
-                  cx={dateScale(getDate(tooltipData.data))}
-                  cy={valueScale(getValue(tooltipData.data))}
-                  r={7}
-                  fill={tooltipData.baseColor}
-                  fillOpacity={1}
-                  stroke="white"
-                  strokeOpacity={0.5}
-                  strokeWidth={2}
-                  pointerEvents="none"
-                />
-              }
+              <Line
+                from={{ x: dateScale(getDate(tooltipData.data)), y: 0 }}
+                to={{ x: dateScale(getDate(tooltipData.data)), y: yMax }}
+                className={classes.tooltipLine}
+              />
+              <circle
+                key={`${tooltipData.metricName}-toolTipPoint`}
+                cx={dateScale(getDate(tooltipData.data))}
+                cy={valueScale(getValue(tooltipData.data))}
+                r={7}
+                fill={'#5252F6'}
+                fillOpacity={1}
+                stroke="white"
+                strokeOpacity={1}
+                strokeWidth={2}
+                pointerEvents="none"
+              />
             </g>
           )}
         </PlotLineAreaGraph>
