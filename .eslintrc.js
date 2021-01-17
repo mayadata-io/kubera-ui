@@ -27,7 +27,7 @@ module.exports = {
     'no-undef': rules.ON,
     '@typescript-eslint/explicit-function-return-type': rules.OFF,
     '@typescript-eslint/no-non-null-assertion': rules.OFF,
-    '@typescript-eslint/no-unused-vars': rules.WARN,
+    '@typescript-eslint/no-unused-vars': rules.OFF, // change later
     '@typescript-eslint/no-explicit-any': rules.OFF,
     'react/no-deprecated': rules.OFF,
     'react/prop-types': rules.OFF,

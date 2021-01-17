@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable consistent-return */
 /* eslint-disable  array-callback-return */
 import { Bounds } from '@visx/brush/lib/types';
@@ -8,7 +9,6 @@ import {
   scaleTime,
   useTooltip,
 } from '@visx/visx';
-// import {bisectCenter} from 'd3',
 import { bisector, extent, max } from 'd3-array';
 import React, { useCallback, useMemo, useState } from 'react';
 import { AreaGrapher, DataValue, LegendData, ToolTipInterface } from './base';
@@ -84,8 +84,8 @@ const ComputationGraph: React.FC<AreaGraphProps> = ({
   legendTableHeight = 200,
 }) => {
   let legenddata: Array<LegendData> = [{ value: [], baseColor: '' }];
-  let containerX;
-  let containerY;
+  // let containerX;
+  // let containerY;
   const classes = useStyles({ width, height });
   // const bisectValueRight = bisector<ToolTipInterface, number>(
   //   (d) => d.data.value
@@ -169,7 +169,7 @@ const ComputationGraph: React.FC<AreaGraphProps> = ({
     [filteredClosedSeries, filteredOpenSeries, filteredEventSeries]
   );
 
-  console.log('container', containerX, containerY);
+  // console.log('container', containerX, containerY);
   const innerHeight = height - margin.top - margin.bottom;
   const topChartBottomMargin = compact
     ? chartSeparation / 2
@@ -274,8 +274,8 @@ const ComputationGraph: React.FC<AreaGraphProps> = ({
       y = y - margin.top;
       const x0 = dateScale.invert(x);
       const y0 = valueScale.invert(y);
-      containerX = 'clientX' in event ? event.clientX : 0;
-      containerY = 'clientY' in event ? event.clientY : 0;
+      // containerX = 'clientX' in event ? event.clientX : 0;
+      // containerY = 'clientY' in event ? event.clientY : 0;
       dd3 = dd3.splice(0);
       i = 0;
       if (closedSeries) {
@@ -359,45 +359,46 @@ const ComputationGraph: React.FC<AreaGraphProps> = ({
       // console.log(y0, bisectValueLeft);
       // console.log('🚀 dd3', dd3);
 
-      dd3 = dd3.sort((a: ToolTipInterface, b: ToolTipInterface) =>
-        a.data.value > b.data.value ? 1 : -1
-      );
-      // console.log('🚀dd3', dd3);
-      let index0: number;
+      // dd3 = dd3.sort((a: ToolTipInterface, b: ToolTipInterface) =>
+      //   a.data.value > b.data.value ? 1 : -1
+      // );
+      // // console.log('🚀dd3', dd3);
+      let index0 = 0;
+      // let index1 = 0;
+      let dd00: ToolTipInterface = {
+        metricName: '',
+        data: { date: NaN, value: NaN },
+        baseColor: '',
+      };
+      let dd11: ToolTipInterface = {
+        metricName: '',
+        data: { date: NaN, value: NaN },
+        baseColor: '',
+      };
 
-      if (dd3) {
-        index0 = bisectValueLeft(dd3, y0);
+      index0 = bisectValueLeft(dd3, y0);
+      dd00 = dd3[index0];
+      dd11 = dd3[index0 - 1];
+      if (dd11 && dd00) {
         // index1 = bisectValueRight(dd3, y0);
-
-        dd0 = dd3[index0].data;
-        dd1 = dd3[index0 - 1].data;
-        if (dd1) {
-          dd3[0] =
-            Math.abs(y0.valueOf() - dd0.value) >
-            Math.abs(y0.valueOf() - dd1.value)
-              ? {
-                  metricName: dd3[index0 - 1].metricName,
-                  data: dd1,
-                  baseColor: dd3[index0 - 1].baseColor,
-                }
-              : {
-                  metricName: dd3[index0].metricName,
-                  data: dd0,
-                  baseColor: dd3[index0].baseColor,
-                };
-        } else {
-          dd3[0] = {
-            metricName: dd3[index0].metricName,
-            data: dd0,
-            baseColor: dd3[index0].baseColor,
-          };
-        }
-        // console.log('🚀dd0/1', dd0, dd1);
-        // console.log('🚀 indexer', indexer);
+        // // index1 = bisectValueRight(dd3, y0);
+        dd3[0] =
+          Math.abs(y0.valueOf() - dd00.data.value) >
+          Math.abs(y0.valueOf() - dd11.data.value)
+            ? dd11
+            : dd00;
+      } else if (dd11 && !dd00) {
+        dd3[0] = dd11;
+      } else if (dd00 && !dd11) {
+        dd3[0] = dd00;
       }
+      // console.log('y0', y0);
+      console.log(dd00, dd11);
+      if (width < 10) return null;
       console.log('y0', y0);
       // console.log(dd3[0]);
-      if (width < 10) return null;
+
+      // console.log(index0, index1);
 
       showTooltip({
         tooltipData: dd3[0],

@@ -54,18 +54,18 @@ const data4: DataValue[] = [
 ];
 const seriestest1: Array<AreaGrapher> = [
   {
-    metricName: 'close1',
+    metricName: 'teal',
     data: data1,
     baseColor: 'teal',
   },
 ];
 const seriestest2: Array<AreaGrapher> = [
-  { metricName: 'lineOpen1', data: data2, baseColor: 'orange' },
-  { metricName: 'lineOpen2', data: data22, baseColor: 'pink' },
+  { metricName: 'orange', data: data2, baseColor: 'orange' },
+  { metricName: 'pink', data: data22, baseColor: 'pink' },
 ];
 const seriestest3: Array<AreaGrapher> = [
-  { metricName: 'chaos-1', data: data3, baseColor: 'red' },
-  { metricName: 'chaos-2', data: data4, baseColor: 'green' },
+  { metricName: 'pink', data: data3, baseColor: 'red' },
+  { metricName: 'green', data: data4, baseColor: 'green' },
 ];
 
 export { seriestest1, seriestest2, seriestest3 };
