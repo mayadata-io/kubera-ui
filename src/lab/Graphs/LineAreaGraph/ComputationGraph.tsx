@@ -8,6 +8,7 @@ import {
   scaleTime,
   useTooltip,
 } from '@visx/visx';
+// import {bisectCenter} from 'd3',
 import { bisector, extent, max } from 'd3-array';
 import React, { useCallback, useMemo, useState } from 'react';
 import { AreaGrapher, DataValue, LegendData, ToolTipInterface } from './base';
@@ -15,7 +16,7 @@ import { LegendTable } from './LegendTable';
 import { PlotLineAreaGraph } from './PlotLineAreaGraph';
 import { useStyles } from './styles';
 
-type TooltipData = Array<ToolTipInterface>;
+type TooltipData = ToolTipInterface;
 // Initialize some variables
 // let containerX: number;
 // let containerY: number;
@@ -27,7 +28,10 @@ let j: number;
 let indexer: number;
 
 const bisectDate = bisector<DataValue, Date>((d) => new Date(d.date)).left;
-
+const bisectValueLeft = bisector<ToolTipInterface, number>((d) => d.data.value)
+  .left;
+// const bisectValueRight = bisector<ToolTipInterface, number>((d) => d.data.value)
+//   .right;
 const brushMargin = { top: 10, bottom: 15, left: 50, right: 20 };
 const chartSeparation = 10;
 
@@ -83,6 +87,9 @@ const ComputationGraph: React.FC<AreaGraphProps> = ({
   let containerX;
   let containerY;
   const classes = useStyles({ width, height });
+  // const bisectValueRight = bisector<ToolTipInterface, number>(
+  //   (d) => d.data.value
+  // ).right;
   const [filteredClosedSeries, setFilteredSeries] = useState(closedSeries);
   const [filteredOpenSeries, setfilteredOpenSeries] = useState(openSeries);
   const [filteredEventSeries, setfilteredEventSeries] = useState(eventSeries);
@@ -262,10 +269,11 @@ const ComputationGraph: React.FC<AreaGraphProps> = ({
     (
       event: React.TouchEvent<SVGRectElement> | React.MouseEvent<SVGRectElement>
     ) => {
-      let { x } = localPoint(event) || { x: 0 };
+      let { x, y } = localPoint(event) || { x: 0, y: 0 };
       x = x - margin.left;
+      y = y - margin.top;
       const x0 = dateScale.invert(x);
-
+      const y0 = valueScale.invert(y);
       containerX = 'clientX' in event ? event.clientX : 0;
       containerY = 'clientY' in event ? event.clientY : 0;
       dd3 = dd3.splice(0);
@@ -318,42 +326,81 @@ const ComputationGraph: React.FC<AreaGraphProps> = ({
           }
         }
       }
-      // i = 0;
 
-      // if (eventSeries) {
-      //   for (let k = 0; k < eventSeries.length; k++) {
-      //     indexer = bisectDate(eventSeries[k].data, x0, 1);
-      //     dd0 = eventSeries[k].data[indexer - 1];
-      //     dd1 = eventSeries[k].data[indexer];
+      if (eventSeries) {
+        for (j = 0; j < eventSeries.length; j++) {
+          indexer = bisectDate(eventSeries[j].data, x0, 1);
+          dd0 = eventSeries[j].data[indexer - 1];
+          dd1 = eventSeries[j].data[indexer];
 
-      //     if (dd1) {
-      //       dd3[i] =
-      //         x0.valueOf() - dd0.date > dd1.date - x0.valueOf()
-      //           ? {
-      //               metricName: eventSeries[k].metricName,
-      //               data: dd1,
-      //               baseColor: eventSeries[k].baseColor,
-      //             }
-      //           : {
-      //               metricName: eventSeries[k].metricName,
-      //               data: dd0,
-      //               baseColor: eventSeries[k].baseColor,
-      //             };
-      //       i++;
-      //     }
-      //   }
-      // }
+          if (dd1) {
+            dd3[i] =
+              x0.valueOf() - dd0.date > dd1.date - x0.valueOf()
+                ? {
+                    metricName: eventSeries[j].metricName,
+                    data: dd1,
+                    baseColor: eventSeries[j].baseColor,
+                  }
+                : {
+                    metricName: eventSeries[j].metricName,
+                    data: dd0,
+                    baseColor: eventSeries[j].baseColor,
+                  };
+            i++;
+          }
+        }
+      }
 
       dd3 = dd3.sort((a, b) => (a.data.date > b.data.date ? 1 : -1));
       const firstToolTipData = dd3[0];
       dd3 = dd3.filter((elem) => elem.data.date <= firstToolTipData.data.date);
+      // const legenTablePointerData = JSON.parse(JSON.stringify(dd3));
+      dd3 = dd3.sort((a, b) => (a.data.value > b.data.value ? 1 : -1));
+      // console.log(y0, bisectValueLeft);
+      // console.log('🚀 dd3', dd3);
 
-      console.log('🚀 dd3', dd3);
+      dd3 = dd3.sort((a: ToolTipInterface, b: ToolTipInterface) =>
+        a.data.value > b.data.value ? 1 : -1
+      );
+      // console.log('🚀dd3', dd3);
+      let index0: number;
 
+      if (dd3) {
+        index0 = bisectValueLeft(dd3, y0);
+        // index1 = bisectValueRight(dd3, y0);
+
+        dd0 = dd3[index0].data;
+        dd1 = dd3[index0 - 1].data;
+        if (dd1) {
+          dd3[0] =
+            Math.abs(y0.valueOf() - dd0.value) >
+            Math.abs(y0.valueOf() - dd1.value)
+              ? {
+                  metricName: dd3[index0 - 1].metricName,
+                  data: dd1,
+                  baseColor: dd3[index0 - 1].baseColor,
+                }
+              : {
+                  metricName: dd3[index0].metricName,
+                  data: dd0,
+                  baseColor: dd3[index0].baseColor,
+                };
+        } else {
+          dd3[0] = {
+            metricName: dd3[index0].metricName,
+            data: dd0,
+            baseColor: dd3[index0].baseColor,
+          };
+        }
+        // console.log('🚀dd0/1', dd0, dd1);
+        // console.log('🚀 indexer', indexer);
+      }
+      console.log('y0', y0);
+      // console.log(dd3[0]);
       if (width < 10) return null;
 
       showTooltip({
-        tooltipData: dd3,
+        tooltipData: dd3[0],
       });
     },
     [showTooltip, dateScale, closedSeries, openSeries, width]
@@ -545,20 +592,20 @@ const ComputationGraph: React.FC<AreaGraphProps> = ({
           />
           {showTips && tooltipData && (
             <g key={`tooltip-points`}>
-              {tooltipData.map((lineData) => (
+              {
                 <circle
-                  key={`${lineData.metricName}-toolTipPoint`}
-                  cx={dateScale(getDate(lineData.data))}
-                  cy={valueScale(getValue(lineData.data))}
+                  key={`${tooltipData.metricName}-toolTipPoint`}
+                  cx={dateScale(getDate(tooltipData.data))}
+                  cy={valueScale(getValue(tooltipData.data))}
                   r={7}
-                  fill={lineData.baseColor}
+                  fill={tooltipData.baseColor}
                   fillOpacity={1}
                   stroke="white"
                   strokeOpacity={0.5}
                   strokeWidth={2}
                   pointerEvents="none"
                 />
-              ))}
+              }
             </g>
           )}
         </PlotLineAreaGraph>
