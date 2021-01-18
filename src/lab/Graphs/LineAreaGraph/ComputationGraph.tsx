@@ -441,6 +441,8 @@ const ComputationGraph: React.FC<AreaGraphProps> = ({
         : undefined;
       const curr = pointerElement
         ? pointerElement.data.value.toFixed(2).toString()
+        : firstMouseEnterGraph
+        ? '--'
         : linedata.data[linedata.data.length - 1].value.toFixed(2).toString();
 
       const avg = (

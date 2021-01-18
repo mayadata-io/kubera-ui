@@ -64,7 +64,11 @@ const seriestest2: Array<AreaGrapher> = [
   { metricName: 'pink', data: data22, baseColor: 'pink' },
 ];
 const seriestest3: Array<AreaGrapher> = [
-  { metricName: 'chaos-pod-delete', data: data3, baseColor: 'red' },
+  {
+    metricName: 'chaos-pod-delete',
+    data: data3,
+    baseColor: 'red',
+  },
   { metricName: 'grn', data: data4, baseColor: 'green' },
 ];
 

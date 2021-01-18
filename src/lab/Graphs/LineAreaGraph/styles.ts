@@ -61,6 +61,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     letterSpacing: '0em',
     paddingLeft: '0.5em',
     textAlign: 'left',
+    minWidth: '3rem',
   },
 
   tableHeading: {
