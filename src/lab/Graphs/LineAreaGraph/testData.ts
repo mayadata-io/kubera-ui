@@ -69,7 +69,7 @@ const seriestest3: Array<AreaGrapher> = [
     data: data3,
     baseColor: 'red',
   },
-  { metricName: 'grn', data: data4, baseColor: 'green' },
+  { metricName: 'yellow', data: data4, baseColor: 'yellow' },
 ];
 
 export { seriestest1, seriestest2, seriestest3 };

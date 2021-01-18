@@ -59,7 +59,6 @@
     "@visx/visx": "^1.1.0",
     "d3-array": "^2.8.0",
     "dayjs": "^1.10.3",
-    "moment": "^2.29.1",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
     "react-router-dom": "^5.2.0"

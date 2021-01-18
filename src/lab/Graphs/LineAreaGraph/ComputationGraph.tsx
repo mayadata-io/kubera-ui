@@ -13,13 +13,14 @@ import {
   useTooltip,
 } from '@visx/visx';
 import { bisector, extent, max } from 'd3-array';
-import moment from 'moment';
+import dayjs from 'dayjs';
 // import { timeFormat } from 'd3-time-format';
 import React, { useCallback, useMemo, useState } from 'react';
 import { AreaGrapher, DataValue, LegendData, ToolTipInterface } from './base';
 import { LegendTable } from './LegendTable';
 import { PlotLineAreaGraph } from './PlotLineAreaGraph';
 import { useStyles } from './styles';
+
 type TooltipData = ToolTipInterface;
 // Initialize some variables
 // let containerX: number;
@@ -666,9 +667,15 @@ const ComputationGraph: React.FC<AreaGraphProps> = ({
                 key={`tooltipDate- ${tooltipData.metricName}`}
               >
                 <div className={classes.tooltipData}>
-                  <span
+                  {/* <span
                     style={{ color: 'white', paddingLeft: '0.5em' }}
                   >{` ${moment(new Date(getDate(tooltipData.data))).format(
+                    'MMM D,YYYY h:mm:ss a'
+                  )}`}</span> */}
+
+                  <span
+                    style={{ color: 'white', paddingLeft: '0.5em' }}
+                  >{` ${dayjs(new Date(getDate(tooltipData.data))).format(
                     'MMM D,YYYY h:mm:ss a'
                   )}`}</span>
                 </div>
