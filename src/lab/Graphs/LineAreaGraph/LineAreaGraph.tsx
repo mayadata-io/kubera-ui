@@ -26,6 +26,7 @@ export type AreaGraphProps = {
   closedSeries?: Array<AreaGrapher>;
   openSeries?: Array<AreaGrapher>;
   eventSeries?: Array<AreaGrapher>;
+  unit?: string;
   showTips?: boolean;
   showPoints?: boolean;
   showGrid?: boolean;
@@ -47,9 +48,9 @@ const LineAreaGraph: React.FC<AreaGraphProps> = ({
   height = 200,
   margin = {
     top: 20,
-    left: 30,
+    left: 50,
     bottom: 20,
-    right: 30,
+    right: 20,
   },
   ...rest
 }) => {

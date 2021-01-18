@@ -37,9 +37,9 @@ const data3: DataValue[] = [
   { date: 5000, value: 0 },
   { date: 6000, value: 0 },
   { date: 7000, value: 0 },
-  { date: 8000, value: 0 },
+  { date: 8000, value: 1 },
   { date: 9000, value: 1 },
-  { date: 10000, value: 1 },
+  { date: 10000, value: 0 },
 ];
 const data4: DataValue[] = [
   { date: 2000, value: 0 },
@@ -64,8 +64,8 @@ const seriestest2: Array<AreaGrapher> = [
   { metricName: 'pink', data: data22, baseColor: 'pink' },
 ];
 const seriestest3: Array<AreaGrapher> = [
-  { metricName: 'red', data: data3, baseColor: 'red' },
-  { metricName: 'green', data: data4, baseColor: 'green' },
+  { metricName: 'chaos-pod-delete', data: data3, baseColor: 'red' },
+  { metricName: 'grn', data: data4, baseColor: 'green' },
 ];
 
 export { seriestest1, seriestest2, seriestest3 };

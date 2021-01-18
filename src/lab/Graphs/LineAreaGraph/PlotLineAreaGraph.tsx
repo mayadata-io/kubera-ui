@@ -2,7 +2,6 @@ import {
   AreaClosed,
   AxisBottom,
   AxisLeft,
-  AxisRight,
   AxisScale,
   curveMonotoneX,
   curveStepAfter,
@@ -34,19 +33,7 @@ const axisBottomTickLabelProps = {
   // opacity: 0.7,
 };
 const axisLeftTickLabelProps = {
-  dx: '-0.25em',
-  dy: '0.25em',
-  fontFamily: 'Ubuntu',
-  fontWeight: 400,
-  fontSize: '10px',
-  textAnchor: 'end' as const,
-  lineHeight: '12px',
-  fill: axisTextColor,
-
-  // opacity: 0.7,
-};
-const axisRightTickLabelProps = {
-  dx: '1.5em',
+  // dx: '-0.1em',
   dy: '0.25em',
   fontFamily: 'Ubuntu',
   fontWeight: 400,
@@ -81,6 +68,7 @@ interface AreaChartProps {
   top?: number;
   left?: number;
   showPoints: boolean;
+  unit?: string;
 }
 
 const PlotLineAreaGraph: React.FC<AreaChartProps> = ({
@@ -102,6 +90,7 @@ const PlotLineAreaGraph: React.FC<AreaChartProps> = ({
   children,
   showPoints = true,
   showGrid = true,
+  unit = '',
 }) => {
   const classes = useStyles();
   // const yMaxValue = yScale.domain()[1];
@@ -120,7 +109,7 @@ const PlotLineAreaGraph: React.FC<AreaChartProps> = ({
     if (shortValue % 1 !== 0) {
       numValue = shortValue.toFixed(1);
     }
-    return `${numValue}${suffixes[suffixNum]}`;
+    return `${numValue}${suffixes[suffixNum]} ${unit}`;
   };
   numValue = '';
 
@@ -201,17 +190,7 @@ const PlotLineAreaGraph: React.FC<AreaChartProps> = ({
           tickLabelProps={() => axisLeftTickLabelProps}
         />
       )}
-      {!hideRightAxis && (
-        <AxisRight
-          left={width - 40}
-          scale={yScale}
-          numTicks={4}
-          stroke={axisColor}
-          tickLabelProps={() => axisRightTickLabelProps}
-          tickFormat={(num) => intToString(num)}
-          orientation="right"
-        />
-      )}
+
       {eventSeries &&
         eventSeries.length > 0 &&
         eventSeries.map((linedata, i) => (
@@ -271,7 +250,7 @@ const PlotLineAreaGraph: React.FC<AreaChartProps> = ({
                           y: yMax,
                         }}
                         stroke={linedata.baseColor}
-                        strokeWidth={1}
+                        strokeWidth={0.5}
                       />
                     </g>
                   )}

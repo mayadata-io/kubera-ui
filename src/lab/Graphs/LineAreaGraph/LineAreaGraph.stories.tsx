@@ -14,6 +14,7 @@ storiesOf('Graphs/Area', module).add('Kubera Chaos', () => (
       eventSeries={seriestest3}
       showPoints={true}
       showTips={true}
+      unit={'mbps'}
     />
   </ThemedBackground>
 ));

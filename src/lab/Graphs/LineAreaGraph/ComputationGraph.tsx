@@ -39,7 +39,7 @@ const bisectValueLeft = bisector<ToolTipInterface, number>((d) => d.data.value)
 //   .right;
 const brushMargin = { top: 10, bottom: 15, left: 50, right: 20 };
 const chartSeparation = 10;
-
+let legenTablePointerData: Array<ToolTipInterface>;
 const tooltipStyles = {
   ...defaultStyles,
   background: '#2B333B',
@@ -92,11 +92,12 @@ const ComputationGraph: React.FC<AreaGraphProps> = ({
   height = 200,
   margin = {
     top: 20,
-    left: 30,
+    left: 50,
     bottom: 20,
-    right: 30,
+    right: 20,
   },
   legendTableHeight = 200,
+  ...rest
 }) => {
   let legenddata: Array<LegendData> = [{ value: [], baseColor: '' }];
   // let containerX;
@@ -270,12 +271,12 @@ const ComputationGraph: React.FC<AreaGraphProps> = ({
   const getSum = (total: number, num: number) => {
     return total + (num || 0);
   };
-  const getMin = (acc: number, num: number) => {
-    return acc > num ? num : acc;
-  };
-  const getMax = (acc: number, num: number) => {
-    return acc < num ? num : acc;
-  };
+  // const getMin = (acc: number, num: number) => {
+  //   return acc > num ? num : acc;
+  // };
+  // const getMax = (acc: number, num: number) => {
+  //   return acc < num ? num : acc;
+  // };
 
   // tooltip handler
   let dd3: ToolTipInterface[] = [];
@@ -369,7 +370,9 @@ const ComputationGraph: React.FC<AreaGraphProps> = ({
       dd3 = dd3.sort((a, b) => (a.data.date > b.data.date ? 1 : -1));
       const firstToolTipData = dd3[0];
       dd3 = dd3.filter((elem) => elem.data.date <= firstToolTipData.data.date);
-      // const legenTablePointerData = JSON.parse(JSON.stringify(dd3));
+      legenTablePointerData = JSON.parse(JSON.stringify(dd3));
+      console.log('🚀 legenTablePointerData', legenTablePointerData);
+
       dd3 = dd3.sort((a, b) => (a.data.value > b.data.value ? 1 : -1));
       // console.log(y0, bisectValueLeft);
       // console.log('🚀 dd3', dd3);
@@ -408,9 +411,9 @@ const ComputationGraph: React.FC<AreaGraphProps> = ({
         dd3[0] = dd00;
       }
       // console.log('y0', y0);
-      console.log(dd00, dd11);
+      // console.log(dd00, dd11);
       if (width < 10) return null;
-      console.log('y0', y0);
+      // console.log('y0', y0);
       // console.log(dd3[0]);
 
       // console.log(index0, index1);
@@ -427,12 +430,14 @@ const ComputationGraph: React.FC<AreaGraphProps> = ({
   legenddata = legenddata.splice(0);
   if (filteredEventSeries) {
     filteredEventSeries.map((linedata, index) => {
-      const curr =
-        eventSeries && eventSeries[index]
-          ? eventSeries[index].data[eventSeries[index].data.length - 1].value
-              .toFixed(2)
-              .toString()
-          : 'NaN';
+      const pointerElement = legenTablePointerData
+        ? legenTablePointerData.filter(
+            (singleMetric) => singleMetric.metricName === linedata.metricName
+          )[0]
+        : undefined;
+      const curr = pointerElement
+        ? pointerElement.data.value.toFixed(2).toString()
+        : '';
 
       const avg = (
         linedata.data.map((d) => (d.value ? d.value : 0)).reduce(getSum, 0) /
@@ -441,34 +446,23 @@ const ComputationGraph: React.FC<AreaGraphProps> = ({
         .toFixed(2)
         .toString();
 
-      const max = linedata.data
-        .map((d) => d.value)
-        .reduce(getMax, 0)
-        .toFixed(2)
-        .toString();
-
-      const min = linedata.data
-        .map((d) => d.value)
-        .reduce(getMin, parseFloat(max))
-        .toFixed(2)
-        .toString();
-
       if (linedata.data !== undefined)
         legenddata[index] = {
-          value: [linedata.metricName, min, max, avg, curr],
+          value: [linedata.metricName, avg, curr],
           baseColor: linedata.baseColor,
         };
     });
   }
   if (filteredClosedSeries) {
     filteredClosedSeries.map((linedata, index) => {
-      const curr =
-        closedSeries && closedSeries[index]
-          ? closedSeries[index].data[closedSeries[index].data.length - 1].value
-              .toFixed(2)
-              .toString()
-          : 'NaN';
-
+      const pointerElement = legenTablePointerData
+        ? legenTablePointerData.filter(
+            (singleMetric) => singleMetric.metricName === linedata.metricName
+          )[0]
+        : undefined;
+      const curr = pointerElement
+        ? pointerElement.data.value.toFixed(2).toString()
+        : '';
       const avg = (
         linedata.data.map((d) => (d.value ? d.value : 0)).reduce(getSum, 0) /
         linedata.data.length
@@ -476,21 +470,9 @@ const ComputationGraph: React.FC<AreaGraphProps> = ({
         .toFixed(2)
         .toString();
 
-      const max = linedata.data
-        .map((d) => d.value)
-        .reduce(getMax, 0)
-        .toFixed(2)
-        .toString();
-
-      const min = linedata.data
-        .map((d) => d.value)
-        .reduce(getMin, parseFloat(max))
-        .toFixed(2)
-        .toString();
-
       if (linedata.data !== undefined)
         legenddata[index + eventSeriesCount] = {
-          value: [linedata.metricName, min, max, avg, curr],
+          value: [linedata.metricName, avg, curr],
           baseColor: linedata.baseColor,
         };
     });
@@ -498,12 +480,14 @@ const ComputationGraph: React.FC<AreaGraphProps> = ({
 
   if (filteredOpenSeries) {
     filteredOpenSeries.map((linedata, index) => {
-      const curr =
-        openSeries && openSeries[index]
-          ? openSeries[index].data[openSeries[index].data.length - 1].value
-              .toFixed(2)
-              .toString()
-          : 'NaN';
+      const pointerElement = legenTablePointerData
+        ? legenTablePointerData.filter(
+            (singleMetric) => singleMetric.metricName === linedata.metricName
+          )[0]
+        : undefined;
+      const curr = pointerElement
+        ? pointerElement.data.value.toFixed(2).toString()
+        : '';
 
       const avg = (
         linedata.data.map((d) => (d.value ? d.value : 0)).reduce(getSum, 0) /
@@ -512,21 +496,9 @@ const ComputationGraph: React.FC<AreaGraphProps> = ({
         .toFixed(2)
         .toString();
 
-      const max = linedata.data
-        .map((d) => d.value)
-        .reduce(getMax, 0)
-        .toFixed(2)
-        .toString();
-
-      const min = linedata.data
-        .map((d) => d.value)
-        .reduce(getMin, parseFloat(max))
-        .toFixed(2)
-        .toString();
-
       if (linedata.data !== undefined)
         legenddata[index + eventSeriesCount + closedSeriesCount] = {
-          value: [linedata.metricName, min, max, avg, curr],
+          value: [linedata.metricName, avg, curr],
           baseColor: linedata.baseColor,
         };
     });
@@ -550,10 +522,19 @@ const ComputationGraph: React.FC<AreaGraphProps> = ({
     setfilteredOpenSeries(eventSeries);
   }
   return (
-    <div>
+    <div
+      onMouseLeave={() => hideTooltip()}
+      style={{
+        width: 600,
+        height: 600,
+        overflow: 'hidden',
+        // background: 'pink',
+      }}
+    >
       <svg
         width={width}
         height={height}
+        onClickCapture={() => console.log('Click')}
         onDoubleClick={() => {
           setFilteredSeries(closedSeries);
           setfilteredOpenSeries(openSeries);
@@ -587,6 +568,7 @@ const ComputationGraph: React.FC<AreaGraphProps> = ({
           xScale={dateScale}
           yScale={valueScale}
           showGrid={showGrid}
+          {...rest}
         >
           <Brush
             key="brush"
@@ -606,7 +588,7 @@ const ComputationGraph: React.FC<AreaGraphProps> = ({
               fillOpacity: '0.2',
             }}
             onMouseMove={handleTooltip}
-            onMouseLeave={() => hideTooltip()}
+            // onMouseLeave={() => hideTooltip()}
           />
           {showTips && tooltipData && (
             <g key={`tooltip-points`}>
@@ -712,7 +694,7 @@ const ComputationGraph: React.FC<AreaGraphProps> = ({
       {showLegend && (
         <LegendTable
           data={legenddata}
-          heading={['', 'Min', 'Max', 'Avg', 'Curr']}
+          heading={['Metric Name', 'Avg', 'Curr']}
           width={width}
           height={legendTableHeight}
           backgroundTransparent={backgroundTransparent}
