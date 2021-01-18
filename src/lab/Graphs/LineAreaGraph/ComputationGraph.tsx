@@ -109,6 +109,7 @@ const ComputationGraph: React.FC<AreaGraphProps> = ({
   const [filteredClosedSeries, setFilteredSeries] = useState(closedSeries);
   const [filteredOpenSeries, setfilteredOpenSeries] = useState(openSeries);
   const [filteredEventSeries, setfilteredEventSeries] = useState(eventSeries);
+  const [firstMouseEnterGraph, setMouseEnterGraph] = useState(false);
   const [dataRender, setAutoRender] = useState(true);
 
   const closedSeriesCount = filteredClosedSeries
@@ -290,6 +291,9 @@ const ComputationGraph: React.FC<AreaGraphProps> = ({
       y = y - margin.top;
       const x0 = dateScale.invert(x);
       const y0 = valueScale.invert(y);
+      if (firstMouseEnterGraph === false) {
+        setMouseEnterGraph(true);
+      }
       // containerX = 'clientX' in event ? event.clientX : 0;
       // containerY = 'clientY' in event ? event.clientY : 0;
       dd3 = dd3.splice(0);
@@ -437,7 +441,7 @@ const ComputationGraph: React.FC<AreaGraphProps> = ({
         : undefined;
       const curr = pointerElement
         ? pointerElement.data.value.toFixed(2).toString()
-        : '';
+        : linedata.data[linedata.data.length - 1].value.toFixed(2).toString();
 
       const avg = (
         linedata.data.map((d) => (d.value ? d.value : 0)).reduce(getSum, 0) /
@@ -462,7 +466,9 @@ const ComputationGraph: React.FC<AreaGraphProps> = ({
         : undefined;
       const curr = pointerElement
         ? pointerElement.data.value.toFixed(2).toString()
-        : '';
+        : firstMouseEnterGraph
+        ? '--'
+        : linedata.data[linedata.data.length - 1].value.toFixed(2).toString();
       const avg = (
         linedata.data.map((d) => (d.value ? d.value : 0)).reduce(getSum, 0) /
         linedata.data.length
@@ -487,7 +493,9 @@ const ComputationGraph: React.FC<AreaGraphProps> = ({
         : undefined;
       const curr = pointerElement
         ? pointerElement.data.value.toFixed(2).toString()
-        : '';
+        : firstMouseEnterGraph
+        ? '--'
+        : linedata.data[linedata.data.length - 1].value.toFixed(2).toString();
 
       const avg = (
         linedata.data.map((d) => (d.value ? d.value : 0)).reduce(getSum, 0) /
@@ -589,6 +597,7 @@ const ComputationGraph: React.FC<AreaGraphProps> = ({
             }}
             onMouseMove={handleTooltip}
             // onMouseLeave={() => hideTooltip()}
+            // ={()=>console.log('d')}
           />
           {showTips && tooltipData && (
             <g key={`tooltip-points`}>
