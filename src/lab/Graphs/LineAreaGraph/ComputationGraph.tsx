@@ -4,29 +4,33 @@
 import { Bounds } from '@visx/brush/lib/types';
 import {
   Brush,
+  defaultStyles,
   Line,
   localPoint,
   scaleLinear,
   scaleTime,
+  Tooltip,
   useTooltip,
 } from '@visx/visx';
 import { bisector, extent, max } from 'd3-array';
+import moment from 'moment';
+// import { timeFormat } from 'd3-time-format';
 import React, { useCallback, useMemo, useState } from 'react';
 import { AreaGrapher, DataValue, LegendData, ToolTipInterface } from './base';
 import { LegendTable } from './LegendTable';
 import { PlotLineAreaGraph } from './PlotLineAreaGraph';
 import { useStyles } from './styles';
-
 type TooltipData = ToolTipInterface;
 // Initialize some variables
 // let containerX: number;
 // let containerY: number;
-
+// const formatDate = timeFormat("%b %d, '%y");
 let dd1: DataValue;
 let dd0: DataValue;
 let i: number;
 let j: number;
 let indexer: number;
+// const formatDate = timeFormat("%b %d, '%y");
 
 const bisectDate = bisector<DataValue, Date>((d) => new Date(d.date)).left;
 const bisectValueLeft = bisector<ToolTipInterface, number>((d) => d.data.value)
@@ -36,13 +40,23 @@ const bisectValueLeft = bisector<ToolTipInterface, number>((d) => d.data.value)
 const brushMargin = { top: 10, bottom: 15, left: 50, right: 20 };
 const chartSeparation = 10;
 
-// const tooltipStyles = {
-//   ...defaultStyles,
-//   background: '#0A1818',
-//   border: '1px solid white',
-//   color: 'white',
-// };
+const tooltipStyles = {
+  ...defaultStyles,
+  background: '#2B333B',
 
+  marginTop: '1rem',
+  marginLeft: '3rem',
+  // border: '1px sol',
+  color: 'white',
+};
+const tooltipDateStyles = {
+  ...defaultStyles,
+  background: '#5252F6',
+  marginTop: '0.5rem',
+  // marginLeft: '3rem',
+  // border: '1px sol',
+  color: 'white',
+};
 // accessors
 const getDate = (d: DataValue) => new Date(d.date);
 const getValue = (d: DataValue) => d.value;
@@ -247,8 +261,8 @@ const ComputationGraph: React.FC<AreaGraphProps> = ({
     hideTooltip,
 
     tooltipData,
-    // tooltipLeft,
-    // tooltipTop,
+    tooltipLeft = 0,
+    tooltipTop = 0,
   } = useTooltip<TooltipData>({
     // initial tooltip state
     tooltipOpen: true,
@@ -403,6 +417,8 @@ const ComputationGraph: React.FC<AreaGraphProps> = ({
 
       showTooltip({
         tooltipData: dd3[0],
+        tooltipLeft: dateScale(getDate(dd3[0].data)),
+        tooltipTop: valueScale(getValue(dd3[0].data)),
       });
     },
     [showTooltip, dateScale, closedSeries, openSeries, width]
@@ -629,23 +645,68 @@ const ComputationGraph: React.FC<AreaGraphProps> = ({
           </Tooltip>
         )} */}
       </svg>
-      {/* {tooltipData && (
-        <Tooltip top={tooltipTop} left={tooltipLeft} style={tooltipStyles}>
-          {tooltipData.map((d, i) => (
-            <div
-              style={{ padding: '5px', display: 'flex' }}
-              key={`tooltip- ${d.metricName}`}
-            >
-              <div className={classes.tooltipData}>
-                <hr color={'red'} className={classes.hr} />
-                <span style={{ color: 'white', paddingLeft: '0.5em' }}>{`${
-                  d.metricName
-                }:  ${getValue(d.data[0]).toFixed(2)}`}</span>
+      {tooltipData && (
+        <div>
+          <Tooltip
+            top={tooltipTop + margin.top}
+            left={tooltipLeft + margin.left}
+            style={tooltipStyles}
+          >
+            {
+              <div
+                style={{ padding: '5px', display: 'flex' }}
+                key={`tooltipName-value- ${tooltipData.metricName}`}
+              >
+                <div className={classes.tooltipData}>
+                  <hr color={tooltipData.baseColor} className={classes.hr} />
+                  <span style={{ color: 'white', paddingLeft: '0.5em' }}>{`${
+                    tooltipData.metricName
+                  }:  ${getValue(tooltipData.data).toFixed(2)}`}</span>
+                </div>
               </div>
-            </div>
-          ))}
-          {console.log('xy:', tooltipLeft, tooltipTop)}
-        </Tooltip>
+            }
+          </Tooltip>
+          <Tooltip top={height} left={tooltipLeft} style={tooltipDateStyles}>
+            {
+              <div
+                style={{ padding: '5px', display: 'flex' }}
+                key={`tooltipDate- ${tooltipData.metricName}`}
+              >
+                <div className={classes.tooltipData}>
+                  <span
+                    style={{ color: 'white', paddingLeft: '0.5em' }}
+                  >{` ${moment(new Date(getDate(tooltipData.data))).format(
+                    'MMM D,YYYY h:mm:ss a'
+                  )}`}</span>
+                </div>
+              </div>
+            }
+          </Tooltip>
+        </div>
+      )}
+      {/* {tooltipData && (
+        <div>
+          <TooltipWithBounds
+            key={Math.random()}
+            top={tooltipTop - 12}
+            left={tooltipLeft + 12}
+            style={tooltipStyles}
+          >
+            {`$${getValue(tooltipData.data)}`}
+          </TooltipWithBounds>
+          <Tooltip
+            top={innerHeight + margin.top - 14}
+            left={tooltipLeft}
+            style={{
+              ...defaultStyles,
+              minWidth: 72,
+              textAlign: 'center',
+              transform: 'translateX(-50%)',
+            }}
+          >
+            {getDate(tooltipData.data)}
+          </Tooltip>
+        </div>
       )} */}
 
       {showLegend && (
