@@ -31,6 +31,7 @@ let dd0: DataValue;
 let i: number;
 let j: number;
 let indexer: number;
+let toolTipPointLength: number;
 // const formatDate = timeFormat("%b %d, '%y");
 
 const bisectDate = bisector<DataValue, Date>((d) => new Date(d.date)).left;
@@ -281,12 +282,12 @@ const ComputationGraph: React.FC<AreaGraphProps> = ({
   // };
 
   // tooltip handler
-  let dd3: ToolTipInterface[] = [];
 
   const handleTooltip = useCallback(
     (
       event: React.TouchEvent<SVGRectElement> | React.MouseEvent<SVGRectElement>
     ) => {
+      let dd3: ToolTipInterface[] = [];
       let { x, y } = localPoint(event) || { x: 0, y: 0 };
       x = x - margin.left;
       y = y - margin.top;
@@ -297,7 +298,7 @@ const ComputationGraph: React.FC<AreaGraphProps> = ({
       }
       // containerX = 'clientX' in event ? event.clientX : 0;
       // containerY = 'clientY' in event ? event.clientY : 0;
-      dd3 = dd3.splice(0);
+      dd3 = dd3.slice(0, 0);
       i = 0;
       if (closedSeries) {
         for (j = 0; j < closedSeries.length; j++) {
@@ -348,35 +349,35 @@ const ComputationGraph: React.FC<AreaGraphProps> = ({
         }
       }
 
-      if (eventSeries) {
-        for (j = 0; j < eventSeries.length; j++) {
-          indexer = bisectDate(eventSeries[j].data, x0, 1);
-          dd0 = eventSeries[j].data[indexer - 1];
-          dd1 = eventSeries[j].data[indexer];
+      // if (eventSeries) {
+      //   for (j = 0; j < eventSeries.length; j++) {
+      //     indexer = bisectDate(eventSeries[j].data, x0, 1);
+      //     dd0 = eventSeries[j].data[indexer - 1];
+      //     dd1 = eventSeries[j].data[indexer];
 
-          if (dd1) {
-            dd3[i] =
-              x0.valueOf() - dd0.date > dd1.date - x0.valueOf()
-                ? {
-                    metricName: eventSeries[j].metricName,
-                    data: dd1,
-                    baseColor: eventSeries[j].baseColor,
-                  }
-                : {
-                    metricName: eventSeries[j].metricName,
-                    data: dd0,
-                    baseColor: eventSeries[j].baseColor,
-                  };
-            i++;
-          }
-        }
-      }
+      //     if (dd1) {
+      //       dd3[i] =
+      //         x0.valueOf() - dd0.date > dd1.date - x0.valueOf()
+      //           ? {
+      //               metricName: eventSeries[j].metricName,
+      //               data: dd1,
+      //               baseColor: eventSeries[j].baseColor,
+      //             }
+      //           : {
+      //               metricName: eventSeries[j].metricName,
+      //               data: dd0,
+      //               baseColor: eventSeries[j].baseColor,
+      //             };
+      //       i++;
+      //     }
+      //   }
+      // }
 
       dd3 = dd3.sort((a, b) => (a.data.date > b.data.date ? 1 : -1));
       const firstToolTipData = dd3[0];
       dd3 = dd3.filter((elem) => elem.data.date <= firstToolTipData.data.date);
       legenTablePointerData = JSON.parse(JSON.stringify(dd3));
-      console.log('🚀 legenTablePointerData', legenTablePointerData);
+      // console.log('🚀 legenTablePointerData', legenTablePointerData);
 
       dd3 = dd3.sort((a, b) => (a.data.value > b.data.value ? 1 : -1));
       // console.log(y0, bisectValueLeft);
@@ -417,6 +418,42 @@ const ComputationGraph: React.FC<AreaGraphProps> = ({
         closetValue = dd00.data.value;
       }
       dd3 = dd3.filter((lineData) => lineData.data.value === closetValue);
+      toolTipPointLength = dd3.length;
+      if (eventSeries) {
+        for (j = 0; j < eventSeries.length; j++) {
+          indexer = bisectDate(eventSeries[j].data, x0, 1);
+          dd0 = eventSeries[j].data[indexer - 1];
+          dd1 = eventSeries[j].data[indexer];
+
+          if (
+            dd1 &&
+            (toolTipPointLength - 1 < 0 ||
+              dd1.date === dd3[toolTipPointLength - 1].data.date)
+          ) {
+            dd3[i] = {
+              metricName: eventSeries[j].metricName,
+              data: dd1,
+              baseColor: eventSeries[j].baseColor,
+            };
+
+            i++;
+          } else if (
+            dd0 &&
+            (toolTipPointLength - 1 < 0 ||
+              dd0.date === dd3[toolTipPointLength - 1].data.date)
+          ) {
+            dd3[i] = {
+              metricName: eventSeries[j].metricName,
+              data: dd1,
+              baseColor: eventSeries[j].baseColor,
+            };
+
+            i++;
+          }
+        }
+      }
+      dd3 = dd3.slice(0, i);
+
       // console.log('y0', y0);
       // console.log(dd00, dd11);
       if (width < 10) return null;
@@ -431,7 +468,7 @@ const ComputationGraph: React.FC<AreaGraphProps> = ({
         tooltipTop: valueScale(getValue(dd3[0].data)),
       });
     },
-    [showTooltip, dateScale, closedSeries, openSeries, width]
+    [showTooltip, dateScale, closedSeries, openSeries, eventSeries, width]
   );
   // legendData
   legenddata = legenddata.splice(0);
@@ -608,29 +645,31 @@ const ComputationGraph: React.FC<AreaGraphProps> = ({
             // onMouseLeave={() => hideTooltip()}
             // ={()=>console.log('d')}
           />
-          {showTips &&
-            tooltipData &&
-            tooltipData.map((lineData) => (
-              <g key={`tooltip-points`}>
-                <Line
-                  from={{ x: dateScale(getDate(lineData.data)), y: 0 }}
-                  to={{ x: dateScale(getDate(lineData.data)), y: yMax }}
-                  className={classes.tooltipLine}
-                />
-                <circle
-                  key={`${lineData.metricName}-toolTipPoint`}
-                  cx={dateScale(getDate(lineData.data))}
-                  cy={valueScale(getValue(lineData.data))}
-                  r={7}
-                  fill={'#5252F6'}
-                  fillOpacity={1}
-                  stroke="white"
-                  strokeOpacity={1}
-                  strokeWidth={2}
-                  pointerEvents="none"
-                />
-              </g>
-            ))}
+          {showTips && tooltipData && (
+            <g key={`toolTipPointsGroup`}>
+              <circle
+                key={`${tooltipData[0].metricName}-toolTipPoint`}
+                cx={dateScale(getDate(tooltipData[0].data))}
+                cy={valueScale(getValue(tooltipData[0].data))}
+                r={7}
+                fill={'#5252F6'}
+                fillOpacity={1}
+                stroke="white"
+                strokeOpacity={1}
+                strokeWidth={2}
+                pointerEvents="none"
+              />
+            </g>
+          )}
+
+          {showTips && tooltipData && (
+            <Line
+              key={`${tooltipData[0].metricName}-toolTipLine`}
+              from={{ x: dateScale(getDate(tooltipData[0].data)), y: 0 }}
+              to={{ x: dateScale(getDate(tooltipData[0].data)), y: yMax }}
+              className={classes.tooltipLine}
+            />
+          )}
         </PlotLineAreaGraph>
       </svg>
       {tooltipData && (
@@ -672,30 +711,6 @@ const ComputationGraph: React.FC<AreaGraphProps> = ({
           </Tooltip>
         </div>
       )}
-      {/* {tooltipData && (
-        <div>
-          <TooltipWithBounds
-            key={Math.random()}
-            top={tooltipTop - 12}
-            left={tooltipLeft + 12}
-            style={tooltipStyles}
-          >
-            {`$${getValue(tooltipData.data)}`}
-          </TooltipWithBounds>
-          <Tooltip
-            top={innerHeight + margin.top - 14}
-            left={tooltipLeft}
-            style={{
-              ...defaultStyles,
-              minWidth: 72,
-              textAlign: 'center',
-              transform: 'translateX(-50%)',
-            }}
-          >
-            {getDate(tooltipData.data)}
-          </Tooltip>
-        </div>
-      )} */}
 
       {showLegend && (
         <LegendTable

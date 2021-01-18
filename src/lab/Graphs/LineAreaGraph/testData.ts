@@ -31,7 +31,6 @@ const data22: DataValue[] = [
   { date: 8000, value: 30 },
 ];
 const data3: DataValue[] = [
-  { date: 2000, value: 1 },
   { date: 3000, value: 1 },
   { date: 4000, value: 0 },
   { date: 5000, value: 0 },
@@ -42,7 +41,6 @@ const data3: DataValue[] = [
   { date: 10000, value: 0 },
 ];
 const data4: DataValue[] = [
-  { date: 2000, value: 0 },
   { date: 3000, value: 0 },
   { date: 4000, value: 0 },
   { date: 5000, value: 0 },
