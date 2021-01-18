@@ -21,7 +21,7 @@ import { LegendTable } from './LegendTable';
 import { PlotLineAreaGraph } from './PlotLineAreaGraph';
 import { useStyles } from './styles';
 
-type TooltipData = ToolTipInterface;
+type TooltipData = Array<ToolTipInterface>;
 // Initialize some variables
 // let containerX: number;
 // let containerY: number;
@@ -387,6 +387,7 @@ const ComputationGraph: React.FC<AreaGraphProps> = ({
       // );
       // // console.log('🚀dd3', dd3);
       let index0 = 0;
+      let closetValue: number;
       // let index1 = 0;
       let dd00: ToolTipInterface = {
         metricName: '',
@@ -405,16 +406,17 @@ const ComputationGraph: React.FC<AreaGraphProps> = ({
       if (dd11 && dd00) {
         // index1 = bisectValueRight(dd3, y0);
         // // index1 = bisectValueRight(dd3, y0);
-        dd3[0] =
+        closetValue =
           Math.abs(y0.valueOf() - dd00.data.value) >
           Math.abs(y0.valueOf() - dd11.data.value)
-            ? dd11
-            : dd00;
+            ? dd11.data.value
+            : dd00.data.value;
       } else if (dd11 && !dd00) {
-        dd3[0] = dd11;
+        closetValue = dd11.data.value;
       } else if (dd00 && !dd11) {
-        dd3[0] = dd00;
+        closetValue = dd00.data.value;
       }
+      dd3 = dd3.filter((lineData) => lineData.data.value === closetValue);
       // console.log('y0', y0);
       // console.log(dd00, dd11);
       if (width < 10) return null;
@@ -424,7 +426,7 @@ const ComputationGraph: React.FC<AreaGraphProps> = ({
       // console.log(index0, index1);
 
       showTooltip({
-        tooltipData: dd3[0],
+        tooltipData: dd3,
         tooltipLeft: dateScale(getDate(dd3[0].data)),
         tooltipTop: valueScale(getValue(dd3[0].data)),
       });
@@ -441,10 +443,14 @@ const ComputationGraph: React.FC<AreaGraphProps> = ({
           )[0]
         : undefined;
       const curr = pointerElement
-        ? pointerElement.data.value.toFixed(2).toString()
+        ? pointerElement.data.value === 1
+          ? 'True'
+          : 'False'
         : firstMouseEnterGraph
         ? '--'
-        : linedata.data[linedata.data.length - 1].value.toFixed(2).toString();
+        : linedata.data[linedata.data.length - 1].value === 1
+        ? 'True'
+        : 'False';
 
       const avg = (
         linedata.data.map((d) => (d.value ? d.value : 0)).reduce(getSum, 0) /
@@ -602,85 +608,67 @@ const ComputationGraph: React.FC<AreaGraphProps> = ({
             // onMouseLeave={() => hideTooltip()}
             // ={()=>console.log('d')}
           />
-          {showTips && tooltipData && (
-            <g key={`tooltip-points`}>
-              <Line
-                from={{ x: dateScale(getDate(tooltipData.data)), y: 0 }}
-                to={{ x: dateScale(getDate(tooltipData.data)), y: yMax }}
-                className={classes.tooltipLine}
-              />
-              <circle
-                key={`${tooltipData.metricName}-toolTipPoint`}
-                cx={dateScale(getDate(tooltipData.data))}
-                cy={valueScale(getValue(tooltipData.data))}
-                r={7}
-                fill={'#5252F6'}
-                fillOpacity={1}
-                stroke="white"
-                strokeOpacity={1}
-                strokeWidth={2}
-                pointerEvents="none"
-              />
-            </g>
-          )}
-        </PlotLineAreaGraph>
-        {/* {tooltipData && (
-          <Tooltip top={containerY} left={containerX} style={tooltipStyles}>
-            {dd3.map((d, i) => (
-              <g style={{ padding: '5px', display: 'flex' }} key={`bb- ${i}`}>
-                <g className={classes.tooltipData}>
-                  <hr color={'red'} className={classes.hr} />
-                  <Text fill={'white'}>
-                    {`${d.metricName}:  ${getValue(d.data[0]).toString()}`}
-                  </Text>
-                </g>
+          {showTips &&
+            tooltipData &&
+            tooltipData.map((lineData) => (
+              <g key={`tooltip-points`}>
+                <Line
+                  from={{ x: dateScale(getDate(lineData.data)), y: 0 }}
+                  to={{ x: dateScale(getDate(lineData.data)), y: yMax }}
+                  className={classes.tooltipLine}
+                />
+                <circle
+                  key={`${lineData.metricName}-toolTipPoint`}
+                  cx={dateScale(getDate(lineData.data))}
+                  cy={valueScale(getValue(lineData.data))}
+                  r={7}
+                  fill={'#5252F6'}
+                  fillOpacity={1}
+                  stroke="white"
+                  strokeOpacity={1}
+                  strokeWidth={2}
+                  pointerEvents="none"
+                />
               </g>
             ))}
-          </Tooltip>
-        )} */}
+        </PlotLineAreaGraph>
       </svg>
       {tooltipData && (
         <div>
-          <Tooltip
-            top={tooltipTop + margin.top}
-            left={tooltipLeft + margin.left}
-            style={tooltipStyles}
-          >
-            {
-              <div
-                style={{ padding: '5px', display: 'flex' }}
-                key={`tooltipName-value- ${tooltipData.metricName}`}
-              >
-                <div className={classes.tooltipData}>
-                  <hr color={tooltipData.baseColor} className={classes.hr} />
-                  <span style={{ color: 'white', paddingLeft: '0.5em' }}>{`${
-                    tooltipData.metricName
-                  }:  ${getValue(tooltipData.data).toFixed(2)}`}</span>
-                </div>
-              </div>
-            }
-          </Tooltip>
           <Tooltip top={height} left={tooltipLeft} style={tooltipDateStyles}>
             {
               <div
                 style={{ padding: '5px', display: 'flex' }}
-                key={`tooltipDate- ${tooltipData.metricName}`}
+                key={`tooltipDate-${tooltipData[0].metricName}`}
               >
                 <div className={classes.tooltipData}>
-                  {/* <span
-                    style={{ color: 'white', paddingLeft: '0.5em' }}
-                  >{` ${moment(new Date(getDate(tooltipData.data))).format(
-                    'MMM D,YYYY h:mm:ss a'
-                  )}`}</span> */}
-
                   <span
                     style={{ color: 'white', paddingLeft: '0.5em' }}
-                  >{` ${dayjs(new Date(getDate(tooltipData.data))).format(
+                  >{` ${dayjs(new Date(getDate(tooltipData[0].data))).format(
                     'MMM D,YYYY h:mm:ss a'
                   )}`}</span>
                 </div>
               </div>
             }
+          </Tooltip>
+          <Tooltip
+            top={tooltipTop + margin.top}
+            left={tooltipLeft + margin.left}
+            style={tooltipStyles}
+          >
+            {tooltipData.map((linedata) => (
+              <div
+                style={{ padding: '5px', display: 'flex' }}
+                key={`tooltipName-value- ${linedata.metricName}`}
+              >
+                <div className={classes.tooltipData}>
+                  <hr color={linedata.baseColor} className={classes.hr} />
+                  <span style={{ color: 'white', paddingLeft: '0.5em' }}>{`${
+                    linedata.metricName
+                  }:  ${getValue(linedata.data).toFixed(2)}`}</span>
+                </div>
+              </div>
+            ))}
           </Tooltip>
         </div>
       )}
