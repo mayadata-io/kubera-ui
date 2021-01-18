@@ -57,27 +57,28 @@ const LineAreaGraph: React.FC<AreaGraphProps> = ({
 
   // scales
 
-  let augmentEventSeries: Array<AreaGrapher> = [];
-  if (eventSeries) {
-    augmentEventSeries = JSON.parse(JSON.stringify(eventSeries));
-  }
-  if (augmentEventSeries) {
-    for (let i = 0; i < augmentEventSeries.length; i++) {
-      const seriesDataCount = augmentEventSeries[i].data.length;
-      for (let j = 0; j < seriesDataCount; j++) {
-        if (
-          augmentEventSeries[i].data[j].value === 1 &&
-          ((j + 1 < augmentEventSeries[i].data.length &&
-            augmentEventSeries[i].data[j + 1].value === 0) ||
-            j + 1 >= augmentEventSeries[i].data.length) &&
-          j - 1 >= 0 &&
-          augmentEventSeries[i].data[j - 1].value === 1
-        ) {
-          augmentEventSeries[i].data[j].value = 0;
-        }
-      }
-    }
-  }
+  const augmentEventSeries: Array<AreaGrapher> =
+    filterUndefinedData(eventSeries) ?? [];
+  // if (eventSeries) {
+  //   augmentEventSeries = JSON.parse(JSON.stringify(eventSeries));
+  // }
+  // if (augmentEventSeries) {
+  //   for (let i = 0; i < augmentEventSeries.length; i++) {
+  //     const seriesDataCount = augmentEventSeries[i].data.length;
+  //     for (let j = 0; j < seriesDataCount; j++) {
+  //       if (
+  //         augmentEventSeries[i].data[j].value === 1 &&
+  //         ((j + 1 < augmentEventSeries[i].data.length &&
+  //           augmentEventSeries[i].data[j + 1].value === 0) ||
+  //           j + 1 >= augmentEventSeries[i].data.length) &&
+  //         j - 1 >= 0 &&
+  //         augmentEventSeries[i].data[j - 1].value === 1
+  //       ) {
+  //         // augmentEventSeries[i].data[j].value = 0;
+  //       }
+  //     }
+  //   }
+  // }
   // augmentEventSeries = augmentEventSeries.map((lineData) => ({
   //   metricName: lineData.metricName,
   //   data: lineData.data.sort((a, b) => (a.date > b.date ? 1 : -1)),

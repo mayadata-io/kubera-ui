@@ -228,9 +228,7 @@ const PlotLineAreaGraph: React.FC<AreaChartProps> = ({
               key={`${linedata.metricName}-eventSeries`}
               data={linedata.data}
               x={(d) => xScale(getDate(d)) || 0}
-              y={(d) =>
-                yScale(getStockValue(d) === 1 ? yScale.domain()[1] : 0) || 0
-              }
+              y={(d) => yScale(yScale.domain()[getStockValue(d)]) ?? 0}
               yScale={yScale}
               // strokeWidth={2}
               // stroke={linedata.baseColor}
