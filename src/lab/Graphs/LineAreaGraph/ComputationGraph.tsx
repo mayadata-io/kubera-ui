@@ -445,6 +445,7 @@ const ComputationGraph: React.FC<AreaGraphProps> = ({
       dd3 = dd3.filter((lineData) => lineData.data.value === closetValue);
 
       toolTipPointLength = dd3.length;
+      const eventToolTip: Array<ToolTipInterface> = [];
       if (eventSeries) {
         for (j = 0; j < eventSeries.length; j++) {
           indexer = bisectDate(eventSeries[j].data, x0, 1);
@@ -456,28 +457,38 @@ const ComputationGraph: React.FC<AreaGraphProps> = ({
             (toolTipPointLength - 1 < 0 ||
               dd1.date === dd3[toolTipPointLength - 1].data.date)
           ) {
-            dd3[i] = {
+            eventToolTip[j] = {
               metricName: eventSeries[j].metricName,
               data: dd1,
               baseColor: eventSeries[j].baseColor,
             };
-
-            i++;
+            legenTablePointerData[j + legenTablePointerData.length] =
+              eventToolTip[j];
+            if (dd1.value !== 'False') {
+              dd3[i] = eventToolTip[j];
+              i++;
+            }
           } else if (
             dd0 &&
             (toolTipPointLength - 1 < 0 ||
               dd0.date === dd3[toolTipPointLength - 1].data.date)
           ) {
-            dd3[i] = {
+            eventToolTip[j] = {
               metricName: eventSeries[j].metricName,
               data: dd0,
               baseColor: eventSeries[j].baseColor,
             };
+            legenTablePointerData[j + legenTablePointerData.length] =
+              eventToolTip[j];
 
-            i++;
+            if (dd0.value !== 'False') {
+              dd3[i] = eventToolTip[j];
+              i++;
+            }
           }
         }
       }
+
       dd3 = dd3.slice(0, i);
 
       // console.log('y0', y0);
@@ -506,14 +517,10 @@ const ComputationGraph: React.FC<AreaGraphProps> = ({
           )[0]
         : undefined;
       const curr = pointerElement
-        ? pointerElement.data.value === 1
-          ? 'True'
-          : 'False'
+        ? getValueStr(pointerElement.data)
         : firstMouseEnterGraph
         ? '--'
-        : linedata.data[linedata.data.length - 1].value === 1
-        ? 'True'
-        : 'False';
+        : getValueStr(linedata.data[linedata.data.length - 1]);
 
       const avg = (
         linedata.data.map((d) => (d.value ? d.value : 0)).reduce(getSum, 0) /
