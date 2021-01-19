@@ -5,12 +5,17 @@ export interface DataValue {
 
 export interface AreaGrapher {
   metricName: string;
-  data: Array<DataValue>;
+  data: Array<DataValueString>;
   baseColor?: string;
 }
+export interface DataValueString {
+  date: number | string;
+  value: number | string;
+}
+
 export interface ToolTipInterface {
   metricName: string;
-  data: DataValue;
+  data: DataValueString;
   baseColor?: string;
 }
 

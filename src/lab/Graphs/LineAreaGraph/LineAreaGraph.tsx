@@ -58,8 +58,35 @@ const LineAreaGraph: React.FC<AreaGraphProps> = ({
 
   // scales
 
-  const augmentEventSeries: Array<AreaGrapher> =
-    filterUndefinedData(eventSeries) ?? [];
+  let augmentEventSeries: Array<AreaGrapher> = [];
+  augmentEventSeries = filterUndefinedData(eventSeries) ?? [];
+
+  if (augmentEventSeries) {
+    for (let i = 0; i < augmentEventSeries.length; i++) {
+      for (let j = 0; j < augmentEventSeries[i].data.length; j++) {
+        if (
+          augmentEventSeries[i].data[j].value === 1 &&
+          (j - 1 < 0 ||
+            (j - 1 >= 0 && augmentEventSeries[i].data[j - 1].value === 'False'))
+        ) {
+          augmentEventSeries[i].data[j].value = 'Start';
+        } else if (
+          augmentEventSeries[i].data[j].value === 0 &&
+          j - 1 >= 0 &&
+          (augmentEventSeries[i].data[j - 1].value === 'True' ||
+            augmentEventSeries[i].data[j - 1].value === 'Start')
+        ) {
+          augmentEventSeries[i].data[j].value = 'End';
+        } else if (augmentEventSeries[i].data[j].value === 0) {
+          augmentEventSeries[i].data[j].value = 'False';
+        } else if (augmentEventSeries[i].data[j].value === 1) {
+          augmentEventSeries[i].data[j].value = 'True';
+        }
+      }
+    }
+  }
+  console.log('event Series', augmentEventSeries);
+
   // if (eventSeries) {
   //   augmentEventSeries = JSON.parse(JSON.stringify(eventSeries));
   // }

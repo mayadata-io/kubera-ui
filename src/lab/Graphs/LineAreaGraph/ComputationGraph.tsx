@@ -16,7 +16,12 @@ import { bisector, extent, max } from 'd3-array';
 import dayjs from 'dayjs';
 // import { timeFormat } from 'd3-time-format';
 import React, { useCallback, useMemo, useState } from 'react';
-import { AreaGrapher, DataValue, LegendData, ToolTipInterface } from './base';
+import {
+  AreaGrapher,
+  DataValueString,
+  LegendData,
+  ToolTipInterface,
+} from './base';
 import { LegendTable } from './LegendTable';
 import { PlotLineAreaGraph } from './PlotLineAreaGraph';
 import { useStyles } from './styles';
@@ -26,17 +31,33 @@ type TooltipData = Array<ToolTipInterface>;
 // let containerX: number;
 // let containerY: number;
 // const formatDate = timeFormat("%b %d, '%y");
-let dd1: DataValue;
-let dd0: DataValue;
+let dd1: DataValueString;
+let dd0: DataValueString;
 let i: number;
 let j: number;
 let indexer: number;
 let toolTipPointLength: number;
 // const formatDate = timeFormat("%b %d, '%y");
 
-const bisectDate = bisector<DataValue, Date>((d) => new Date(d.date)).left;
-const bisectValueLeft = bisector<ToolTipInterface, number>((d) => d.data.value)
-  .left;
+// accessors
+// const getDate = (d: DataValue) => new Date(d.date);
+// const getValue = (d: DataValue) => d.value;
+const getDateNum = (d: DataValueString) =>
+  typeof d.date === 'number'
+    ? new Date(d.date)
+    : new Date(parseInt(d.date, 10));
+const getValueNum = (d: DataValueString) =>
+  typeof d.value === 'number' ? d.value : parseInt(d.value, 10);
+
+const getValueStr = (d: DataValueString) =>
+  typeof d.value === 'number' ? d.value.toFixed(2).toString() : d.value;
+//bisectors
+const bisectDate = bisector<DataValueString, Date>(
+  (d) => new Date(getDateNum(d))
+).left;
+const bisectValueLeft = bisector<ToolTipInterface, number>((d) =>
+  getValueNum(d.data)
+).left;
 // const bisectValueRight = bisector<ToolTipInterface, number>((d) => d.data.value)
 //   .right;
 const brushMargin = { top: 10, bottom: 15, left: 50, right: 20 };
@@ -59,9 +80,6 @@ const tooltipDateStyles = {
   // border: '1px sol',
   color: 'white',
 };
-// accessors
-const getDate = (d: DataValue) => new Date(d.date);
-const getValue = (d: DataValue) => d.value;
 
 export type AreaGraphProps = {
   closedSeries?: Array<AreaGrapher>;
@@ -130,8 +148,8 @@ const ComputationGraph: React.FC<AreaGraphProps> = ({
         const seriesCopy = filteredClosedSeries
           .map((lineData) =>
             lineData.data.filter((s) => {
-              const x = getDate(s).getTime();
-              const y = getValue(s);
+              const x = getDateNum(s).getTime();
+              const y = getValueNum(s);
               return x > x0 && x < x1 && y > y0 && y < y1;
             })
           )
@@ -150,8 +168,8 @@ const ComputationGraph: React.FC<AreaGraphProps> = ({
         const seriesCopy = filteredOpenSeries
           .map((lineData) =>
             lineData.data.filter((s) => {
-              const x = getDate(s).getTime();
-              const y = getValue(s);
+              const x = getDateNum(s).getTime();
+              const y = getValueNum(s);
               return x > x0 && x < x1 && y > y0 && y < y1;
             })
           )
@@ -169,9 +187,10 @@ const ComputationGraph: React.FC<AreaGraphProps> = ({
         const seriesCopy = filteredEventSeries
           .map((lineData) =>
             lineData.data.filter((s) => {
-              const x = getDate(s).getTime();
-              const y = getValue(s);
-              return x > x0 && x < x1 && y > y0 && y < y1;
+              const x = getDateNum(s).getTime();
+              // const y = getValueStr(s);
+              // return x > x0 && x < x1 && y > y0 && y < y1;
+              return x > x0 && x < x1;
             })
           )
           .map((linedata, i) => ({
@@ -226,7 +245,7 @@ const ComputationGraph: React.FC<AreaGraphProps> = ({
                     .reduce((rec, d) => rec.concat(d), [])
                 : [{ date: NaN, value: NaN }]
             ),
-          getDate
+          getDateNum
         ) as [Date, Date],
       }),
     [xMax, filteredClosedSeries, filteredOpenSeries, filteredEventSeries]
@@ -251,7 +270,7 @@ const ComputationGraph: React.FC<AreaGraphProps> = ({
                     .reduce((rec, d) => rec.concat(d), [])
                 : [{ date: NaN, value: NaN }]
             ),
-            getValue
+            getValueNum
           ) || 0,
         ],
         nice: true,
@@ -271,8 +290,12 @@ const ComputationGraph: React.FC<AreaGraphProps> = ({
     // initial tooltip state
     tooltipOpen: true,
   });
-  const getSum = (total: number, num: number) => {
-    return total + (num || 0);
+  const getSum = (total: number, num: number | string) => {
+    if (typeof num === 'number') {
+      return total + (num || 0);
+    } else {
+      return total + (parseInt(num, 10) || 0);
+    }
   };
   // const getMin = (acc: number, num: number) => {
   //   return acc > num ? num : acc;
@@ -309,7 +332,8 @@ const ComputationGraph: React.FC<AreaGraphProps> = ({
 
           if (dd1) {
             dd3[i] =
-              x0.valueOf() - dd0.date > dd1.date - x0.valueOf()
+              x0.valueOf() - getDateNum(dd0).valueOf() >
+              getDateNum(dd1).valueOf() - x0.valueOf()
                 ? {
                     metricName: closedSeries[i].metricName,
                     data: dd1,
@@ -333,7 +357,8 @@ const ComputationGraph: React.FC<AreaGraphProps> = ({
 
           if (dd1) {
             dd3[i] =
-              x0.valueOf() - dd0.date > dd1.date - x0.valueOf()
+              x0.valueOf() - getDateNum(dd0).valueOf() >
+              getDateNum(dd1).valueOf() - x0.valueOf()
                 ? {
                     metricName: openSeries[j].metricName,
                     data: dd1,
@@ -408,16 +433,17 @@ const ComputationGraph: React.FC<AreaGraphProps> = ({
         // index1 = bisectValueRight(dd3, y0);
         // // index1 = bisectValueRight(dd3, y0);
         closetValue =
-          Math.abs(y0.valueOf() - dd00.data.value) >
-          Math.abs(y0.valueOf() - dd11.data.value)
-            ? dd11.data.value
-            : dd00.data.value;
+          Math.abs(y0.valueOf() - getValueNum(dd00.data)) >
+          Math.abs(y0.valueOf() - getValueNum(dd11.data))
+            ? getValueNum(dd11.data)
+            : getValueNum(dd00.data);
       } else if (dd11 && !dd00) {
-        closetValue = dd11.data.value;
+        closetValue = getValueNum(dd11.data);
       } else if (dd00 && !dd11) {
-        closetValue = dd00.data.value;
+        closetValue = getValueNum(dd00.data);
       }
       dd3 = dd3.filter((lineData) => lineData.data.value === closetValue);
+
       toolTipPointLength = dd3.length;
       if (eventSeries) {
         for (j = 0; j < eventSeries.length; j++) {
@@ -444,7 +470,7 @@ const ComputationGraph: React.FC<AreaGraphProps> = ({
           ) {
             dd3[i] = {
               metricName: eventSeries[j].metricName,
-              data: dd1,
+              data: dd0,
               baseColor: eventSeries[j].baseColor,
             };
 
@@ -464,8 +490,8 @@ const ComputationGraph: React.FC<AreaGraphProps> = ({
 
       showTooltip({
         tooltipData: dd3,
-        tooltipLeft: dateScale(getDate(dd3[0].data)),
-        tooltipTop: valueScale(getValue(dd3[0].data)),
+        tooltipLeft: dateScale(getDateNum(dd3[0].data)),
+        tooltipTop: valueScale(getValueNum(dd3[0].data)),
       });
     },
     [showTooltip, dateScale, closedSeries, openSeries, eventSeries, width]
@@ -511,10 +537,10 @@ const ComputationGraph: React.FC<AreaGraphProps> = ({
           )[0]
         : undefined;
       const curr = pointerElement
-        ? pointerElement.data.value.toFixed(2).toString()
+        ? getValueStr(pointerElement.data)
         : firstMouseEnterGraph
         ? '--'
-        : linedata.data[linedata.data.length - 1].value.toFixed(2).toString();
+        : getValueStr(linedata.data[linedata.data.length - 1]);
       const avg = (
         linedata.data.map((d) => (d.value ? d.value : 0)).reduce(getSum, 0) /
         linedata.data.length
@@ -538,10 +564,10 @@ const ComputationGraph: React.FC<AreaGraphProps> = ({
           )[0]
         : undefined;
       const curr = pointerElement
-        ? pointerElement.data.value.toFixed(2).toString()
+        ? getValueStr(pointerElement.data)
         : firstMouseEnterGraph
         ? '--'
-        : linedata.data[linedata.data.length - 1].value.toFixed(2).toString();
+        : getValueStr(linedata.data[linedata.data.length - 1]);
 
       const avg = (
         linedata.data.map((d) => (d.value ? d.value : 0)).reduce(getSum, 0) /
@@ -649,8 +675,8 @@ const ComputationGraph: React.FC<AreaGraphProps> = ({
             <g key={`toolTipPointsGroup`}>
               <circle
                 key={`${tooltipData[0].metricName}-toolTipPoint`}
-                cx={dateScale(getDate(tooltipData[0].data))}
-                cy={valueScale(getValue(tooltipData[0].data))}
+                cx={dateScale(getDateNum(tooltipData[0].data))}
+                cy={valueScale(getValueNum(tooltipData[0].data))}
                 r={7}
                 fill={'#5252F6'}
                 fillOpacity={1}
@@ -665,8 +691,8 @@ const ComputationGraph: React.FC<AreaGraphProps> = ({
           {showTips && tooltipData && (
             <Line
               key={`${tooltipData[0].metricName}-toolTipLine`}
-              from={{ x: dateScale(getDate(tooltipData[0].data)), y: 0 }}
-              to={{ x: dateScale(getDate(tooltipData[0].data)), y: yMax }}
+              from={{ x: dateScale(getDateNum(tooltipData[0].data)), y: 0 }}
+              to={{ x: dateScale(getDateNum(tooltipData[0].data)), y: yMax }}
               className={classes.tooltipLine}
             />
           )}
@@ -683,7 +709,7 @@ const ComputationGraph: React.FC<AreaGraphProps> = ({
                 <div className={classes.tooltipData}>
                   <span
                     style={{ color: 'white', paddingLeft: '0.5em' }}
-                  >{` ${dayjs(new Date(getDate(tooltipData[0].data))).format(
+                  >{` ${dayjs(new Date(getDateNum(tooltipData[0].data))).format(
                     'MMM D,YYYY h:mm:ss a'
                   )}`}</span>
                 </div>
@@ -704,7 +730,7 @@ const ComputationGraph: React.FC<AreaGraphProps> = ({
                   <hr color={linedata.baseColor} className={classes.hr} />
                   <span style={{ color: 'white', paddingLeft: '0.5em' }}>{`${
                     linedata.metricName
-                  }:  ${getValue(linedata.data).toFixed(2)}`}</span>
+                  }:  ${getValueStr(linedata.data)}`}</span>
                 </div>
               </div>
             ))}

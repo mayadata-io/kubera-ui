@@ -15,7 +15,7 @@ import {
   Polygon,
 } from '@visx/visx';
 import React from 'react';
-import { AreaGrapher, DataValue } from './base';
+import { AreaGrapher, DataValueString } from './base';
 import { useStyles } from './styles';
 // Initialize some variables
 const axisColor = '#777777';
@@ -46,8 +46,16 @@ const axisLeftTickLabelProps = {
 };
 
 // accessors
-const getDate = (d: DataValue) => new Date(d.date);
-const getStockValue = (d: DataValue) => d.value;
+const getDateNum = (d: DataValueString) =>
+  typeof d.date === 'number'
+    ? new Date(d.date)
+    : new Date(parseInt(d.date, 10));
+const getValueNum = (d: DataValueString) =>
+  typeof d.value === 'number' ? d.value : parseInt(d.value, 10);
+
+const getValueStr = (d: DataValueString) =>
+  typeof d.value === 'number' ? d.value.toFixed(2).toString() : d.value;
+
 let numValue = '';
 interface AreaChartProps {
   data?: Array<AreaGrapher>;
@@ -143,11 +151,11 @@ const PlotLineAreaGraph: React.FC<AreaChartProps> = ({
               toOpacity={0.1}
             />
 
-            <AreaClosed<DataValue>
+            <AreaClosed<DataValueString>
               key={`${linedata.metricName}-line`}
               data={linedata.data}
-              x={(d) => xScale(getDate(d)) || 0}
-              y={(d) => yScale(getStockValue(d)) || 0}
+              x={(d) => xScale(getDateNum(d)) || 0}
+              y={(d) => yScale(getValueNum(d)) || 0}
               yScale={yScale}
               strokeWidth={2}
               stroke={linedata.baseColor}
@@ -161,8 +169,8 @@ const PlotLineAreaGraph: React.FC<AreaChartProps> = ({
                   key={`dataPoint-${d.date}-${d.value}-${linedata.metricName}`}
                 >
                   <circle
-                    cx={xScale(getDate(d))}
-                    cy={yScale(getStockValue(d))}
+                    cx={xScale(getDateNum(d))}
+                    cy={yScale(getValueNum(d))}
                     r={5}
                     fill={linedata.baseColor}
                     fillOpacity={0.7}
@@ -203,11 +211,17 @@ const PlotLineAreaGraph: React.FC<AreaChartProps> = ({
               toOpacity={0.1}
             />
 
-            <AreaClosed<DataValue>
+            <AreaClosed<DataValueString>
               key={`${linedata.metricName}-eventSeries`}
               data={linedata.data}
-              x={(d) => xScale(getDate(d)) || 0}
-              y={(d) => yScale(yScale.domain()[getStockValue(d)]) ?? 0}
+              x={(d) => xScale(getDateNum(d)) || 0}
+              y={(d) => {
+                if (getValueStr(d) === 'False' || getValueStr(d) === 'End') {
+                  return yScale(yScale.domain()[0]) ?? 0;
+                } else {
+                  return yScale(yScale.domain()[1]) ?? 0;
+                }
+              }}
               yScale={yScale}
               // strokeWidth={2}
               // stroke={linedata.baseColor}
@@ -220,13 +234,7 @@ const PlotLineAreaGraph: React.FC<AreaChartProps> = ({
                 <g
                   key={`dataPoint-${d.date}-${d.value}-${linedata.metricName}`}
                 >
-                  {((linedata.data[pointIndex].value === 1 &&
-                    (pointIndex - 1 < 0 ||
-                      (linedata.data[pointIndex - 1] &&
-                        linedata.data[pointIndex - 1].value === 0))) ||
-                    (linedata.data[pointIndex].value === 0 &&
-                      linedata.data[pointIndex - 1] &&
-                      linedata.data[pointIndex - 1].value === 1)) && (
+                  {(getValueStr(d) === 'Start' || getValueStr(d) === 'End') && (
                     <g>
                       <Polygon
                         sides={3}
@@ -235,7 +243,7 @@ const PlotLineAreaGraph: React.FC<AreaChartProps> = ({
                         opacity={0.6}
                         strokeWidth={5}
                         center={{
-                          x: xScale(getDate(d)) ?? 0,
+                          x: xScale(getDateNum(d)) ?? 0,
                           y: yScale(0) ?? 0,
                         }}
                         fill={linedata.baseColor}
@@ -244,9 +252,9 @@ const PlotLineAreaGraph: React.FC<AreaChartProps> = ({
                         style={{ strokeLinejoin: 'round' }}
                       />
                       <Line
-                        from={{ x: xScale(getDate(d)), y: 0 }}
+                        from={{ x: xScale(getDateNum(d)), y: 0 }}
                         to={{
-                          x: xScale(getDate(d)),
+                          x: xScale(getDateNum(d)),
                           y: yMax,
                         }}
                         stroke={linedata.baseColor}
@@ -270,10 +278,10 @@ const PlotLineAreaGraph: React.FC<AreaChartProps> = ({
               refX={2.5}
               fillOpacity={0.6}
             />
-            <LinePath<DataValue>
+            <LinePath<DataValueString>
               data={openLineData.data}
-              x={(d) => xScale(getDate(d)) ?? 0}
-              y={(d) => yScale(getStockValue(d)) ?? 0}
+              x={(d) => xScale(getDateNum(d)) ?? 0}
+              y={(d) => yScale(getValueNum(d)) ?? 0}
               strokeWidth={2}
               stroke={openLineData.baseColor}
               strokeOpacity={0.7}
