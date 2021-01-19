@@ -16,7 +16,6 @@ export type LegendProps = {
   heading?: Array<string>;
   width?: number;
   height?: number;
-  backgroundTransparent?: boolean;
 };
 
 const LegendTable: React.FC<LegendProps> = ({
@@ -24,9 +23,8 @@ const LegendTable: React.FC<LegendProps> = ({
   heading,
   width = 400,
   height = 200,
-  backgroundTransparent = false,
 }) => {
-  const classes = useStyles({ width, height, backgroundTransparent });
+  const classes = useStyles({ width, height });
   return (
     <TableContainer className={classes.table}>
       <Table aria-label="simple table">

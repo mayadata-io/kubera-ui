@@ -1,6 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable consistent-return */
-/* eslint-disable  array-callback-return */
 import { Bounds } from '@visx/brush/lib/types';
 import {
   Brush,
@@ -14,7 +11,6 @@ import {
 } from '@visx/visx';
 import { bisector, extent, max } from 'd3-array';
 import dayjs from 'dayjs';
-// import { timeFormat } from 'd3-time-format';
 import React, { useCallback, useMemo, useState } from 'react';
 import {
   AreaGrapher,
@@ -27,21 +23,14 @@ import { PlotLineAreaGraph } from './PlotLineAreaGraph';
 import { useStyles } from './styles';
 
 type TooltipData = Array<ToolTipInterface>;
-// Initialize some variables
-// let containerX: number;
-// let containerY: number;
-// const formatDate = timeFormat("%b %d, '%y");
+
 let dd1: DataValueString;
 let dd0: DataValueString;
 let i: number;
 let j: number;
 let indexer: number;
 let toolTipPointLength: number;
-// const formatDate = timeFormat("%b %d, '%y");
 
-// accessors
-// const getDate = (d: DataValue) => new Date(d.date);
-// const getValue = (d: DataValue) => d.value;
 const getDateNum = (d: DataValueString) =>
   typeof d.date === 'number'
     ? new Date(d.date)
@@ -58,8 +47,7 @@ const bisectDate = bisector<DataValueString, Date>(
 const bisectValueLeft = bisector<ToolTipInterface, number>((d) =>
   getValueNum(d.data)
 ).left;
-// const bisectValueRight = bisector<ToolTipInterface, number>((d) => d.data.value)
-//   .right;
+
 const brushMargin = { top: 10, bottom: 15, left: 50, right: 20 };
 const chartSeparation = 10;
 let legenTablePointerData: Array<ToolTipInterface>;
@@ -69,15 +57,12 @@ const tooltipStyles = {
 
   marginTop: '1rem',
   marginLeft: '3rem',
-  // border: '1px sol',
   color: 'white',
 };
 const tooltipDateStyles = {
   ...defaultStyles,
   background: '#5252F6',
   marginTop: '0.5rem',
-  // marginLeft: '3rem',
-  // border: '1px sol',
   color: 'white',
 };
 
@@ -100,13 +85,11 @@ export type AreaGraphProps = {
 
 const ComputationGraph: React.FC<AreaGraphProps> = ({
   compact = false,
-  backgroundTransparent = false,
   closedSeries,
   openSeries,
   eventSeries,
   showTips = true,
   showPoints = true,
-  showGrid = true,
   showLegend = true,
   width = 200,
   height = 200,
@@ -120,12 +103,8 @@ const ComputationGraph: React.FC<AreaGraphProps> = ({
   ...rest
 }) => {
   let legenddata: Array<LegendData> = [{ value: [], baseColor: '' }];
-  // let containerX;
-  // let containerY;
   const classes = useStyles({ width, height });
-  // const bisectValueRight = bisector<ToolTipInterface, number>(
-  //   (d) => d.data.value
-  // ).right;
+
   const [filteredClosedSeries, setFilteredSeries] = useState(closedSeries);
   const [filteredOpenSeries, setfilteredOpenSeries] = useState(openSeries);
   const [filteredEventSeries, setfilteredEventSeries] = useState(eventSeries);
@@ -143,14 +122,13 @@ const ComputationGraph: React.FC<AreaGraphProps> = ({
     (domain: Bounds | null) => {
       if (!domain) return;
       setAutoRender(false);
-      const { x0, x1, y0, y1 } = domain;
+      const { x0, x1 } = domain;
       if (filteredClosedSeries) {
         const seriesCopy = filteredClosedSeries
           .map((lineData) =>
             lineData.data.filter((s) => {
               const x = getDateNum(s).getTime();
-              const y = getValueNum(s);
-              return x > x0 && x < x1 && y > y0 && y < y1;
+              return x > x0 && x < x1;
             })
           )
           .map((linedata, i) => ({
@@ -158,8 +136,6 @@ const ComputationGraph: React.FC<AreaGraphProps> = ({
             data: linedata,
             baseColor: filteredClosedSeries[i].baseColor,
           }));
-
-        // .reduce((rec, d) => rec.concat(d), []);
 
         setFilteredSeries(seriesCopy);
       }
@@ -169,8 +145,7 @@ const ComputationGraph: React.FC<AreaGraphProps> = ({
           .map((lineData) =>
             lineData.data.filter((s) => {
               const x = getDateNum(s).getTime();
-              const y = getValueNum(s);
-              return x > x0 && x < x1 && y > y0 && y < y1;
+              return x > x0 && x < x1;
             })
           )
           .map((linedata, i) => ({
@@ -179,8 +154,6 @@ const ComputationGraph: React.FC<AreaGraphProps> = ({
             baseColor: filteredOpenSeries[i].baseColor,
           }));
 
-        // .reduce((rec, d) => rec.concat(d), []);
-
         setfilteredOpenSeries(seriesCopy);
       }
       if (filteredEventSeries) {
@@ -188,8 +161,6 @@ const ComputationGraph: React.FC<AreaGraphProps> = ({
           .map((lineData) =>
             lineData.data.filter((s) => {
               const x = getDateNum(s).getTime();
-              // const y = getValueStr(s);
-              // return x > x0 && x < x1 && y > y0 && y < y1;
               return x > x0 && x < x1;
             })
           )
@@ -199,15 +170,12 @@ const ComputationGraph: React.FC<AreaGraphProps> = ({
             baseColor: filteredEventSeries[i].baseColor,
           }));
 
-        // .reduce((rec, d) => rec.concat(d), []);
-
         setfilteredEventSeries(seriesCopy);
       }
     },
     [filteredClosedSeries, filteredOpenSeries, filteredEventSeries]
   );
 
-  // console.log('container', containerX, containerY);
   const innerHeight = height - margin.top - margin.bottom;
   const topChartBottomMargin = compact
     ? chartSeparation / 2
@@ -297,12 +265,6 @@ const ComputationGraph: React.FC<AreaGraphProps> = ({
       return total + (parseInt(num, 10) || 0);
     }
   };
-  // const getMin = (acc: number, num: number) => {
-  //   return acc > num ? num : acc;
-  // };
-  // const getMax = (acc: number, num: number) => {
-  //   return acc < num ? num : acc;
-  // };
 
   // tooltip handler
 
@@ -310,194 +272,156 @@ const ComputationGraph: React.FC<AreaGraphProps> = ({
     (
       event: React.TouchEvent<SVGRectElement> | React.MouseEvent<SVGRectElement>
     ) => {
-      let dd3: ToolTipInterface[] = [];
-      let { x, y } = localPoint(event) || { x: 0, y: 0 };
-      x = x - margin.left;
-      y = y - margin.top;
-      const x0 = dateScale.invert(x);
-      const y0 = valueScale.invert(y);
-      if (firstMouseEnterGraph === false) {
-        setMouseEnterGraph(true);
-      }
-      // containerX = 'clientX' in event ? event.clientX : 0;
-      // containerY = 'clientY' in event ? event.clientY : 0;
-      dd3 = dd3.slice(0, 0);
-      i = 0;
-      if (closedSeries) {
-        for (j = 0; j < closedSeries.length; j++) {
-          indexer = bisectDate(closedSeries[i].data, x0, 1);
-          dd0 = closedSeries[j].data[indexer - 1];
-          dd1 = closedSeries[j].data[indexer];
-          // console.log('🚀  dd0/1', dd0, dd1);
+      let dd3: ToolTipInterface[] = [
+        { metricName: '', data: dd0, baseColor: '' },
+      ];
+      if (showTips) {
+        let { x, y } = localPoint(event) || { x: 0, y: 0 };
+        x = x - margin.left;
+        y = y - margin.top;
+        const x0 = dateScale.invert(x);
+        const y0 = valueScale.invert(y);
 
-          if (dd1) {
-            dd3[i] =
-              x0.valueOf() - getDateNum(dd0).valueOf() >
-              getDateNum(dd1).valueOf() - x0.valueOf()
-                ? {
-                    metricName: closedSeries[i].metricName,
-                    data: dd1,
-                    baseColor: closedSeries[i].baseColor,
-                  }
-                : {
-                    metricName: closedSeries[i].metricName,
-                    data: dd0,
-                    baseColor: closedSeries[i].baseColor,
-                  };
-            i++;
-          }
+        if (firstMouseEnterGraph === false) {
+          setMouseEnterGraph(true);
         }
-      }
-      if (openSeries) {
-        for (j = 0; j < openSeries.length; j++) {
-          indexer = bisectDate(openSeries[j].data, x0, 1);
-          dd0 = openSeries[j].data[indexer - 1];
-          dd1 = openSeries[j].data[indexer];
-          // console.log('🚀  dd0/1', dd0, dd1);
+        dd3 = dd3.slice(0, 0);
+        i = 0;
+        if (closedSeries) {
+          for (j = 0; j < closedSeries.length; j++) {
+            indexer = bisectDate(closedSeries[i].data, x0, 1);
+            dd0 = closedSeries[j].data[indexer - 1];
+            dd1 = closedSeries[j].data[indexer];
 
-          if (dd1) {
-            dd3[i] =
-              x0.valueOf() - getDateNum(dd0).valueOf() >
-              getDateNum(dd1).valueOf() - x0.valueOf()
-                ? {
-                    metricName: openSeries[j].metricName,
-                    data: dd1,
-                    baseColor: openSeries[j].baseColor,
-                  }
-                : {
-                    metricName: openSeries[j].metricName,
-                    data: dd0,
-                    baseColor: openSeries[j].baseColor,
-                  };
-            i++;
-          }
-        }
-      }
-
-      // if (eventSeries) {
-      //   for (j = 0; j < eventSeries.length; j++) {
-      //     indexer = bisectDate(eventSeries[j].data, x0, 1);
-      //     dd0 = eventSeries[j].data[indexer - 1];
-      //     dd1 = eventSeries[j].data[indexer];
-
-      //     if (dd1) {
-      //       dd3[i] =
-      //         x0.valueOf() - dd0.date > dd1.date - x0.valueOf()
-      //           ? {
-      //               metricName: eventSeries[j].metricName,
-      //               data: dd1,
-      //               baseColor: eventSeries[j].baseColor,
-      //             }
-      //           : {
-      //               metricName: eventSeries[j].metricName,
-      //               data: dd0,
-      //               baseColor: eventSeries[j].baseColor,
-      //             };
-      //       i++;
-      //     }
-      //   }
-      // }
-
-      dd3 = dd3.sort((a, b) => (a.data.date > b.data.date ? 1 : -1));
-      const firstToolTipData = dd3[0];
-      dd3 = dd3.filter((elem) => elem.data.date <= firstToolTipData.data.date);
-      legenTablePointerData = JSON.parse(JSON.stringify(dd3));
-      // console.log('🚀 legenTablePointerData', legenTablePointerData);
-
-      dd3 = dd3.sort((a, b) => (a.data.value > b.data.value ? 1 : -1));
-      // console.log(y0, bisectValueLeft);
-      // console.log('🚀 dd3', dd3);
-
-      // dd3 = dd3.sort((a: ToolTipInterface, b: ToolTipInterface) =>
-      //   a.data.value > b.data.value ? 1 : -1
-      // );
-      // // console.log('🚀dd3', dd3);
-      let index0 = 0;
-      let closetValue: number;
-      // let index1 = 0;
-      let dd00: ToolTipInterface = {
-        metricName: '',
-        data: { date: NaN, value: NaN },
-        baseColor: '',
-      };
-      let dd11: ToolTipInterface = {
-        metricName: '',
-        data: { date: NaN, value: NaN },
-        baseColor: '',
-      };
-
-      index0 = bisectValueLeft(dd3, y0);
-      dd00 = dd3[index0];
-      dd11 = dd3[index0 - 1];
-      if (dd11 && dd00) {
-        // index1 = bisectValueRight(dd3, y0);
-        // // index1 = bisectValueRight(dd3, y0);
-        closetValue =
-          Math.abs(y0.valueOf() - getValueNum(dd00.data)) >
-          Math.abs(y0.valueOf() - getValueNum(dd11.data))
-            ? getValueNum(dd11.data)
-            : getValueNum(dd00.data);
-      } else if (dd11 && !dd00) {
-        closetValue = getValueNum(dd11.data);
-      } else if (dd00 && !dd11) {
-        closetValue = getValueNum(dd00.data);
-      }
-      dd3 = dd3.filter((lineData) => lineData.data.value === closetValue);
-
-      toolTipPointLength = dd3.length;
-      const eventToolTip: Array<ToolTipInterface> = [];
-      if (eventSeries) {
-        for (j = 0; j < eventSeries.length; j++) {
-          indexer = bisectDate(eventSeries[j].data, x0, 1);
-          dd0 = eventSeries[j].data[indexer - 1];
-          dd1 = eventSeries[j].data[indexer];
-
-          if (
-            dd1 &&
-            (toolTipPointLength - 1 < 0 ||
-              dd1.date === dd3[toolTipPointLength - 1].data.date)
-          ) {
-            eventToolTip[j] = {
-              metricName: eventSeries[j].metricName,
-              data: dd1,
-              baseColor: eventSeries[j].baseColor,
-            };
-            legenTablePointerData[j + legenTablePointerData.length] =
-              eventToolTip[j];
-            if (dd1.value !== 'False') {
-              dd3[i] = eventToolTip[j];
-              i++;
-            }
-          } else if (
-            dd0 &&
-            (toolTipPointLength - 1 < 0 ||
-              dd0.date === dd3[toolTipPointLength - 1].data.date)
-          ) {
-            eventToolTip[j] = {
-              metricName: eventSeries[j].metricName,
-              data: dd0,
-              baseColor: eventSeries[j].baseColor,
-            };
-            legenTablePointerData[j + legenTablePointerData.length] =
-              eventToolTip[j];
-
-            if (dd0.value !== 'False') {
-              dd3[i] = eventToolTip[j];
+            if (dd1) {
+              dd3[i] =
+                x0.valueOf() - getDateNum(dd0).valueOf() >
+                getDateNum(dd1).valueOf() - x0.valueOf()
+                  ? {
+                      metricName: closedSeries[i].metricName,
+                      data: dd1,
+                      baseColor: closedSeries[i].baseColor,
+                    }
+                  : {
+                      metricName: closedSeries[i].metricName,
+                      data: dd0,
+                      baseColor: closedSeries[i].baseColor,
+                    };
               i++;
             }
           }
         }
+        if (openSeries) {
+          for (j = 0; j < openSeries.length; j++) {
+            indexer = bisectDate(openSeries[j].data, x0, 1);
+            dd0 = openSeries[j].data[indexer - 1];
+            dd1 = openSeries[j].data[indexer];
+
+            if (dd1) {
+              dd3[i] =
+                x0.valueOf() - getDateNum(dd0).valueOf() >
+                getDateNum(dd1).valueOf() - x0.valueOf()
+                  ? {
+                      metricName: openSeries[j].metricName,
+                      data: dd1,
+                      baseColor: openSeries[j].baseColor,
+                    }
+                  : {
+                      metricName: openSeries[j].metricName,
+                      data: dd0,
+                      baseColor: openSeries[j].baseColor,
+                    };
+              i++;
+            }
+          }
+        }
+
+        dd3 = dd3.sort((a, b) => (a.data.date > b.data.date ? 1 : -1));
+        const firstToolTipData = dd3[0];
+        dd3 = dd3.filter(
+          (elem) => elem.data.date <= firstToolTipData.data.date
+        );
+        legenTablePointerData = JSON.parse(JSON.stringify(dd3));
+
+        dd3 = dd3.sort((a, b) => (a.data.value > b.data.value ? 1 : -1));
+
+        let index0 = 0;
+        let closetValue: number;
+        let dd00: ToolTipInterface = {
+          metricName: '',
+          data: { date: NaN, value: NaN },
+          baseColor: '',
+        };
+        let dd11: ToolTipInterface = {
+          metricName: '',
+          data: { date: NaN, value: NaN },
+          baseColor: '',
+        };
+
+        index0 = bisectValueLeft(dd3, y0);
+        dd00 = dd3[index0];
+        dd11 = dd3[index0 - 1];
+        if (dd11 && dd00) {
+          closetValue =
+            Math.abs(y0.valueOf() - getValueNum(dd00.data)) >
+            Math.abs(y0.valueOf() - getValueNum(dd11.data))
+              ? getValueNum(dd11.data)
+              : getValueNum(dd00.data);
+        } else if (dd11 && !dd00) {
+          closetValue = getValueNum(dd11.data);
+        } else if (dd00 && !dd11) {
+          closetValue = getValueNum(dd00.data);
+        }
+        dd3 = dd3.filter((lineData) => lineData.data.value === closetValue);
+
+        toolTipPointLength = dd3.length;
+        const eventToolTip: Array<ToolTipInterface> = [];
+        if (eventSeries) {
+          for (j = 0; j < eventSeries.length; j++) {
+            indexer = bisectDate(eventSeries[j].data, x0, 1);
+            dd0 = eventSeries[j].data[indexer - 1];
+            dd1 = eventSeries[j].data[indexer];
+
+            if (
+              dd1 &&
+              (toolTipPointLength - 1 < 0 ||
+                dd1.date === dd3[toolTipPointLength - 1].data.date)
+            ) {
+              eventToolTip[j] = {
+                metricName: eventSeries[j].metricName,
+                data: dd1,
+                baseColor: eventSeries[j].baseColor,
+              };
+              legenTablePointerData[j + legenTablePointerData.length] =
+                eventToolTip[j];
+              if (dd1.value !== 'False') {
+                dd3[i] = eventToolTip[j];
+                i++;
+              }
+            } else if (
+              dd0 &&
+              (toolTipPointLength - 1 < 0 ||
+                dd0.date === dd3[toolTipPointLength - 1].data.date)
+            ) {
+              eventToolTip[j] = {
+                metricName: eventSeries[j].metricName,
+                data: dd0,
+                baseColor: eventSeries[j].baseColor,
+              };
+              legenTablePointerData[j + legenTablePointerData.length] =
+                eventToolTip[j];
+
+              if (dd0.value !== 'False') {
+                dd3[i] = eventToolTip[j];
+                i++;
+              }
+            }
+          }
+        }
+
+        dd3 = dd3.slice(0, i);
       }
-
-      dd3 = dd3.slice(0, i);
-
-      // console.log('y0', y0);
-      // console.log(dd00, dd11);
       if (width < 10) return null;
-      // console.log('y0', y0);
-      // console.log(dd3[0]);
-
-      // console.log(index0, index1);
 
       showTooltip({
         tooltipData: dd3,
@@ -590,13 +514,13 @@ const ComputationGraph: React.FC<AreaGraphProps> = ({
         };
     });
   }
-
-  legenddata = legenddata.slice(
-    0,
-    (filteredEventSeries ? filteredEventSeries.length : 0) +
-      (filteredOpenSeries ? filteredOpenSeries.length : 0) +
-      (filteredClosedSeries ? filteredClosedSeries?.length : 0)
-  );
+  // Comment Afterwards
+  // legenddata = legenddata.slice(
+  //   0,
+  //   (filteredEventSeries ? filteredEventSeries.length : 0) +
+  //     (filteredOpenSeries ? filteredOpenSeries.length : 0) +
+  //     (filteredClosedSeries ? filteredClosedSeries?.length : 0)
+  // );
 
   if (
     (filteredClosedSeries !== closedSeries ||
@@ -612,16 +536,13 @@ const ComputationGraph: React.FC<AreaGraphProps> = ({
     <div
       onMouseLeave={() => hideTooltip()}
       style={{
-        width: 600,
-        height: 600,
-        overflow: 'hidden',
-        // background: 'pink',
+        width: width,
+        height: height + legendTableHeight,
       }}
     >
       <svg
         width={width}
         height={height}
-        onClickCapture={() => console.log('Click')}
         onDoubleClick={() => {
           setFilteredSeries(closedSeries);
           setfilteredOpenSeries(openSeries);
@@ -634,11 +555,7 @@ const ComputationGraph: React.FC<AreaGraphProps> = ({
           y={0}
           width={width}
           height={height}
-          className={
-            backgroundTransparent
-              ? classes.rectBaseTransparent
-              : classes.rectBase
-          }
+          className={classes.rectBase}
         />
 
         <PlotLineAreaGraph
@@ -654,11 +571,9 @@ const ComputationGraph: React.FC<AreaGraphProps> = ({
           xMax={xMax}
           xScale={dateScale}
           yScale={valueScale}
-          showGrid={showGrid}
           {...rest}
         >
           <Brush
-            key="brush"
             xScale={dateScale}
             yScale={valueScale}
             width={xMax}
@@ -675,13 +590,11 @@ const ComputationGraph: React.FC<AreaGraphProps> = ({
               fillOpacity: '0.2',
             }}
             onMouseMove={handleTooltip}
-            // onMouseLeave={() => hideTooltip()}
-            // ={()=>console.log('d')}
           />
           {showTips && tooltipData && toolTipPointLength >= 1 && (
-            <g key={`toolTipPointsGroup`}>
+            <g>
               <circle
-                key={`${tooltipData[0].metricName}-toolTipPoint`}
+                // key={`${tooltipData[0].metricName}-toolTipPoint`}
                 cx={dateScale(getDateNum(tooltipData[0].data))}
                 cy={valueScale(getValueNum(tooltipData[0].data))}
                 r={7}
@@ -751,11 +664,9 @@ const ComputationGraph: React.FC<AreaGraphProps> = ({
           heading={['Metric Name', 'Avg', 'Curr']}
           width={width}
           height={legendTableHeight}
-          backgroundTransparent={backgroundTransparent}
         />
       )}
     </div>
   );
 };
-
 export { ComputationGraph };

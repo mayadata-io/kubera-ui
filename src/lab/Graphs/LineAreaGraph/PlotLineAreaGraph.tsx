@@ -92,7 +92,6 @@ const PlotLineAreaGraph: React.FC<AreaChartProps> = ({
   yScale,
   hideBottomAxis = false,
   hideLeftAxis = false,
-  hideRightAxis = false,
   top,
   left,
   children,
@@ -129,13 +128,13 @@ const PlotLineAreaGraph: React.FC<AreaChartProps> = ({
             scale={yScale}
             width={xMax}
             className={classes.grid}
-            pointerEvents="none"
+            // pointerEvents="none"
           />
           <GridColumns
             scale={xScale}
             height={height}
             className={classes.grid}
-            pointerEvents="none"
+            // pointerEvents="none"
           />
         </Group>
       )}
@@ -144,7 +143,7 @@ const PlotLineAreaGraph: React.FC<AreaChartProps> = ({
         closedSeries.map((linedata, i) => (
           <Group key={`${linedata.metricName}-group`}>
             <LinearGradient
-              id={`${i}-linearGragient`}
+              id={`${linedata.metricName}-linearGragient`}
               from={linedata.baseColor}
               to={linedata.baseColor}
               fromOpacity={0.5}
@@ -159,7 +158,7 @@ const PlotLineAreaGraph: React.FC<AreaChartProps> = ({
               yScale={yScale}
               strokeWidth={2}
               stroke={linedata.baseColor}
-              fill={`url(#${i}-linearGragient)`}
+              fill={`url(#${linedata.metricName}-linearGragient)`}
               curve={curveMonotoneX}
             />
 
@@ -192,7 +191,7 @@ const PlotLineAreaGraph: React.FC<AreaChartProps> = ({
       {!hideLeftAxis && (
         <AxisLeft
           scale={yScale}
-          numTicks={4}
+          numTicks={height > 200 ? 5 : 4}
           stroke={axisColor}
           tickFormat={(num) => intToString(num)}
           tickLabelProps={() => axisLeftTickLabelProps}
@@ -204,7 +203,7 @@ const PlotLineAreaGraph: React.FC<AreaChartProps> = ({
         eventSeries.map((linedata, i) => (
           <Group key={`${linedata.metricName}-eventSeries`}>
             <LinearGradient
-              id={`${i}-linearGragient-eventSeries`}
+              id={`${linedata.metricName}-linearGragient-eventSeries`}
               from={linedata.baseColor}
               to={linedata.baseColor}
               fromOpacity={0.1}
@@ -223,14 +222,12 @@ const PlotLineAreaGraph: React.FC<AreaChartProps> = ({
                 }
               }}
               yScale={yScale}
-              // strokeWidth={2}
-              // stroke={linedata.baseColor}
-              fill={`url(#${i}-linearGragient-eventSeries)`}
+              fill={`url(#${linedata.metricName}-linearGragient-eventSeries)`}
               curve={curveStepAfter}
             />
 
             {showPoints &&
-              linedata.data.map((d, pointIndex) => (
+              linedata.data.map((d) => (
                 <g
                   key={`dataPoint-${d.date}-${d.value}-${linedata.metricName}`}
                 >
