@@ -1,6 +1,6 @@
-import { AreaGrapher, DataValue } from './base';
+import { AreaGrapher, DataValueString } from './base';
 
-const data1: DataValue[] = [
+const data1: DataValueString[] = [
   { date: 1000, value: 20 },
   { date: 2000, value: 30 },
   { date: 3000, value: 35 },
@@ -10,7 +10,7 @@ const data1: DataValue[] = [
   { date: 7000, value: 30 },
   // { date: 8000, value: 10 },
 ];
-const data2: DataValue[] = [
+const data2: DataValueString[] = [
   { date: 1000, value: 40 },
   { date: 2000, value: 10 },
   { date: 3000, value: 55 },
@@ -20,7 +20,7 @@ const data2: DataValue[] = [
   { date: 7000, value: 60 },
   { date: 8000, value: 10 },
 ];
-const data22: DataValue[] = [
+const data22: DataValueString[] = [
   { date: 1000, value: 0 },
   { date: 2000, value: 14 },
   { date: 3000, value: 5 },
@@ -30,17 +30,14 @@ const data22: DataValue[] = [
   { date: 7000, value: 20 },
   { date: 8000, value: 30 },
 ];
-const data3: DataValue[] = [
+const data3: DataValueString[] = [
   { date: 3000, value: 1 },
   { date: 4000, value: 0 },
   { date: 5000, value: 0 },
   { date: 6000, value: 0 },
   { date: 7000, value: 0 },
-  { date: 8000, value: 1 },
-  { date: 9000, value: 1 },
-  { date: 10000, value: 0 },
 ];
-const data4: DataValue[] = [
+const data4: DataValueString[] = [
   { date: 3000, value: 0 },
   { date: 4000, value: 0 },
   { date: 5000, value: 0 },
@@ -49,6 +46,13 @@ const data4: DataValue[] = [
   { date: 8000, value: 0 },
   { date: 9000, value: 0 },
   { date: 10000, value: 0 },
+  { date: 11000, value: 1 },
+  { date: 12000, value: 1 },
+  { date: 13000, value: 0 },
+  { date: 14000, value: 0 },
+  { date: 15000, value: 1 },
+  { date: 16000, value: 1 },
+  { date: 17000, value: 0 },
 ];
 const seriestest1: Array<AreaGrapher> = [
   {
