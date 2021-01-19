@@ -678,7 +678,7 @@ const ComputationGraph: React.FC<AreaGraphProps> = ({
             // onMouseLeave={() => hideTooltip()}
             // ={()=>console.log('d')}
           />
-          {showTips && tooltipData && (
+          {showTips && tooltipData && toolTipPointLength >= 1 && (
             <g key={`toolTipPointsGroup`}>
               <circle
                 key={`${tooltipData[0].metricName}-toolTipPoint`}
