@@ -1,3 +1,4 @@
+import { useTheme } from '@material-ui/core';
 import {
   AreaClosed,
   AxisBottom,
@@ -19,37 +20,7 @@ import React from 'react';
 import { AreaGrapher, DataValue } from './base';
 import { useStyles } from './styles';
 
-// Initialize some variables
-const axisColor = '#777777';
-// const axisTextColor = '#B9B9B9';
-
-const axisBottomTickLabelProps = {
-  dy: '0.3rem',
-  textAnchor: 'middle' as const,
-  fontFamily: 'Ubuntu',
-  fontSize: '12px',
-  fontWeight: 400,
-  fill: '#B9B9B9',
-  lineHeight: '12px',
-};
-const axisLeftTickLabelProps = {
-  dy: '0.5em',
-  fontFamily: 'Ubuntu',
-  fontWeight: 400,
-  fontSize: '10px',
-  textAnchor: 'end' as const,
-  lineHeight: '12px',
-  fill: '#B9B9B9',
-};
-const yLabelProps = {
-  fontFamily: 'Ubuntu',
-  fontWeight: 700,
-  fontSize: '12px',
-  lineHeight: '12px',
-  fill: '#FFFFFF',
-};
-
-// accessors
+// Accessors
 const getDateNum = (d: DataValue) =>
   typeof d.date === 'number'
     ? new Date(d.date)
@@ -84,7 +55,6 @@ const dateFormat = (date: number, xAxistimeFormat: string) => {
 };
 
 interface AreaChartProps {
-  data?: Array<AreaGrapher>;
   xScale: AxisScale<number>;
   yScale: AxisScale<number>;
   closedSeries?: Array<AreaGrapher>;
@@ -132,24 +102,44 @@ const PlotLineAreaGraph: React.FC<AreaChartProps> = ({
   yLableOffset = 45,
 }) => {
   const classes = useStyles();
-  // const yMaxValue = yScale.domain()[1];
+  const { palette } = useTheme();
+  const axisBottomTickLabelProps = {
+    dy: '0.3rem',
+    textAnchor: 'middle' as const,
+    fontFamily: 'Ubuntu',
+    fontSize: '12px',
+    fontWeight: 400,
+    fill: palette.text.hint,
+    lineHeight: '12px',
+  };
+  const axisLeftTickLabelProps = {
+    dy: '0.5em',
+    fontFamily: 'Ubuntu',
+    fontWeight: 400,
+    fontSize: '10px',
+    textAnchor: 'end' as const,
+    lineHeight: '12px',
+    fill: palette.text.hint,
+  };
+  const yLabelProps = {
+    fontFamily: 'Ubuntu',
+    fontWeight: 700,
+    fontSize: '12px',
+    lineHeight: '12px',
+    fill: palette.text.primary,
+  };
+
   if (width < 10) return null;
 
   return (
     <Group left={left || margin?.left} top={top || margin?.top}>
       {showGrid && (
         <Group>
-          <GridRows
-            scale={yScale}
-            width={xMax}
-            className={classes.grid}
-            // pointerEvents="none"
-          />
+          <GridRows scale={yScale} width={xMax} className={classes.grid} />
           <GridColumns
             scale={xScale}
             height={height}
             className={classes.grid}
-            // pointerEvents="none"
           />
         </Group>
       )}
@@ -185,7 +175,7 @@ const PlotLineAreaGraph: React.FC<AreaChartProps> = ({
                   <circle
                     cx={xScale(getDateNum(d))}
                     cy={yScale(getValueNum(d))}
-                    r={3}
+                    r={5}
                     fill={linedata.baseColor}
                     fillOpacity={0.7}
                     pointerEvents="none"
@@ -201,7 +191,7 @@ const PlotLineAreaGraph: React.FC<AreaChartProps> = ({
             scale={xScale}
             numTicks={width > 520 ? 6 : 5}
             tickFormat={(num) => dateFormat(num, xAxistimeFormat)}
-            stroke={axisColor}
+            stroke={palette.text.primary}
             tickLabelProps={() => axisBottomTickLabelProps}
           />
         ) : (
@@ -209,7 +199,7 @@ const PlotLineAreaGraph: React.FC<AreaChartProps> = ({
             top={yMax}
             scale={xScale}
             numTicks={width > 520 ? 6 : 5}
-            stroke={axisColor}
+            stroke={palette.text.primary}
             tickLabelProps={() => axisBottomTickLabelProps}
           />
         ))}
@@ -218,11 +208,10 @@ const PlotLineAreaGraph: React.FC<AreaChartProps> = ({
         <AxisLeft
           scale={yScale}
           numTicks={height > 200 ? 7 : 6}
-          stroke={axisColor}
+          stroke={palette.text.primary}
           tickFormat={(num) => intToString(num, unit)}
           tickLabelProps={() => axisLeftTickLabelProps}
           label={yLable}
-          // labelProps={{ fill: 'red' }}
           labelProps={yLabelProps}
           left={left}
           labelOffset={yLableOffset}

@@ -1,5 +1,3 @@
-/* eslint-disable consistent-return */
-/* eslint-disable  array-callback-return */
 import React from 'react';
 import { AreaGrapher, AreaGraphProps } from './base';
 import { ComputationGraph } from './ComputationGraph';
@@ -16,8 +14,8 @@ const filterUndefinedData = (
             (d) =>
               d &&
               d.date &&
-              typeof d.date === 'number' &&
-              typeof d.value === 'number'
+              (typeof d.date === 'number' || typeof d.date === 'string') &&
+              (typeof d.value === 'number' || typeof d.value === 'string')
           )
         )
     : data;

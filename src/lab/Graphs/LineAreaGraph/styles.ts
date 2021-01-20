@@ -1,11 +1,8 @@
 import { makeStyles, Theme } from '@material-ui/core';
 
 interface StyleProps {
-  color?: string;
   width?: number;
   height?: number;
-  align?: string;
-  backgroundTransparent?: boolean;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -62,7 +59,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   tableHeading: {
     paddingLeft: '1.5em',
     fontSize: '0.9rem',
-    color: theme.graph.dashboard.lightBlue,
+    color: theme.graph.legendTableHeading,
     whiteSpace: 'nowrap',
     fontWeight: 500,
   },
@@ -76,7 +73,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     strokeOpacity: 0.2,
   },
   tooltipLine: {
-    stroke: '#5252F6',
+    stroke: theme.graph.toolTip,
     strokeWidth: 4,
     pointerEvents: 'none',
   },
@@ -88,7 +85,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   tooltipDateStyles: {
     marginTop: '0.3rem',
-    backgroundColor: `#5252F6 !important`,
+    backgroundColor: `${theme.graph.toolTip} !important`,
     padding: '0.5rem',
   },
   tooltipData: {
@@ -111,4 +108,5 @@ const useStyles = makeStyles((theme: Theme) => ({
     minWidth: '10%',
   },
 }));
+
 export { useStyles };

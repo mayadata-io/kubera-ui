@@ -1,7 +1,9 @@
+import { useTheme } from '@material-ui/core';
 import { Bounds } from '@visx/brush/lib/types';
 import {
   Brush,
   Line,
+  LinearGradient,
   localPoint,
   scaleLinear,
   scaleTime,
@@ -28,7 +30,7 @@ let i: number;
 let j: number;
 let indexer: number;
 let toolTipPointLength: number;
-
+// Accessor functions
 const getDateNum = (d: DataValue) =>
   typeof d.date === 'number'
     ? new Date(d.date)
@@ -39,14 +41,13 @@ const getValueNum = (d: DataValue) =>
 const getValueStr = (d: DataValue) =>
   typeof d.value === 'number' ? d.value.toFixed(2).toString() : d.value;
 
-//bisectors
+// Bisectors
 const bisectDate = bisector<DataValue, Date>((d) => new Date(getDateNum(d)))
   .left;
 const bisectorValue = bisector<ToolTipInterface, number>((d) =>
   getValueNum(d.data)
 ).left;
 
-// const brushMargin = { top: 10, bottom: 15, left: 30, right: 20 };
 const chartSeparation = 10;
 let legenTablePointerData: Array<ToolTipInterface>;
 
@@ -70,6 +71,8 @@ const ComputationGraph: React.FC<AreaGraphProps> = ({
   toolTiptimeFormat = 'MMM D,YYYY h:mm:ss a',
   ...rest
 }) => {
+  const { palette, graph } = useTheme();
+
   let legenddata: Array<LegendData> = [{ value: [], baseColor: '' }];
   const classes = useStyles({ width, height });
 
@@ -239,7 +242,7 @@ const ComputationGraph: React.FC<AreaGraphProps> = ({
     (
       event: React.TouchEvent<SVGRectElement> | React.MouseEvent<SVGRectElement>
     ) => {
-      let dd3: ToolTipInterface[] = [
+      let pointerDataSelection: ToolTipInterface[] = [
         { metricName: '', data: dd0, baseColor: '' },
       ];
       if (showTips) {
@@ -252,7 +255,6 @@ const ComputationGraph: React.FC<AreaGraphProps> = ({
         if (firstMouseEnterGraph === false) {
           setMouseEnterGraph(true);
         }
-        // dd3 = dd3.slice(0, 0);
         i = 0;
         if (closedSeries) {
           for (j = 0; j < closedSeries.length; j++) {
@@ -261,7 +263,7 @@ const ComputationGraph: React.FC<AreaGraphProps> = ({
             dd1 = closedSeries[j].data[indexer];
 
             if (dd1) {
-              dd3[i] =
+              pointerDataSelection[i] =
                 x0.valueOf() - getDateNum(dd0).valueOf() >
                 getDateNum(dd1).valueOf() - x0.valueOf()
                   ? {
@@ -285,7 +287,7 @@ const ComputationGraph: React.FC<AreaGraphProps> = ({
             dd1 = openSeries[j].data[indexer];
 
             if (dd1) {
-              dd3[i] =
+              pointerDataSelection[i] =
                 x0.valueOf() - getDateNum(dd0).valueOf() >
                 getDateNum(dd1).valueOf() - x0.valueOf()
                   ? {
@@ -303,20 +305,26 @@ const ComputationGraph: React.FC<AreaGraphProps> = ({
           }
         }
 
-        dd3 = dd3.sort((a, b) => (a.data.date > b.data.date ? 1 : -1));
-        const firstToolTipData = dd3[0];
-        dd3 = dd3.filter(
+        pointerDataSelection = pointerDataSelection.sort((a, b) =>
+          a.data.date > b.data.date ? 1 : -1
+        );
+        const firstToolTipData = pointerDataSelection[0];
+        pointerDataSelection = pointerDataSelection.filter(
           (elem) =>
             elem.data &&
             firstToolTipData.data &&
             elem.data.date <= firstToolTipData.data.date
         );
-        legenTablePointerData = JSON.parse(JSON.stringify(dd3));
+        legenTablePointerData = JSON.parse(
+          JSON.stringify(pointerDataSelection)
+        );
 
-        dd3 = dd3.sort((a, b) => (a.data.value > b.data.value ? 1 : -1));
+        pointerDataSelection = pointerDataSelection.sort((a, b) =>
+          a.data.value > b.data.value ? 1 : -1
+        );
 
         let index0 = 0;
-        let closetValue: number | undefined;
+        let closestValue: number | undefined;
         let dd00: ToolTipInterface = {
           metricName: '',
           data: { date: NaN, value: NaN },
@@ -328,25 +336,25 @@ const ComputationGraph: React.FC<AreaGraphProps> = ({
           baseColor: '',
         };
 
-        index0 = bisectorValue(dd3, y0);
-        dd00 = dd3[index0];
-        dd11 = dd3[index0 - 1];
+        index0 = bisectorValue(pointerDataSelection, y0);
+        dd00 = pointerDataSelection[index0];
+        dd11 = pointerDataSelection[index0 - 1];
         if (dd11 && dd00) {
-          closetValue =
+          closestValue =
             Math.abs(y0.valueOf() - getValueNum(dd00.data)) >
             Math.abs(y0.valueOf() - getValueNum(dd11.data))
               ? getValueNum(dd11.data)
               : getValueNum(dd00.data);
         } else if (dd11 && !dd00) {
-          closetValue = getValueNum(dd11.data);
+          closestValue = getValueNum(dd11.data);
         } else if (dd00 && !dd11) {
-          closetValue = getValueNum(dd00.data);
+          closestValue = getValueNum(dd00.data);
         }
-        dd3 = dd3.filter(
-          (lineData) => closetValue && lineData.data.value === closetValue
+        pointerDataSelection = pointerDataSelection.filter(
+          (lineData) => closestValue && lineData.data.value === closestValue
         );
 
-        toolTipPointLength = dd3.length;
+        toolTipPointLength = pointerDataSelection.length;
         const eventToolTip: Array<ToolTipInterface> = [];
         if (eventSeries) {
           for (j = 0; j < eventSeries.length; j++) {
@@ -357,7 +365,8 @@ const ComputationGraph: React.FC<AreaGraphProps> = ({
             if (
               dd1 &&
               (toolTipPointLength - 1 < 0 ||
-                dd1.date === dd3[toolTipPointLength - 1].data.date)
+                dd1.date ===
+                  pointerDataSelection[toolTipPointLength - 1].data.date)
             ) {
               eventToolTip[j] = {
                 metricName: eventSeries[j].metricName,
@@ -367,13 +376,14 @@ const ComputationGraph: React.FC<AreaGraphProps> = ({
               legenTablePointerData[j + legenTablePointerData.length] =
                 eventToolTip[j];
               if (dd1.value !== 'False') {
-                dd3[i] = eventToolTip[j];
+                pointerDataSelection[i] = eventToolTip[j];
                 i++;
               }
             } else if (
               dd0 &&
               (toolTipPointLength - 1 < 0 ||
-                dd0.date === dd3[toolTipPointLength - 1].data.date)
+                dd0.date ===
+                  pointerDataSelection[toolTipPointLength - 1].data.date)
             ) {
               eventToolTip[j] = {
                 metricName: eventSeries[j].metricName,
@@ -384,26 +394,42 @@ const ComputationGraph: React.FC<AreaGraphProps> = ({
                 eventToolTip[j];
 
               if (dd0.value !== 'False') {
-                dd3[i] = eventToolTip[j];
+                pointerDataSelection[i] = eventToolTip[j];
                 i++;
               }
             }
           }
         }
 
-        dd3 = dd3.slice(0, i);
+        pointerDataSelection = pointerDataSelection.slice(0, i);
       }
       if (width < 10) return null;
 
       showTooltip({
-        tooltipData: dd3,
+        tooltipData: pointerDataSelection,
         tooltipLeft:
-          dd3[0] && dd3[0].data ? dateScale(getDateNum(dd3[0].data)) : 0,
+          pointerDataSelection[0] && pointerDataSelection[0].data
+            ? dateScale(getDateNum(pointerDataSelection[0].data))
+            : 0,
         tooltipTop:
-          dd3[0] && dd3[0].data ? valueScale(getValueNum(dd3[0].data)) : 0,
+          pointerDataSelection[0] && pointerDataSelection[0].data
+            ? valueScale(getValueNum(pointerDataSelection[0].data))
+            : 0,
       });
     },
-    [showTooltip, dateScale, closedSeries, openSeries, eventSeries, width]
+    [
+      showTips,
+      width,
+      showTooltip,
+      dateScale,
+      valueScale,
+      margin.left,
+      margin.top,
+      firstMouseEnterGraph,
+      closedSeries,
+      openSeries,
+      eventSeries,
+    ]
   );
   // legendData
   legenddata = legenddata.splice(0);
@@ -483,13 +509,6 @@ const ComputationGraph: React.FC<AreaGraphProps> = ({
         };
     });
   }
-  // Comment Afterwards
-  // legenddata = legenddata.slice(
-  //   0,
-  //   (filteredEventSeries ? filteredEventSeries.length : 0) +
-  //     (filteredOpenSeries ? filteredOpenSeries.length : 0) +
-  //     (filteredClosedSeries ? filteredClosedSeries?.length : 0)
-  // );
 
   if (
     (filteredClosedSeries !== closedSeries ||
@@ -533,6 +552,14 @@ const ComputationGraph: React.FC<AreaGraphProps> = ({
           yScale={valueScale}
           {...rest}
         >
+          <LinearGradient
+            id={'linearGradient-Brush'}
+            from={palette.text.primary}
+            to={palette.text.primary}
+            fromOpacity={0.4}
+            toOpacity={0}
+          />
+
           <Brush
             xScale={dateScale}
             yScale={valueScale}
@@ -545,9 +572,9 @@ const ComputationGraph: React.FC<AreaGraphProps> = ({
             onBrushEnd={onBrushChange}
             onChange={() => hideTooltip()}
             selectedBoxStyle={{
-              fill: 'white',
-              stroke: 'white',
-              fillOpacity: '0.2',
+              fill: 'url(#linearGradient-Brush)',
+              stroke: palette.text.primary,
+              strokeOpacity: '0.8',
             }}
             onMouseMove={handleTooltip}
             onClick={() => {
@@ -571,9 +598,9 @@ const ComputationGraph: React.FC<AreaGraphProps> = ({
                 cx={dateScale(getDateNum(tooltipData[0].data))}
                 cy={valueScale(getValueNum(tooltipData[0].data))}
                 r={5}
-                fill={'#5252F6'}
+                fill={graph.toolTip}
                 fillOpacity={1}
-                stroke="white"
+                stroke={palette.text.primary}
                 strokeOpacity={1}
                 strokeWidth={2}
                 pointerEvents="none"
