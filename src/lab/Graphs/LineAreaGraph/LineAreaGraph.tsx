@@ -1,7 +1,7 @@
 /* eslint-disable consistent-return */
 /* eslint-disable  array-callback-return */
 import React from 'react';
-import { AreaGrapher } from './base';
+import { AreaGrapher, AreaGraphProps } from './base';
 import { ComputationGraph } from './ComputationGraph';
 
 // Initialize some variables
@@ -22,24 +22,6 @@ const filterUndefinedData = (
         )
     : data;
 
-export type AreaGraphProps = {
-  closedSeries?: Array<AreaGrapher>;
-  openSeries?: Array<AreaGrapher>;
-  eventSeries?: Array<AreaGrapher>;
-  unit?: string;
-  showTips?: boolean;
-  showPoints?: boolean;
-  showGrid?: boolean;
-  showLegend?: true;
-  legendTableHeight?: number;
-  width?: number;
-  height?: number;
-  margin?: { top: number; right: number; bottom: number; left: number };
-  compact?: boolean;
-  xAxistimeFormat?: string;
-  toolTiptimeFormat?: string;
-};
-
 const LineAreaGraph: React.FC<AreaGraphProps> = ({
   compact = false,
   closedSeries,
@@ -48,16 +30,12 @@ const LineAreaGraph: React.FC<AreaGraphProps> = ({
   height = 200,
   margin = {
     top: 20,
-    left: 50,
+    left: 100,
     bottom: 20,
     right: 20,
   },
   ...rest
 }) => {
-  // bounds
-
-  // scales
-
   let augmentEventSeries: Array<AreaGrapher> = [];
   augmentEventSeries = filterUndefinedData(eventSeries) ?? [];
 

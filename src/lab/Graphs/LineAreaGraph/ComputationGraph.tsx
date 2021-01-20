@@ -12,8 +12,8 @@ import { bisector, extent, max } from 'd3-array';
 import dayjs from 'dayjs';
 import React, { useCallback, useMemo, useState } from 'react';
 import {
-  AreaGrapher,
-  DataValueString,
+  AreaGraphProps,
+  DataValue,
   LegendData,
   ToolTipInterface,
 } from './base';
@@ -22,53 +22,33 @@ import { PlotLineAreaGraph } from './PlotLineAreaGraph';
 import { useStyles } from './styles';
 
 type TooltipData = Array<ToolTipInterface>;
-
-let dd1: DataValueString;
-let dd0: DataValueString;
+let dd1: DataValue;
+let dd0: DataValue;
 let i: number;
 let j: number;
 let indexer: number;
 let toolTipPointLength: number;
 
-const getDateNum = (d: DataValueString) =>
+const getDateNum = (d: DataValue) =>
   typeof d.date === 'number'
     ? new Date(d.date)
     : new Date(parseInt(d.date, 10));
-const getValueNum = (d: DataValueString) =>
+const getValueNum = (d: DataValue) =>
   typeof d.value === 'number' ? d.value : parseInt(d.value, 10);
 
-const getValueStr = (d: DataValueString) =>
+const getValueStr = (d: DataValue) =>
   typeof d.value === 'number' ? d.value.toFixed(2).toString() : d.value;
+
 //bisectors
-const bisectDate = bisector<DataValueString, Date>(
-  (d) => new Date(getDateNum(d))
-).left;
-const bisectValueLeft = bisector<ToolTipInterface, number>((d) =>
+const bisectDate = bisector<DataValue, Date>((d) => new Date(getDateNum(d)))
+  .left;
+const bisectorValue = bisector<ToolTipInterface, number>((d) =>
   getValueNum(d.data)
 ).left;
 
-const brushMargin = { top: 10, bottom: 15, left: 50, right: 20 };
+// const brushMargin = { top: 10, bottom: 15, left: 30, right: 20 };
 const chartSeparation = 10;
 let legenTablePointerData: Array<ToolTipInterface>;
-
-export type AreaGraphProps = {
-  closedSeries?: Array<AreaGrapher>;
-  openSeries?: Array<AreaGrapher>;
-  eventSeries?: Array<AreaGrapher>;
-  showTips?: boolean;
-  showPoints?: boolean;
-  showGrid?: boolean;
-  showLegend?: true;
-  legendTableHeight?: number;
-  width?: number;
-  height?: number;
-  margin?: { top: number; right: number; bottom: number; left: number };
-  compact?: boolean;
-
-  backgroundTransparent?: boolean;
-  xAxistimeFormat?: string;
-  toolTiptimeFormat?: string;
-};
 
 const ComputationGraph: React.FC<AreaGraphProps> = ({
   compact = false,
@@ -82,9 +62,9 @@ const ComputationGraph: React.FC<AreaGraphProps> = ({
   height = 200,
   margin = {
     top: 20,
-    left: 50,
+    left: 30,
     bottom: 20,
-    right: 20,
+    right: 10,
   },
   legendTableHeight = 200,
   toolTiptimeFormat = 'MMM D,YYYY h:mm:ss a',
@@ -103,7 +83,6 @@ const ComputationGraph: React.FC<AreaGraphProps> = ({
     ? filteredClosedSeries.length
     : 0;
 
-  // const openSeriesCount = filteredOpenSeries ? filteredOpenSeries.length : 0;
   const eventSeriesCount = filteredEventSeries ? filteredEventSeries.length : 0;
 
   const onBrushChange = useCallback(
@@ -229,7 +208,7 @@ const ComputationGraph: React.FC<AreaGraphProps> = ({
             getValueNum
           ) || 0,
         ],
-        nice: true,
+        nice: false,
       }),
     [yMax, filteredClosedSeries, filteredOpenSeries]
   );
@@ -337,7 +316,7 @@ const ComputationGraph: React.FC<AreaGraphProps> = ({
         dd3 = dd3.sort((a, b) => (a.data.value > b.data.value ? 1 : -1));
 
         let index0 = 0;
-        let closetValue: number;
+        let closetValue: number | undefined;
         let dd00: ToolTipInterface = {
           metricName: '',
           data: { date: NaN, value: NaN },
@@ -349,7 +328,7 @@ const ComputationGraph: React.FC<AreaGraphProps> = ({
           baseColor: '',
         };
 
-        index0 = bisectValueLeft(dd3, y0);
+        index0 = bisectorValue(dd3, y0);
         dd00 = dd3[index0];
         dd11 = dd3[index0 - 1];
         if (dd11 && dd00) {
@@ -363,7 +342,9 @@ const ComputationGraph: React.FC<AreaGraphProps> = ({
         } else if (dd00 && !dd11) {
           closetValue = getValueNum(dd00.data);
         }
-        dd3 = dd3.filter((lineData) => lineData.data.value === closetValue);
+        dd3 = dd3.filter(
+          (lineData) => closetValue && lineData.data.value === closetValue
+        );
 
         toolTipPointLength = dd3.length;
         const eventToolTip: Array<ToolTipInterface> = [];
@@ -557,7 +538,7 @@ const ComputationGraph: React.FC<AreaGraphProps> = ({
             yScale={valueScale}
             width={xMax}
             height={yMax}
-            margin={brushMargin}
+            margin={margin}
             handleSize={8}
             resizeTriggerAreas={['left', 'right']}
             resetOnEnd
@@ -576,12 +557,20 @@ const ComputationGraph: React.FC<AreaGraphProps> = ({
               setAutoRender(true);
             }}
           />
+          {showTips && tooltipData && tooltipData[0] && (
+            <Line
+              key={`${tooltipData[0].metricName}-toolTipLine`}
+              from={{ x: dateScale(getDateNum(tooltipData[0].data)), y: 0 }}
+              to={{ x: dateScale(getDateNum(tooltipData[0].data)), y: yMax }}
+              className={classes.tooltipLine}
+            />
+          )}
           {showTips && tooltipData && toolTipPointLength >= 1 && (
             <g>
               <circle
                 cx={dateScale(getDateNum(tooltipData[0].data))}
                 cy={valueScale(getValueNum(tooltipData[0].data))}
-                r={7}
+                r={5}
                 fill={'#5252F6'}
                 fillOpacity={1}
                 stroke="white"
@@ -590,15 +579,6 @@ const ComputationGraph: React.FC<AreaGraphProps> = ({
                 pointerEvents="none"
               />
             </g>
-          )}
-
-          {showTips && tooltipData && tooltipData[0] && (
-            <Line
-              key={`${tooltipData[0].metricName}-toolTipLine`}
-              from={{ x: dateScale(getDateNum(tooltipData[0].data)), y: 0 }}
-              to={{ x: dateScale(getDateNum(tooltipData[0].data)), y: yMax }}
-              className={classes.tooltipLine}
-            />
           )}
         </PlotLineAreaGraph>
       </svg>

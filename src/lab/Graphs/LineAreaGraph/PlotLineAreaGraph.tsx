@@ -16,8 +16,9 @@ import {
 } from '@visx/visx';
 import dayjs from 'dayjs';
 import React from 'react';
-import { AreaGrapher, DataValueString } from './base';
+import { AreaGrapher, DataValue } from './base';
 import { useStyles } from './styles';
+
 // Initialize some variables
 const axisColor = '#777777';
 // const axisTextColor = '#B9B9B9';
@@ -28,11 +29,11 @@ const axisBottomTickLabelProps = {
   fontFamily: 'Ubuntu',
   fontSize: '12px',
   fontWeight: 400,
-  fill: '##B9B9B9',
+  fill: '#B9B9B9',
   lineHeight: '12px',
 };
 const axisLeftTickLabelProps = {
-  dy: '0.25em',
+  dy: '0.5em',
   fontFamily: 'Ubuntu',
   fontWeight: 400,
   fontSize: '10px',
@@ -40,16 +41,23 @@ const axisLeftTickLabelProps = {
   lineHeight: '12px',
   fill: '#B9B9B9',
 };
+const yLabelProps = {
+  fontFamily: 'Ubuntu',
+  fontWeight: 700,
+  fontSize: '12px',
+  lineHeight: '12px',
+  fill: '#FFFFFF',
+};
 
 // accessors
-const getDateNum = (d: DataValueString) =>
+const getDateNum = (d: DataValue) =>
   typeof d.date === 'number'
     ? new Date(d.date)
     : new Date(parseInt(d.date, 10));
-const getValueNum = (d: DataValueString) =>
+const getValueNum = (d: DataValue) =>
   typeof d.value === 'number' ? d.value : parseInt(d.value, 10);
 
-const getValueStr = (d: DataValueString) =>
+const getValueStr = (d: DataValue) =>
   typeof d.value === 'number' ? d.value.toFixed(2).toString() : d.value;
 
 let numValue = '';
@@ -94,8 +102,10 @@ interface AreaChartProps {
   top?: number;
   left?: number;
   showPoints: boolean;
+  yLable?: string;
   unit?: string;
   xAxistimeFormat?: string;
+  yLableOffset?: number;
 }
 
 const PlotLineAreaGraph: React.FC<AreaChartProps> = ({
@@ -118,6 +128,8 @@ const PlotLineAreaGraph: React.FC<AreaChartProps> = ({
   showGrid = true,
   unit = '',
   xAxistimeFormat,
+  yLable,
+  yLableOffset = 45,
 }) => {
   const classes = useStyles();
   // const yMaxValue = yScale.domain()[1];
@@ -153,7 +165,7 @@ const PlotLineAreaGraph: React.FC<AreaChartProps> = ({
               toOpacity={0.1}
             />
 
-            <AreaClosed<DataValueString>
+            <AreaClosed<DataValue>
               key={`${linedata.metricName}-line`}
               data={linedata.data}
               x={(d) => xScale(getDateNum(d)) || 0}
@@ -173,7 +185,7 @@ const PlotLineAreaGraph: React.FC<AreaChartProps> = ({
                   <circle
                     cx={xScale(getDateNum(d))}
                     cy={yScale(getValueNum(d))}
-                    r={5}
+                    r={3}
                     fill={linedata.baseColor}
                     fillOpacity={0.7}
                     pointerEvents="none"
@@ -205,10 +217,15 @@ const PlotLineAreaGraph: React.FC<AreaChartProps> = ({
       {!hideLeftAxis && (
         <AxisLeft
           scale={yScale}
-          numTicks={height > 200 ? 5 : 4}
+          numTicks={height > 200 ? 7 : 6}
           stroke={axisColor}
           tickFormat={(num) => intToString(num, unit)}
           tickLabelProps={() => axisLeftTickLabelProps}
+          label={yLable}
+          // labelProps={{ fill: 'red' }}
+          labelProps={yLabelProps}
+          left={left}
+          labelOffset={yLableOffset}
         />
       )}
 
@@ -224,7 +241,7 @@ const PlotLineAreaGraph: React.FC<AreaChartProps> = ({
               toOpacity={0.1}
             />
 
-            <AreaClosed<DataValueString>
+            <AreaClosed<DataValue>
               key={`${linedata.metricName}-eventSeries`}
               data={linedata.data}
               x={(d) => xScale(getDateNum(d)) || 0}
@@ -289,7 +306,7 @@ const PlotLineAreaGraph: React.FC<AreaChartProps> = ({
               refX={2.5}
               fillOpacity={0.6}
             />
-            <LinePath<DataValueString>
+            <LinePath<DataValue>
               data={openLineData.data}
               x={(d) => xScale(getDateNum(d)) ?? 0}
               y={(d) => yScale(getValueNum(d)) ?? 0}

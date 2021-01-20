@@ -12,16 +12,11 @@ const useStyles = makeStyles((theme: Theme) => ({
   rectBase: {
     fill: theme.palette.background.paper,
   },
-  rectBaseTransparent: {
-    fill: 'transparent',
-  },
   table: (props: StyleProps) => ({
     display: 'flex',
     width: props.width,
     height: props.height,
-    backgroundColor: props.backgroundTransparent
-      ? 'transparent'
-      : theme.palette.background.paper,
+    backgroundColor: theme.palette.background.paper,
     overflowY: 'auto',
     '&::-webkit-scrollbar': {
       width: '3px',
@@ -92,6 +87,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     backgroundColor: `${theme.palette.cards.background} !important`,
   },
   tooltipDateStyles: {
+    marginTop: '0.3rem',
     backgroundColor: `#5252F6 !important`,
     padding: '0.5rem',
   },
@@ -113,12 +109,6 @@ const useStyles = makeStyles((theme: Theme) => ({
   tableCell: {
     maxWidth: '30%',
     minWidth: '10%',
-  },
-  disableSelect: {
-    '&:: -webkit-user-select': 'none',
-    '&:: -moz-user-select': 'none',
-    '&:: -ms-user-select': 'none',
-    userSelect: 'none',
   },
 }));
 export { useStyles };
