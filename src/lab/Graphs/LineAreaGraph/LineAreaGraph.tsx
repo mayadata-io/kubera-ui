@@ -36,6 +36,8 @@ export type AreaGraphProps = {
   height?: number;
   margin?: { top: number; right: number; bottom: number; left: number };
   compact?: boolean;
+  xAxistimeFormat?: string;
+  toolTiptimeFormat?: string;
 };
 
 const LineAreaGraph: React.FC<AreaGraphProps> = ({

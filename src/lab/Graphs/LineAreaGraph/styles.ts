@@ -84,12 +84,26 @@ const useStyles = makeStyles((theme: Theme) => ({
     stroke: '#5252F6',
     strokeWidth: 4,
     pointerEvents: 'none',
-    // strokeDasharray: '5,2',
+  },
+  tooltipMetric: {
+    marginTop: '1rem',
+    marginLeft: '3rem',
+    padding: '0.5rem',
+    backgroundColor: `${theme.palette.cards.background} !important`,
+  },
+  tooltipDateStyles: {
+    backgroundColor: `#5252F6 !important`,
+    padding: '0.5rem',
   },
   tooltipData: {
     float: 'left',
     display: 'flex',
     alignItems: 'flex-start',
+    color: theme.palette.text.primary,
+    padding: '0.2rem',
+    '& span': {
+      paddingLeft: '0.5em',
+    },
   },
   tableRow: {
     '& td': {
@@ -99,6 +113,12 @@ const useStyles = makeStyles((theme: Theme) => ({
   tableCell: {
     maxWidth: '30%',
     minWidth: '10%',
+  },
+  disableSelect: {
+    '&:: -webkit-user-select': 'none',
+    '&:: -moz-user-select': 'none',
+    '&:: -ms-user-select': 'none',
+    userSelect: 'none',
   },
 }));
 export { useStyles };

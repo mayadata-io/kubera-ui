@@ -14,12 +14,13 @@ import {
   MarkerCircle,
   Polygon,
 } from '@visx/visx';
+import dayjs from 'dayjs';
 import React from 'react';
 import { AreaGrapher, DataValueString } from './base';
 import { useStyles } from './styles';
 // Initialize some variables
 const axisColor = '#777777';
-const axisTextColor = '#B9B9B9';
+// const axisTextColor = '#B9B9B9';
 
 const axisBottomTickLabelProps = {
   dy: '0.3rem',
@@ -27,22 +28,17 @@ const axisBottomTickLabelProps = {
   fontFamily: 'Ubuntu',
   fontSize: '12px',
   fontWeight: 400,
-  // stroke: axisColor,
-  fill: axisTextColor,
+  fill: '##B9B9B9',
   lineHeight: '12px',
-  // opacity: 0.7,
 };
 const axisLeftTickLabelProps = {
-  // dx: '-0.1em',
   dy: '0.25em',
   fontFamily: 'Ubuntu',
   fontWeight: 400,
   fontSize: '10px',
   textAnchor: 'end' as const,
   lineHeight: '12px',
-  fill: axisTextColor,
-
-  // opacity: 0.7,
+  fill: '#B9B9B9',
 };
 
 // accessors
@@ -57,6 +53,28 @@ const getValueStr = (d: DataValueString) =>
   typeof d.value === 'number' ? d.value.toFixed(2).toString() : d.value;
 
 let numValue = '';
+const intToString = (value: number, unit: string) => {
+  numValue = '';
+  const suffixes = ['', 'k', 'm', 'b', 't'];
+
+  const suffixNum = Math.floor(
+    Math.floor(Math.abs(value)).toString().length / 3
+  );
+
+  const shortValue = parseFloat(
+    (suffixNum !== 0 ? value / 1000 ** suffixNum : value).toPrecision(1)
+  );
+  numValue = shortValue.toString();
+
+  if (shortValue % 1 !== 0) {
+    numValue = shortValue.toFixed(1);
+  }
+  return `${numValue}${suffixes[suffixNum]} ${unit}`;
+};
+const dateFormat = (date: number, xAxistimeFormat: string) => {
+  return dayjs(new Date(date)).format(xAxistimeFormat);
+};
+
 interface AreaChartProps {
   data?: Array<AreaGrapher>;
   xScale: AxisScale<number>;
@@ -77,6 +95,7 @@ interface AreaChartProps {
   left?: number;
   showPoints: boolean;
   unit?: string;
+  xAxistimeFormat?: string;
 }
 
 const PlotLineAreaGraph: React.FC<AreaChartProps> = ({
@@ -98,27 +117,11 @@ const PlotLineAreaGraph: React.FC<AreaChartProps> = ({
   showPoints = true,
   showGrid = true,
   unit = '',
+  xAxistimeFormat,
 }) => {
   const classes = useStyles();
   // const yMaxValue = yScale.domain()[1];
   if (width < 10) return null;
-  const intToString = (value: number) => {
-    const suffixes = ['', 'k', 'm', 'b', 't'];
-
-    const suffixNum = Math.floor(
-      Math.floor(Math.abs(value)).toString().length / 3
-    );
-
-    const shortValue = parseFloat(
-      (suffixNum !== 0 ? value / 1000 ** suffixNum : value).toPrecision(1)
-    );
-    numValue = shortValue.toString();
-    if (shortValue % 1 !== 0) {
-      numValue = shortValue.toFixed(1);
-    }
-    return `${numValue}${suffixes[suffixNum]} ${unit}`;
-  };
-  numValue = '';
 
   return (
     <Group left={left || margin?.left} top={top || margin?.top}>
@@ -179,21 +182,32 @@ const PlotLineAreaGraph: React.FC<AreaChartProps> = ({
               ))}
           </Group>
         ))}
-      {!hideBottomAxis && (
-        <AxisBottom
-          top={yMax}
-          scale={xScale}
-          numTicks={width > 520 ? 6 : 5}
-          stroke={axisColor}
-          tickLabelProps={() => axisBottomTickLabelProps}
-        />
-      )}
+      {!hideBottomAxis &&
+        (xAxistimeFormat ? (
+          <AxisBottom
+            top={yMax}
+            scale={xScale}
+            numTicks={width > 520 ? 6 : 5}
+            tickFormat={(num) => dateFormat(num, xAxistimeFormat)}
+            stroke={axisColor}
+            tickLabelProps={() => axisBottomTickLabelProps}
+          />
+        ) : (
+          <AxisBottom
+            top={yMax}
+            scale={xScale}
+            numTicks={width > 520 ? 6 : 5}
+            stroke={axisColor}
+            tickLabelProps={() => axisBottomTickLabelProps}
+          />
+        ))}
+
       {!hideLeftAxis && (
         <AxisLeft
           scale={yScale}
           numTicks={height > 200 ? 5 : 4}
           stroke={axisColor}
-          tickFormat={(num) => intToString(num)}
+          tickFormat={(num) => intToString(num, unit)}
           tickLabelProps={() => axisLeftTickLabelProps}
         />
       )}

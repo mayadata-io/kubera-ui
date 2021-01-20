@@ -1,7 +1,6 @@
 import { Bounds } from '@visx/brush/lib/types';
 import {
   Brush,
-  defaultStyles,
   Line,
   localPoint,
   scaleLinear,
@@ -51,20 +50,6 @@ const bisectValueLeft = bisector<ToolTipInterface, number>((d) =>
 const brushMargin = { top: 10, bottom: 15, left: 50, right: 20 };
 const chartSeparation = 10;
 let legenTablePointerData: Array<ToolTipInterface>;
-const tooltipStyles = {
-  ...defaultStyles,
-  background: '#2B333B',
-
-  marginTop: '1rem',
-  marginLeft: '3rem',
-  color: 'white',
-};
-const tooltipDateStyles = {
-  ...defaultStyles,
-  background: '#5252F6',
-  marginTop: '0.5rem',
-  color: 'white',
-};
 
 export type AreaGraphProps = {
   closedSeries?: Array<AreaGrapher>;
@@ -81,6 +66,8 @@ export type AreaGraphProps = {
   compact?: boolean;
 
   backgroundTransparent?: boolean;
+  xAxistimeFormat?: string;
+  toolTiptimeFormat?: string;
 };
 
 const ComputationGraph: React.FC<AreaGraphProps> = ({
@@ -100,6 +87,7 @@ const ComputationGraph: React.FC<AreaGraphProps> = ({
     right: 20,
   },
   legendTableHeight = 200,
+  toolTiptimeFormat = 'MMM D,YYYY h:mm:ss a',
   ...rest
 }) => {
   let legenddata: Array<LegendData> = [{ value: [], baseColor: '' }];
@@ -285,7 +273,7 @@ const ComputationGraph: React.FC<AreaGraphProps> = ({
         if (firstMouseEnterGraph === false) {
           setMouseEnterGraph(true);
         }
-        dd3 = dd3.slice(0, 0);
+        // dd3 = dd3.slice(0, 0);
         i = 0;
         if (closedSeries) {
           for (j = 0; j < closedSeries.length; j++) {
@@ -339,7 +327,10 @@ const ComputationGraph: React.FC<AreaGraphProps> = ({
         dd3 = dd3.sort((a, b) => (a.data.date > b.data.date ? 1 : -1));
         const firstToolTipData = dd3[0];
         dd3 = dd3.filter(
-          (elem) => elem.data.date <= firstToolTipData.data.date
+          (elem) =>
+            elem.data &&
+            firstToolTipData.data &&
+            elem.data.date <= firstToolTipData.data.date
         );
         legenTablePointerData = JSON.parse(JSON.stringify(dd3));
 
@@ -425,8 +416,10 @@ const ComputationGraph: React.FC<AreaGraphProps> = ({
 
       showTooltip({
         tooltipData: dd3,
-        tooltipLeft: dateScale(getDateNum(dd3[0].data)),
-        tooltipTop: valueScale(getValueNum(dd3[0].data)),
+        tooltipLeft:
+          dd3[0] && dd3[0].data ? dateScale(getDateNum(dd3[0].data)) : 0,
+        tooltipTop:
+          dd3[0] && dd3[0].data ? valueScale(getValueNum(dd3[0].data)) : 0,
       });
     },
     [showTooltip, dateScale, closedSeries, openSeries, eventSeries, width]
@@ -446,12 +439,7 @@ const ComputationGraph: React.FC<AreaGraphProps> = ({
         ? '--'
         : getValueStr(linedata.data[linedata.data.length - 1]);
 
-      const avg = (
-        linedata.data.map((d) => (d.value ? d.value : 0)).reduce(getSum, 0) /
-        linedata.data.length
-      )
-        .toFixed(2)
-        .toString();
+      const avg = '--';
 
       if (linedata.data !== undefined)
         legenddata[index] = {
@@ -540,16 +528,7 @@ const ComputationGraph: React.FC<AreaGraphProps> = ({
         height: height + legendTableHeight,
       }}
     >
-      <svg
-        width={width}
-        height={height}
-        onDoubleClick={() => {
-          setFilteredSeries(closedSeries);
-          setfilteredOpenSeries(openSeries);
-          setfilteredEventSeries(eventSeries);
-          setAutoRender(true);
-        }}
-      >
+      <svg width={width} height={height}>
         <rect
           x={0}
           y={0}
@@ -590,11 +569,16 @@ const ComputationGraph: React.FC<AreaGraphProps> = ({
               fillOpacity: '0.2',
             }}
             onMouseMove={handleTooltip}
+            onClick={() => {
+              setFilteredSeries(closedSeries);
+              setfilteredOpenSeries(openSeries);
+              setfilteredEventSeries(eventSeries);
+              setAutoRender(true);
+            }}
           />
           {showTips && tooltipData && toolTipPointLength >= 1 && (
             <g>
               <circle
-                // key={`${tooltipData[0].metricName}-toolTipPoint`}
                 cx={dateScale(getDateNum(tooltipData[0].data))}
                 cy={valueScale(getValueNum(tooltipData[0].data))}
                 r={7}
@@ -608,7 +592,7 @@ const ComputationGraph: React.FC<AreaGraphProps> = ({
             </g>
           )}
 
-          {showTips && tooltipData && (
+          {showTips && tooltipData && tooltipData[0] && (
             <Line
               key={`${tooltipData[0].metricName}-toolTipLine`}
               from={{ x: dateScale(getDateNum(tooltipData[0].data)), y: 0 }}
@@ -618,39 +602,33 @@ const ComputationGraph: React.FC<AreaGraphProps> = ({
           )}
         </PlotLineAreaGraph>
       </svg>
-      {tooltipData && (
+      {tooltipData && tooltipData[0] && (
         <div>
-          <Tooltip top={height} left={tooltipLeft} style={tooltipDateStyles}>
+          <Tooltip
+            top={height}
+            left={tooltipLeft}
+            className={classes.tooltipDateStyles}
+          >
             {
-              <div
-                style={{ padding: '5px', display: 'flex' }}
-                key={`tooltipDate-${tooltipData[0].metricName}`}
-              >
-                <div className={classes.tooltipData}>
-                  <span
-                    style={{ color: 'white', paddingLeft: '0.5em' }}
-                  >{` ${dayjs(new Date(getDateNum(tooltipData[0].data))).format(
-                    'MMM D,YYYY h:mm:ss a'
-                  )}`}</span>
-                </div>
+              <div className={classes.tooltipData}>
+                <span>{` ${dayjs(
+                  new Date(getDateNum(tooltipData[0].data))
+                ).format(toolTiptimeFormat)}`}</span>
               </div>
             }
           </Tooltip>
           <Tooltip
             top={tooltipTop + margin.top}
             left={tooltipLeft + margin.left}
-            style={tooltipStyles}
+            className={classes.tooltipMetric}
           >
             {tooltipData.map((linedata) => (
-              <div
-                style={{ padding: '5px', display: 'flex' }}
-                key={`tooltipName-value- ${linedata.metricName}`}
-              >
+              <div key={`tooltipName-value- ${linedata.metricName}`}>
                 <div className={classes.tooltipData}>
                   <hr color={linedata.baseColor} className={classes.hr} />
-                  <span style={{ color: 'white', paddingLeft: '0.5em' }}>{`${
-                    linedata.metricName
-                  }:  ${getValueStr(linedata.data)}`}</span>
+                  <span>{`${linedata.metricName}:  ${getValueStr(
+                    linedata.data
+                  )}`}</span>
                 </div>
               </div>
             ))}
