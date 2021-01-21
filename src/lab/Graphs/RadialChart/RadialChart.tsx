@@ -4,9 +4,9 @@ import { LegendData } from '../LineAreaGraph/base';
 import { RadialChartProps } from './base';
 import { LegendTable } from './LegendTable';
 import { useStyles } from './styles';
-
 const green = '#52F995';
 const red = '#CA2C2C';
+
 const color = ['#52F995', '#F6B92B', '#CA2C2C'];
 
 export type ChordProps = {
@@ -38,6 +38,8 @@ const RadialChart = ({
   const [centerDataValue, setCenterDataValue] = useState<string>('NoData');
   const circleOrient = semiCircle ? 1 : 2;
   const scalerArc: number = circleOrient * Math.PI;
+
+  console.log(centerDataValue);
   const startAngle: number = -(Math.PI / 2);
   let currentAngle: number = startAngle;
   const outerRadius =
