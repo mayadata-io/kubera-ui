@@ -34,8 +34,9 @@ const LineAreaGraph: React.FC<AreaGraphProps> = ({
   },
   ...rest
 }) => {
-  let augmentEventSeries: Array<AreaGrapher> = [];
-  augmentEventSeries = filterUndefinedData(eventSeries) ?? [];
+  const augmentEventSeries:
+    | Array<AreaGrapher>
+    | undefined = filterUndefinedData(eventSeries);
 
   if (augmentEventSeries) {
     for (let i = 0; i < augmentEventSeries.length; i++) {

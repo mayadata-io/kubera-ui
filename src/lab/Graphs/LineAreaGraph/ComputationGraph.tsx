@@ -325,20 +325,10 @@ const ComputationGraph: React.FC<AreaGraphProps> = ({
 
         let index0 = 0;
         let closestValue: number | undefined;
-        let dd00: ToolTipInterface = {
-          metricName: '',
-          data: { date: NaN, value: NaN },
-          baseColor: '',
-        };
-        let dd11: ToolTipInterface = {
-          metricName: '',
-          data: { date: NaN, value: NaN },
-          baseColor: '',
-        };
 
         index0 = bisectorValue(pointerDataSelection, y0);
-        dd00 = pointerDataSelection[index0];
-        dd11 = pointerDataSelection[index0 - 1];
+        const dd00: ToolTipInterface = pointerDataSelection[index0];
+        const dd11: ToolTipInterface = pointerDataSelection[index0 - 1];
         if (dd11 && dd00) {
           closestValue =
             Math.abs(y0.valueOf() - getValueNum(dd00.data)) >
