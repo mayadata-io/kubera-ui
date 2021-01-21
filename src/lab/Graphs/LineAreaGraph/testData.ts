@@ -8,7 +8,7 @@ const data1: DataValue[] = [
   { date: 5000, value: 50 },
   { date: 6000, value: 74 },
   { date: 7000, value: 30 },
-  // { date: 8000, value: 10 },
+  { date: 8000, value: 10 },
 ];
 const data2: DataValue[] = [
   { date: 1000, value: 40 },
@@ -63,7 +63,7 @@ const seriestest3: Array<AreaGrapher> = [
     data: data3,
     baseColor: 'red',
   },
-  { metricName: 'yellow', data: data4, baseColor: 'yellow' },
+  { metricName: 'chaos-network-pod', data: data4, baseColor: 'yellow' },
 ];
 
 export { seriestest1, seriestest2, seriestest3 };

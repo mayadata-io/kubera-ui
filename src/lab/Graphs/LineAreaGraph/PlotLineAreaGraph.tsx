@@ -41,7 +41,7 @@ const intToString = (value: number, unit: string) => {
   );
 
   const shortValue = parseFloat(
-    (suffixNum !== 0 ? value / 1000 ** suffixNum : value).toPrecision(1)
+    (suffixNum !== 0 ? value / 1000 ** suffixNum : value).toPrecision(2)
   );
   numValue = shortValue.toString();
 

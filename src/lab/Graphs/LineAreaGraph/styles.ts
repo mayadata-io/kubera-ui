@@ -84,6 +84,8 @@ const useStyles = makeStyles((theme: Theme) => ({
     backgroundColor: `${theme.palette.cards.background} !important`,
   },
   tooltipDateStyles: {
+    position: 'relative',
+    transform: 'translate(30%,0)',
     marginTop: '0.3rem',
     backgroundColor: `${theme.graph.toolTip} !important`,
     padding: '0.5rem',

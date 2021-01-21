@@ -211,7 +211,7 @@ const ComputationGraph: React.FC<AreaGraphProps> = ({
             getValueNum
           ) || 0,
         ],
-        nice: false,
+        nice: true,
       }),
     [yMax, filteredClosedSeries, filteredOpenSeries]
   );
