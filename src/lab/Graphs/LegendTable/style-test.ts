@@ -6,9 +6,6 @@ interface StyleProps {
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
-  rectBase: {
-    fill: theme.palette.background.paper,
-  },
   table: (props: StyleProps) => ({
     display: 'flex',
     width: props.width,
@@ -38,11 +35,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
   }),
 
-  tableDataRow: {
-    float: 'left',
-    display: 'flex',
-    alignItems: 'flex-start',
-  },
   tableFont: {
     fontFamily: 'Ubuntu',
     fontSize: '0.8rem',
@@ -53,7 +45,8 @@ const useStyles = makeStyles((theme: Theme) => ({
     letterSpacing: '0em',
     paddingLeft: '0.5em',
     textAlign: 'left',
-    minWidth: '4rem',
+    color: theme.palette.text.primary,
+    minWidth: '1rem',
   },
 
   tableHeading: {
@@ -65,42 +58,27 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 
   hr: {
-    position: 'fixed',
+    position: 'relative',
     width: '12px',
     height: '2px',
   },
-  grid: {
-    stroke: theme.palette.disabledBackground,
-    strokeOpacity: 0.2,
+
+  tableRow: {
+    justifyContent: 'flex-end',
+    '& td': {
+      borderBottom: 'none',
+    },
   },
-  tooltipLine: {
-    stroke: theme.graph.toolTip,
-    strokeWidth: 4,
-    pointerEvents: 'none',
-  },
-  tooltipMetric: {
-    marginTop: '1rem',
-    marginLeft: '3rem',
-    padding: '0.5rem',
-    backgroundColor: `${theme.palette.cards.background} !important`,
-  },
-  tooltipDateStyles: {
-    position: 'relative',
-    transform: 'translate(30%,0)',
-    marginTop: '0.3rem',
-    backgroundColor: `${theme.graph.toolTip} !important`,
-    padding: '0.5rem',
-  },
-  tooltipData: {
+  tableDataRow: {
     float: 'left',
     display: 'flex',
-    color: theme.palette.text.primary,
-
-    padding: '0.2rem',
-    '& span': {
-      paddingLeft: '1.2em',
-      maxWidth: '20rem',
-    },
+    justifyContent: 'flex-end',
+    overflow: 'hidden',
+  },
+  tableCell: {
+    padding: '1rem',
+    maxWidth: '30%',
+    minWidth: '1rem',
   },
 }));
 

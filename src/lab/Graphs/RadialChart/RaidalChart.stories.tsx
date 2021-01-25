@@ -10,7 +10,7 @@ storiesOf('Graphs/RadialChart', module).add('Kubera Chaos', () => (
       width={500}
       height={250}
       radialData={testRadialChartData}
-      semiCircle
+      semiCircle={false}
     />
   </ThemedBackground>
 ));

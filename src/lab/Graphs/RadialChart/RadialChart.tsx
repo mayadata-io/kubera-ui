@@ -1,13 +1,11 @@
-import { Arc, Group, LinearGradient, Text } from '@visx/visx';
+import { Arc, Group, Text } from '@visx/visx';
 import React, { useState } from 'react';
-import { LegendData } from '../LineAreaGraph/base';
+import { LegendData } from '../LegendTable/base';
+import { LegendTable } from '../LegendTable/LegendTable';
 import { RadialChartProps } from './base';
-import { LegendTable } from './LegendTable';
 import { useStyles } from './styles';
-const green = '#52F995';
-const red = '#CA2C2C';
-
-const color = ['#52F995', '#F6B92B', '#CA2C2C'];
+// const green = '#52F995';
+// const red = '#CA2C2C';
 
 export type ChordProps = {
   width: number;
@@ -27,7 +25,6 @@ const RadialChart = ({
   height,
   radialData,
   centerSize = 30,
-  showOuterArc = true,
   semiCircle = true,
   showArc = true,
   legendTableHeight = 150,
@@ -55,11 +52,12 @@ const RadialChart = ({
       )
     : NaN;
   // console.log(total);
-  const radialArc = radialData
+  const radialArc: RadialChartProps[] = radialData
     ? radialData.map((elem) => {
         return {
           value: (total ? elem.value / total : 0) * scalerArc,
           lable: elem.lable,
+          baseColor: elem.baseColor,
         };
       })
     : [{ value: NaN, lable: '' }];
@@ -74,19 +72,13 @@ const RadialChart = ({
       if (element.value !== undefined)
         legenddata[index] = {
           value: [element.lable, element.value.toString()],
+          baseColor: element.baseColor,
         };
     });
   }
   return width < 10 ? null : (
     <div className="chords">
       <svg width={width} height={height}>
-        <LinearGradient
-          id="gpinkorange"
-          from={green}
-          to={red}
-          vertical={false}
-        />
-
         <rect
           width={width}
           height={height}
@@ -99,50 +91,35 @@ const RadialChart = ({
             total > 0 &&
             radialArc &&
             radialArc.map((elem, i) => (
-              <Arc
-                className={classes.radicalArc}
-                cornerRadius={2}
-                padAngle={0.02}
-                key={`key-${i}`}
-                data={true}
-                innerRadius={innerRadius}
-                outerRadius={outerRadius}
-                fill={color[i % 3]}
-                startAngle={currentAngle}
-                endAngle={(currentAngle += elem.value)}
-                onMouseEnter={() =>
-                  setCenterDataValue(radialData[i].value.toString())
-                }
-                onMouseLeave={() => setCenterDataValue(total.toString())}
-              />
+              <g key={`key-${i}`}>
+                <Arc
+                  className={classes.radicalArc}
+                  // cornerRadius={2}
+                  // padAngle={0.02}
+                  data={true}
+                  innerRadius={innerRadius}
+                  outerRadius={outerRadius}
+                  fill={elem.baseColor}
+                  startAngle={currentAngle}
+                  endAngle={(currentAngle += elem.value)}
+                  onMouseEnter={() =>
+                    setCenterDataValue(radialData[i].value.toString())
+                  }
+                  onMouseLeave={() => setCenterDataValue(total.toString())}
+                />
+              </g>
             ))}
           {(currentAngle = Math.PI)}
           {showArc && (total == 0 || isNaN(total)) && (
             <Arc
               cornerRadius={2}
               padAngle={0.02}
-              key={`key-something-something`}
               data={true}
               innerRadius={innerRadius}
               outerRadius={outerRadius}
               fill={'#2B333B'}
               startAngle={startAngle}
               endAngle={circleOrient == 1 ? Math.PI / 2 : 2 * Math.PI}
-            />
-          )}
-          {showOuterArc && (
-            <Arc
-              cornerRadius={2}
-              padAngle={0.02}
-              key={`key-something-122`}
-              data={true}
-              innerRadius={outerRadius + 10}
-              outerRadius={outerRadius + 15}
-              fill={
-                total == 0 || isNaN(total) ? '#2B333B' : 'url(#gpinkorange)'
-              }
-              startAngle={startAngle}
-              endAngle={circleOrient * Math.PI}
             />
           )}
           <Group
@@ -157,7 +134,7 @@ const RadialChart = ({
       {showLegend && (
         <LegendTable
           data={legenddata}
-          heading={['', 'Count']}
+          // heading={['', 'Count']}
           width={width}
           height={legendTableHeight}
         />

@@ -14,10 +14,6 @@ export interface ToolTipInterface {
   baseColor?: string;
 }
 
-export interface LegendData {
-  value: Array<string>;
-  baseColor?: string;
-}
 export interface AreaGraphProps {
   closedSeries?: Array<AreaGrapher>;
   openSeries?: Array<AreaGrapher>;

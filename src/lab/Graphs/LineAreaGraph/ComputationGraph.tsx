@@ -13,13 +13,9 @@ import {
 import { bisector, extent, max } from 'd3-array';
 import dayjs from 'dayjs';
 import React, { useCallback, useMemo, useState } from 'react';
-import {
-  AreaGraphProps,
-  DataValue,
-  LegendData,
-  ToolTipInterface,
-} from './base';
-import { LegendTable } from './LegendTable';
+import { LegendData } from '../LegendTable/base';
+import { LegendTable } from '../LegendTable/LegendTable';
+import { AreaGraphProps, DataValue, ToolTipInterface } from './base';
 import { PlotLineAreaGraph } from './PlotLineAreaGraph';
 import { useStyles } from './styles';
 
