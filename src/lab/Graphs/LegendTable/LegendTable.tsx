@@ -26,27 +26,17 @@ const LegendTable: React.FC<LegendProps> = ({
 }) => {
   const classes = useStyles({ width, height });
   return (
-    <TableContainer className={classes.table}>
-      <Table aria-label="simple table">
+    <TableContainer className={classes.root}>
+      <Table aria-label="simple table" cellPadding="0.2">
         <TableHead>
-          <TableRow
-            style={{ display: 'flex', justifyContent: 'space-between' }}
-          >
+          <TableRow className={classes.tableRow}>
             {heading &&
               heading.map((element) => (
                 <TableCell
                   key={`${element}-heading-cell`}
-                  style={{
-                    border: 'none',
-                    minWidth: '15%',
-                    color: 'blue',
-                  }}
+                  className={classes.tableHeading}
                 >
-                  <Typography
-                    style={{ wordWrap: 'break-word', whiteSpace: 'initial' }}
-                  >
-                    {element}
-                  </Typography>
+                  <Typography>{element}</Typography>
                 </TableCell>
               ))}
           </TableRow>
@@ -56,40 +46,16 @@ const LegendTable: React.FC<LegendProps> = ({
             data.map((row) => (
               <TableRow
                 key={`${row.value[0]} ${Math.random() * 100} }`}
-                style={{
-                  display: 'flex',
-                  justifyContent: 'space-between',
-                  border: '0px',
-                  margin: 'none',
-                  padding: '0px !important',
-                  width: '100%',
-                }}
+                className={classes.tableRow}
               >
                 {row.value.map(
                   (element, index) =>
                     (index === 0 && (
                       <TableCell
                         key={`${element}-${Math.random() * 100} `}
-                        style={{
-                          display: 'flex',
-                          border: '0px',
-                          margin: 'none',
-                          alignContent: 'flex-start',
-                          padding: '0px !important',
-                        }}
+                        className={classes.tableCell}
                       >
-                        <Typography
-                          style={{
-                            wordWrap: 'break-word',
-                            whiteSpace: 'initial',
-                            width: '12rem',
-                            alignContent: 'left',
-                            color: 'red',
-                            padding: '0px !important',
-
-                            margin: '0',
-                          }}
-                        >
+                        <Typography className={classes.tableLabel}>
                           {element}
                         </Typography>
                       </TableCell>
@@ -97,26 +63,9 @@ const LegendTable: React.FC<LegendProps> = ({
                     (index !== 0 && (
                       <TableCell
                         key={`${element}-${Math.random() * 100} `}
-                        style={{
-                          display: 'flex',
-                          border: '0px',
-
-                          padding: '0px !important',
-                          margin: 'none',
-                          alignContent: 'flex-start',
-                        }}
+                        className={classes.tableCell}
                       >
-                        <Typography
-                          style={{
-                            wordWrap: 'break-word',
-                            whiteSpace: 'initial',
-                            width: '4rem',
-                            alignContent: 'left',
-                            padding: '0px !important',
-
-                            margin: '0',
-                          }}
-                        >
+                        <Typography className={classes.tableData}>
                           {element}
                         </Typography>
                       </TableCell>

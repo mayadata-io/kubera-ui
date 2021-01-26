@@ -6,7 +6,7 @@ interface StyleProps {
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
-  table: (props: StyleProps) => ({
+  root: (props: StyleProps) => ({
     display: 'flex',
     width: props.width,
     height: props.height,
@@ -34,6 +34,54 @@ const useStyles = makeStyles((theme: Theme) => ({
       backgroundColor: theme.palette.highlight,
     },
   }),
+  tableRow: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    border: '0px',
+    margin: 'none',
+    width: '100%',
+  },
+  tableCell: {
+    display: 'flex',
+    border: '0px',
+    margin: 'none',
+    alignContent: 'flex-start',
+  },
+
+  tableHeading: {
+    display: 'flex',
+    border: '0px',
+    margin: 'none',
+    alignContent: 'flex-start',
+    wordWrap: 'break-word',
+    whiteSpace: 'initial',
+    color: 'pink',
+    width: '4rem',
+    '&:first-child': {
+      width: '14rem',
+      color: 'yellow',
+    },
+    '& span': {
+      alignContent: 'flex-start',
+      textAlign: 'left',
+    },
+  },
+  tableLabel: {
+    wordWrap: 'break-word',
+    whiteSpace: 'initial',
+    width: '14rem',
+    alignContent: 'flex-start',
+    color: 'red',
+  },
+  tableData: {
+    wordWrap: 'break-word',
+    whiteSpace: 'initial',
+    width: '4rem',
+    alignContent: 'flex-start',
+    '& span': {
+      alignContent: 'flex-start',
+    },
+  },
 }));
 
 export { useStyles };
