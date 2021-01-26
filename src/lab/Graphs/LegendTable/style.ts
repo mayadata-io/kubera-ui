@@ -55,15 +55,10 @@ const useStyles = makeStyles((theme: Theme) => ({
     alignContent: 'flex-start',
     wordWrap: 'break-word',
     whiteSpace: 'initial',
-    color: 'pink',
+    color: theme.graph.dashboard.lightBlue,
     width: '4rem',
     '&:first-child': {
       width: '14rem',
-      color: 'yellow',
-    },
-    '& span': {
-      alignContent: 'flex-start',
-      textAlign: 'left',
     },
   },
   tableLabel: {
@@ -71,13 +66,14 @@ const useStyles = makeStyles((theme: Theme) => ({
     whiteSpace: 'initial',
     width: '14rem',
     alignContent: 'flex-start',
-    color: 'red',
+    color: theme.palette.text.primary,
   },
   tableData: {
     wordWrap: 'break-word',
     whiteSpace: 'initial',
     width: '4rem',
     alignContent: 'flex-start',
+    color: theme.palette.text.primary,
     '& span': {
       alignContent: 'flex-start',
     },
