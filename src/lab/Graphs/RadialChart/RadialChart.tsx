@@ -38,8 +38,6 @@ const RadialChart = ({
   const [centerDataValue, setCenterDataValue] = useState<string>('NoData');
   const circleOrient = semiCircle ? 1 : 2;
   const scalerArc: number = circleOrient * Math.PI;
-
-  // console.log(centerDataValue);
   const startAngle: number = -(Math.PI / 2);
   let currentAngle: number = startAngle;
   const outerRadius =
