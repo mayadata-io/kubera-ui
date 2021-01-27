@@ -11,8 +11,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     width: props.width,
     height: props.height,
     backgroundColor: theme.palette.background.paper,
-    // backgroundColor: 'pink',
-
     overflowY: 'auto',
     '&::-webkit-scrollbar': {
       width: '3px',
@@ -39,13 +37,13 @@ const useStyles = makeStyles((theme: Theme) => ({
   tableRow: {
     display: 'flex',
     justifyContent: 'space-between',
-    border: '0px',
+    border: 'none',
     margin: 'none',
     width: '100%',
   },
   tableCell: {
     display: 'flex',
-    border: '0px',
+    border: 'none',
     margin: 'none',
     alignContent: 'flex-start',
     padding: theme.spacing(1, 0),
@@ -53,7 +51,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 
   tableHeading: {
     display: 'flex',
-    border: '0px',
+    border: 'none',
     margin: '0',
     justifyContent: 'space-between',
     color: theme.graph.dashboard.lightBlue,
@@ -79,8 +77,8 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   hr: {
     position: 'relative',
-    width: '10px',
-    height: '2px',
+    width: '1rem',
+    height: '0.2rem',
     alignSelf: 'baseline',
     marginRight: '0.5em',
     marginTop: '0.5rem',
