@@ -26,6 +26,7 @@ let i: number;
 let j: number;
 let indexer: number;
 let toolTipPointLength: number;
+
 // Accessor functions
 const getDateNum = (d: DataValue) =>
   typeof d.date === 'number'
@@ -418,82 +419,84 @@ const ComputationGraph: React.FC<AreaGraphProps> = ({
     ]
   );
   // legendData
-  legenddata = legenddata.splice(0);
-  if (filteredEventSeries) {
-    filteredEventSeries.map((linedata, index) => {
-      const pointerElement = legenTablePointerData
-        ? legenTablePointerData.filter(
-            (singleMetric) => singleMetric.metricName === linedata.metricName
-          )[0]
-        : undefined;
-      const curr = pointerElement
-        ? getValueStr(pointerElement.data)
-        : firstMouseEnterGraph
-        ? '--'
-        : getValueStr(linedata.data[linedata.data.length - 1]);
+  if (showLegend) {
+    legenddata = legenddata.splice(0);
+    if (filteredEventSeries) {
+      filteredEventSeries.map((linedata, index) => {
+        const pointerElement = legenTablePointerData
+          ? legenTablePointerData.filter(
+              (singleMetric) => singleMetric.metricName === linedata.metricName
+            )[0]
+          : undefined;
+        const curr = pointerElement
+          ? getValueStr(pointerElement.data)
+          : firstMouseEnterGraph
+          ? '--'
+          : getValueStr(linedata.data[linedata.data.length - 1]);
 
-      const avg = '--';
+        const avg = '--';
 
-      if (linedata.data !== undefined)
-        legenddata[index] = {
-          data: [linedata.metricName, avg, curr],
-          baseColor: linedata.baseColor,
-        };
-    });
-  }
-  if (filteredClosedSeries) {
-    filteredClosedSeries.map((linedata, index) => {
-      const pointerElement = legenTablePointerData
-        ? legenTablePointerData.filter(
-            (singleMetric) => singleMetric.metricName === linedata.metricName
-          )[0]
-        : undefined;
-      const curr = pointerElement
-        ? getValueStr(pointerElement.data)
-        : firstMouseEnterGraph
-        ? '--'
-        : getValueStr(linedata.data[linedata.data.length - 1]);
-      const avg = (
-        linedata.data.map((d) => (d.value ? d.value : 0)).reduce(getSum, 0) /
-        linedata.data.length
-      )
-        .toFixed(2)
-        .toString();
+        if (linedata.data !== undefined)
+          legenddata[index] = {
+            data: [linedata.metricName, avg, curr],
+            baseColor: linedata.baseColor,
+          };
+      });
+    }
+    if (filteredClosedSeries) {
+      filteredClosedSeries.map((linedata, index) => {
+        const pointerElement = legenTablePointerData
+          ? legenTablePointerData.filter(
+              (singleMetric) => singleMetric.metricName === linedata.metricName
+            )[0]
+          : undefined;
+        const curr = pointerElement
+          ? getValueStr(pointerElement.data)
+          : firstMouseEnterGraph
+          ? '--'
+          : getValueStr(linedata.data[linedata.data.length - 1]);
+        const avg = (
+          linedata.data.map((d) => (d.value ? d.value : 0)).reduce(getSum, 0) /
+          linedata.data.length
+        )
+          .toFixed(2)
+          .toString();
 
-      if (linedata.data !== undefined)
-        legenddata[index + eventSeriesCount] = {
-          data: [linedata.metricName, avg, curr],
-          baseColor: linedata.baseColor,
-        };
-    });
-  }
+        if (linedata.data !== undefined)
+          legenddata[index + eventSeriesCount] = {
+            data: [linedata.metricName, avg, curr],
+            baseColor: linedata.baseColor,
+          };
+      });
+    }
 
-  if (filteredOpenSeries) {
-    filteredOpenSeries.map((linedata, index) => {
-      const pointerElement = legenTablePointerData
-        ? legenTablePointerData.filter(
-            (singleMetric) => singleMetric.metricName === linedata.metricName
-          )[0]
-        : undefined;
-      const curr = pointerElement
-        ? getValueStr(pointerElement.data)
-        : firstMouseEnterGraph
-        ? '--'
-        : getValueStr(linedata.data[linedata.data.length - 1]);
+    if (filteredOpenSeries) {
+      filteredOpenSeries.map((linedata, index) => {
+        const pointerElement = legenTablePointerData
+          ? legenTablePointerData.filter(
+              (singleMetric) => singleMetric.metricName === linedata.metricName
+            )[0]
+          : undefined;
+        const curr = pointerElement
+          ? getValueStr(pointerElement.data)
+          : firstMouseEnterGraph
+          ? '--'
+          : getValueStr(linedata.data[linedata.data.length - 1]);
 
-      const avg = (
-        linedata.data.map((d) => (d.value ? d.value : 0)).reduce(getSum, 0) /
-        linedata.data.length
-      )
-        .toFixed(2)
-        .toString();
+        const avg = (
+          linedata.data.map((d) => (d.value ? d.value : 0)).reduce(getSum, 0) /
+          linedata.data.length
+        )
+          .toFixed(2)
+          .toString();
 
-      if (linedata.data !== undefined)
-        legenddata[index + eventSeriesCount + closedSeriesCount] = {
-          data: [linedata.metricName, avg, curr],
-          baseColor: linedata.baseColor,
-        };
-    });
+        if (linedata.data !== undefined)
+          legenddata[index + eventSeriesCount + closedSeriesCount] = {
+            data: [linedata.metricName, avg, curr],
+            baseColor: linedata.baseColor,
+          };
+      });
+    }
   }
 
   if (
