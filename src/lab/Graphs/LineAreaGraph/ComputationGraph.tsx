@@ -508,7 +508,7 @@ const ComputationGraph: React.FC<AreaGraphProps> = ({
   }
   return (
     <div
-      // onMouseLeave={() => hideTooltip()}
+      onMouseLeave={() => hideTooltip()}
       style={{
         width: width,
         height: height + legendTableHeight,

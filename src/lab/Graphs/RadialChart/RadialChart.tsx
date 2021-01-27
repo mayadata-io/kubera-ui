@@ -1,3 +1,4 @@
+import { useTheme } from '@material-ui/core';
 import { Arc, Group, Text } from '@visx/visx';
 import React, { useState } from 'react';
 import { LegendData } from '../LegendTable/base';
@@ -30,6 +31,8 @@ const RadialChart = ({
   showLegend = true,
   heading,
 }: ChordProps) => {
+  const { palette } = useTheme();
+
   let legenddata: Array<LegendData> = [{ data: [] }];
   const classes = useStyles();
   const [centerDataValue, setCenterDataValue] = useState<string>('NoData');
@@ -89,7 +92,7 @@ const RadialChart = ({
             total > 0 &&
             radialArc &&
             radialArc.map((elem, i) => (
-              <g key={`key-${i}`}>
+              <g key={`${elem.lable}-arc`}>
                 <Arc
                   className={classes.radicalArc}
                   data={true}
@@ -114,7 +117,7 @@ const RadialChart = ({
               data={true}
               innerRadius={innerRadius}
               outerRadius={outerRadius}
-              fill={'#2B333B'}
+              fill={palette.disabledBackground}
               startAngle={startAngle}
               endAngle={circleOrient == 1 ? Math.PI / 2 : 2 * Math.PI}
             />
