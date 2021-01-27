@@ -51,10 +51,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   tableHeading: {
     display: 'flex',
     border: '0px',
-    margin: 'none',
-    alignContent: 'flex-start',
-    wordWrap: 'break-word',
-    whiteSpace: 'initial',
+    margin: '0',
     color: theme.graph.dashboard.lightBlue,
     width: '4rem',
     '&:first-child': {
@@ -62,21 +59,27 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
   },
   tableLabel: {
-    wordWrap: 'break-word',
-    whiteSpace: 'initial',
     width: '14rem',
-    alignContent: 'flex-start',
-    color: theme.palette.text.primary,
   },
   tableData: {
-    wordWrap: 'break-word',
-    whiteSpace: 'initial',
     width: '4rem',
-    alignContent: 'flex-start',
-    color: theme.palette.text.primary,
     '& span': {
       alignContent: 'flex-start',
     },
+  },
+  tableFont: {
+    wordWrap: 'break-word',
+    whiteSpace: 'initial',
+    alignContent: 'flex-start',
+    color: theme.palette.text.primary,
+  },
+  hr: {
+    position: 'relative',
+    width: '10px',
+    height: '2px',
+    alignSelf: 'baseline',
+    marginRight: '1rem',
+    marginTop: '0.7rem',
   },
 }));
 

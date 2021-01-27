@@ -65,7 +65,6 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 
   hr: {
-    position: 'fixed',
     width: '12px',
     height: '2px',
   },
@@ -92,15 +91,22 @@ const useStyles = makeStyles((theme: Theme) => ({
     padding: '0.5rem',
   },
   tooltipData: {
-    float: 'left',
+    // float: 'left',
     display: 'flex',
     color: theme.palette.text.primary,
-
+    justifyContent: 'space-between',
     padding: '0.2rem',
     '& span': {
-      paddingLeft: '1.2em',
+      paddingLeft: '0.5em',
       maxWidth: '20rem',
+      lineHeight: '1rem',
     },
+  },
+  tooltipLabel: {
+    display: 'flex',
+  },
+  tooltipValue: {
+    paddingLeft: '0.2rem',
   },
 }));
 

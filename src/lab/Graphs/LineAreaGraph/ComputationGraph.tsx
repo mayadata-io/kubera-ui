@@ -508,7 +508,7 @@ const ComputationGraph: React.FC<AreaGraphProps> = ({
   }
   return (
     <div
-      onMouseLeave={() => hideTooltip()}
+      // onMouseLeave={() => hideTooltip()}
       style={{
         width: width,
         height: height + legendTableHeight,
@@ -618,10 +618,13 @@ const ComputationGraph: React.FC<AreaGraphProps> = ({
             {tooltipData.map((linedata) => (
               <div key={`tooltipName-value- ${linedata.metricName}`}>
                 <div className={classes.tooltipData}>
-                  <hr color={linedata.baseColor} className={classes.hr} />
-                  <span>{`${linedata.metricName}:  ${getValueStr(
-                    linedata.data
-                  )}`}</span>
+                  <div className={classes.tooltipLabel}>
+                    <hr color={linedata.baseColor} className={classes.hr} />
+                    <span>{`${linedata.metricName}`}</span>
+                  </div>
+                  <div className={classes.tooltipValue}>
+                    <span>{`${getValueStr(linedata.data)}`}</span>
+                  </div>
                 </div>
               </div>
             ))}
