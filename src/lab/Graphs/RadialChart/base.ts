@@ -1,5 +1,5 @@
 export interface RadialChartProps {
   value: number;
-  lable: string;
+  label: string;
   baseColor?: string;
 }

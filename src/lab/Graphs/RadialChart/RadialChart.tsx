@@ -58,11 +58,11 @@ const RadialChart = ({
     ? radialData.map((elem) => {
         return {
           value: (total ? elem.value / total : 0) * scalerArc,
-          lable: elem.lable,
+          label: elem.label,
           baseColor: elem.baseColor,
         };
       })
-    : [{ value: NaN, lable: '' }];
+    : [{ value: NaN, label: '' }];
   if (centerDataValue === 'NoData' && total > 0) {
     setCenterDataValue(total.toString());
   }
@@ -72,7 +72,7 @@ const RadialChart = ({
     radialData.map((element, index) => {
       if (element.value !== undefined)
         legenddata[index] = {
-          data: [element.lable, element.value.toString()],
+          data: [element.label, element.value.toString()],
           baseColor: element.baseColor,
         };
     });
@@ -92,7 +92,7 @@ const RadialChart = ({
             total > 0 &&
             radialArc &&
             radialArc.map((elem, i) => (
-              <g key={`${elem.lable}-arc`}>
+              <g key={`${elem.label}-arc`}>
                 <Arc
                   className={classes.radicalArc}
                   data={true}
