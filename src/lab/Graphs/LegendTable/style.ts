@@ -60,7 +60,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     width: '4rem',
     '&:first-child': {
       width: '14rem',
-      // flexGrow: 1,
     },
   },
   tableLabel: {

@@ -91,7 +91,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     padding: '0.5rem',
   },
   tooltipData: {
-    // float: 'left',
     display: 'flex',
     color: theme.palette.text.primary,
     justifyContent: 'space-between',
