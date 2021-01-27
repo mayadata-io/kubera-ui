@@ -34,7 +34,7 @@ const LegendTable: React.FC<LegendProps> = ({
               heading.map((element) => (
                 <TableCell
                   key={`${element}-heading-cell`}
-                  className={`${classes.tableHeading}`}
+                  className={`${classes.tableCell} ${classes.tableHeading}`}
                 >
                   <Typography>{element}</Typography>
                 </TableCell>
@@ -45,11 +45,11 @@ const LegendTable: React.FC<LegendProps> = ({
           {data &&
             data.map((row) => (
               <TableRow
-                key={`${row.value[0]} ${Math.random() * 100} }`}
+                key={`${row.data[0]} ${Math.random() * 100} }`}
                 className={classes.tableRow}
               >
-                {row.value.map(
-                  (element, index) =>
+                {row.data.map(
+                  (element: string, index: number) =>
                     (index === 0 && (
                       <TableCell
                         key={`${element}-${Math.random() * 100} `}

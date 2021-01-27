@@ -15,7 +15,7 @@ storiesOf('Graphs/Area', module).add('Kubera Chaos', () => (
       showPoints={true}
       showTips={true}
       unit={'%'}
-      yLable={'Chaos'}
+      yLabel={'Chaos'}
     />
   </ThemedBackground>
 ));

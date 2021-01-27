@@ -1,4 +1,4 @@
 export interface LegendData {
-  value: Array<string>;
+  data: Array<string>;
   baseColor?: string;
 }

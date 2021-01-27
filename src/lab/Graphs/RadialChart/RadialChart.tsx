@@ -4,8 +4,6 @@ import { LegendData } from '../LegendTable/base';
 import { LegendTable } from '../LegendTable/LegendTable';
 import { RadialChartProps } from './base';
 import { useStyles } from './styles';
-// const green = '#52F995';
-// const red = '#CA2C2C';
 
 export type ChordProps = {
   width: number;
@@ -18,6 +16,7 @@ export type ChordProps = {
   showArc?: boolean;
   showLegend?: boolean;
   radialData: RadialChartProps[];
+  heading?: string;
 };
 
 const RadialChart = ({
@@ -29,14 +28,15 @@ const RadialChart = ({
   showArc = true,
   legendTableHeight = 150,
   showLegend = true,
+  heading,
 }: ChordProps) => {
-  let legenddata: Array<LegendData> = [{ value: [] }];
+  let legenddata: Array<LegendData> = [{ data: [] }];
   const classes = useStyles();
   const [centerDataValue, setCenterDataValue] = useState<string>('NoData');
   const circleOrient = semiCircle ? 1 : 2;
   const scalerArc: number = circleOrient * Math.PI;
 
-  console.log(centerDataValue);
+  // console.log(centerDataValue);
   const startAngle: number = -(Math.PI / 2);
   let currentAngle: number = startAngle;
   const outerRadius =
@@ -51,7 +51,6 @@ const RadialChart = ({
         0
       )
     : NaN;
-  // console.log(total);
   const radialArc: RadialChartProps[] = radialData
     ? radialData.map((elem) => {
         return {
@@ -65,19 +64,18 @@ const RadialChart = ({
     setCenterDataValue(total.toString());
   }
 
-  // console.log(radialArc);
   legenddata = legenddata.splice(0);
   if (radialData) {
     radialData.map((element, index) => {
       if (element.value !== undefined)
         legenddata[index] = {
-          value: [element.lable, element.value.toString()],
+          data: [element.lable, element.value.toString()],
           baseColor: element.baseColor,
         };
     });
   }
   return width < 10 ? null : (
-    <div className="chords">
+    <div>
       <svg width={width} height={height}>
         <rect
           width={width}
@@ -94,21 +92,20 @@ const RadialChart = ({
               <g key={`key-${i}`}>
                 <Arc
                   className={classes.radicalArc}
-                  // cornerRadius={2}
-                  // padAngle={0.02}
                   data={true}
                   innerRadius={innerRadius}
                   outerRadius={outerRadius}
                   fill={elem.baseColor}
                   startAngle={currentAngle}
                   endAngle={(currentAngle += elem.value)}
-                  onMouseEnter={() =>
-                    setCenterDataValue(radialData[i].value.toString())
-                  }
+                  onMouseEnter={() => {
+                    setCenterDataValue(radialData[i].value.toString());
+                  }}
                   onMouseLeave={() => setCenterDataValue(total.toString())}
                 />
               </g>
             ))}
+
           {(currentAngle = Math.PI)}
           {showArc && (total == 0 || isNaN(total)) && (
             <Arc
@@ -123,18 +120,33 @@ const RadialChart = ({
             />
           )}
           <Group
-            id={'test-text'}
-            left={-14 * centerDataValue.toString().length}
-            top={circleOrient == 1 ? -8 : 16}
+            left={-10 * centerDataValue.toString().length}
+            top={circleOrient === 1 ? -32 : 8}
           >
-            <Text className={classes.centerDataValue}>{centerDataValue}</Text>
+            <Text
+              className={`${classes.centerDataValue} ${classes.radialFont}`}
+            >
+              {centerDataValue}
+            </Text>
           </Group>
+          {heading && (
+            <Group
+              left={-5 * heading.length}
+              top={circleOrient === 1 ? -8 : 28}
+            >
+              <Text
+                className={`${classes.centerHeading} ${classes.radialFont}`}
+              >
+                {heading}
+              </Text>
+            </Group>
+          )}
         </Group>
       </svg>
+
       {showLegend && (
         <LegendTable
           data={legenddata}
-          // heading={['', 'Count']}
           width={width}
           height={legendTableHeight}
         />

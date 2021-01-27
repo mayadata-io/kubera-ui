@@ -69,7 +69,7 @@ const ComputationGraph: React.FC<AreaGraphProps> = ({
 }) => {
   const { palette, graph } = useTheme();
 
-  let legenddata: Array<LegendData> = [{ value: [], baseColor: '' }];
+  let legenddata: Array<LegendData> = [{ data: [], baseColor: '' }];
   const classes = useStyles({ width, height });
 
   const [filteredClosedSeries, setFilteredSeries] = useState(closedSeries);
@@ -436,7 +436,7 @@ const ComputationGraph: React.FC<AreaGraphProps> = ({
 
       if (linedata.data !== undefined)
         legenddata[index] = {
-          value: [linedata.metricName, avg, curr],
+          data: [linedata.metricName, avg, curr],
           baseColor: linedata.baseColor,
         };
     });
@@ -462,7 +462,7 @@ const ComputationGraph: React.FC<AreaGraphProps> = ({
 
       if (linedata.data !== undefined)
         legenddata[index + eventSeriesCount] = {
-          value: [linedata.metricName, avg, curr],
+          data: [linedata.metricName, avg, curr],
           baseColor: linedata.baseColor,
         };
     });
@@ -490,7 +490,7 @@ const ComputationGraph: React.FC<AreaGraphProps> = ({
 
       if (linedata.data !== undefined)
         legenddata[index + eventSeriesCount + closedSeriesCount] = {
-          value: [linedata.metricName, avg, curr],
+          data: [linedata.metricName, avg, curr],
           baseColor: linedata.baseColor,
         };
     });

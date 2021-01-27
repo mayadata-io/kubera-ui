@@ -11,6 +11,8 @@ const useStyles = makeStyles((theme: Theme) => ({
     width: props.width,
     height: props.height,
     backgroundColor: theme.palette.background.paper,
+    // backgroundColor: 'pink',
+
     overflowY: 'auto',
     '&::-webkit-scrollbar': {
       width: '3px',
@@ -46,16 +48,19 @@ const useStyles = makeStyles((theme: Theme) => ({
     border: '0px',
     margin: 'none',
     alignContent: 'flex-start',
+    padding: theme.spacing(1, 0),
   },
 
   tableHeading: {
     display: 'flex',
     border: '0px',
     margin: '0',
+    justifyContent: 'space-between',
     color: theme.graph.dashboard.lightBlue,
     width: '4rem',
     '&:first-child': {
       width: '14rem',
+      // flexGrow: 1,
     },
   },
   tableLabel: {
@@ -78,8 +83,8 @@ const useStyles = makeStyles((theme: Theme) => ({
     width: '10px',
     height: '2px',
     alignSelf: 'baseline',
-    marginRight: '1rem',
-    marginTop: '0.7rem',
+    marginRight: '0.5em',
+    marginTop: '0.5rem',
   },
 }));
 
