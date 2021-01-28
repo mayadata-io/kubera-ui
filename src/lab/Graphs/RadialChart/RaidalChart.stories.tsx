@@ -7,11 +7,11 @@ import { testRadialChartData } from './testData';
 storiesOf('Graphs/RadialChart', module).add('Kubera Chaos', () => (
   <ThemedBackground platform="kubera-chaos">
     <RadialChart
-      width={350}
-      height={250}
+      width={300}
+      height={300}
       radialData={testRadialChartData}
-      semiCircle={false}
-      heading={'Heading'}
+      circleExpandOnHover={4}
+      heading={'Workflows'}
     />
   </ThemedBackground>
 ));

@@ -57,11 +57,13 @@ const useStyles = makeStyles((theme: Theme) => ({
     color: theme.graph.dashboard.lightBlue,
     width: '4rem',
     '&:first-child': {
-      width: '14rem',
+      maxWidth: '14rem',
+      minWidth: '4rem',
     },
   },
   tableLabel: {
-    width: '14rem',
+    maxWidth: '14rem',
+    minWidth: '4rem',
   },
   tableData: {
     width: '4rem',

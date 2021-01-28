@@ -1,31 +1,64 @@
 import { makeStyles, Theme } from '@material-ui/core';
+interface StyleProps {
+  width: number;
+  height: number;
+  circleOrient: number;
+}
 
 const useStyles = makeStyles((theme: Theme) => ({
   rectBase: {
     fill: theme.palette.background.paper,
   },
-  radicalArc: {
-    opacity: 0.9,
-    transform: 'scale(1)',
-    '&:hover': {
-      opacity: 1,
-      transform: 'scale(1.02)',
-    },
-  },
+
   radialFont: {
     textAlign: 'left',
     fontStyle: 'normal',
     fontFamily: 'Ubuntu',
   },
-  centerDataValue: {
+  centerDataFont: {
+    fontStyle: 'normal',
+    fontFamily: 'Ubuntu',
+    background: 'transparent',
+    wordWrap: 'break-word',
+    whiteSpace: 'initial',
+    textAlign: 'center',
+    lineHeight: '1.5rem',
+    margin: theme.spacing(1.5, 0),
+    alignContent: 'flex-start',
+  },
+  centerValue: {
+    maxWidth: '8rem',
+    minWidth: '6rem',
     fontSize: '2rem',
     fontWeight: 500,
-    fill: theme.palette.text.primary,
+    color: theme.palette.text.primary,
   },
-  centerHeading: {
+
+  centerText: {
+    width: '6rem',
     fontSize: '1.2rem',
     fontWeight: 300,
-    fill: theme.palette.text.hint,
+    color: theme.palette.text.hint,
   },
+
+  // centerData: {
+  //   whiteSpace: 'initial',
+  //   alignContent: 'flex-start',
+  //   background: 'transparent',
+  //   display: 'inline-grid',
+  //   margin: 0,
+  //   height: 'fit-content',
+  //   width: 'fit-content',
+  //   color: theme.palette.text.primary,
+  // },
+  // chartPlot: {
+  //   alignItems: 'center',
+  //   justifyContent: 'center',
+  // },
+  centerDataContainer: (props: StyleProps) => ({
+    top: props.circleOrient === 1 ? props.height : props.height / 2 + 20,
+    left: props.width / 2,
+    position: 'absolute',
+  }),
 }));
 export { useStyles };
