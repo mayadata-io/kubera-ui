@@ -36,10 +36,8 @@ const RadialChart = ({
   const { palette } = useTheme();
 
   let legenddata: Array<LegendData> = [{ data: [] }];
-  const [centerValue, setcenterValue] = useState<string>('NoData');
-  const [centerText, setCenterText] = useState<string>(
-    centerValue === 'NoData' ? '' : heading ?? ''
-  );
+  const [centerValue, setcenterValue] = useState<string>('0');
+  const [centerText, setCenterText] = useState<string>(heading ?? '');
   const [currentHovered, setcurrentHovered] = useState<string>('');
 
   const circleOrient = semiCircle ? 1 : 2;
@@ -68,7 +66,7 @@ const RadialChart = ({
         };
       })
     : [{ value: NaN, label: '' }];
-  if (centerValue === 'NoData' && total > 0) {
+  if (centerValue === '0' && total > 0) {
     setcenterValue(total.toString());
     setCenterText(heading ?? '');
   }
@@ -122,7 +120,6 @@ const RadialChart = ({
                       setcurrentHovered(
                         e.currentTarget.getAttribute('id')?.toString() ?? ''
                       );
-                      console.log('hoverd', currentHovered);
                     }}
                     onMouseLeave={() => {
                       setcenterValue(total.toString());

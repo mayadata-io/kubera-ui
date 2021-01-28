@@ -2,7 +2,7 @@ import { makeStyles, Theme } from '@material-ui/core';
 interface StyleProps {
   width: number;
   height: number;
-  circleOrient: number;
+  circleOrient?: number;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -41,20 +41,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     color: theme.palette.text.hint,
   },
 
-  // centerData: {
-  //   whiteSpace: 'initial',
-  //   alignContent: 'flex-start',
-  //   background: 'transparent',
-  //   display: 'inline-grid',
-  //   margin: 0,
-  //   height: 'fit-content',
-  //   width: 'fit-content',
-  //   color: theme.palette.text.primary,
-  // },
-  // chartPlot: {
-  //   alignItems: 'center',
-  //   justifyContent: 'center',
-  // },
   centerDataContainer: (props: StyleProps) => ({
     top: props.circleOrient === 1 ? props.height : props.height / 2 + 20,
     left: props.width / 2,
