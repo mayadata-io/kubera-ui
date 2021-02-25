@@ -4,14 +4,15 @@ import { ThemedBackground } from '../../../utils/storybook';
 import { RadialChart } from './RadialChart';
 import { testRadialChartData } from './testData';
 
-storiesOf('Graphs/RadialChart', module).add('Kubera Chaos', () => (
+storiesOf('Graphs/RadialChart', module).add('Litmus Portal', () => (
   <ThemedBackground platform="kubera-chaos">
-    <RadialChart
-      width={300}
-      height={300}
-      radialData={testRadialChartData}
-      circleExpandOnHover={4}
-      heading={'Workflows'}
-    />
+    <div style={{ height: '20rem', width: '20rem' }}>
+      <RadialChart
+        radialData={testRadialChartData}
+        semiCircle={false}
+        heading="heading"
+        legendTableHeight={100}
+      />
+    </div>
   </ThemedBackground>
 ));
