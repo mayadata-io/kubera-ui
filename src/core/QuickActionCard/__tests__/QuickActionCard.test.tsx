@@ -8,10 +8,10 @@ import { quickActionTestData } from '../testData';
 afterEach(cleanup);
 jest.useFakeTimers();
 
-describe('EditablText component', () => {
+describe('QuickActionCard', () => {
   it('Renders', () => {
     render(
-      <KuberaThemeProvider platform="kubera-chaos">
+      <KuberaThemeProvider platform="litmus-portal">
         <QuickActionCard
           quickActions={quickActionTestData}
           title={'Quick Actions'}
@@ -24,5 +24,11 @@ describe('EditablText component', () => {
       'quickActionCardComponent'
     );
     expect(quickActionCardComponent).toBeTruthy();
+
+    // Get element using alt text and check src
+    for (let i = 0; i < 4; i++) {
+      const image = screen.getByAltText(i.toString());
+      expect(image.getAttribute('src')).toMatch(`testUrl${i}`);
+    }
   });
 });
