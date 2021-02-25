@@ -1,7 +1,7 @@
 {
   "name": "kubera-ui",
   "license": "Apache-2.0",
-  "version": "0.3.6",
+  "version": "0.3.7",
   "private": false,
   "description": "Component Library for Kubera products",
   "author": "MayaData, Inc.",
@@ -58,7 +58,7 @@
     "@material-ui/lab": "^4.0.0-alpha.56",
     "@visx/visx": "^1.1.0",
     "d3-array": "^2.8.0",
-    "dayjs": "^1.10.3",
+    "dayjs": "^1.10.4",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
     "react-router-dom": "^5.2.0"
