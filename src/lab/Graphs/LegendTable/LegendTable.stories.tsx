@@ -3,7 +3,7 @@ import React from 'react';
 import { ThemedBackground } from '../../../utils/storybook';
 import { LegendTable } from './LegendTable';
 import { LegendTableTestData1 } from './testData';
-storiesOf('Graphs/LegendTable', module).add('Litmus Portal', () => (
+storiesOf('Graphs/LegendTable', module).add('Kubera Chaos', () => (
   <ThemedBackground platform="kubera-chaos">
     <div
       style={{
