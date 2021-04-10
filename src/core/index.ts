@@ -9,3 +9,4 @@ export * from './QuickActionCard';
 export * from './RadioButton';
 export * from './Search';
 export * from './Text';
+export * from './Table';
